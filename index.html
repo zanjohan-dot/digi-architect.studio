@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-WNG8MK4K');</script>
+<!-- End Google Tag Manager -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>The Digital Systems Architect</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Georgia&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #0F172A;
+    --navy-d: #020617;
+    --gold: #CC9940;
+    --gold-light: #E6BC73;
+    --gold-soft: rgba(204, 153, 64, 0.4);
+    --bg-base: #F8FAFC;
+    --grey: #64748B;
+    --text-dark: #1E293B;
+    --white: #ffffff;
+    --red-alert: #dc2626;
+    --success: #16a34a;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html, body {
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: var(--bg-base);
+    font-family: 'Montserrat', sans-serif;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    touch-action: none;
+  }
+  body::before {
+    content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background-image: radial-gradient(rgba(15, 23, 42, 0.04) 1px, transparent 1px);
+    background-size: 32px 32px; z-index: -2; pointer-events: none;
+  }
+  .ambient-glow {
+    position: fixed; width: 80vw; height: 80vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(204, 153, 64, 0.05) 0%, transparent 60%);
+    top: -20%; right: -10%; z-index: -1; pointer-events: none; transition: all 1s ease-out;
+  }
+  .ambient-glow-2 {
+    position: fixed; width: 60vw; height: 60vw; border-radius: 50%;
+    background: radial-gradient(circle, rgba(15, 23, 42, 0.03) 0%, transparent 60%);
+    bottom: -10%; left: -10%; z-index: -1; pointer-events: none; transition: all 1s ease-out;
+  }
+  h1, h2, h3, h4 { font-family: 'Georgia', serif; color: var(--navy); font-weight: normal; }
+  .app-container { position: relative; width: 100vw; height: 100vh; z-index: 1; }
+  .view {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    padding: 0 5vw; opacity: 0; pointer-events: none; visibility: hidden;
+    transform: scale(0.98) translateY(15px);
+    transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out), visibility 0.6s;
+    z-index: 10;
+  }
+  .view.active {
+    opacity: 1; pointer-events: auto; visibility: visible;
+    transform: scale(1) translateY(0); z-index: 20;
+  }
+  .view.exit {
+    transform: scale(1.02) translateY(-15px); opacity: 0; visibility: hidden;
+  }
+  @keyframes elegantGlide {
+    0% { opacity: 0; transform: translateY(40px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+  .view .eyebrow, .view .large-title, .view .subtitle,
+  .view .grid-2 > div, .view .grid-4 > div, .view .grid-5 > div {
+    opacity: 0;
+  }
+  .view.active .eyebrow { animation: elegantGlide 1.2s var(--ease-out) 0.1s both; }
+  .view.active .large-title { animation: elegantGlide 1.2s var(--ease-out) 0.2s both; }
+  .view.active .subtitle { animation: elegantGlide 1.2s var(--ease-out) 0.3s both; }
+
+  .view.active .grid-2 > div:nth-child(1) { animation: elegantGlide 1.2s var(--ease-out) 0.3s both; }
+  .view.active .grid-2 > div:nth-child(2) { animation: elegantGlide 1.2s var(--ease-out) 0.4s both; }
+  .view.active .grid-4 > div:nth-child(1) { animation: elegantGlide 1.2s var(--ease-out) 0.2s both; }
+  .view.active .grid-4 > div:nth-child(2) { animation: elegantGlide 1.2s var(--ease-out) 0.3s both; }
+  .view.active .grid-4 > div:nth-child(3) { animation: elegantGlide 1.2s var(--ease-out) 0.4s both; }
+  .view.active .grid-4 > div:nth-child(4) { animation: elegantGlide 1.2s var(--ease-out) 0.5s both; }
+  .view.active .grid-5 > div:nth-child(1) { animation: elegantGlide 1.2s var(--ease-out) 0.2s both; }
+  .view.active .grid-5 > div:nth-child(2) { animation: elegantGlide 1.2s var(--ease-out) 0.3s both; }
+  .view.active .grid-5 > div:nth-child(3) { animation: elegantGlide 1.2s var(--ease-out) 0.4s both; }
+  .view.active .grid-5 > div:nth-child(4) { animation: elegantGlide 1.2s var(--ease-out) 0.5s both; }
+  .view.active .grid-5 > div:nth-child(5) { animation: elegantGlide 1.2s var(--ease-out) 0.6s both; }
+
+  /* Responsive base classes replacing inline styles */
+  .highlight-text { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .core-h3 { color: var(--gold); margin-bottom: 12px; font-size: 16px; }
+  .core-h4 { font-size: 13px; color: var(--white); margin-bottom: 2px; }
+  .core-p { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  .grid-5 h3 { font-size: 14px; }
+  .grid-5 p { font-size: 11px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 12px; font-size: 11px;
+    font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 12px;
+  }
+  .eyebrow::before { content: ''; width: 30px; height: 1px; background: var(--gold); opacity: 0.5; }
+  .content-wrapper {
+    max-width: 1100px; width: 100%; margin: 0 auto;
+    display: flex; flex-direction: column; justify-content: center;
+  }
+
+  .text-center { text-align: center; }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+  .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .card {
+    background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.9); border-radius: 16px; padding: 24px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+    display: flex; flex-direction: column; justify-content: center;
+    transition: transform 0.6s var(--ease-out), box-shadow 0.6s var(--ease-out), border-color 0.4s;
+  }
+  .card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
+    border-color: rgba(204, 153, 64, 0.4);
+  }
+  .menu-toggle {
+    position: fixed; top: 24px; right: 24px; width: 44px; height: 44px;
+    background: rgba(255, 255, 255, 0.9); border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    cursor: pointer; z-index: 2000; box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    border: 1px solid rgba(15, 23, 42, 0.05); transition: all 0.3s;
+  }
+  .menu-toggle:hover { background: var(--navy); box-shadow: 0 0 30px rgba(204, 153, 64, 0.5), 0 4px 15px rgba(0,0,0,0.1); }
+  .menu-toggle:hover span { background: var(--white); }
+  .menu-toggle span { width: 18px; height: 2px; background: var(--navy); border-radius: 2px; transition: all 0.3s; }
+  .eq-container { position: fixed; top: 38px; right: 84px; z-index: 2000; display: flex; align-items: center; }
+  .eq-btn { display: flex; align-items: flex-end; gap: 4px; height: 18px; cursor: pointer; opacity: 0.8; transition: opacity 0.3s; }
+  .eq-btn:hover { opacity: 1; }
+  .eq-bar { width: 3px; background: var(--grey); border-radius: 2px; transition: height 0.2s; }
+  .eq-btn.playing .eq-bar { background: var(--gold); animation: eqBounce 1s infinite; }
+  .eq-btn.playing .eq-bar:nth-child(1) { animation-delay: 0.0s; }
+  .eq-btn.playing .eq-bar:nth-child(2) { animation-delay: 0.2s; }
+  .eq-btn.playing .eq-bar:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes eqBounce { 0%, 100% { height: 4px; } 50% { height: 18px; } }
+  .menu-overlay {
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(248, 250, 252, 0.95); backdrop-filter: blur(15px);
+    z-index: 1500; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 24px;
+    opacity: 0; pointer-events: none; transition: all 0.4s ease; transform: translateY(-20px);
+  }
+  .menu-overlay.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .menu-item { font-family: 'Georgia', serif; font-size: 32px; color: var(--navy); cursor: pointer; transition: all 0.3s; }
+  .menu-item:hover { color: var(--gold); transform: scale(1.05); text-shadow: 0 0 30px rgba(204, 153, 64, 0.4); }
+  .global-nav {
+    position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.85); backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.8); border-radius: 100px;
+    padding: 6px 12px; display: flex; align-items: center; gap: 4px; z-index: 1000;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, 0.08);
+  }
+  .nav-dot {
+    position: relative;
+    width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 11px; font-weight: 700; color: var(--navy); cursor: pointer;
+    transition: color 0.4s ease, background 0.4s ease, transform 0.4s ease;
+    z-index: 1;
+  }
+  .nav-dot::before {
+    content: '';
+    position: absolute;
+    inset: -8px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(204, 153, 64, 0.55) 0%, rgba(204, 153, 64, 0.15) 40%, transparent 70%);
+    opacity: 0;
+    transform: scale(0.6);
+    transition: opacity 0.5s var(--ease-out), transform 0.5s var(--ease-out);
+    z-index: -1;
+    pointer-events: none;
+  }
+  .nav-dot:hover::before { opacity: 1; transform: scale(1); }
+  .nav-dot:hover { color: var(--gold); transform: scale(1.1); }
+  .nav-dot.active { background: var(--navy); color: var(--white); box-shadow: 0 4px 15px rgba(15, 23, 42, 0.25); }
+  .nav-dot.active:hover { color: var(--white); }
+
+  .progression-area {
+    position: fixed; bottom: 30px; right: 40px;
+    display: flex; justify-content: center; align-items: center; z-index: 1000;
+  }
+  .pulse-btn {
+    display: flex; align-items: center; gap: 12px;
+    background: var(--navy); border-radius: 100px;
+    padding: 12px 24px; font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--white); cursor: pointer;
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.2); transition: all 0.3s;
+    animation: float 3s ease-in-out infinite;
+  }
+  .pulse-btn:hover {
+    background: var(--gold);
+    color: var(--white);
+    transform: scale(1.06) translateY(-3px);
+    box-shadow: 0 15px 40px rgba(204, 153, 64, 0.5), 0 0 30px rgba(204, 153, 64, 0.3);
+    animation-play-state: paused;
+  }
+  .pulse-btn svg { width: 16px; height: 16px; fill: currentColor; transition: transform 0.3s; }
+  .pulse-btn:hover svg { transform: translateX(4px); }
+  @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+  .large-title { font-size: 48px; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
+  .subtitle { font-size: 16px; color: var(--grey); line-height: 1.6; margin-bottom: 24px; max-width: 650px; margin-inline: auto; }
+
+  .clean-form { display: flex; flex-direction: column; gap: 16px; position: relative; }
+  .clean-input {
+    width: 100%; padding: 12px 0; border: none; border-bottom: 2px solid rgba(15, 23, 42, 0.1);
+    background: transparent; font-family: 'Montserrat', sans-serif; font-size: 14px;
+    color: var(--navy); transition: all 0.3s;
+  }
+  .clean-input:focus { outline: none; border-bottom-color: var(--gold); }
+  select.clean-input { appearance: none; cursor: pointer; }
+  .btn-submit {
+    -webkit-appearance: none !important;
+    -moz-appearance: none !important;
+    appearance: none !important;
+    display: block; width: 100%;
+    background-color: var(--navy) !important;
+    color: var(--white) !important;
+    border: 1px solid var(--navy) !important;
+    padding: 16px; border-radius: 8px;
+    font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.1em; cursor: pointer;
+    transition: all 0.3s; box-shadow: 0 4px 15px rgba(15, 23, 42, 0.2); margin-top: 10px;
+  }
+  .btn-submit:hover {
+    background-color: var(--gold) !important;
+    border-color: var(--gold) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(204, 153, 64, 0.45), 0 0 25px rgba(204, 153, 64, 0.25) !important;
+  }
+  .success-overlay {
+    position: absolute; inset: 0; background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px); border-radius: 16px; display: none;
+    flex-direction: column; justify-content: center; align-items: center;
+    text-align: center; padding: 32px; z-index: 50;
+  }
+  .success-icon {
+    width: 50px; height: 50px; border-radius: 50%; background: rgba(22, 163, 74, 0.1);
+    color: var(--success); display: flex; align-items: center; justify-content: center;
+    font-size: 24px; margin-bottom: 16px;
+  }
+  .social-dock { display: flex; gap: 12px; margin-top: 16px; }
+  .social-icon {
+    width: 40px; height: 40px; border-radius: 50%; background: var(--white);
+    display: flex; align-items: center; justify-content: center; color: var(--navy);
+    border: 1px solid rgba(15, 23, 42, 0.1); transition: all 0.35s var(--ease-out);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+  }
+  .social-icon:hover {
+    background: var(--gold); color: var(--white); transform: translateY(-4px) scale(1.08);
+    box-shadow: 0 12px 30px rgba(204, 153, 64, 0.45), 0 0 25px rgba(204, 153, 64, 0.25);
+    border-color: var(--gold);
+  }
+  .social-icon svg { width: 18px; height: 18px; fill: currentColor; }
+  .brand-logo {
+    height: 48px; width: auto;
+    margin-right: 12px; border-radius: 6px;
+  }
+  .contact-signature {
+    color: rgba(100, 116, 139, 0.8); text-align: center;
+    margin-top: 24px; font-weight: 500; letter-spacing: 0.02em; line-height: 1.6;
+  }
+  .contact-signature a { color: var(--navy); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; font-weight: 600; }
+  .contact-signature a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+
+  /* ============================================================
+     CUSTOM GOLD CURSOR  (desktop + fine pointer only)
+     - small precise gold dot follows the mouse
+     - soft gold glow trails behind with a slight lag
+     - expands + brightens over clickable elements
+     ============================================================ */
+  .cursor-dot, .cursor-glow {
+    position: fixed; top: 0; left: 0; pointer-events: none;
+    transform: translate(-50%, -50%);
+    will-change: transform, width, height;
+    display: none;
+  }
+  .cursor-dot {
+    width: 7px; height: 7px;
+    background: var(--gold);
+    border-radius: 50%;
+    z-index: 10001;
+    transition: width 0.25s var(--ease-out), height 0.25s var(--ease-out),
+                background 0.25s, box-shadow 0.25s;
+    box-shadow: 0 0 12px rgba(204, 153, 64, 0.9);
+  }
+  .cursor-glow {
+    width: 38px; height: 38px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(204, 153, 64, 0.28) 0%, rgba(204, 153, 64, 0.08) 45%, transparent 75%);
+    z-index: 10000;
+    transition: width 0.35s var(--ease-out), height 0.35s var(--ease-out),
+                background 0.35s, opacity 0.35s;
+  }
+  .cursor-dot.is-clickable {
+    width: 14px; height: 14px;
+    background: var(--gold-light);
+    box-shadow: 0 0 20px rgba(204, 153, 64, 1), 0 0 40px rgba(204, 153, 64, 0.6);
+  }
+  .cursor-glow.is-clickable {
+    width: 75px; height: 75px;
+    background: radial-gradient(circle, rgba(204, 153, 64, 0.45) 0%, rgba(204, 153, 64, 0.15) 45%, transparent 75%);
+  }
+  .cursor-dot.is-typing {
+    width: 3px; height: 22px; border-radius: 1px;
+  }
+  .cursor-dot.is-clicking {
+    transform: translate(-50%, -50%) scale(0.7);
+  }
+
+  /* ============================================================
+     DESKTOP LARGE SCREEN — 1280px and up
+     scale typography + spacing so the content stops looking
+     stranded on big monitors
+     ============================================================ */
+  @media (min-width: 1280px) {
+    .content-wrapper { max-width: 1200px; }
+    .large-title { font-size: 56px; }
+    .subtitle { font-size: 17px; max-width: 720px; }
+
+    .grid-2 { gap: 80px; }
+    .grid-4 { gap: 24px; }
+    .grid-5 { gap: 16px; }
+
+    .card { padding: 28px; }
+    .card h3 { font-size: 16px; }
+    .card p { font-size: 13px; }
+    .highlight-text { font-size: 16px; }
+    .core-h3 { font-size: 18px; }
+    .core-h4 { font-size: 15px; }
+    .core-p { font-size: 13px; }
+    .grid-5 .eyebrow { font-size: 11px; }
+    .grid-5 h3 { font-size: 16px; }
+    .grid-5 p { font-size: 13px; }
+    .contact-signature { font-size: 11px; }
+
+
+    /* hide native cursor only on actual desktops (with a precise pointer) */
+    @media (hover: hover) and (pointer: fine) {
+      html, body, * { cursor: none !important; }
+      .cursor-dot, .cursor-glow { display: block; }
+    }
+  }
+
+  @media (min-width: 1600px) {
+    .content-wrapper { max-width: 1320px; }
+    .large-title { font-size: 64px; line-height: 1.08; }
+    .subtitle { font-size: 18px; max-width: 760px; margin-bottom: 32px; }
+
+    .grid-2 { gap: 100px; }
+    .grid-4 { gap: 28px; }
+    .grid-5 { gap: 20px; }
+
+    .card { padding: 32px; border-radius: 20px; }
+    .card h3 { font-size: 18px; }
+    .card p { font-size: 14px; line-height: 1.65; }
+    .highlight-text { font-size: 18px; }
+    .core-h3 { font-size: 20px; }
+    .core-h4 { font-size: 17px; }
+    .core-p { font-size: 14px; }
+    .grid-5 .eyebrow { font-size: 12px; }
+    .grid-5 h3 { font-size: 18px; }
+    .grid-5 p { font-size: 14px; }
+    .contact-signature { font-size: 12px; }
+
+
+  
+  /* Responsive base classes replacing inline styles */
+  .highlight-text { font-size: 14px; font-weight: 600; color: var(--navy); }
+  .core-h3 { color: var(--gold); margin-bottom: 12px; font-size: 16px; }
+  .core-h4 { font-size: 13px; color: var(--white); margin-bottom: 2px; }
+  .core-p { font-size: 11px; color: rgba(255,255,255,0.6); }
+
+  .grid-5 h3 { font-size: 14px; }
+  .grid-5 p { font-size: 11px; }
+  .eyebrow { font-size: 12px; }
+    .menu-item { font-size: 40px; }
+
+    .nav-dot { width: 40px; height: 40px; font-size: 12px; }
+    .global-nav { padding: 8px 14px; gap: 6px; }
+
+    .pulse-btn { padding: 14px 28px; font-size: 12px; }
+    .progression-area { bottom: 40px; right: 60px; }
+    .menu-toggle { top: 32px; right: 32px; width: 50px; height: 50px; }
+    .eq-container { top: 46px; right: 100px; }
+  }
+
+  @media (min-width: 1920px) {
+    .content-wrapper { max-width: 1500px; }
+    .large-title { font-size: 72px; }
+    .subtitle { font-size: 20px; max-width: 820px; }
+
+    .grid-2 { gap: 120px; }
+    .card { padding: 36px; }
+    .card h3 { font-size: 20px; }
+    .card p { font-size: 15px; }
+    .highlight-text { font-size: 20px; }
+    .core-h3 { font-size: 24px; }
+    .core-h4 { font-size: 18px; }
+    .core-p { font-size: 15px; }
+    .grid-5 .eyebrow { font-size: 14px; }
+    .grid-5 h3 { font-size: 20px; }
+    .grid-5 p { font-size: 15px; }
+    .contact-signature { font-size: 14px; }
+
+  }
+
+  /* ============================================================
+     TABLET — keep things readable in the awkward middle widths
+     ============================================================ */
+  @media (min-width: 769px) and (max-width: 1279px) {
+    .large-title { font-size: 40px; }
+    .subtitle { font-size: 15px; }
+    .grid-2 { gap: 40px; }
+    .grid-5 { grid-template-columns: repeat(5, 1fr); gap: 10px; }
+    .card { padding: 20px; }
+    .card h3 { font-size: 14px; }
+    .card p { font-size: 11.5px; line-height: 1.55; }
+    .highlight-text { font-size: 15px; }
+    .core-h3 { font-size: 17px; }
+    .core-h4 { font-size: 14px; }
+    .core-p { font-size: 12px; }
+    .grid-5 .eyebrow { font-size: 10px; }
+    .grid-5 h3 { font-size: 15px; }
+    .grid-5 p { font-size: 12px; }
+    .contact-signature { font-size: 10px; }
+
+  }
+
+  /* ============================================================
+     MOBILE — unchanged from the working version
+     ============================================================ */
+  @media (max-width: 768px) {
+    .large-title { font-size: 32px; }
+    .subtitle { font-size: 13px; margin-bottom: 16px; }
+
+    .view { padding: 0 16px; }
+    .content-wrapper {
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+      justify-content: flex-start;
+      padding-top: 80px;
+      padding-bottom: 40px;
+    }
+
+    .grid-2 { grid-template-columns: 1fr; gap: 24px; }
+    .grid-4 { grid-template-columns: 1fr; gap: 12px; }
+    .grid-5 { display: flex; flex-direction: column; gap: 12px; }
+    .card { padding: 16px 20px; }
+    .card h3 { font-size: 15px; margin-bottom: 4px; }
+    .card p { font-size: 12px; line-height: 1.5; margin-bottom: 0; }
+    .highlight-text { font-size: 14px; }
+    .core-h3 { font-size: 16px; }
+    .core-h4 { font-size: 13px; }
+    .core-p { font-size: 11px; }
+    .grid-5 .eyebrow { font-size: 9px; }
+    .grid-5 h3 { font-size: 14px; }
+    .grid-5 p { font-size: 11px; }
+    .contact-signature { font-size: 9px; }
+
+    .menu-toggle { top: 16px; right: 16px; width: 40px; height: 40px; }
+    .eq-container { top: 28px; right: 64px; left: auto; bottom: auto; }
+    .progression-area { bottom: 130px; right: 16px; }
+    .pulse-btn { width: 52px; height: 52px; padding: 0; justify-content: center; border-radius: 50%; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.3); }
+    .pulse-btn span { display: none; }
+    .pulse-btn svg { margin: 0; width: 22px; height: 22px; }
+
+    .global-nav { display: none; }
+  }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNG8MK4K"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+
+<!-- Custom gold cursor (only visible on desktop via CSS) -->
+<div class="cursor-glow" id="cursor-glow"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
+
+<div class="ambient-glow" id="glow1"></div>
+<div class="ambient-glow-2" id="glow2"></div>
+<div class="eq-container">
+  <div class="eq-btn" id="eq-toggle" onclick="toggleMusic(true)">
+    <div class="eq-bar" style="height: 6px;"></div>
+    <div class="eq-bar" style="height: 12px;"></div>
+    <div class="eq-bar" style="height: 8px;"></div>
+  </div>
+</div>
+<div class="menu-toggle" onclick="toggleMenu()">
+  <span></span>
+  <span></span>
+  <span></span>
+</div>
+<div class="menu-overlay" id="menu-overlay">
+  <div class="menu-item" onclick="goToView(0); toggleMenu();">01. Architecture</div>
+  <div class="menu-item" onclick="goToView(1); toggleMenu();">02. Philosophy</div>
+  <div class="menu-item" onclick="goToView(2); toggleMenu();">03. Methodology</div>
+  <div class="menu-item" onclick="goToView(3); toggleMenu();">04. Experience</div>
+  <div class="menu-item" onclick="goToView(4); toggleMenu();">05. Connect</div>
+</div>
+<div class="app-container" id="app-container">
+  <div class="view active" id="view-0">
+    <div class="content-wrapper text-center">
+      <div class="eyebrow">The Digital Systems Architect</div>
+      <h1 class="large-title">We bring structure to<br>operational complexity.</h1>
+      <p class="subtitle">More than 17 years of combined experience in operational, governance, regulatory compliance, finance, and digital transformation&mdash;engineering the scalable infrastructure your organisation requires.</p>
+    </div>
+  </div>
+  <div class="view" id="view-1">
+    <div class="content-wrapper">
+      <div class="text-center">
+        <div class="eyebrow">Philosophy</div>
+        <h2 class="large-title" style="margin-bottom: 16px;">We build the ecosystem.</h2>
+      </div>
+
+      <div class="grid-2">
+        <div>
+          <p class="subtitle" style="margin-bottom: 12px;">Software alone cannot fix fragmented operations. We integrate human resources, finance, and operations management into a single, cohesive framework.</p>
+          <p class="highlight-text">Real expertise applied directly to your bottlenecks.</p>
+        </div>
+        <div class="card" style="background: var(--navy); color: var(--white); border: none;">
+          <h3 class="core-h3">Core Beliefs</h3>
+          <div style="margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px;">
+            <h4 class="core-h4">01. Complexity is a Leadership Problem</h4>
+            <p class="core-p">Technology alone doesn't solve chaos. Architectural thinking does.</p>
+          </div>
+          <div style="margin-bottom: 10px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px;">
+            <h4 class="core-h4">02. Design for the Operator</h4>
+            <p class="core-p">If a system requires a 50-page manual, it is fundamentally broken.</p>
+          </div>
+          <div>
+            <h4 class="core-h4">03. Scale Requires Foundation</h4>
+            <p class="core-p">You cannot automate a process you haven't mathematically standardized.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="view" id="view-2">
+    <div class="content-wrapper">
+      <div class="text-center">
+        <div class="eyebrow">Methodology</div>
+        <h2 class="large-title" style="margin-bottom: 24px;">Infrastructure That Scales.</h2>
+      </div>
+      <div class="grid-5">
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom: 4px;">01 / Discover</div>
+          <h3>Audit &amp; Map</h3>
+          <p>Pinpoint the exact bottlenecks draining operational efficiency.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom: 4px;">02 / Architect</div>
+          <h3>System Design</h3>
+          <p>Blueprint scalable ecosystems tailored strictly to your business logic.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom: 4px;">03 / Integrate</div>
+          <h3>Unify Operations</h3>
+          <p>Bridged siloed HR, finance, and operational systems into one truth.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom: 4px;">04 / Deploy</div>
+          <h3>Implementation</h3>
+          <p>Seamless transition to an automated digital infrastructure.</p>
+        </div>
+        <div class="card">
+          <div class="eyebrow" style="margin-bottom: 4px;">05 / Scale</div>
+          <h3>Optimize</h3>
+          <p>Post-launch refinement with built-in compliance monitoring.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="view" id="view-3">
+    <div class="content-wrapper">
+      <div class="text-center">
+        <div class="eyebrow">Operational Experience</div>
+        <h2 class="large-title" style="margin-bottom: 24px;">Transforming Chaos into Clarity.</h2>
+      </div>
+      <div class="grid-4">
+        <div class="card">
+          <h3 style="color: var(--navy); margin-bottom: 6px;">Financial Automation</h3>
+          <p style="color: var(--grey);">Integrated RPA into complex workflows, eliminating billing discrepancies and reducing manual processing by hundreds of hours annually.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy); margin-bottom: 6px;">Institutional Governance</h3>
+          <p style="color: var(--grey);">Architected compliant e-registry systems and SOPs, enforcing strict regulatory adherence and continuous audit readiness.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy); margin-bottom: 6px;">Regulatory Management</h3>
+          <p style="color: var(--grey);">Engineered centralized database architectures to modernize surveillance, ensure data integrity, and provide real-time executive oversight.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy); margin-bottom: 6px;">Resource Optimization</h3>
+          <p style="color: var(--grey);">Developed dynamic tracking ecosystems to monitor institutional performance, optimize personnel deployment, and elevate reporting.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="view" id="view-4">
+    <div class="content-wrapper">
+      <div class="grid-2">
+        <div class="text-center">
+
+          <div class="eyebrow" style="display: inline-flex; align-items: center; justify-content: center; margin-bottom: 12px;">
+            <img src="logo.png" alt="Logo" class="brand-logo">
+            Let's Connect
+          </div>
+
+          <h2 class="large-title" style="margin-bottom: 8px;">Build Something That Lasts.</h2>
+          <p class="subtitle">We respond within 2 business days to <b style="color: var(--red-alert);">serious</b> operational inquiries.</p>
+
+          <div class="social-dock" style="justify-content: center;">
+            <a href="https://www.instagram.com/the.digital.systems.architect?igsh=emR3azc3OXptOTVy&utm_source=qr" class="social-icon" target="_blank" title="Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/zanjohan" class="social-icon" target="_blank" title="Founder LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/company/the-digital-systems-architect/" class="social-icon" target="_blank" title="Company LinkedIn">
+              <svg viewBox="0 0 24 24"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+            </a>
+            <a href="https://wa.me/6589878714" class="social-icon" target="_blank" title="WhatsApp (+65 8987 8714)">
+              <svg viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.347-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.876 1.213 3.074.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div style="display: flex; flex-direction: column; height: 100%;">
+          <div class="card" style="padding: 32px; position: relative;">
+
+            <form action="https://script.google.com/macros/s/AKfycbzkfp9O6Jdmi_qvXk9VkAry4OhvVp0kjYnucv52RW97dneyJSaI2SIfL39-ASyfq-flAg/exec" method="POST" class="clean-form" id="contactForm" onsubmit="event.preventDefault(); submitForm(this);">
+              <input type="text" name="name" class="clean-input" placeholder="Your Name" required>
+              <input type="email" name="email" class="clean-input" placeholder="Corporate Email Address" required>
+              <select name="subject" class="clean-input" required>
+                <option value="" disabled selected>Select Area of Focus...</option>
+                <option>Finance &amp; Billing Automation</option>
+                <option>HR &amp; Resource Allocation Systems</option>
+                <option>Cross-Department Integration</option>
+                <option>Governance Dashboards</option>
+                <option>Other Operational Infrastructure</option>
+                <option>Just want to have a kopi chat &#9749;</option>
+              </select>
+              <textarea name="message" class="clean-input" rows="2" placeholder="Briefly describe the challenge..." required style="resize: none;"></textarea>
+              <button type="submit" class="btn-submit">Send Enquiry</button>
+            </form>
+            <div class="success-overlay" id="success-message">
+              <div class="success-icon">&#10003;</div>
+              <h3 style="color: var(--navy); font-size: 24px; margin-bottom: 8px;">Enquiry Sent</h3>
+              <p style="font-size: 13px; color: var(--grey); margin-bottom: 24px;">Your details have been securely submitted. We will be in touch within 2 business days.</p>
+              <button class="btn-submit" style="width: 100%;" onclick="closeSuccess()">Close</button>
+            </div>
+          </div>
+
+          <div class="contact-signature">
+            Designed and built by The Digital Systems Architect | Zan J Private Limited (UEN: 202616105R) | <a href="mailto:admin@digi-architect.studio">admin@digi-architect.studio</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="progression-area">
+  <div class="pulse-btn" id="next-btn" onclick="nextView()">
+    <span id="next-text">Enter Architecture</span>
+    <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+  </div>
+</div>
+<nav class="global-nav">
+  <div class="nav-dot active" onclick="goToView(0)">01</div>
+  <div class="nav-dot" onclick="goToView(1)">02</div>
+  <div class="nav-dot" onclick="goToView(2)">03</div>
+  <div class="nav-dot" onclick="goToView(3)">04</div>
+  <div class="nav-dot" onclick="goToView(4)">05</div>
+</nav>
+
+<!-- Hidden audio iframe — positioned off-screen at full size so YouTube
+     doesn't refuse to play because the player is "too small" -->
+<div style="position: fixed; top: 0; left: 0; width: 200px; height: 200px; overflow: hidden; opacity: 0.001; pointer-events: none; z-index: -999;">
+  <div id="yt-player"></div>
+</div>
+
+<script>
+  /* =====================================================================
+     FORM SUBMISSION
+     ===================================================================== */
+  function submitForm(formElement) {
+    const scriptURL = formElement.action;
+    const formData = new FormData(formElement);
+    const submitBtn = formElement.querySelector('.btn-submit');
+    const originalBtnText = submitBtn.innerText;
+    submitBtn.innerText = "Sending...";
+    submitBtn.disabled = true;
+
+    fetch(scriptURL, { method: 'POST', body: formData })
+      .then(response => {
+        document.getElementById('success-message').style.display = 'flex';
+        formElement.reset();
+      })
+      .catch(error => {
+        console.error('Error!', error.message);
+        alert("Oops! Something went wrong. Please try again.");
+      })
+      .finally(() => {
+        submitBtn.innerText = originalBtnText;
+        submitBtn.disabled = false;
+      });
+  }
+  function closeSuccess() {
+    document.getElementById('success-message').style.display = 'none';
+  }
+
+  /* =====================================================================
+     MENU
+     ===================================================================== */
+  function toggleMenu() {
+    const overlay = document.getElementById('menu-overlay');
+    overlay.classList.toggle('open');
+  }
+
+  /* =====================================================================
+     VIEW NAVIGATION
+     ===================================================================== */
+  const views = document.querySelectorAll('.view');
+  const dots = document.querySelectorAll('.nav-dot');
+  const nextBtnText = document.getElementById('next-text');
+  let currentViewIndex = 0;
+  let isAnimating = false;
+  const buttonLabels = [
+    "Enter Architecture",
+    "View Methodology",
+    "See Experience",
+    "Discuss Systems",
+    "Back to Start"
+  ];
+  function goToView(index) {
+    if (isAnimating || index === currentViewIndex) return;
+    isAnimating = true;
+    triggerAudio();
+    views[currentViewIndex].classList.remove('active');
+    views[currentViewIndex].classList.add('exit');
+    dots.forEach(d => d.classList.remove('active'));
+    dots[index].classList.add('active');
+
+    nextBtnText.innerText = buttonLabels[index];
+    const iconPath = document.querySelector('.pulse-btn svg');
+    if (index === views.length - 1) {
+      iconPath.style.transform = "rotate(180deg)";
+    } else {
+      iconPath.style.transform = "rotate(0deg)";
+    }
+    const glow1 = document.getElementById('glow1');
+    const glow2 = document.getElementById('glow2');
+    glow1.style.transform = `translate(${index * -5}vw, ${index * 5}vh)`;
+    glow2.style.transform = `translate(${index * 5}vw, ${index * -5}vh)`;
+    setTimeout(() => {
+      views[currentViewIndex].classList.remove('exit');
+      currentViewIndex = index;
+      views[currentViewIndex].classList.add('active');
+      setTimeout(() => { isAnimating = false; }, 600);
+    }, 400);
+  }
+  function nextView() {
+    if (currentViewIndex < views.length - 1) {
+      goToView(currentViewIndex + 1);
+    } else {
+      goToView(0);
+    }
+  }
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
+      if (currentViewIndex < views.length - 1) goToView(currentViewIndex + 1);
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      if (currentViewIndex > 0) goToView(currentViewIndex - 1);
+    }
+  });
+  let touchStartY = 0;
+  let touchEndY = 0;
+  const appContainer = document.getElementById('app-container');
+  appContainer.addEventListener('touchstart', e => {
+    touchStartY = e.changedTouches[0].screenY;
+  }, { passive: true });
+  appContainer.addEventListener('touchend', e => {
+    touchEndY = e.changedTouches[0].screenY;
+    handleSwipe();
+  }, { passive: true });
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    if (touchStartY - touchEndY > swipeThreshold) {
+      if (currentViewIndex < views.length - 1) goToView(currentViewIndex + 1);
+    } else if (touchEndY - touchStartY > swipeThreshold) {
+      if (currentViewIndex > 0) goToView(currentViewIndex - 1);
+    }
+  }
+
+  /* =====================================================================
+     MOUSE-WHEEL / TRACKPAD NAVIGATION  (desktop)
+     - Accumulates deltaY so one trackpad gesture doesn't fly through
+       several pages.
+     - Locks during the page transition (isAnimating) so it stays calm.
+     - Skips when the cursor is over a form field, so typing/scrolling
+       inside the textarea still feels natural.
+     - Resets accumulator after a short idle, so a slow scroll doesn't
+       carry over into the next gesture.
+     ===================================================================== */
+  let wheelAccumulator = 0;
+  let wheelResetTimer = null;
+  let wheelCooldown = false;
+  const WHEEL_THRESHOLD = 90;
+
+  window.addEventListener('wheel', (e) => {
+    if (isAnimating || wheelCooldown) return;
+    if (e.target.closest && e.target.closest('input, textarea, select, .menu-overlay')) return;
+
+    wheelAccumulator += e.deltaY;
+
+    clearTimeout(wheelResetTimer);
+    wheelResetTimer = setTimeout(() => { wheelAccumulator = 0; }, 220);
+
+    if (wheelAccumulator > WHEEL_THRESHOLD) {
+      if (currentViewIndex < views.length - 1) {
+        goToView(currentViewIndex + 1);
+      }
+      wheelAccumulator = 0;
+      wheelCooldown = true;
+      setTimeout(() => { wheelCooldown = false; }, 700);
+    } else if (wheelAccumulator < -WHEEL_THRESHOLD) {
+      if (currentViewIndex > 0) {
+        goToView(currentViewIndex - 1);
+      }
+      wheelAccumulator = 0;
+      wheelCooldown = true;
+      setTimeout(() => { wheelCooldown = false; }, 700);
+    }
+  }, { passive: true });
+
+  /* =====================================================================
+     CUSTOM GOLD CURSOR  (desktop + mouse only — touch users keep native)
+     ===================================================================== */
+  (function () {
+    const supportsHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+    const wideEnough = window.matchMedia('(min-width: 1280px)').matches;
+    if (!supportsHover || !wideEnough) return;
+
+    const dot = document.getElementById('cursor-dot');
+    const glow = document.getElementById('cursor-glow');
+    if (!dot || !glow) return;
+
+    let mouseX = window.innerWidth / 2;
+    let mouseY = window.innerHeight / 2;
+    let glowX = mouseX;
+    let glowY = mouseY;
+
+    document.addEventListener('mousemove', e => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      dot.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+    });
+
+    function animateGlow() {
+      glowX += (mouseX - glowX) * 0.18;
+      glowY += (mouseY - glowY) * 0.18;
+      glow.style.transform = `translate(${glowX}px, ${glowY}px) translate(-50%, -50%)`;
+      requestAnimationFrame(animateGlow);
+    }
+    animateGlow();
+
+    // Click feedback
+    document.addEventListener('mousedown', () => dot.classList.add('is-clicking'));
+    document.addEventListener('mouseup',   () => dot.classList.remove('is-clicking'));
+
+    // What counts as "clickable"
+    const clickableSel = 'a, button, .nav-dot, .menu-item, .card, .pulse-btn, ' +
+                        '.social-icon, .menu-toggle, .eq-btn, [onclick], select, ' +
+                        'input[type="submit"], input[type="button"]';
+    const typingSel = 'input[type="text"], input[type="email"], textarea';
+
+    function applyHoverState(e) {
+      const t = e.target.closest(clickableSel);
+      const typing = e.target.closest(typingSel);
+      if (typing) {
+        dot.classList.add('is-typing');
+        dot.classList.remove('is-clickable');
+        glow.classList.remove('is-clickable');
+      } else if (t) {
+        dot.classList.add('is-clickable');
+        glow.classList.add('is-clickable');
+        dot.classList.remove('is-typing');
+      } else {
+        dot.classList.remove('is-clickable', 'is-typing');
+        glow.classList.remove('is-clickable');
+      }
+    }
+    document.addEventListener('mouseover', applyHoverState);
+    document.addEventListener('mouseout',  applyHoverState);
+
+    // Hide the cursor if it leaves the window
+    document.addEventListener('mouseleave', () => {
+      dot.style.opacity = '0';
+      glow.style.opacity = '0';
+    });
+    document.addEventListener('mouseenter', () => {
+      dot.style.opacity = '1';
+      glow.style.opacity = '1';
+    });
+  })();
+
+  /* =====================================================================
+     MUSIC — YouTube IFrame API
+     Robust version: queue play intent if user clicks BEFORE the player
+     is ready. This is what was failing on desktop — the player API loads
+     asynchronously, and the first click was firing playVideo() against
+     a player that didn't exist yet, so nothing happened.
+     ===================================================================== */
+  const VIDEO_ID = 'Dwy1dHnMRs8';
+  let player = null;
+  let playerReady = false;
+  let isPlaying = false;
+  let wantsToPlay = false;
+  let userHasManuallyPaused = false;
+
+  const tag = document.createElement('script');
+  tag.src = "https://www.youtube.com/iframe_api";
+  const firstScriptTag = document.getElementsByTagName('script')[0];
+  firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+
+  function onYouTubeIframeAPIReady() {
+    player = new YT.Player('yt-player', {
+      height: '200',
+      width: '200',
+      videoId: VIDEO_ID,
+      playerVars: {
+        'autoplay': 0,
+        'loop': 1,
+        'playlist': VIDEO_ID,
+        'controls': 0,
+        'playsinline': 1,
+        'rel': 0,
+        'modestbranding': 1
+      },
+      events: {
+        'onReady': onPlayerReady,
+        'onStateChange': onPlayerStateChange,
+        'onError': onPlayerError
+      }
+    });
+  }
+
+  function onPlayerReady(event) {
+    playerReady = true;
+    // If the user already clicked somewhere on the page while the
+    // YouTube API was still loading, honour that and start playback now.
+    if (wantsToPlay && !userHasManuallyPaused) {
+      try { player.playVideo(); } catch (e) { /* ignore */ }
+    }
+  }
+
+  function onPlayerError(event) {
+    console.warn('YouTube player error code:', event.data);
+  }
+
+  function onPlayerStateChange(event) {
+    if (event.data === YT.PlayerState.PLAYING) {
+      isPlaying = true;
+      document.getElementById('eq-toggle').classList.add('playing');
+    } else {
+      isPlaying = false;
+      document.getElementById('eq-toggle').classList.remove('playing');
+    }
+    if (event.data === YT.PlayerState.ENDED) {
+      try { player.playVideo(); } catch (e) {}
+    }
+  }
+
+  // Manual toggle from the EQ button
+  function toggleMusic() {
+    if (!playerReady || !player || typeof player.getPlayerState !== 'function') {
+      // Player isn't loaded yet — remember the intent.
+      wantsToPlay = !wantsToPlay;
+      userHasManuallyPaused = !wantsToPlay;
+      return;
+    }
+    if (isPlaying) {
+      player.pauseVideo();
+      userHasManuallyPaused = true;
+    } else {
+      player.playVideo();
+      userHasManuallyPaused = false;
+    }
+  }
+
+  // Soft trigger — called when the user navigates / first clicks
+  function triggerAudio() {
+    if (userHasManuallyPaused) return;
+    wantsToPlay = true;
+    if (playerReady && player && typeof player.playVideo === 'function' && !isPlaying) {
+      try { player.playVideo(); } catch (e) { /* ignore — autoplay policy */ }
+    }
+  }
+
+  // First-interaction trigger — covers the browser autoplay rule that
+  // requires a user gesture before audio can start.
+  function attemptAudioStart() {
+    triggerAudio();
+    if (isPlaying) {
+      document.removeEventListener('click', attemptAudioStart);
+      document.removeEventListener('touchstart', attemptAudioStart);
+      document.removeEventListener('keydown', attemptAudioStart);
+    }
+  }
+  document.addEventListener('click', attemptAudioStart);
+  document.addEventListener('touchstart', attemptAudioStart, { passive: true });
+  document.addEventListener('keydown', attemptAudioStart);
+</script>
+<script>
+  // Disable right-click + common devtools shortcuts
+  document.addEventListener('contextmenu', event => { event.preventDefault(); });
+  document.addEventListener('keydown', event => {
+    if (event.key === 'F12') event.preventDefault();
+    if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'I') event.preventDefault();
+    if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'J') event.preventDefault();
+    if ((event.ctrlKey || event.metaKey) && event.key === 'U') event.preventDefault();
+  });
+</script>
+</body>
+</html>
