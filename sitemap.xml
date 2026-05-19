@@ -2,32 +2,26 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://digi-architect.studio/</loc>
-    <lastmod>2026-05-18</lastmod>
     <priority>1.0</priority>
   </url>
   <url>
     <loc>https://digi-architect.studio/workflow-automation-singapore/</loc>
-    <lastmod>2026-05-18</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://digi-architect.studio/governance-dashboard-singapore/</loc>
-    <lastmod>2026-05-18</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://digi-architect.studio/finance-automation-singapore/</loc>
-    <lastmod>2026-05-18</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://digi-architect.studio/hr-systems-singapore/</loc>
-    <lastmod>2026-05-18</lastmod>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://digi-architect.studio/faq/</loc>
-    <lastmod>2026-05-18</lastmod>
-    <priority>0.7</priority>
+    <priority>0.6</priority>
   </url>
 </urlset>
