@@ -511,6 +511,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
     .menu-toggle { top: 16px; right: 16px; width: 40px; height: 40px; }
     .eq-container { top: 28px; right: 64px; left: auto; bottom: auto; }
+    .progression-area { bottom: 130px; right: 16px; }
+    .pulse-btn { width: 52px; height: 52px; padding: 0; justify-content: center; border-radius: 50%; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.3); }
+    .pulse-btn span { display: none; }
+    .pulse-btn svg { margin: 0; width: 22px; height: 22px; }
+
+    .global-nav { display: none; }
+  }
+
+  .seo-pill {
+    font-size: 10px;
+    color: var(--navy);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-radius: 100px;
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    transition: all 0.3s var(--ease-out);
+    background: transparent;
+    display: inline-block;
+  }
+  .seo-pill:hover {
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.15);
+  }
+  @media(max-width:768px) {
+    .seo-pill { font-size: 9px; padding: 5px 10px; }
+  }
+</style>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNG8MK4K"
 height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 <!-- End Google Tag Manager (noscript) -->
 
