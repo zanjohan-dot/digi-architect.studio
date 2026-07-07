@@ -7,7 +7,7 @@ const contact = {
   phone: "89878714",
   email: "zanj@digi-architect.studio",
   website: "https://digi-architect.studio",
-  linkedin: "https://www.linkedin.com/company/the-digital-systems-architect",
+  linkedin: "linkedin.com/in/zanjohan",
   instagram: "https://www.instagram.com/digital.systems.architect",
   facebook: "https://www.facebook.com/share/17tceLy88Z/?mibextid=wwXIfr",
   cardUrl: "https://digi-architect.studio/zan/",
