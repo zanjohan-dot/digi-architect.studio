@@ -1,49 +1,65 @@
-const contact = {
+"use strict";
+
+/**
+ * Clean v4 digital name card script
+ * Handles:
+ * - Contact link configuration
+ * - QR rendering with local image fallback
+ * - Save Contact vCard download
+ * - Copy link actions
+ * - QR and Instagram modals
+ */
+
+const CONTACT = {
   name: "Zan Johan",
-  familyName: "Johan",
   givenName: "Zan",
+  familyName: "Johan",
   title: "Digital Systems Architect",
   company: "The Digital Systems Architect",
-  phone: "+65 8987 8714",
-  whatsappPhone: "6589878714",
+
+  phoneDisplay: "+65 8987 8714",
+  whatsappNumber: "6589878714",
   email: "zanj@digi-architect.studio",
+
   website: "https://digi-architect.studio",
-  linkedin: "https://www.linkedin.com/company/the-digital-systems-architect",
-  personalLinkedIn: "https://www.linkedin.com/in/zanjohan",
+  cardUrl: "https://digi-architect.studio/zan/",
+
+  linkedinCompany: "https://www.linkedin.com/company/the-digital-systems-architect",
+  linkedinPersonal: "https://www.linkedin.com/in/zanjohan",
   instagram: "https://www.instagram.com/digital.systems.architect",
   facebook: "https://www.facebook.com/share/17tceLy88Z/?mibextid=wwXIfr",
-  cardUrl: "https://digi-architect.studio/zan/",
+
+  qrFallbackImage: "assets/card-qr.png",
 };
 
-const selectors = {
-  cardUrl: "[data-card-url]",
-  modalCardUrl: "[data-modal-card-url]",
+const SELECTOR = {
+  cardUrlLinks: "[data-card-url], [data-modal-card-url]",
+
+  websiteLinks: "[data-website-link]",
+  whatsappLinks: "[data-whatsapp-link]",
+  emailLinks: "[data-email-link]",
+  linkedinCompanyLinks: "[data-linkedin-link]",
+  linkedinPersonalLinks: "[data-personal-linkedin-link]",
+  instagramLinks: "[data-instagram-link]",
+  facebookLinks: "[data-facebook-link]",
 
   qrCanvas: "[data-qr-canvas]",
   qrFallback: "[data-qr-fallback]",
   modalQrCanvas: "[data-modal-qr-canvas]",
   modalQrFallback: "[data-modal-qr-fallback]",
 
-  openQr: "[data-open-qr]",
-  closeQr: "[data-close-qr]",
   qrModal: "[data-qr-modal]",
+  openQrModal: "[data-open-qr]",
+  closeQrModal: "[data-close-qr]",
 
   instagramModal: "[data-instagram-modal]",
-  openInstagram: "[data-open-instagram]",
-  closeInstagram: "[data-close-instagram]",
+  openInstagramModal: "[data-open-instagram]",
+  closeInstagramModal: "[data-close-instagram]",
 
   saveContact: "[data-save-contact]",
   copyLink: "[data-copy-link]",
   modalCopyLink: "[data-modal-copy-link]",
   copyInstagram: "[data-copy-instagram]",
-
-  websiteLinks: "[data-website-link]",
-  whatsappLinks: "[data-whatsapp-link]",
-  emailLinks: "[data-email-link]",
-  linkedinLinks: "[data-linkedin-link]",
-  personalLinkedInLinks: "[data-personal-linkedin-link]",
-  instagramLinks: "[data-instagram-link]",
-  facebookLinks: "[data-facebook-link]",
 
   toast: "[data-toast]",
 };
@@ -51,32 +67,108 @@ const selectors = {
 let lastModalTrigger = null;
 let toastTimer = null;
 
+/* ---------- Utility helpers ---------- */
+
+function displayUrl(url) {
+  return String(url).replace(/^https?:\/\//, "").replace(/\/$/, "");
+}
+
+function getElement(selector) {
+  return document.querySelector(selector);
+}
+
+function getElements(selector) {
+  return Array.from(document.querySelectorAll(selector));
+}
+
+function setLink(selector, href) {
+  getElements(selector).forEach((element) => {
+    element.href = href;
+  });
+}
+
+function showToast(message) {
+  const toast = getElement(SELECTOR.toast);
+
+  if (!toast) return;
+
+  window.clearTimeout(toastTimer);
+
+  toast.textContent = message;
+  toast.hidden = false;
+
+  toastTimer = window.setTimeout(() => {
+    toast.hidden = true;
+  }, 1800);
+}
+
+async function copyText(text, successMessage = "Copied") {
+  try {
+    await navigator.clipboard.writeText(text);
+  } catch {
+    const fallbackInput = document.createElement("input");
+
+    fallbackInput.value = text;
+    fallbackInput.setAttribute("readonly", "");
+    fallbackInput.style.position = "fixed";
+    fallbackInput.style.left = "-9999px";
+
+    document.body.append(fallbackInput);
+    fallbackInput.select();
+    document.execCommand("copy");
+    fallbackInput.remove();
+  }
+
+  showToast(successMessage);
+}
+
+/* ---------- Contact links ---------- */
+
+function applyContactLinks() {
+  setLink(SELECTOR.websiteLinks, CONTACT.website);
+  setLink(SELECTOR.whatsappLinks, `https://wa.me/${CONTACT.whatsappNumber}`);
+  setLink(SELECTOR.emailLinks, `mailto:${CONTACT.email}`);
+  setLink(SELECTOR.linkedinCompanyLinks, CONTACT.linkedinCompany);
+  setLink(SELECTOR.linkedinPersonalLinks, CONTACT.linkedinPersonal);
+  setLink(SELECTOR.instagramLinks, CONTACT.instagram);
+  setLink(SELECTOR.facebookLinks, CONTACT.facebook);
+
+  getElements(SELECTOR.cardUrlLinks).forEach((link) => {
+    link.href = CONTACT.cardUrl;
+    link.textContent = displayUrl(CONTACT.cardUrl);
+  });
+}
+
+/* ---------- vCard ---------- */
+
 function escapeVCard(value) {
   return String(value ?? "")
     .replace(/\\/g, "\\\\")
-    .replace(/\n/g, "\\n")
+    .replace(/\r?\n/g, "\\n")
     .replace(/,/g, "\\,")
     .replace(/;/g, "\\;");
 }
 
 function buildVCard() {
-  return [
+  const lines = [
     "BEGIN:VCARD",
     "VERSION:3.0",
-    `N:${escapeVCard(contact.familyName)};${escapeVCard(contact.givenName)};;;`,
-    `FN:${escapeVCard(contact.name)}`,
-    `ORG:${escapeVCard(contact.company)}`,
-    `TITLE:${escapeVCard(contact.title)}`,
-    `TEL;TYPE=CELL:${escapeVCard(contact.phone)}`,
-    `EMAIL;TYPE=INTERNET:${escapeVCard(contact.email)}`,
-    `URL:${escapeVCard(contact.website)}`,
-    `X-SOCIALPROFILE;TYPE=linkedin-company:${escapeVCard(contact.linkedin)}`,
-    `X-SOCIALPROFILE;TYPE=linkedin-personal:${escapeVCard(contact.personalLinkedIn)}`,
-    `X-SOCIALPROFILE;TYPE=instagram:${escapeVCard(contact.instagram)}`,
-    `X-SOCIALPROFILE;TYPE=facebook:${escapeVCard(contact.facebook)}`,
-    `NOTE:${escapeVCard(`Digital card: ${contact.cardUrl}`)}`,
+    `N:${escapeVCard(CONTACT.familyName)};${escapeVCard(CONTACT.givenName)};;;`,
+    `FN:${escapeVCard(CONTACT.name)}`,
+    `ORG:${escapeVCard(CONTACT.company)}`,
+    `TITLE:${escapeVCard(CONTACT.title)}`,
+    `TEL;TYPE=CELL:${escapeVCard(CONTACT.phoneDisplay)}`,
+    `EMAIL;TYPE=INTERNET:${escapeVCard(CONTACT.email)}`,
+    `URL:${escapeVCard(CONTACT.website)}`,
+    `X-SOCIALPROFILE;TYPE=linkedin-company:${escapeVCard(CONTACT.linkedinCompany)}`,
+    `X-SOCIALPROFILE;TYPE=linkedin-personal:${escapeVCard(CONTACT.linkedinPersonal)}`,
+    `X-SOCIALPROFILE;TYPE=instagram:${escapeVCard(CONTACT.instagram)}`,
+    `X-SOCIALPROFILE;TYPE=facebook:${escapeVCard(CONTACT.facebook)}`,
+    `NOTE:${escapeVCard(`Digital card: ${CONTACT.cardUrl}`)}`,
     "END:VCARD",
-  ].join("\r\n");
+  ];
+
+  return lines.join("\r\n");
 }
 
 function downloadVCard() {
@@ -89,136 +181,46 @@ function downloadVCard() {
 
   link.href = url;
   link.download = "Zan-Johan.vcf";
+
   document.body.append(link);
   link.click();
   link.remove();
 
   URL.revokeObjectURL(url);
+
   showToast("Contact saved");
 }
 
-function showToast(message) {
-  const toast = document.querySelector(selectors.toast);
+/* ---------- QR code ---------- */
 
-  if (!toast) return;
-
-  window.clearTimeout(toastTimer);
-  toast.textContent = message;
-  toast.hidden = false;
-
-  toastTimer = window.setTimeout(() => {
-    toast.hidden = true;
-  }, 1800);
-}
-
-async function copyText(value, message = "Copied") {
-  try {
-    await navigator.clipboard.writeText(value);
-  } catch {
-    const tempInput = document.createElement("input");
-    tempInput.value = value;
-    tempInput.setAttribute("readonly", "");
-    tempInput.style.position = "fixed";
-    tempInput.style.left = "-9999px";
-
-    document.body.append(tempInput);
-    tempInput.select();
-    document.execCommand("copy");
-    tempInput.remove();
-  }
-
-  showToast(message);
-}
-
-function displayUrl(url) {
-  return url.replace(/^https?:\/\//, "").replace(/\/$/, "");
-}
-
-function setCardUrls() {
-  document
-    .querySelectorAll(`${selectors.cardUrl}, ${selectors.modalCardUrl}`)
-    .forEach((link) => {
-      link.href = contact.cardUrl;
-      link.textContent = displayUrl(contact.cardUrl);
-    });
-}
-
-function setContactLinks() {
-  document.querySelectorAll(selectors.websiteLinks).forEach((link) => {
-    link.href = contact.website;
-  });
-
-  document.querySelectorAll(selectors.whatsappLinks).forEach((link) => {
-    link.href = `https://wa.me/${contact.whatsappPhone}`;
-  });
-
-  document.querySelectorAll(selectors.emailLinks).forEach((link) => {
-    link.href = `mailto:${contact.email}`;
-  });
-
-  document.querySelectorAll(selectors.linkedinLinks).forEach((link) => {
-    link.href = contact.linkedin;
-  });
-
-  document.querySelectorAll(selectors.personalLinkedInLinks).forEach((link) => {
-    link.href = contact.personalLinkedIn;
-  });
-
-  document.querySelectorAll(selectors.instagramLinks).forEach((link) => {
-    link.href = contact.instagram;
-  });
-
-  document.querySelectorAll(selectors.facebookLinks).forEach((link) => {
-    link.href = contact.facebook;
-  });
-}
-
-function removeExistingQrTextFallback(fallback) {
-  const existing = fallback?.parentElement?.querySelector(".qr-text-fallback");
-  existing?.remove();
-}
-
-function renderFallbackQr(canvasSelector, fallbackSelector) {
-  const canvas = document.querySelector(canvasSelector);
-  const fallback = document.querySelector(fallbackSelector);
+function showQrFallback(canvasSelector, fallbackSelector) {
+  const canvas = getElement(canvasSelector);
+  const fallback = getElement(fallbackSelector);
 
   if (canvas) {
     canvas.hidden = true;
   }
 
-  if (!fallback) return;
-
-  fallback.hidden = true;
-  removeExistingQrTextFallback(fallback);
-
-  const link = document.createElement("a");
-  link.className = "qr-text-fallback";
-  link.href = contact.cardUrl;
-  link.target = "_blank";
-  link.rel = "noopener";
-  link.textContent = displayUrl(contact.cardUrl);
-
-  fallback.insertAdjacentElement("afterend", link);
-
-  console.warn("QR library unavailable; showing card link fallback.");
+  if (fallback) {
+    fallback.src = CONTACT.qrFallbackImage;
+    fallback.hidden = false;
+  }
 }
 
-function renderQr(canvasSelector, fallbackSelector, width) {
-  const canvas = document.querySelector(canvasSelector);
-  const fallback = document.querySelector(fallbackSelector);
+function renderQr(canvasSelector, fallbackSelector, size) {
+  const canvas = getElement(canvasSelector);
+  const fallback = getElement(fallbackSelector);
 
   if (!canvas || !window.QRCode?.toCanvas) {
-    renderFallbackQr(canvasSelector, fallbackSelector);
+    showQrFallback(canvasSelector, fallbackSelector);
     return;
   }
 
-  removeExistingQrTextFallback(fallback);
-
   window.QRCode.toCanvas(
     canvas,
-    contact.cardUrl,
+    CONTACT.cardUrl,
     {
-      width,
+      width: size,
       margin: 2,
       errorCorrectionLevel: "M",
       color: {
@@ -228,7 +230,7 @@ function renderQr(canvasSelector, fallbackSelector, width) {
     },
     (error) => {
       if (error) {
-        renderFallbackQr(canvasSelector, fallbackSelector);
+        showQrFallback(canvasSelector, fallbackSelector);
         return;
       }
 
@@ -242,9 +244,11 @@ function renderQr(canvasSelector, fallbackSelector, width) {
 }
 
 function renderQrCodes() {
-  renderQr(selectors.qrCanvas, selectors.qrFallback, 152);
-  renderQr(selectors.modalQrCanvas, selectors.modalQrFallback, 292);
+  renderQr(SELECTOR.qrCanvas, SELECTOR.qrFallback, 152);
+  renderQr(SELECTOR.modalQrCanvas, SELECTOR.modalQrFallback, 292);
 }
+
+/* ---------- Modals ---------- */
 
 function openModal(modal, trigger) {
   if (!modal) return;
@@ -264,12 +268,6 @@ function openModal(modal, trigger) {
   firstFocusable?.focus();
 }
 
-function restoreFocus() {
-  if (lastModalTrigger instanceof HTMLElement) {
-    lastModalTrigger.focus();
-  }
-}
-
 function closeModal(modal) {
   if (!modal) return;
 
@@ -281,10 +279,16 @@ function closeModal(modal) {
   }
 }
 
-function bindModal(modalSelector, openSelector, closeSelector) {
-  const modal = document.querySelector(modalSelector);
-  const openButton = document.querySelector(openSelector);
-  const closeButton = document.querySelector(closeSelector);
+function restoreFocus() {
+  if (lastModalTrigger instanceof HTMLElement) {
+    lastModalTrigger.focus();
+  }
+}
+
+function bindModal({ modalSelector, openSelector, closeSelector }) {
+  const modal = getElement(modalSelector);
+  const openButton = getElement(openSelector);
+  const closeButton = getElement(closeSelector);
 
   openButton?.addEventListener("click", (event) => {
     openModal(modal, event.currentTarget);
@@ -294,51 +298,29 @@ function bindModal(modalSelector, openSelector, closeSelector) {
     closeModal(modal);
   });
 
-  modal?.addEventListener("close", restoreFocus);
-
   modal?.addEventListener("click", (event) => {
     if (event.target === modal) {
       closeModal(modal);
     }
   });
 
+  modal?.addEventListener("close", restoreFocus);
+
   return modal;
 }
 
-function bindEvents() {
-  const qrModal = bindModal(
-    selectors.qrModal,
-    selectors.openQr,
-    selectors.closeQr
-  );
+function bindModals() {
+  const qrModal = bindModal({
+    modalSelector: SELECTOR.qrModal,
+    openSelector: SELECTOR.openQrModal,
+    closeSelector: SELECTOR.closeQrModal,
+  });
 
-  const instagramModal = bindModal(
-    selectors.instagramModal,
-    selectors.openInstagram,
-    selectors.closeInstagram
-  );
-
-  document
-    .querySelector(selectors.saveContact)
-    ?.addEventListener("click", downloadVCard);
-
-  document
-    .querySelector(selectors.copyLink)
-    ?.addEventListener("click", () => {
-      copyText(contact.cardUrl, "Link copied");
-    });
-
-  document
-    .querySelector(selectors.modalCopyLink)
-    ?.addEventListener("click", () => {
-      copyText(contact.cardUrl, "Link copied");
-    });
-
-  document
-    .querySelector(selectors.copyInstagram)
-    ?.addEventListener("click", () => {
-      copyText(contact.instagram, "Instagram copied");
-    });
+  const instagramModal = bindModal({
+    modalSelector: SELECTOR.instagramModal,
+    openSelector: SELECTOR.openInstagramModal,
+    closeSelector: SELECTOR.closeInstagramModal,
+  });
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
@@ -353,10 +335,37 @@ function bindEvents() {
   });
 }
 
+/* ---------- Event binding ---------- */
+
+function bindActions() {
+  getElement(SELECTOR.saveContact)?.addEventListener("click", downloadVCard);
+
+  getElement(SELECTOR.copyLink)?.addEventListener("click", () => {
+    copyText(CONTACT.cardUrl, "Link copied");
+  });
+
+  getElement(SELECTOR.modalCopyLink)?.addEventListener("click", () => {
+    copyText(CONTACT.cardUrl, "Link copied");
+  });
+
+  getElement(SELECTOR.copyInstagram)?.addEventListener("click", () => {
+    copyText(CONTACT.instagram, "Instagram copied");
+  });
+}
+
+/* ---------- Init ---------- */
+
 function init() {
-  setCardUrls();
-  setContactLinks();
-  bindEvents();
+  applyContactLinks();
+  bindActions();
+  bindModals();
+
+  /**
+   * Show local QR image immediately.
+   * If QRCode library loads properly, it will replace the image with canvas later.
+   */
+  showQrFallback(SELECTOR.qrCanvas, SELECTOR.qrFallback);
+  showQrFallback(SELECTOR.modalQrCanvas, SELECTOR.modalQrFallback);
 }
 
 if (document.readyState === "loading") {
