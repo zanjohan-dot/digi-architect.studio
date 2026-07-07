@@ -314,7 +314,7 @@ svg {
   justify-content: center;
   align-items: flex-start;
   gap: 9px;
-  margin: 16px auto 14px;
+  margin: 16px auto 28px;
   flex-wrap: nowrap;
 }
 
@@ -323,11 +323,11 @@ svg {
   height: 46px;
   display: inline-grid;
   place-items: center;
+  position: relative;
   border: 1px solid rgba(229, 231, 235, 0.9);
   border-radius: 999px;
   color: var(--navy);
-  background:
-    linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
   box-shadow:
     0 10px 24px rgba(0, 0, 0, 0.22),
     inset 0 1px 0 rgba(255, 255, 255, 0.95);
@@ -364,26 +364,29 @@ svg {
   transform: translateY(0);
 }
 
+/* Personal LinkedIn caption: keeps the icon clean and places "zan j" below */
 .social-button-caption {
-  width: 48px;
-  height: 48px;
-  grid-template-rows: 18px auto;
-  gap: 2px;
-  padding: 5px 4px 4px;
+  overflow: visible;
 }
 
 .social-button-caption svg {
-  width: 17px;
-  height: 17px;
+  width: 20px;
+  height: 20px;
 }
 
 .social-caption {
-  color: var(--navy);
+  position: absolute;
+  left: 50%;
+  bottom: -18px;
+  transform: translateX(-50%);
+  color: var(--muted);
   font-size: 0.56rem;
-  font-weight: 800;
+  font-weight: 700;
   line-height: 1;
   letter-spacing: 0.02em;
+  white-space: nowrap;
   text-transform: lowercase;
+  pointer-events: none;
 }
 
 .site-link {
@@ -612,6 +615,7 @@ svg {
 
   .contact-row {
     gap: 7px;
+    margin-bottom: 26px;
   }
 
   .social-button {
@@ -624,19 +628,14 @@ svg {
     height: 18px;
   }
 
-  .social-button-caption {
-    width: 44px;
-    height: 44px;
-    padding-top: 5px;
-  }
-
   .social-button-caption svg {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
   }
 
   .social-caption {
-    font-size: 0.52rem;
+    bottom: -16px;
+    font-size: 0.5rem;
   }
 
   .modal {
