@@ -4,23 +4,23 @@
  * Zan Johan Digital Name Card
  * Clean static QR version
  *
- * This script handles:
- * - Contact link setup
- * - Save Contact vCard
+ * Handles:
+ * - Contact links
+ * - Save contact vCard
  * - Copy card link
  * - QR modal
  * - Instagram modal
  * - Toast messages
  *
- * It does NOT generate QR codes.
- * The QR code is a static image: assets/card-qr.png
+ * QR is static:
+ * zan/assets/card-qr.png
  */
 
 const CONTACT = {
   name: "Zan Johan",
   givenName: "Zan",
   familyName: "Johan",
-  title: "Digital Systems Architect",
+  title: "Executive Director, Digital Systems Architect | Halal | Finance | Legal",
   company: "The Digital Systems Architect",
 
   phoneDisplay: "+65 8987 8714",
@@ -66,9 +66,9 @@ const SELECTOR = {
 let lastModalTrigger = null;
 let toastTimer = null;
 
-/* ----------------------------------------
-   Helpers
----------------------------------------- */
+/* -----------------------------
+   Basic helpers
+----------------------------- */
 
 function getElement(selector) {
   return document.querySelector(selector);
@@ -88,9 +88,9 @@ function setHref(selector, href) {
   });
 }
 
-/* ----------------------------------------
+/* -----------------------------
    Apply live links
----------------------------------------- */
+----------------------------- */
 
 function applyContactLinks() {
   setHref(SELECTOR.websiteLinks, CONTACT.website);
@@ -107,9 +107,9 @@ function applyContactLinks() {
   });
 }
 
-/* ----------------------------------------
+/* -----------------------------
    Toast
----------------------------------------- */
+----------------------------- */
 
 function showToast(message) {
   const toast = getElement(SELECTOR.toast);
@@ -126,9 +126,9 @@ function showToast(message) {
   }, 1800);
 }
 
-/* ----------------------------------------
+/* -----------------------------
    Copy text
----------------------------------------- */
+----------------------------- */
 
 async function copyText(text, successMessage) {
   try {
@@ -150,9 +150,9 @@ async function copyText(text, successMessage) {
   showToast(successMessage);
 }
 
-/* ----------------------------------------
+/* -----------------------------
    vCard
----------------------------------------- */
+----------------------------- */
 
 function escapeVCard(value) {
   return String(value ?? "")
@@ -227,9 +227,9 @@ function downloadVCard() {
   showToast("Contact saved");
 }
 
-/* ----------------------------------------
+/* -----------------------------
    Modals
----------------------------------------- */
+----------------------------- */
 
 function openModal(modal, trigger) {
   if (!modal) return;
@@ -316,9 +316,9 @@ function bindModals() {
   });
 }
 
-/* ----------------------------------------
+/* -----------------------------
    Button actions
----------------------------------------- */
+----------------------------- */
 
 function bindActions() {
   getElement(SELECTOR.saveContact)?.addEventListener("click", downloadVCard);
@@ -336,9 +336,9 @@ function bindActions() {
   });
 }
 
-/* ----------------------------------------
+/* -----------------------------
    Init
----------------------------------------- */
+----------------------------- */
 
 function init() {
   applyContactLinks();
