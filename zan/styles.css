@@ -1,22 +1,27 @@
 :root {
   --bg: #050914;
-  --bg-2: #08111f;
-  --card: rgba(8, 17, 31, 0.82);
+  --card: rgba(8, 17, 31, 0.9);
   --card-border: rgba(255, 255, 255, 0.12);
+
   --text: #f8fbff;
   --muted: #aab6c8;
   --soft: #d9e4f5;
   --navy: #07111f;
+
   --accent: #4fb7ff;
-  --accent-2: #7dd3fc;
+  --accent-soft: #7dd3fc;
+
   --white: #ffffff;
   --off-white: #f8fbff;
-  --line: rgba(255, 255, 255, 0.14);
-  --shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
-  --ring: 0 0 0 3px rgba(79, 183, 255, 0.28);
-  --radius-lg: 28px;
-  --radius-md: 20px;
-  --radius-sm: 14px;
+
+  --shadow-card: 0 28px 90px rgba(0, 0, 0, 0.48);
+  --shadow-soft: 0 12px 28px rgba(0, 0, 0, 0.18);
+  --ring: 0 0 0 3px rgba(79, 183, 255, 0.3);
+
+  --radius-card: 30px;
+  --radius-large: 24px;
+  --radius-medium: 18px;
+  --radius-round: 999px;
 }
 
 * {
@@ -35,10 +40,9 @@ body {
     sans-serif;
   color: var(--text);
   background:
-    radial-gradient(circle at 18% 12%, rgba(79, 183, 255, 0.22), transparent 30%),
+    radial-gradient(circle at 18% 12%, rgba(79, 183, 255, 0.2), transparent 28%),
     radial-gradient(circle at 82% 18%, rgba(125, 211, 252, 0.14), transparent 30%),
-    radial-gradient(circle at 50% 95%, rgba(79, 183, 255, 0.1), transparent 38%),
-    linear-gradient(135deg, #020617 0%, #050914 48%, #08111f 100%);
+    linear-gradient(135deg, #020617 0%, #050914 52%, #08111f 100%);
   overflow-x: hidden;
 }
 
@@ -51,7 +55,7 @@ body::before {
     linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
     linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
   background-size: 42px 42px;
-  mask-image: radial-gradient(circle at center, black 0%, transparent 72%);
+  mask-image: radial-gradient(circle at center, black 0%, transparent 74%);
   opacity: 0.5;
 }
 
@@ -60,18 +64,24 @@ a {
   text-decoration: none;
 }
 
+button {
+  font: inherit;
+}
+
 button,
 a {
   -webkit-tap-highlight-color: transparent;
 }
 
-button {
-  font: inherit;
-}
-
 svg {
   display: block;
 }
+
+[hidden] {
+  display: none !important;
+}
+
+/* Page shell */
 
 .card-page {
   min-height: 100vh;
@@ -86,11 +96,11 @@ svg {
   overflow: hidden;
   padding: 20px 20px 18px;
   border: 1px solid var(--card-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-card);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.085), transparent 22%),
-    linear-gradient(145deg, rgba(8, 17, 31, 0.92), rgba(3, 8, 19, 0.9));
-  box-shadow: var(--shadow);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 24%),
+    linear-gradient(145deg, rgba(13, 27, 45, 0.94), rgba(3, 8, 19, 0.95));
+  box-shadow: var(--shadow-card);
   backdrop-filter: blur(22px);
 }
 
@@ -101,15 +111,17 @@ svg {
   pointer-events: none;
   border-radius: inherit;
   background:
-    radial-gradient(circle at 18% 8%, rgba(79, 183, 255, 0.24), transparent 32%),
-    radial-gradient(circle at 90% 20%, rgba(125, 211, 252, 0.12), transparent 34%);
-  opacity: 0.85;
+    radial-gradient(circle at 18% 8%, rgba(79, 183, 255, 0.22), transparent 34%),
+    radial-gradient(circle at 92% 12%, rgba(125, 211, 252, 0.12), transparent 36%);
+  opacity: 0.9;
 }
 
 .identity-card > * {
   position: relative;
   z-index: 1;
 }
+
+/* Top bar */
 
 .card-top {
   display: flex;
@@ -123,15 +135,15 @@ svg {
   display: inline-flex;
   align-items: center;
   justify-content: flex-start;
+  height: 44px;
+  max-width: 180px;
   min-width: 0;
-  height: 42px;
-  max-width: 190px;
 }
 
 .brand-logo img {
   display: block;
   max-width: 100%;
-  max-height: 38px;
+  max-height: 40px;
   object-fit: contain;
 }
 
@@ -144,19 +156,20 @@ svg {
 .icon-button {
   width: 36px;
   height: 36px;
+  padding: 0;
   display: inline-grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: var(--radius-round);
   color: var(--soft);
-  background: rgba(255, 255, 255, 0.07);
+  background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
   transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease,
-    color 180ms ease,
-    box-shadow 180ms ease;
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .icon-button svg {
@@ -164,7 +177,7 @@ svg {
   height: 18px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.9;
+  stroke-width: 2;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -173,21 +186,11 @@ svg {
   transform: translateY(-1px);
   color: var(--white);
   border-color: rgba(79, 183, 255, 0.55);
-  background: rgba(79, 183, 255, 0.12);
+  background: rgba(79, 183, 255, 0.14);
   box-shadow: 0 10px 24px rgba(79, 183, 255, 0.12);
 }
 
-.icon-button:focus-visible,
-.social-button:focus-visible,
-.qr-button:focus-visible,
-.site-link:focus-visible,
-.modal-close:focus-visible,
-.modal-copy:focus-visible,
-.card-url:focus-visible,
-.modal-url:focus-visible {
-  outline: none;
-  box-shadow: var(--ring);
-}
+/* Identity */
 
 .person {
   display: grid;
@@ -204,12 +207,12 @@ svg {
   object-fit: cover;
   object-position: center;
   border-radius: 28px;
-  border: 1px solid rgba(255, 255, 255, 0.24);
+  border: 1px solid rgba(79, 183, 255, 0.36);
+  background: rgba(255, 255, 255, 0.08);
   box-shadow:
     0 18px 40px rgba(0, 0, 0, 0.34),
     0 0 0 5px rgba(255, 255, 255, 0.045);
   margin-bottom: 8px;
-  background: rgba(255, 255, 255, 0.08);
 }
 
 .person h1 {
@@ -222,19 +225,21 @@ svg {
 
 .role {
   margin: 0;
-  color: var(--accent-2);
+  color: var(--accent-soft);
   font-size: 0.83rem;
   font-weight: 700;
   letter-spacing: 0.03em;
 }
 
 .tagline {
-  max-width: 270px;
+  max-width: 275px;
   margin: 4px auto 0;
   color: var(--muted);
   font-size: 0.78rem;
   line-height: 1.45;
 }
+
+/* QR */
 
 .qr-section {
   display: grid;
@@ -246,28 +251,28 @@ svg {
 .qr-button {
   width: 166px;
   height: 166px;
+  padding: 0;
   display: grid;
   place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(226, 232, 240, 0.9);
   border-radius: 24px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.95), rgba(248, 251, 255, 0.92));
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.5),
-    0 18px 36px rgba(0, 0, 0, 0.28);
+    inset 0 0 0 1px rgba(255, 255, 255, 0.85),
+    0 18px 36px rgba(0, 0, 0, 0.3);
   cursor: pointer;
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease;
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease;
 }
 
 .qr-button:hover {
   transform: translateY(-2px);
-  border-color: rgba(79, 183, 255, 0.45);
+  border-color: rgba(79, 183, 255, 0.5);
   box-shadow:
-    inset 0 0 0 1px rgba(255, 255, 255, 0.6),
-    0 22px 44px rgba(0, 0, 0, 0.34),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.95),
+    0 22px 44px rgba(0, 0, 0, 0.36),
     0 0 28px rgba(79, 183, 255, 0.12);
 }
 
@@ -283,16 +288,6 @@ svg {
   object-fit: contain;
 }
 
-.qr-text-fallback {
-  max-width: 138px;
-  color: var(--navy);
-  font-size: 0.72rem;
-  line-height: 1.25;
-  font-weight: 700;
-  overflow-wrap: anywhere;
-  text-align: center;
-}
-
 .card-url {
   color: var(--soft);
   font-size: 0.76rem;
@@ -300,44 +295,47 @@ svg {
   letter-spacing: 0.01em;
   border-bottom: 1px solid rgba(217, 228, 245, 0.35);
   transition:
-    color 180ms ease,
-    border-color 180ms ease;
+    color 160ms ease,
+    border-color 160ms ease;
 }
 
 .card-url:hover {
   color: var(--white);
-  border-color: rgba(79, 183, 255, 0.7);
+  border-color: rgba(79, 183, 255, 0.72);
 }
+
+/* Social/contact icons */
 
 .contact-row {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 9px;
-  margin: 16px auto 28px;
+  gap: 12px;
+  margin: 18px auto 30px;
   flex-wrap: nowrap;
 }
 
 .social-button {
-  width: 46px;
-  height: 46px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   display: inline-grid;
   place-items: center;
   position: relative;
-  border: 1px solid rgba(229, 231, 235, 0.9);
-  border-radius: 999px;
-  color: var(--navy);
-  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
+  border: 1px solid rgba(226, 232, 240, 0.95);
+  border-radius: var(--radius-round);
+  color: #0f172a;
+  background: #ffffff;
   box-shadow:
-    0 10px 24px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+    0 8px 18px rgba(0, 0, 0, 0.16),
+    inset 0 1px 0 rgba(255, 255, 255, 1);
   cursor: pointer;
   transition:
-    transform 180ms ease,
-    box-shadow 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease,
-    color 180ms ease;
+    transform 160ms ease,
+    box-shadow 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease,
+    color 160ms ease;
 }
 
 .social-button svg {
@@ -345,7 +343,7 @@ svg {
   height: 20px;
   fill: none;
   stroke: currentColor;
-  stroke-width: 1.85;
+  stroke-width: 2.15;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
@@ -353,18 +351,17 @@ svg {
 .social-button:hover {
   transform: translateY(-2px);
   color: #020617;
-  border-color: rgba(79, 183, 255, 0.72);
+  border-color: rgba(148, 163, 184, 0.95);
   background: #ffffff;
   box-shadow:
-    0 14px 30px rgba(0, 0, 0, 0.26),
-    0 0 0 4px rgba(79, 183, 255, 0.1);
+    0 12px 24px rgba(0, 0, 0, 0.22),
+    0 0 0 4px rgba(255, 255, 255, 0.08);
 }
 
 .social-button:active {
   transform: translateY(0);
 }
 
-/* Personal LinkedIn caption: keeps the icon clean and places "zan j" below */
 .social-button-caption {
   overflow: visible;
 }
@@ -377,10 +374,10 @@ svg {
 .social-caption {
   position: absolute;
   left: 50%;
-  bottom: -18px;
+  bottom: -17px;
   transform: translateX(-50%);
   color: var(--muted);
-  font-size: 0.56rem;
+  font-size: 0.54rem;
   font-weight: 700;
   line-height: 1;
   letter-spacing: 0.02em;
@@ -388,6 +385,8 @@ svg {
   text-transform: lowercase;
   pointer-events: none;
 }
+
+/* Bottom website link */
 
 .site-link {
   display: table;
@@ -398,14 +397,16 @@ svg {
   letter-spacing: 0.02em;
   border-bottom: 1px solid rgba(170, 182, 200, 0.35);
   transition:
-    color 180ms ease,
-    border-color 180ms ease;
+    color 160ms ease,
+    border-color 160ms ease;
 }
 
 .site-link:hover {
   color: var(--white);
   border-color: rgba(79, 183, 255, 0.72);
 }
+
+/* Modal */
 
 .modal {
   width: min(calc(100vw - 32px), 420px);
@@ -449,10 +450,11 @@ svg {
 .modal-close {
   width: 36px;
   height: 36px;
+  padding: 0;
   display: inline-grid;
   place-items: center;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
+  border-radius: var(--radius-round);
   color: var(--soft);
   background: rgba(255, 255, 255, 0.08);
   cursor: pointer;
@@ -481,7 +483,7 @@ svg {
   margin: 0 auto 14px;
   border-radius: 26px;
   background: var(--off-white);
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
 }
 
 .modal-qr canvas,
@@ -501,7 +503,7 @@ svg {
   border-radius: 24px;
   background: var(--off-white);
   padding: 10px;
-  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.85);
 }
 
 .modal-url {
@@ -525,7 +527,7 @@ svg {
   width: 100%;
   min-height: 44px;
   border: 1px solid rgba(79, 183, 255, 0.38);
-  border-radius: 999px;
+  border-radius: var(--radius-round);
   color: var(--white);
   background:
     linear-gradient(135deg, rgba(79, 183, 255, 0.2), rgba(125, 211, 252, 0.08));
@@ -534,9 +536,9 @@ svg {
   font-weight: 800;
   letter-spacing: 0.02em;
   transition:
-    transform 180ms ease,
-    border-color 180ms ease,
-    background 180ms ease;
+    transform 160ms ease,
+    border-color 160ms ease,
+    background 160ms ease;
 }
 
 .modal-copy:hover {
@@ -545,6 +547,8 @@ svg {
   background:
     linear-gradient(135deg, rgba(79, 183, 255, 0.28), rgba(125, 211, 252, 0.12));
 }
+
+/* Toast */
 
 .toast {
   position: fixed;
@@ -555,7 +559,7 @@ svg {
   margin: 0;
   padding: 10px 14px;
   border: 1px solid rgba(255, 255, 255, 0.14);
-  border-radius: 999px;
+  border-radius: var(--radius-round);
   color: var(--white);
   background: rgba(3, 8, 19, 0.92);
   box-shadow: 0 16px 38px rgba(0, 0, 0, 0.38);
@@ -564,9 +568,21 @@ svg {
   backdrop-filter: blur(10px);
 }
 
-[hidden] {
-  display: none !important;
+/* Focus */
+
+.icon-button:focus-visible,
+.social-button:focus-visible,
+.qr-button:focus-visible,
+.site-link:focus-visible,
+.modal-close:focus-visible,
+.modal-copy:focus-visible,
+.card-url:focus-visible,
+.modal-url:focus-visible {
+  outline: none;
+  box-shadow: var(--ring);
 }
+
+/* Mobile */
 
 @media (max-width: 430px) {
   .card-page {
@@ -614,13 +630,13 @@ svg {
   }
 
   .contact-row {
-    gap: 7px;
-    margin-bottom: 26px;
+    gap: 8px;
+    margin-bottom: 28px;
   }
 
   .social-button {
-    width: 42px;
-    height: 42px;
+    width: 40px;
+    height: 40px;
   }
 
   .social-button svg {
@@ -653,6 +669,8 @@ svg {
     height: 266px;
   }
 }
+
+/* Reduced motion */
 
 @media (prefers-reduced-motion: reduce) {
   *,
