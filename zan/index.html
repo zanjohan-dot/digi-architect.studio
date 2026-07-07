@@ -17,6 +17,7 @@
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 
+    <!-- WhatsApp / Facebook / LinkedIn preview -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="The Digital Systems Architect" />
     <meta property="og:title" content="Zan Johan | Digital Systems Architect" />
@@ -41,6 +42,7 @@
       content="Zan Johan digital name card preview"
     />
 
+    <!-- Twitter / X preview -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Zan Johan | Digital Systems Architect" />
     <meta
@@ -64,8 +66,54 @@
   </head>
 
   <body>
+    <svg class="icon-defs" aria-hidden="true" focusable="false">
+      <symbol id="icon-download" viewBox="0 0 24 24">
+        <path d="M12 3v10" />
+        <path d="m8 9 4 4 4-4" />
+        <path d="M5 14v3.5A2.5 2.5 0 0 0 7.5 20h9a2.5 2.5 0 0 0 2.5-2.5V14" />
+      </symbol>
+
+      <symbol id="icon-copy" viewBox="0 0 24 24">
+        <path d="M9 9h10v10H9z" />
+        <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+      </symbol>
+
+      <symbol id="icon-whatsapp" viewBox="0 0 24 24">
+        <path d="M4.9 19.1 6 15.4a7.5 7.5 0 1 1 2.8 2.7z" />
+        <path d="M9.1 8.5c.2-.4.4-.4.6-.4h.5c.2 0 .4.1.5.4l.7 1.6c.1.2.1.4-.1.6l-.4.5c.6 1 1.5 1.8 2.6 2.3l.5-.6c.2-.2.4-.3.7-.2l1.5.7c.3.1.4.3.4.6v.5c0 .3-.2.6-.5.8-.4.2-.9.4-1.4.4-2.8-.1-6.4-3-6.8-5.9-.1-.5 0-.9.2-1.3z" />
+      </symbol>
+
+      <symbol id="icon-email" viewBox="0 0 24 24">
+        <path d="M4 6h16v12H4z" />
+        <path d="m4 7 8 6 8-6" />
+      </symbol>
+
+      <symbol id="icon-linkedin" viewBox="0 0 24 24">
+        <path d="M6.5 10V18" />
+        <path d="M6.5 6.7v.1" />
+        <path d="M10.5 18v-8" />
+        <path d="M10.5 13.2c0-1.9 1.1-3.2 2.9-3.2 1.7 0 2.8 1.2 2.8 3.4V18" />
+        <path d="M4.8 3h14.4A1.8 1.8 0 0 1 21 4.8v14.4a1.8 1.8 0 0 1-1.8 1.8H4.8A1.8 1.8 0 0 1 3 19.2V4.8A1.8 1.8 0 0 1 4.8 3z" />
+      </symbol>
+
+      <symbol id="icon-instagram" viewBox="0 0 24 24">
+        <rect x="4" y="4" width="16" height="16" rx="5" />
+        <circle cx="12" cy="12" r="3.5" />
+        <path d="M17.4 6.7v.1" />
+      </symbol>
+
+      <symbol id="icon-facebook" viewBox="0 0 24 24">
+        <path d="M14 8h2V4h-2.4C10.8 4 9 5.8 9 8.5V11H7v4h2v5h4v-5h2.6l.4-4h-3V8.7c0-.5.4-.7 1-.7z" />
+      </symbol>
+
+      <symbol id="icon-close" viewBox="0 0 24 24">
+        <path d="m6 6 12 12" />
+        <path d="M18 6 6 18" />
+      </symbol>
+    </svg>
+
     <main class="card-page" aria-labelledby="card-title">
-      <article class="identity-card">
+      <article class="identity-card" aria-label="Digital name card for Zan Johan">
         <header class="card-top">
           <a
             class="brand-logo"
@@ -86,9 +134,11 @@
               class="icon-button"
               type="button"
               data-save-contact
-              aria-label="Save contact"
+              aria-label="Save Zan Johan contact"
             >
-              <span class="icon-symbol" aria-hidden="true">↓</span>
+              <svg class="icon" aria-hidden="true">
+                <use href="#icon-download"></use>
+              </svg>
             </button>
 
             <button
@@ -97,7 +147,9 @@
               data-copy-link
               aria-label="Copy digital card link"
             >
-              <span class="icon-symbol" aria-hidden="true">⧉</span>
+              <svg class="icon" aria-hidden="true">
+                <use href="#icon-copy"></use>
+              </svg>
             </button>
           </div>
         </header>
@@ -121,13 +173,12 @@
             class="qr-button"
             type="button"
             data-open-qr
-            aria-label="Open enlarged digital card QR code"
+            aria-label="Open enlarged QR code"
           >
             <img
-              class="qr-fallback"
+              class="qr-image"
               src="assets/card-qr.png"
               alt="QR code for Zan Johan digital card"
-              data-qr-fallback
             />
           </button>
 
@@ -149,7 +200,9 @@
             aria-label="Open WhatsApp"
             data-whatsapp-link
           >
-            <span class="social-icon" aria-hidden="true">WA</span>
+            <svg class="social-icon" aria-hidden="true">
+              <use href="#icon-whatsapp"></use>
+            </svg>
           </a>
 
           <a
@@ -158,7 +211,9 @@
             aria-label="Email Zan Johan"
             data-email-link
           >
-            <span class="social-icon" aria-hidden="true">@</span>
+            <svg class="social-icon" aria-hidden="true">
+              <use href="#icon-email"></use>
+            </svg>
           </a>
 
           <a
@@ -169,7 +224,9 @@
             aria-label="Open company LinkedIn page"
             data-linkedin-link
           >
-            <span class="social-icon" aria-hidden="true">in</span>
+            <svg class="social-icon" aria-hidden="true">
+              <use href="#icon-linkedin"></use>
+            </svg>
           </a>
 
           <div class="social-item">
@@ -181,8 +238,11 @@
               aria-label="Open Zan Johan personal LinkedIn profile"
               data-personal-linkedin-link
             >
-              <span class="social-icon" aria-hidden="true">in</span>
+              <svg class="social-icon" aria-hidden="true">
+                <use href="#icon-linkedin"></use>
+              </svg>
             </a>
+
             <span class="social-caption">zan j</span>
           </div>
 
@@ -192,7 +252,9 @@
             data-open-instagram
             aria-label="Open Instagram QR code"
           >
-            <span class="social-icon" aria-hidden="true">IG</span>
+            <svg class="social-icon" aria-hidden="true">
+              <use href="#icon-instagram"></use>
+            </svg>
           </button>
 
           <a
@@ -203,7 +265,9 @@
             aria-label="Open Facebook"
             data-facebook-link
           >
-            <span class="social-icon" aria-hidden="true">f</span>
+            <svg class="social-icon" aria-hidden="true">
+              <use href="#icon-facebook"></use>
+            </svg>
           </a>
         </nav>
 
@@ -230,16 +294,17 @@
             data-close-qr
             aria-label="Close QR code"
           >
-            <span aria-hidden="true">×</span>
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-close"></use>
+            </svg>
           </button>
         </header>
 
         <div class="modal-qr">
           <img
-            class="qr-fallback"
+            class="modal-qr-image"
             src="assets/card-qr.png"
             alt="Large QR code for Zan Johan digital card"
-            data-modal-qr-fallback
           />
         </div>
 
@@ -272,7 +337,9 @@
             data-close-instagram
             aria-label="Close Instagram QR code"
           >
-            <span aria-hidden="true">×</span>
+            <svg class="icon" aria-hidden="true">
+              <use href="#icon-close"></use>
+            </svg>
           </button>
         </header>
 
