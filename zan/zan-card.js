@@ -1,13 +1,19 @@
 "use strict";
 
 /**
- * Clean v4 digital name card script
- * Handles:
- * - Contact link configuration
- * - QR rendering with local image fallback
- * - Save Contact vCard download
- * - Copy link actions
- * - QR and Instagram modals
+ * Zan Johan Digital Name Card
+ * Clean static QR version
+ *
+ * This script handles:
+ * - Contact link setup
+ * - Save Contact vCard
+ * - Copy card link
+ * - QR modal
+ * - Instagram modal
+ * - Toast messages
+ *
+ * It does NOT generate QR codes.
+ * The QR code is a static image: assets/card-qr.png
  */
 
 const CONTACT = {
@@ -28,8 +34,6 @@ const CONTACT = {
   linkedinPersonal: "https://www.linkedin.com/in/zanjohan",
   instagram: "https://www.instagram.com/digital.systems.architect",
   facebook: "https://www.facebook.com/share/17tceLy88Z/?mibextid=wwXIfr",
-
-  qrFallbackImage: "assets/card-qr.png",
 };
 
 const SELECTOR = {
@@ -42,11 +46,6 @@ const SELECTOR = {
   linkedinPersonalLinks: "[data-personal-linkedin-link]",
   instagramLinks: "[data-instagram-link]",
   facebookLinks: "[data-facebook-link]",
-
-  qrCanvas: "[data-qr-canvas]",
-  qrFallback: "[data-qr-fallback]",
-  modalQrCanvas: "[data-modal-qr-canvas]",
-  modalQrFallback: "[data-modal-qr-fallback]",
 
   qrModal: "[data-qr-modal]",
   openQrModal: "[data-open-qr]",
@@ -67,11 +66,9 @@ const SELECTOR = {
 let lastModalTrigger = null;
 let toastTimer = null;
 
-/* ---------- Utility helpers ---------- */
-
-function displayUrl(url) {
-  return String(url).replace(/^https?:\/\//, "").replace(/\/$/, "");
-}
+/* ----------------------------------------
+   Helpers
+---------------------------------------- */
 
 function getElement(selector) {
   return document.querySelector(selector);
@@ -81,11 +78,38 @@ function getElements(selector) {
   return Array.from(document.querySelectorAll(selector));
 }
 
-function setLink(selector, href) {
+function displayUrl(url) {
+  return String(url).replace(/^https?:\/\//, "").replace(/\/$/, "");
+}
+
+function setHref(selector, href) {
   getElements(selector).forEach((element) => {
     element.href = href;
   });
 }
+
+/* ----------------------------------------
+   Apply live links
+---------------------------------------- */
+
+function applyContactLinks() {
+  setHref(SELECTOR.websiteLinks, CONTACT.website);
+  setHref(SELECTOR.whatsappLinks, `https://wa.me/${CONTACT.whatsappNumber}`);
+  setHref(SELECTOR.emailLinks, `mailto:${CONTACT.email}`);
+  setHref(SELECTOR.linkedinCompanyLinks, CONTACT.linkedinCompany);
+  setHref(SELECTOR.linkedinPersonalLinks, CONTACT.linkedinPersonal);
+  setHref(SELECTOR.instagramLinks, CONTACT.instagram);
+  setHref(SELECTOR.facebookLinks, CONTACT.facebook);
+
+  getElements(SELECTOR.cardUrlLinks).forEach((link) => {
+    link.href = CONTACT.cardUrl;
+    link.textContent = displayUrl(CONTACT.cardUrl);
+  });
+}
+
+/* ----------------------------------------
+   Toast
+---------------------------------------- */
 
 function showToast(message) {
   const toast = getElement(SELECTOR.toast);
@@ -102,44 +126,33 @@ function showToast(message) {
   }, 1800);
 }
 
-async function copyText(text, successMessage = "Copied") {
+/* ----------------------------------------
+   Copy text
+---------------------------------------- */
+
+async function copyText(text, successMessage) {
   try {
     await navigator.clipboard.writeText(text);
   } catch {
-    const fallbackInput = document.createElement("input");
+    const input = document.createElement("input");
 
-    fallbackInput.value = text;
-    fallbackInput.setAttribute("readonly", "");
-    fallbackInput.style.position = "fixed";
-    fallbackInput.style.left = "-9999px";
+    input.value = text;
+    input.setAttribute("readonly", "");
+    input.style.position = "fixed";
+    input.style.left = "-9999px";
 
-    document.body.append(fallbackInput);
-    fallbackInput.select();
+    document.body.append(input);
+    input.select();
     document.execCommand("copy");
-    fallbackInput.remove();
+    input.remove();
   }
 
   showToast(successMessage);
 }
 
-/* ---------- Contact links ---------- */
-
-function applyContactLinks() {
-  setLink(SELECTOR.websiteLinks, CONTACT.website);
-  setLink(SELECTOR.whatsappLinks, `https://wa.me/${CONTACT.whatsappNumber}`);
-  setLink(SELECTOR.emailLinks, `mailto:${CONTACT.email}`);
-  setLink(SELECTOR.linkedinCompanyLinks, CONTACT.linkedinCompany);
-  setLink(SELECTOR.linkedinPersonalLinks, CONTACT.linkedinPersonal);
-  setLink(SELECTOR.instagramLinks, CONTACT.instagram);
-  setLink(SELECTOR.facebookLinks, CONTACT.facebook);
-
-  getElements(SELECTOR.cardUrlLinks).forEach((link) => {
-    link.href = CONTACT.cardUrl;
-    link.textContent = displayUrl(CONTACT.cardUrl);
-  });
-}
-
-/* ---------- vCard ---------- */
+/* ----------------------------------------
+   vCard
+---------------------------------------- */
 
 function escapeVCard(value) {
   return String(value ?? "")
@@ -150,25 +163,48 @@ function escapeVCard(value) {
 }
 
 function buildVCard() {
-  const lines = [
+  return [
     "BEGIN:VCARD",
     "VERSION:3.0",
+
     `N:${escapeVCard(CONTACT.familyName)};${escapeVCard(CONTACT.givenName)};;;`,
     `FN:${escapeVCard(CONTACT.name)}`,
     `ORG:${escapeVCard(CONTACT.company)}`,
     `TITLE:${escapeVCard(CONTACT.title)}`,
     `TEL;TYPE=CELL:${escapeVCard(CONTACT.phoneDisplay)}`,
     `EMAIL;TYPE=INTERNET:${escapeVCard(CONTACT.email)}`,
-    `URL:${escapeVCard(CONTACT.website)}`,
-    `X-SOCIALPROFILE;TYPE=linkedin-company:${escapeVCard(CONTACT.linkedinCompany)}`,
-    `X-SOCIALPROFILE;TYPE=linkedin-personal:${escapeVCard(CONTACT.linkedinPersonal)}`,
-    `X-SOCIALPROFILE;TYPE=instagram:${escapeVCard(CONTACT.instagram)}`,
-    `X-SOCIALPROFILE;TYPE=facebook:${escapeVCard(CONTACT.facebook)}`,
-    `NOTE:${escapeVCard(`Digital card: ${CONTACT.cardUrl}`)}`,
-    "END:VCARD",
-  ];
 
-  return lines.join("\r\n");
+    `item1.URL:${escapeVCard(CONTACT.website)}`,
+    "item1.X-ABLabel:Website",
+
+    `item2.URL:${escapeVCard(CONTACT.cardUrl)}`,
+    "item2.X-ABLabel:Digital Card",
+
+    `item3.URL:${escapeVCard(CONTACT.linkedinCompany)}`,
+    "item3.X-ABLabel:LinkedIn Company",
+
+    `item4.URL:${escapeVCard(CONTACT.linkedinPersonal)}`,
+    "item4.X-ABLabel:LinkedIn Personal",
+
+    `item5.URL:${escapeVCard(CONTACT.instagram)}`,
+    "item5.X-ABLabel:Instagram",
+
+    `item6.URL:${escapeVCard(CONTACT.facebook)}`,
+    "item6.X-ABLabel:Facebook",
+
+    `NOTE:${escapeVCard(
+      [
+        `Digital card: ${CONTACT.cardUrl}`,
+        `Website: ${CONTACT.website}`,
+        `LinkedIn Company: ${CONTACT.linkedinCompany}`,
+        `LinkedIn Personal: ${CONTACT.linkedinPersonal}`,
+        `Instagram: ${CONTACT.instagram}`,
+        `Facebook: ${CONTACT.facebook}`,
+      ].join("\n")
+    )}`,
+
+    "END:VCARD",
+  ].join("\r\n");
 }
 
 function downloadVCard() {
@@ -191,64 +227,9 @@ function downloadVCard() {
   showToast("Contact saved");
 }
 
-/* ---------- QR code ---------- */
-
-function showQrFallback(canvasSelector, fallbackSelector) {
-  const canvas = getElement(canvasSelector);
-  const fallback = getElement(fallbackSelector);
-
-  if (canvas) {
-    canvas.hidden = true;
-  }
-
-  if (fallback) {
-    fallback.src = CONTACT.qrFallbackImage;
-    fallback.hidden = false;
-  }
-}
-
-function renderQr(canvasSelector, fallbackSelector, size) {
-  const canvas = getElement(canvasSelector);
-  const fallback = getElement(fallbackSelector);
-
-  if (!canvas || !window.QRCode?.toCanvas) {
-    showQrFallback(canvasSelector, fallbackSelector);
-    return;
-  }
-
-  window.QRCode.toCanvas(
-    canvas,
-    CONTACT.cardUrl,
-    {
-      width: size,
-      margin: 2,
-      errorCorrectionLevel: "M",
-      color: {
-        dark: "#050914",
-        light: "#f8fbff",
-      },
-    },
-    (error) => {
-      if (error) {
-        showQrFallback(canvasSelector, fallbackSelector);
-        return;
-      }
-
-      canvas.hidden = false;
-
-      if (fallback) {
-        fallback.hidden = true;
-      }
-    }
-  );
-}
-
-function renderQrCodes() {
-  renderQr(SELECTOR.qrCanvas, SELECTOR.qrFallback, 152);
-  renderQr(SELECTOR.modalQrCanvas, SELECTOR.modalQrFallback, 292);
-}
-
-/* ---------- Modals ---------- */
+/* ----------------------------------------
+   Modals
+---------------------------------------- */
 
 function openModal(modal, trigger) {
   if (!modal) return;
@@ -285,7 +266,7 @@ function restoreFocus() {
   }
 }
 
-function bindModal({ modalSelector, openSelector, closeSelector }) {
+function bindModal(modalSelector, openSelector, closeSelector) {
   const modal = getElement(modalSelector);
   const openButton = getElement(openSelector);
   const closeButton = getElement(closeSelector);
@@ -310,17 +291,17 @@ function bindModal({ modalSelector, openSelector, closeSelector }) {
 }
 
 function bindModals() {
-  const qrModal = bindModal({
-    modalSelector: SELECTOR.qrModal,
-    openSelector: SELECTOR.openQrModal,
-    closeSelector: SELECTOR.closeQrModal,
-  });
+  const qrModal = bindModal(
+    SELECTOR.qrModal,
+    SELECTOR.openQrModal,
+    SELECTOR.closeQrModal
+  );
 
-  const instagramModal = bindModal({
-    modalSelector: SELECTOR.instagramModal,
-    openSelector: SELECTOR.openInstagramModal,
-    closeSelector: SELECTOR.closeInstagramModal,
-  });
+  const instagramModal = bindModal(
+    SELECTOR.instagramModal,
+    SELECTOR.openInstagramModal,
+    SELECTOR.closeInstagramModal
+  );
 
   document.addEventListener("keydown", (event) => {
     if (event.key !== "Escape") return;
@@ -335,7 +316,9 @@ function bindModals() {
   });
 }
 
-/* ---------- Event binding ---------- */
+/* ----------------------------------------
+   Button actions
+---------------------------------------- */
 
 function bindActions() {
   getElement(SELECTOR.saveContact)?.addEventListener("click", downloadVCard);
@@ -353,19 +336,14 @@ function bindActions() {
   });
 }
 
-/* ---------- Init ---------- */
+/* ----------------------------------------
+   Init
+---------------------------------------- */
 
 function init() {
   applyContactLinks();
   bindActions();
   bindModals();
-
-  /**
-   * Show local QR image immediately.
-   * If QRCode library loads properly, it will replace the image with canvas later.
-   */
-  showQrFallback(SELECTOR.qrCanvas, SELECTOR.qrFallback);
-  showQrFallback(SELECTOR.modalQrCanvas, SELECTOR.modalQrFallback);
 }
 
 if (document.readyState === "loading") {
@@ -373,5 +351,3 @@ if (document.readyState === "loading") {
 } else {
   init();
 }
-
-window.addEventListener("load", renderQrCodes);
