@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WNG8MK4K');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Muslim-Friendly Dining Directory | The Digital Systems Architect</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta name="description" content="A consumer-facing directory of self-declared Muslim-friendly establishments in Singapore. Review individual declarations covering food practices, meat sourcing, alcohol policies and facilities before deciding whether to visit.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://digi-architect.studio/muslim-friendly-directory/">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Muslim-Friendly Dining Directory | The Digital Systems Architect">
+<meta property="og:description" content="Self-declared Muslim-friendly establishments. Review individual declarations and make your own informed dining decision.">
+<meta property="og:url" content="https://digi-architect.studio/muslim-friendly-directory/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<style>
+:root{
+  --ink:#0A0F1E;--ink-2:#1C2438;
+  --gold:#B8832A;--gold-l:#D4A855;--gold-xl:#F0CF8E;
+  --sand:#F5F0E8;--cream:#FEFCF7;--muted:#6B7280;
+  --line:rgba(10,15,30,0.10);--line-w:rgba(255,255,255,0.12);
+  --sage:#3D5A47;--sage-bg:#EBF2EC;
+  --good:#2F7A52;--good-bg:#EAF3EE;
+  --caution:#92400E;--caution-bg:#FEF3C7;
+  --white:#FFFFFF;--ease:cubic-bezier(0.16,1,0.3,1);
+  --nav-w:220px;--hdr-h:60px;
+  --shadow-sm:0 2px 8px rgba(10,15,30,0.06);
+  --shadow-md:0 6px 20px rgba(10,15,30,0.09);
+  --shadow-gold:0 8px 28px rgba(184,131,42,0.22);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;}
+::selection{background:var(--gold);color:#fff;}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;}
+h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;font-weight:normal;line-height:1.2;color:var(--ink);}
+p{color:var(--muted);}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+.page-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:radial-gradient(ellipse 70% 50% at 80% 0%,rgba(184,131,42,0.09) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 60% at 0% 100%,rgba(61,90,71,0.06) 0%,transparent 60%),
+             radial-gradient(ellipse 40% 40% at 50% 50%,rgba(184,131,42,0.02) 0%,transparent 70%);}
+.site-header{position:fixed;top:0;left:0;right:0;height:var(--hdr-h);z-index:300;background-color:rgba(254,252,247,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,3vw,28px);gap:12px;}
+.hdr-brand{display:flex;align-items:center;gap:10px;font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink);min-width:0;flex-shrink:1;overflow:hidden;white-space:nowrap;}
+.hdr-brand img{height:30px;width:auto;border-radius:4px;flex-shrink:0;}
+.hdr-brand-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;padding-left:10px;border-left:1px solid var(--line);margin-left:2px;}
+@media(max-width:860px){.hdr-brand-sub{display:none;}}
+@media(max-width:640px){.hdr-brand span:not(.hdr-brand-sub){display:none;}}
+.hdr-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.hdr-back{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0.02em;transition:color .2s;min-height:44px;display:flex;align-items:center;}
+.hdr-back:hover{color:var(--gold);}
+@media(max-width:768px){.hdr-back{display:none;}}
+.hdr-section-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:none;}
+@media(min-width:1025px){.hdr-section-label{display:block;}}
+.hdr-cta{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--white);background:var(--ink);padding:0 18px;height:38px;border-radius:2px;transition:background .25s,box-shadow .25s;display:inline-flex;align-items:center;white-space:nowrap;cursor:pointer;border:0;}
+.hdr-cta:hover{background:var(--gold);box-shadow:var(--shadow-gold);}
+.nav-toggle{display:none;width:44px;height:44px;background:none;border:1px solid var(--line);border-radius:2px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;flex-shrink:0;transition:border-color .2s;}
+.nav-toggle:hover{border-color:var(--gold);}
+.nav-toggle span{display:block;width:18px;height:2px;background:var(--ink);border-radius:1px;transition:transform .25s var(--ease),opacity .25s;}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:1024px){.nav-toggle{display:flex;}}
+.nav-backdrop{display:none;position:fixed;inset:0;z-index:390;background:rgba(10,15,30,0.45);opacity:0;transition:opacity .25s;}
+.nav-backdrop.is-open{display:block;opacity:1;}
+.nav-drawer{position:fixed;top:0;left:0;bottom:0;z-index:400;width:min(300px,85vw);background:var(--cream);border-right:1px solid var(--line);transform:translateX(-100%);transition:transform .3s var(--ease);overflow-y:auto;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0);}
+.nav-drawer.is-open{transform:translateX(0);}
+@media(min-width:1025px){.nav-drawer,.nav-backdrop{display:none!important;}}
+.drawer-header{height:var(--hdr-h);display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.drawer-brand{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink);}
+.drawer-close{width:36px;height:36px;border:1px solid var(--line);border-radius:2px;background:none;cursor:pointer;font-size:18px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.drawer-close:hover{border-color:var(--gold);color:var(--gold);}
+.drawer-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);padding:24px 20px 12px;}
+.drawer-nav-list{list-style:none;padding:0 0 24px;}
+.drawer-nav-item button{display:flex;align-items:center;gap:12px;padding:11px 20px;font-size:13px;font-weight:500;color:var(--muted);transition:all .15s;min-height:44px;width:100%;background:none;border:0;text-align:left;cursor:pointer;}
+.drawer-nav-item button:hover{color:var(--ink);background:var(--sand);}
+.drawer-nav-item.active button{color:var(--ink);font-weight:700;background:rgba(184,131,42,0.06);}
+.drawer-nav-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--line);background:var(--cream);flex-shrink:0;transition:all .2s;}
+.drawer-nav-item.active .drawer-nav-dot{background:var(--gold);border-color:var(--gold);}
+.drawer-cta{padding:20px;border-top:1px solid var(--line);margin-top:auto;}
+.drawer-cta button{display:flex;align-items:center;justify-content:center;padding:13px;background:var(--ink);color:var(--white);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;border-radius:2px;transition:background .2s;min-height:44px;width:100%;border:0;cursor:pointer;}
+.drawer-cta button:hover{background:var(--gold);}
+.page-body{position:fixed;top:var(--hdr-h);left:0;right:0;bottom:0;display:grid;grid-template-columns:var(--nav-w) 1fr;}
+@media(max-width:1024px){.page-body{grid-template-columns:1fr;}:root{--nav-w:0px;}}
+.side-nav{height:100%;overflow-y:auto;padding:40px 0 40px 28px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:var(--cream);}
+@media(max-width:1024px){.side-nav{display:none;}}
+.side-nav-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;}
+.snav-list{display:flex;flex-direction:column;position:relative;list-style:none;}
+.snav-list::before{content:'';position:absolute;left:9px;top:12px;bottom:12px;width:1px;background:linear-gradient(to bottom,transparent,rgba(10,15,30,0.08) 15%,rgba(10,15,30,0.08) 85%,transparent);}
+.snav-item{display:flex;align-items:center;gap:12px;padding:7px 0;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:color .2s;position:relative;background:none;border:0;text-align:left;width:100%;min-height:38px;}
+.snav-item:hover{color:var(--ink);}
+.snav-item.active{color:var(--ink);font-weight:700;}
+.snav-item:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:2px;}
+.snav-dot{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(10,15,30,0.12);background:var(--cream);flex-shrink:0;z-index:1;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.snav-item.active .snav-dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px rgba(184,131,42,0.12);}
+.snav-item:hover:not(.active) .snav-dot{border-color:var(--gold);background:rgba(184,131,42,0.07);}
+.snav-dot-inner{width:6px;height:6px;border-radius:50%;background:var(--white);opacity:0;}
+.snav-item.active .snav-dot-inner{opacity:1;}
+.panel-area{position:relative;overflow:hidden;height:100%;}
+.view{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;transition:opacity .4s var(--ease);-webkit-overflow-scrolling:touch;}
+.view.active{opacity:1;pointer-events:auto;}
+.panel-nav{position:fixed;bottom:28px;right:28px;z-index:200;display:flex;gap:8px;}
+@media(max-width:480px){.panel-nav{bottom:16px;right:16px;}}
+.panel-nav-btn{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--white);border:0;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(10,15,30,0.22);}
+.panel-nav-btn:hover{background:var(--gold);transform:scale(1.08);box-shadow:var(--shadow-gold);}
+.panel-nav-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.panel-nav-btn:disabled{opacity:0.2;cursor:default;transform:none;box-shadow:none;}
+.panel-counter{height:40px;padding:0 16px;border-radius:20px;background:rgba(10,15,30,0.05);border:1px solid var(--line);display:flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap;letter-spacing:0.04em;}
+.panel-pad{padding:clamp(40px,5vw,64px) clamp(24px,5vw,56px);}
+.section-inner{max-width:820px;}
+.section-inner.wide{max-width:1060px;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);opacity:0.6;}
+.eyebrow.light{color:var(--gold-l);}.eyebrow.light::before{background:var(--gold-l);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0 26px;min-height:44px;border-radius:2px;cursor:pointer;transition:all .25s;border:1.5px solid transparent;}
+.btn-primary{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.btn-primary:hover{background:var(--gold-l);box-shadow:var(--shadow-gold);transform:translateY(-1px);}
+.btn-ghost-light{background:transparent;color:rgba(255,255,255,0.85);border-color:rgba(255,255,255,0.28);}
+.btn-ghost-light:hover{border-color:var(--gold-l);color:var(--gold-xl);}
+.btn-dark{background:var(--ink);color:var(--white);border-color:var(--ink);}
+.btn-dark:hover{background:var(--gold);border-color:var(--gold);color:var(--ink);box-shadow:var(--shadow-gold);}
+.btn-sm{min-height:36px;padding:0 16px;font-size:11px;}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+#view-hero{background:var(--ink);}
+#view-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 85% at 95% -5%,rgba(184,131,42,0.20) 0%,transparent 55%),radial-gradient(ellipse 55% 55% at -5% 105%,rgba(61,90,71,0.16) 0%,transparent 55%);}
+#view-hero::after{content:'';position:absolute;top:0;right:0;width:420px;height:420px;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 80% 20%,black 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 80% 20%,black 0%,transparent 70%);}
+.hero-inner{max-width:780px;height:100%;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;}
+.hero-h1{font-size:clamp(36px,5.5vw,66px);color:var(--white);letter-spacing:-0.028em;line-height:1.04;max-width:15ch;margin-bottom:22px;}
+.hero-h1 em{font-style:normal;color:var(--gold-l);}
+.hero-p{font-size:clamp(14px,1.8vw,16px);color:rgba(255,255,255,0.68);max-width:52ch;margin-bottom:32px;line-height:1.78;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;}
+.hero-notice{padding:16px 20px;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);}
+.hero-notice-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-l);margin-bottom:7px;}
+.hero-notice p{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.65;max-width:60ch;}
+.hero-notice p b{color:rgba(255,255,255,0.8);font-weight:600;}
+.hero-coord{position:absolute;bottom:clamp(24px,4vw,44px);right:clamp(24px,4vw,44px);font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.12em;text-transform:uppercase;z-index:1;}
+#view-meaning{background:var(--sand);}
+.meaning-layout{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;height:100%;align-items:center;}
+@media(max-width:860px){.meaning-layout{grid-template-columns:1fr;gap:32px;height:auto;}}
+.meaning-left{padding-right:clamp(24px,4vw,56px);}
+.meaning-divider{background:linear-gradient(to bottom,transparent,var(--gold) 20%,var(--gold) 80%,transparent);opacity:0.35;align-self:stretch;}
+@media(max-width:860px){.meaning-divider{display:none;}}
+.meaning-right{padding-left:clamp(24px,4vw,56px);display:flex;flex-direction:column;gap:20px;}
+.meaning-quote{font-family:Georgia,'Times New Roman',serif;font-size:clamp(20px,3vw,32px);color:var(--ink);line-height:1.3;margin:18px 0 22px;}
+.meaning-body{font-size:clamp(13px,1.5vw,15px);color:var(--muted);max-width:42ch;line-height:1.75;}
+.meaning-annotation{padding:16px 18px;border:1px solid var(--line);background:var(--cream);}
+.meaning-annotation strong{display:block;font-size:12px;color:var(--ink);margin-bottom:6px;}
+.meaning-annotation p{font-size:12px;color:var(--muted);line-height:1.65;}
+#view-framework{background:var(--cream);}
+.framework-intro{font-size:clamp(13px,1.5vw,15px);max-width:56ch;margin-top:10px;margin-bottom:28px;line-height:1.72;}
+.fw-accordion{border:1px solid var(--line);max-width:780px;}
+.fw-item{border-bottom:1px solid var(--line);}
+.fw-item:last-child{border-bottom:0;}
+.fw-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;background:none;border:0;cursor:pointer;text-align:left;min-height:52px;transition:background .15s;}
+.fw-btn:hover{background:var(--sand);}
+.fw-btn-left{display:flex;align-items:center;gap:14px;}
+.fw-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;flex-shrink:0;}
+.fw-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(13px,1.6vw,15px);color:var(--ink);font-weight:normal;line-height:1.3;transition:color .2s;}
+.fw-btn:hover .fw-title{color:var(--gold);}
+.fw-toggle{width:20px;height:20px;flex-shrink:0;border:1.5px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .22s;position:relative;}
+.fw-btn:hover .fw-toggle{border-color:var(--gold);}
+.fw-item.is-open .fw-toggle{background:var(--gold);border-color:var(--gold);}
+.fw-toggle::before,.fw-toggle::after{content:'';position:absolute;background:var(--muted);border-radius:1px;transition:all .22s;}
+.fw-toggle::before{width:8px;height:1.5px;}
+.fw-toggle::after{width:1.5px;height:8px;}
+.fw-item.is-open .fw-toggle::before,.fw-item.is-open .fw-toggle::after{background:var(--white);}
+.fw-item.is-open .fw-toggle::after{transform:rotate(90deg);opacity:0;}
+.fw-panel{overflow:hidden;max-height:0;transition:max-height .32s var(--ease);}
+.fw-item.is-open .fw-panel{max-height:300px;}
+.fw-body{padding:0 20px 18px calc(20px + 14px + 34px);font-size:13px;color:var(--muted);line-height:1.7;max-width:66ch;}
+#view-why{background:var(--sand);}
+.why-intro{font-size:clamp(13px,1.5vw,15px);max-width:58ch;margin-top:10px;margin-bottom:28px;line-height:1.72;}
+.pro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);}
+@media(max-width:780px){.pro-grid{grid-template-columns:1fr;}}
+.pro-cell{padding:clamp(22px,3vw,32px) clamp(18px,2.5vw,28px);border-right:1px solid var(--line);background:var(--cream);}
+.pro-cell:last-child{border-right:0;}
+@media(max-width:780px){.pro-cell{border-right:0;border-bottom:1px solid var(--line);}.pro-cell:last-child{border-bottom:0;}}
+.pro-cell.dark{background:var(--ink);}
+.pro-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.pro-cell.dark .pro-label{color:var(--gold-l);}
+.pro-cell h3{font-size:15px;color:var(--ink);margin-bottom:10px;}
+.pro-cell.dark h3{color:var(--white);}
+.pro-cell p{font-size:13px;line-height:1.65;}
+.pro-cell.dark p{color:rgba(255,255,255,0.6);}
+.why-method{margin-top:28px;border:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);}
+@media(max-width:700px){.why-method{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:400px){.why-method{grid-template-columns:1fr;}}
+.method-cell{padding:18px 16px;border-right:1px solid var(--line);}
+.method-cell:last-child{border-right:0;}
+@media(max-width:700px){.method-cell:nth-child(2n){border-right:0;}.method-cell{border-bottom:1px solid var(--line);}.method-cell:nth-last-child(-n+2){border-bottom:0;}}
+@media(max-width:400px){.method-cell{border-right:0!important;border-bottom:1px solid var(--line);}.method-cell:last-child{border-bottom:0;}}
+.method-idx{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
+.method-cell h3{font-size:13px;color:var(--ink);margin-bottom:5px;}
+.method-cell p{font-size:12px;line-height:1.55;}
+#view-notice{background:var(--cream);}
+.notice-intro{font-size:clamp(13px,1.5vw,15px);max-width:56ch;margin-top:10px;margin-bottom:24px;line-height:1.72;}
+.notice-box{border:1px solid var(--line);max-width:820px;}
+.notice-head{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);padding:14px 20px;border-bottom:1px solid var(--line);background:var(--sand);}
+.notice-row{display:flex;gap:16px;align-items:flex-start;padding:12px 20px;border-bottom:1px solid var(--line);}
+.notice-row:last-of-type{border-bottom:0;}
+.notice-n{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);flex-shrink:0;letter-spacing:0.06em;padding-top:2px;min-width:20px;}
+.notice-row p{font-size:13px;color:var(--muted);line-height:1.65;}
+.notice-row p mark{background:rgba(184,131,42,0.12);color:var(--ink);font-weight:600;padding:0 3px;}
+.notice-more{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);padding:12px 20px;border-top:1px solid var(--line);background:var(--sand);}
+#view-directory{background:var(--cream);}
+.dir-panel-inner{height:100%;display:flex;flex-direction:column;}
+.dir-panel-top{flex-shrink:0;padding:clamp(28px,3.5vw,44px) clamp(24px,5vw,56px) 0;}
+.dir-panel-body{flex:1;min-height:0;display:grid;grid-template-columns:300px 1fr;border-top:1px solid var(--line);margin-top:20px;}
+@media(max-width:900px){.dir-panel-body{grid-template-columns:1fr;}}
+.dir-filter-col{padding:18px;border-right:1px solid var(--line);background:var(--sand);overflow-y:auto;}
+@media(max-width:900px){.dir-filter-col{border-right:0;border-bottom:1px solid var(--line);max-height:260px;}}
+.filter-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:5px;}
+.dir-field,.dir-select{width:100%;border:1px solid var(--line);border-radius:2px;background:var(--white);padding:9px 12px;font-size:16px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;margin-bottom:10px;}
+.dir-field:focus,.dir-select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,131,42,0.12);}
+.dir-field::placeholder{font-size:13px;color:var(--muted);}
+.adv-toggle{border:1px solid var(--line);border-radius:2px;margin:8px 0;overflow:hidden;background:var(--white);}
+.adv-toggle summary{list-style:none;cursor:pointer;padding:9px 12px;font-size:10px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;text-transform:uppercase;}
+.adv-toggle summary::-webkit-details-marker{display:none;}
+.adv-toggle summary::after{content:'+';color:var(--gold);}
+.adv-toggle[open] summary::after{content:'-';}
+.adv-toggle-body{padding:6px 12px 12px;display:grid;gap:8px;}
+.adv-fg{display:grid;gap:4px;}
+.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.active-chips{display:flex;flex-wrap:wrap;gap:5px;padding:0 0 10px;}
+.chip{display:inline-flex;align-items:center;gap:5px;background:var(--sand);border:1px solid var(--line);color:var(--ink);border-radius:2px;padding:4px 8px;font-size:11px;font-weight:600;}
+.chip button{border:0;background:none;color:var(--muted);font-size:13px;line-height:1;padding:0 2px;cursor:pointer;}
+.chip button:hover{color:var(--gold);}
+.dir-main-col{display:flex;flex-direction:column;overflow:hidden;}
+.dir-map-el{width:100%;height:280px;flex-shrink:0;}
+@media(max-width:640px){.dir-map-el{height:200px;}}
+.map-caption{padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--white);flex-shrink:0;}
+.leaflet-container{z-index:0;}
+.leaflet-pane,.leaflet-top,.leaflet-bottom{z-index:auto;}
+.dir-results{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.dir-topline{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:6px;flex-shrink:0;position:sticky;top:0;background:var(--cream);z-index:1;}
+.dir-topline strong{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink);text-transform:uppercase;letter-spacing:0.06em;}
+.result-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+.records-list{border:0;}
+.record-row{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--line);transition:background .15s;cursor:pointer;}
+.record-row:last-child{border-bottom:0;}
+.record-row:hover{background:var(--sand);}
+.record-row.is-selected{background:rgba(184,131,42,0.06);box-shadow:inset 3px 0 0 var(--gold);}
+.record-main{flex:1 1 200px;min-width:0;}
+.record-main h4{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink);font-weight:normal;margin-bottom:2px;}
+.record-meta{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.record-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+.badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;padding:2px 7px;border-radius:2px;letter-spacing:0.03em;white-space:nowrap;}
+.badge-self{background:var(--sand);color:var(--ink);border:1px solid var(--line);}
+.badge-not-halal{background:var(--caution-bg);color:var(--caution);}
+.badge-halal{background:var(--good-bg);color:var(--good);}
+.record-chips{display:flex;flex-wrap:wrap;gap:4px;}
+.dchip{font-size:10px;font-weight:600;border-radius:2px;padding:3px 7px 3px 5px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
+.dchip.positive{background:var(--good-bg);color:var(--good);}
+.dchip.caution{background:var(--caution-bg);color:var(--caution);}
+.dchip svg{width:9px;height:9px;stroke-width:3;fill:none;stroke:currentColor;}
+.record-foot{display:flex;align-items:center;gap:10px;flex:none;flex-wrap:wrap;margin-top:6px;}
+.last-updated{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);white-space:nowrap;}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);display:none;}
+.empty-state.visible{display:block;}
+.empty-state h3{font-size:15px;color:var(--ink);margin-bottom:8px;}
+.empty-state p{font-size:13px;}
+.marker-selected{filter:drop-shadow(0 0 6px rgba(184,131,42,0.9));}
+.map-fallback{padding:2rem;text-align:center;color:var(--muted);font-size:13px;height:100%;display:flex;align-items:center;justify-content:center;}
+#view-how{background:var(--sand);}
+.how-intro{font-size:clamp(13px,1.5vw,15px);max-width:56ch;margin-top:10px;margin-bottom:28px;line-height:1.72;}
+.how-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);position:relative;}
+.how-grid::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),rgba(184,131,42,0.15));z-index:1;}
+@media(max-width:900px){.how-grid{grid-template-columns:repeat(2,1fr);}.how-grid::before{width:3px;height:auto;background:linear-gradient(to bottom,var(--gold),rgba(184,131,42,0.15));top:0;bottom:0;left:0;right:auto;}}
+@media(max-width:440px){.how-grid{grid-template-columns:1fr;}}
+.how-step{padding:clamp(20px,2.5vw,28px) clamp(14px,1.8vw,20px);border-right:1px solid var(--line);}
+.how-step:last-child{border-right:0;}
+@media(max-width:900px){.how-step:nth-child(2n){border-right:0;}.how-step{border-bottom:1px solid var(--line);}.how-step:nth-last-child(-n+2){border-bottom:0;}}
+@media(max-width:440px){.how-step{border-right:0!important;border-bottom:1px solid var(--line);}.how-step:last-child{border-bottom:0;}}
+.how-n{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.how-n-dot{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:700;color:var(--gold);background:var(--sand);}
+.how-step:hover .how-n-dot{background:var(--gold);color:var(--white);}
+.how-step h3{font-size:13px;color:var(--ink);margin-bottom:6px;font-family:Georgia,'Times New Roman',serif;font-weight:normal;}
+.how-step p{font-size:12px;line-height:1.58;}
+.how-outcome{margin-top:22px;padding:16px 22px;background:var(--ink);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.how-outcome-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-l);white-space:nowrap;flex-shrink:0;}
+.how-outcome p{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;}
+#view-faq{background:var(--cream);}
+.faq-info-layout{display:grid;grid-template-columns:1fr 320px;gap:40px;max-width:1020px;}
+@media(max-width:860px){.faq-info-layout{grid-template-columns:1fr;gap:28px;}}
+.faq-list{max-width:640px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-btn{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:16px 0;background:none;border:0;cursor:pointer;text-align:left;min-height:44px;}
+.faq-q{font-family:Georgia,'Times New Roman',serif;font-size:clamp(13px,1.6vw,15px);color:var(--ink);font-weight:normal;line-height:1.35;transition:color .2s;}
+.faq-btn:hover .faq-q{color:var(--gold);}
+.faq-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.faq-icon{width:20px;height:20px;flex-shrink:0;margin-top:2px;border:1.5px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .22s;position:relative;}
+.faq-btn:hover .faq-icon{border-color:var(--gold);}
+.faq-item.open .faq-icon{background:var(--gold);border-color:var(--gold);}
+.faq-icon::before,.faq-icon::after{content:'';position:absolute;background:var(--muted);border-radius:1px;transition:all .22s;}
+.faq-icon::before{width:8px;height:1.5px;}
+.faq-icon::after{width:1.5px;height:8px;}
+.faq-item.open .faq-icon::before,.faq-item.open .faq-icon::after{background:var(--white);}
+.faq-item.open .faq-icon::after{transform:rotate(90deg);opacity:0;}
+.faq-panel{overflow:hidden;max-height:0;transition:max-height .32s var(--ease);}
+.faq-item.open .faq-panel{max-height:400px;}
+.faq-answer{padding:0 0 16px;font-size:13px;color:var(--muted);line-height:1.72;}
+.info-card{background:var(--ink);padding:clamp(24px,3vw,36px);border-radius:2px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:16px;box-shadow:0 16px 52px rgba(10,15,30,0.16);}
+.info-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--gold),rgba(184,131,42,0.3));}
+.info-card::after{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(184,131,42,0.14) 0%,transparent 70%);top:-60px;right:-60px;pointer-events:none;}
+.info-card .eyebrow{color:var(--gold-l);}.info-card .eyebrow::before{background:var(--gold-l);}
+.info-card h3{color:var(--white);font-size:clamp(16px,2vw,20px);line-height:1.22;}
+.info-card p{font-size:13px;color:rgba(255,255,255,0.58);line-height:1.68;}
+.info-card-btns{display:flex;flex-direction:column;gap:8px;}
+.footer-line{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.05em;line-height:2.1;max-width:640px;}
+.footer-line a{color:var(--muted);transition:color .2s;}.footer-line a:hover{color:var(--gold);}
+.footer-links-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
+.drawer-backdrop{position:fixed;inset:0;background:rgba(10,15,30,0.55);z-index:1000;opacity:0;transition:opacity .2s;display:none;}
+.drawer-backdrop.is-open{opacity:1;display:block;}
+.decl-drawer{position:fixed;top:0;right:0;height:100%;width:min(460px,100%);background:var(--white);z-index:1100;transform:translateX(100%);transition:transform .22s var(--ease);display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(10,15,30,0.15);}
+.decl-drawer.is-open{transform:translateX(0);}
+@media(max-width:520px){.decl-drawer{width:100%;}}
+.decl-drawer-hdr{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:20px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.decl-drawer-hdr h2{font-size:17px;color:var(--ink);}
+.decl-drawer-close{border:1px solid var(--line);background:none;color:var(--ink);width:32px;height:32px;font-size:18px;line-height:1;flex-shrink:0;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.decl-drawer-close:hover{background:var(--ink);color:var(--white);}
+.decl-drawer-body{padding:16px 20px 40px;overflow-y:auto;display:grid;gap:20px;flex:1;}
+.drawer-sec-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:10px;}
+.detail-list{display:grid;gap:7px;}
+.detail-list div{display:flex;justify-content:space-between;gap:12px;font-size:13px;border-bottom:1px dashed var(--line);padding-bottom:6px;}
+.detail-list dt{color:var(--muted);}
+.detail-list dd{margin:0;font-weight:600;color:var(--ink);text-align:right;}
+.link-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+.link-row a{font-size:12px;font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold);}
+.decl-list{display:grid;gap:8px;}
+.decl-item{display:flex;gap:10px;align-items:flex-start;padding:10px;border-left:2px solid transparent;}
+.decl-item.positive{background:var(--good-bg);border-left-color:var(--good);}
+.decl-item.caution{background:var(--caution-bg);border-left-color:var(--caution);}
+.decl-marker{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.04em;padding:2px 5px;background:rgba(255,255,255,0.6);flex-shrink:0;margin-top:2px;}
+.decl-item div strong{display:block;font-size:13px;color:var(--ink);margin-bottom:3px;}
+.decl-item div p{font-size:12px;color:var(--muted);line-height:1.45;}
+.drawer-plain{font-size:13px;color:var(--ink);line-height:1.6;}
+.drawer-disclaimer{font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;border-top:1px solid var(--line);padding-top:14px;}
+.lp-name{font-weight:700;color:var(--ink);font-size:13px;}
+.lp-meta{font-size:11px;color:var(--muted);margin:2px 0 7px;}
+.lp-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--caution);text-transform:uppercase;letter-spacing:0.03em;margin-bottom:7px;display:block;}
+.lp-btn{border:0;background:var(--ink);color:var(--white);font-size:11px;font-weight:700;padding:6px 10px;border-radius:2px;cursor:pointer;}
+@media(prefers-reduced-motion:reduce){.view,.snav-dot,.btn,.fw-panel,.faq-panel,.decl-drawer,.nav-drawer{transition:none!important;animation:none!important;}}
+</style>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNG8MK4K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div class="page-bg" aria-hidden="true"></div>
+<header class="site-header">
+  <a class="hdr-brand" href="/"><img src="/logo.png" alt="The Digital Systems Architect logo"><span>The Digital Systems Architect</span><span class="hdr-brand-sub">Directory</span></a>
+  <div class="hdr-right">
+    <span class="hdr-section-label" id="hdrLabel"></span>
+    <a class="hdr-back" href="/halal-muslim-friendly-singapore/">&#8592; Advisory</a>
+    <button class="hdr-cta" type="button" onclick="showPanel('directory')">Search the Directory</button>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navDrawer"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Page sections" aria-hidden="true" role="dialog">
+  <div class="drawer-header"><span class="drawer-brand">Directory</span><button class="drawer-close" id="drawerClose" type="button" aria-label="Close navigation">&times;</button></div>
+  <div class="drawer-label mono">Sections</div>
+  <ul class="drawer-nav-list" id="drawerNavList">
+    <li class="drawer-nav-item" data-panel="hero"><button type="button"><span class="drawer-nav-dot"></span>Overview</button></li>
+    <li class="drawer-nav-item" data-panel="meaning"><button type="button"><span class="drawer-nav-dot"></span>What It Means</button></li>
+    <li class="drawer-nav-item" data-panel="framework"><button type="button"><span class="drawer-nav-dot"></span>Declaration Framework</button></li>
+    <li class="drawer-nav-item" data-panel="why"><button type="button"><span class="drawer-nav-dot"></span>Why This Exists</button></li>
+    <li class="drawer-nav-item" data-panel="notice"><button type="button"><span class="drawer-nav-dot"></span>Important Notice</button></li>
+    <li class="drawer-nav-item" data-panel="directory"><button type="button"><span class="drawer-nav-dot"></span>Explore Directory</button></li>
+    <li class="drawer-nav-item" data-panel="how"><button type="button"><span class="drawer-nav-dot"></span>How to Use</button></li>
+    <li class="drawer-nav-item" data-panel="faq"><button type="button"><span class="drawer-nav-dot"></span>FAQ &amp; Information</button></li>
+  </ul>
+  <div class="drawer-cta"><button type="button" onclick="showPanel('directory');closeDrawer();">Search the Directory</button></div>
+</nav>
+<div class="page-body">
+  <nav class="side-nav" aria-label="Page sections">
+    <div class="side-nav-label mono">Contents</div>
+    <ul class="snav-list" id="snavList">
+      <li><button class="snav-item active" data-panel="hero" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Overview</button></li>
+      <li><button class="snav-item" data-panel="meaning" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>What It Means</button></li>
+      <li><button class="snav-item" data-panel="framework" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Declaration Framework</button></li>
+      <li><button class="snav-item" data-panel="why" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Why This Exists</button></li>
+      <li><button class="snav-item" data-panel="notice" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Important Notice</button></li>
+      <li><button class="snav-item" data-panel="directory" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Explore Directory</button></li>
+      <li><button class="snav-item" data-panel="how" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>How to Use</button></li>
+      <li><button class="snav-item" data-panel="faq" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>FAQ &amp; Information</button></li>
+    </ul>
+  </nav>
+  <div class="panel-area" id="panelArea">
+    <div class="view active" id="view-hero">
+      <div class="panel-pad" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="hero-inner">
+          <div class="eyebrow light">Muslim-Friendly Dining Directory</div>
+          <h1 class="hero-h1">Clearer information<br>for more <em>informed</em> dining.</h1>
+          <p class="hero-p">This independent directory presents information voluntarily disclosed by establishments about their food practices, meat sourcing and alcohol policies. It is designed to help Muslim diners review each declaration before deciding whether an establishment meets their requirements.</p>
+          <div class="hero-btns">
+            <button class="btn btn-primary" type="button" onclick="showPanel('directory')">Search the Directory</button>
+            <button class="btn btn-ghost-light" type="button" onclick="showPanel('meaning')">Understand the Declaration</button>
+          </div>
+          <div class="hero-notice">
+            <div class="hero-notice-title">Important before you browse</div>
+            <p><b>Self-declared Muslim-friendly is not the same as halal-certified.</b> The declaration is made by the establishment. The final dining decision rests with each individual diner. Some establishments listed here may serve alcohol on the premises.</p>
+          </div>
+        </div>
+        <div class="hero-coord" aria-hidden="true">Self-declared &bull; Not halal-certified &bull; Diner decides</div>
+      </div>
+    </div>
+    <div class="view" id="view-meaning">
+      <div class="panel-pad" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="meaning-layout">
+          <div class="meaning-left">
+            <div class="eyebrow">What It Means</div>
+            <div class="meaning-quote">Self-declared is not<br>halal-certified.</div>
+            <p class="meaning-body">A self-declared Muslim-friendly establishment has voluntarily provided information about its food ingredients, preparation practices, meat sourcing and alcohol policies. It does not necessarily hold halal certification. The directory presents each disclosure separately so diners can review the information and make their own informed decision.</p>
+            <div style="margin-top:28px;"><button class="btn btn-dark" type="button" onclick="showPanel('framework')">See the Declaration Framework &#8594;</button></div>
+          </div>
+          <div class="meaning-divider" aria-hidden="true"></div>
+          <div class="meaning-right">
+            <div class="meaning-annotation"><strong>The distinction</strong><p>Halal certification is a formal mark issued by a certification body such as Muis. Self-declared Muslim-friendly is a voluntary disclosure of specific practices. The two are not equivalent. Each listing shows which applies.</p></div>
+            <div class="meaning-annotation"><strong>What this means in practice</strong><p>Some establishments on this directory serve alcohol, use shared equipment, or have not yet certified. That information is displayed clearly on each listing. The directory is not a recommendation. The diner decides.</p></div>
+            <div class="meaning-annotation"><strong>Your responsibility as a diner</strong><p>Review each declaration carefully. Where a requirement is essential to you, contact the establishment directly before visiting. Your dining decision is your own.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-framework">
+      <div class="panel-pad">
+        <div class="section-inner">
+          <div class="eyebrow">Declaration Framework</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:8px;">Five declaration categories.</h2>
+          <p class="framework-intro">Each establishment that joins this directory declares its position on five specific categories. These are self-declarations only and do not constitute halal certification.</p>
+          <div class="fw-accordion" id="fwAccordion">
+            <div class="fw-item is-open"><button class="fw-btn" type="button" aria-expanded="true" aria-controls="fw-panel-0"><span class="fw-btn-left"><span class="fw-num">01 / 05</span><span class="fw-title">No pork declared</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-0" style="max-height:300px;"><div class="fw-body">Pork and pork-derived ingredients are declared not to be part of the menu. This declaration is made by the establishment. It does not confirm halal certification or exclude all animal-derived ingredients of concern.</div></div></div>
+            <div class="fw-item"><button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel-1"><span class="fw-btn-left"><span class="fw-num">02 / 05</span><span class="fw-title">No lard declared</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-1"><div class="fw-body">Lard is declared not to be used in cooking or food preparation. This is a voluntary declaration by the establishment. Diners should contact the establishment directly if they have specific concerns about cooking fats or shared equipment.</div></div></div>
+            <div class="fw-item"><button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel-2"><span class="fw-btn-left"><span class="fw-num">03 / 05</span><span class="fw-title">Meat source declared</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-2"><div class="fw-body">Where meat is served, the establishment declares whether it is sourced from halal-certified suppliers. A declaration does not substitute for confirmation from the establishment directly. Diners concerned about meat sourcing should verify before dining.</div></div></div>
+            <div class="fw-item"><button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel-3"><span class="fw-btn-left"><span class="fw-num">04 / 05</span><span class="fw-title">Alcohol disclosure</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-3"><div class="fw-body">The establishment declares whether alcohol is served on the premises and whether alcohol is used in food items. Some establishments on this directory serve alcohol. That information is displayed clearly on each listing. The diner decides whether this is acceptable to them.</div></div></div>
+            <div class="fw-item"><button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel-4"><span class="fw-btn-left"><span class="fw-num">05 / 05</span><span class="fw-title">Certification status</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-4"><div class="fw-body">The establishment's halal-certification status is clearly displayed on each listing. A self-declared listing must not be treated as halal-certified unless a valid certificate from the relevant authority is expressly shown. Diners who require halal-certified establishments should choose accordingly.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-why">
+      <div class="panel-pad">
+        <div class="section-inner wide">
+          <div class="eyebrow">Why This Directory Exists</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:8px;">Transparency, not endorsement.</h2>
+          <p class="why-intro">Some establishments cannot presently meet full halal-certification requirements, often due to alcohol service or an operating model that does not permit full compliance. Muslim diners are often left to guess. This directory is a structured response to that gap.</p>
+          <div class="pro-grid">
+            <div class="pro-cell"><div class="pro-label">The Issue</div><h3>Information gaps</h3><p>Some establishments cannot presently meet full halal-certification requirements. Muslim diners are often left to guess about food practices, meat sourcing and alcohol policies.</p></div>
+            <div class="pro-cell"><div class="pro-label">The Response</div><h3>Voluntary disclosure</h3><p>Establishments may voluntarily disclose their food practices, meat sourcing, alcohol policies and facilities so that Muslim diners can review the information and make their own informed personal decision.</p></div>
+            <div class="pro-cell dark"><div class="pro-label">The Outcome</div><h3>Informed decision</h3><p>Diners understand each establishment's position clearly before deciding whether they are comfortable visiting. Diners who prefer only halal-certified establishments should continue to make that choice.</p></div>
+          </div>
+          <div class="why-method">
+            <div class="method-cell"><div class="method-idx">01 / Consult</div><h3>Understand dietary concerns</h3><p>Common Muslim dietary requirements and diner expectations.</p></div>
+            <div class="method-cell"><div class="method-idx">02 / Guide</div><h3>Advise on disclosure</h3><p>Sourcing, menu labelling, declaration preparation and clear communication to consumers.</p></div>
+            <div class="method-cell"><div class="method-idx">03 / Review</div><h3>Review declarations</h3><p>Review declaration completeness and consistency before listing is published.</p></div>
+            <div class="method-cell"><div class="method-idx">04 / Clarify</div><h3>Set clear boundaries</h3><p>This is not certification, a religious ruling, endorsement or statutory verification.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-notice">
+      <div class="panel-pad">
+        <div class="section-inner">
+          <div class="eyebrow">Important Notice</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:8px;">Read before using this directory.</h2>
+          <p class="notice-intro">These notices apply to every listing in this directory. Please read carefully before making a dining decision.</p>
+          <div class="notice-box">
+            <div class="notice-head">Before you make a dining decision</div>
+            <div class="notice-row"><span class="notice-n">01</span><p>Self-declared Muslim-friendly establishments are <mark>not necessarily halal-certified</mark>. Each listing clearly states its certification or self-declaration status.</p></div>
+            <div class="notice-row"><span class="notice-n">02</span><p>Some establishments on this directory <mark>may serve alcohol</mark> on the premises. This is disclosed on each listing.</p></div>
+            <div class="notice-row"><span class="notice-n">03</span><p>Some establishments may use shared kitchens, utensils, fryers, grills or equipment. Contact the establishment directly where this is an essential concern.</p></div>
+            <div class="notice-row"><span class="notice-n">04</span><p>Information submitted by establishments may change after the declaration date. Where requirements are essential, verify directly with the establishment before visiting.</p></div>
+            <div class="notice-row"><span class="notice-n">05</span><p>The information displayed is based on the establishment's own declaration. It is not halal certification, a fatwa, official religious endorsement or statutory verification.</p></div>
+            <div class="notice-row"><span class="notice-n">06</span><p>The <mark>final dining decision rests with each individual diner</mark> based on their own requirements, comfort level and religious understanding.</p></div>
+            <div class="notice-row"><span class="notice-n">07</span><p>Diners who prefer to dine only at halal-certified establishments should continue to make that choice. That preference is fully respected.</p></div>
+            <div class="notice-more">A full disclaimer appears in the FAQ &amp; Information section.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-directory">
+      <div class="dir-panel-inner">
+        <div class="dir-panel-top">
+          <div class="eyebrow">Disclosure Directory</div>
+          <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:flex-end;">
+            <h2 style="font-size:clamp(20px,2.8vw,32px);">Self-declared Muslim-friendly establishments.</h2>
+            <span class="result-count mono" id="topResultCount">Search or filter to view establishments</span>
+          </div>
+          <p style="font-size:13px;color:var(--muted);max-width:60ch;line-height:1.6;margin-top:6px;">Search, select a map marker, or apply filters. Review each listing's declarations carefully before making a dining decision.</p>
+        </div>
+        <div class="dir-panel-body">
+          <aside class="dir-filter-col" id="directoryControls" aria-label="Directory filters and search">
+            <div class="active-chips" id="activeChips" aria-live="polite"></div>
+            <label class="filter-label" for="searchInput">Search</label>
+            <input class="dir-field" id="searchInput" type="search" placeholder="Name, area, cuisine&#8230;" autocomplete="off" aria-label="Search establishments" />
+            <details class="adv-toggle">
+              <summary>Advanced Filters</summary>
+              <div class="adv-toggle-body">
+                <div class="adv-fg"><label class="filter-label" for="areaFilter">Area</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div>
+                <div class="adv-fg"><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div>
+                <div class="adv-fg"><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
+                <div class="adv-fg"><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared halal-sourced</option><option value="unknown">Not stated</option></select></div>
+                <div class="adv-fg"><label class="filter-label" for="porkFilter">Pork declaration</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div>
+                <div class="adv-fg"><label class="filter-label" for="lardFilter">Lard declaration</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div>
+                <div class="adv-fg"><label class="filter-label" for="sortSelect">Sort</label><select class="dir-select" id="sortSelect"><option value="name">Name A&#8211;Z</option><option value="area">Area</option><option value="updated">Recently updated</option></select></div>
+              </div>
+            </details>
+            <div class="action-row">
+              <button class="btn btn-dark btn-sm" type="button" id="searchSubmitBtn">Search &#8594;</button>
+              <button class="btn btn-outline btn-sm" type="button" id="clearFiltersBtn">Reset</button>
+            </div>
+          </aside>
+          <div class="dir-main-col">
+            <div class="dir-map-el" id="declarationMap" role="application" aria-label="Map of establishment locations"></div>
+            <p class="map-caption">Tap a marker to view that establishment's declaration.</p>
+            <div class="dir-results">
+              <div class="dir-topline"><strong>Results</strong><span class="result-count" id="resultsInlineCount">Search or filter to view establishments</span></div>
+              <div class="records-list" id="recordsGrid"></div>
+              <div class="empty-state" id="emptyState"><h3>Start your search</h3><p>Use the search bar, map markers, or advanced filters to display establishment records.</p><button class="btn btn-outline btn-sm" type="button" id="emptyClearBtn" style="margin-top:12px;">Reset filters</button></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-how">
+      <div class="panel-pad">
+        <div class="section-inner wide">
+          <div class="eyebrow">How to Use This Directory</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:8px;">Five steps to a more informed decision.</h2>
+          <p class="how-intro">This directory provides information, not endorsement. Use it as a starting point, not as a substitute for your own enquiries where requirements are essential.</p>
+          <div class="how-grid">
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">01</span></div><h3>Review the certification status</h3><p>Check whether the establishment is halal-certified or self-declared only. These are not equivalent.</p></div>
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">02</span></div><h3>Review each declaration</h3><p>Read what the establishment has declared about pork, lard, meat sourcing and alcohol. Declarations vary between listings.</p></div>
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">03</span></div><h3>Check alcohol and cross-contact</h3><p>Review the alcohol disclosure and any notes about shared equipment, utensils, fryers or preparation areas.</p></div>
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">04</span></div><h3>Contact the establishment</h3><p>Where a requirement is essential to you, contact the establishment directly before visiting to verify current practices.</p></div>
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">05</span></div><h3>Decide for yourself</h3><p>Make your decision based on your own requirements, comfort level and religious understanding. The directory does not decide for you.</p></div>
+          </div>
+          <div class="how-outcome"><span class="how-outcome-label">Reminder</span><p>This directory provides information for diners. It is not halal certification, a religious ruling, official endorsement or statutory verification. The final decision rests with each individual diner.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-faq">
+      <div class="panel-pad">
+        <div class="section-inner wide">
+          <div class="eyebrow">Questions</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:20px;">Frequently asked questions.</h2>
+          <div class="faq-info-layout">
+            <div>
+              <div class="faq-list">
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-1"><span class="faq-q">Are all establishments in this directory halal-certified?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-1"><div class="faq-answer">No. Each listing clearly states its certification or self-declaration status. Self-declared Muslim-friendly establishments should not be treated as halal-certified unless a valid certificate from the relevant authority is expressly shown.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-2"><span class="faq-q">Does Muslim-friendly mean halal?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-2"><div class="faq-answer">No. Muslim-friendly is not a legal or religious equivalent to halal certification. It describes specific practices or policies declared by the establishment. Each listing's individual declarations should be reviewed before making a dining decision.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-3"><span class="faq-q">Why are establishments that serve alcohol included?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-3"><div class="faq-answer">The directory is based on transparent disclosure. Where alcohol is served, this is clearly stated on the listing so diners can decide whether the establishment meets their individual requirements. The directory is not a recommendation to dine at any particular establishment.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-4"><span class="faq-q">Should I dine at a self-declared establishment?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-4"><div class="faq-answer">That decision rests with each individual diner. Some diners may be comfortable after reviewing the declarations, while others may choose only halal-certified establishments. Both choices are valid and should be respected.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-5"><span class="faq-q">Who checks the information?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-5"><div class="faq-answer">The information is primarily based on declarations submitted by the establishment. Where advisory support has been provided, this may be noted on the listing. The information is not subject to statutory verification or equivalent to halal certification.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-6"><span class="faq-q">What should I do if information appears incorrect?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-6"><div class="faq-answer">Contact the establishment directly to verify. You may also contact us at admin@digi-architect.studio. Where reliable updated information is received, listings will be reviewed and corrected where appropriate.</div></div></div>
+              </div>
+              <div class="footer-line">
+                <div class="footer-links-row"><a href="/">Home</a><a href="/halal-muslim-friendly-singapore/">Halal Advisory</a><a href="/workflow-automation-singapore/">Workflow Automation</a><a href="/governance-dashboard-singapore/">Governance</a><a href="/finance-automation-singapore/">Finance</a><a href="/hr-systems-singapore/">HR Systems</a></div>
+                The establishments listed on this platform may be halal-certified, self-declared Muslim-friendly, pending verification or community-suggested. Self-declared information is reproduced in good faith based on disclosures provided by the respective establishments and may change without prior notice. The platform does not provide halal certification, a religious ruling, official endorsement or statutory verification. Diners remain responsible for making their own enquiries. &mdash; The Digital Systems Architect | Zan J Private Limited (UEN: 202616105R) | <a href="mailto:admin@digi-architect.studio">admin@digi-architect.studio</a>
+              </div>
+            </div>
+            <div>
+              <div class="info-card">
+                <div class="eyebrow">Are You an Establishment?</div>
+                <h3>Improve transparency and reach more consumers.</h3>
+                <p>Businesses that wish to improve transparency, prepare a Muslim-friendly declaration, join the directory or explore digital promotion can learn more through our advisory page.</p>
+                <div class="info-card-btns">
+                  <a class="btn btn-primary" href="/halal-muslim-friendly-singapore/">Explore Business Advisory &#8594;</a>
+                  <a class="btn btn-ghost-light" href="mailto:admin@digi-architect.studio?subject=Directory%20Listing%20Enquiry">Contact Us</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel-nav" role="navigation" aria-label="Section navigation">
+  <button class="panel-nav-btn" id="prevBtn" type="button" aria-label="Previous section">&#8593;</button>
+  <span class="panel-counter" id="panelCounter" aria-live="polite"></span>
+  <button class="panel-nav-btn" id="nextBtn" type="button" aria-label="Next section">&#8594;</button>
+</div>
+<div class="drawer-backdrop" id="declBackdrop" aria-hidden="true"></div>
+<aside class="decl-drawer" id="declDrawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog" aria-modal="true">
+  <div class="decl-drawer-hdr"><div id="drawerTitleArea"></div><button class="decl-drawer-close" type="button" id="declDrawerClose" aria-label="Close declaration record">&times;</button></div>
+  <div class="decl-drawer-body" id="drawerContent"></div>
+</aside>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script>
+var PANELS=['hero','meaning','framework','why','notice','directory','how','faq'];
+var PANEL_LABELS=['Overview','What It Means','Declaration Framework','Why This Exists','Important Notice','Explore Directory','How to Use','FAQ & Information'];
+var currentIdx=0;
+function showPanel(id,fromNav){
+  var idx=PANELS.indexOf(id);if(idx<0)return;
+  var prev=document.querySelector('.view.active');if(prev)prev.classList.remove('active');
+  var next=document.getElementById('view-'+id);
+  if(next){next.classList.add('active');next.scrollTop=0;}
+  currentIdx=idx;
+  document.querySelectorAll('.snav-item').forEach(function(btn){btn.classList.toggle('active',btn.dataset.panel===id);});
+  document.querySelectorAll('.drawer-nav-item').forEach(function(li){li.classList.toggle('active',li.dataset.panel===id);});
+  var lbl=document.getElementById('hdrLabel');if(lbl)lbl.textContent=PANEL_LABELS[idx]||'';
+  var ctr=document.getElementById('panelCounter');if(ctr)ctr.textContent=(idx+1)+' / '+PANELS.length;
+  var prevBtn=document.getElementById('prevBtn');var nextBtn=document.getElementById('nextBtn');
+  if(prevBtn)prevBtn.disabled=(idx===0);if(nextBtn)nextBtn.disabled=(idx===PANELS.length-1);
+  if(window.history&&window.history.replaceState)window.history.replaceState(null,'','#'+id);
+  if(fromNav)closeDrawer();
+  if(id==='directory'&&mapInstance){setTimeout(function(){mapInstance.invalidateSize();},60);}
+}
+(function(){var hash=(window.location.hash||'').replace('#','');showPanel(PANELS.indexOf(hash)>-1?hash:'hero');})();
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT'||e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();if(currentIdx<PANELS.length-1)showPanel(PANELS[currentIdx+1]);}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();if(currentIdx>0)showPanel(PANELS[currentIdx-1]);}
+});
+document.getElementById('prevBtn').addEventListener('click',function(){if(currentIdx>0)showPanel(PANELS[currentIdx-1]);});
+document.getElementById('nextBtn').addEventListener('click',function(){if(currentIdx<PANELS.length-1)showPanel(PANELS[currentIdx+1]);});
+document.querySelectorAll('.snav-item[data-panel]').forEach(function(btn){btn.addEventListener('click',function(){showPanel(btn.dataset.panel,true);});});
+function openDrawer(){var d=document.getElementById('navDrawer'),b=document.getElementById('navBackdrop');d.classList.add('is-open');b.classList.add('is-open');document.getElementById('navToggle').setAttribute('aria-expanded','true');d.setAttribute('aria-hidden','false');b.removeAttribute('aria-hidden');document.body.style.overflow='hidden';var cl=document.getElementById('drawerClose');if(cl)cl.focus();}
+function closeDrawer(){var d=document.getElementById('navDrawer'),b=document.getElementById('navBackdrop');if(!d)return;d.classList.remove('is-open');b.classList.remove('is-open');document.getElementById('navToggle').setAttribute('aria-expanded','false');d.setAttribute('aria-hidden','true');b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+document.getElementById('navToggle').addEventListener('click',function(){document.getElementById('navDrawer').classList.contains('is-open')?closeDrawer():openDrawer();});
+document.getElementById('drawerClose').addEventListener('click',closeDrawer);
+document.getElementById('navBackdrop').addEventListener('click',closeDrawer);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('navDrawer').classList.contains('is-open'))closeDrawer();});
+document.querySelectorAll('.drawer-nav-item[data-panel] button').forEach(function(btn){btn.addEventListener('click',function(){showPanel(btn.closest('[data-panel]').dataset.panel,true);});});
+var RAW_ESTABLISHMENTS=[{id:"sample-1",name:"Establishment Name 1",area:"Central",address:"Address, Singapore",cuisine:"Cuisine Type",establishmentType:"Restaurant",coordinates:{lat:1.3006,lng:103.8398},website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",status:"Self-declared Muslim-friendly",basisOfListing:"Independent self-declaration",halalCertified:false,certificationStatus:"Not halal-certified",certifyingBody:null,certificateExpiry:null,declarations:{noPorkDeclared:true,noLardDeclared:true,meatFromHalalCertifiedSources:true,alcoholServed:true,alcoholMenuItemsDisclosed:true},declarationProvided:"No pork. No lard. Meats sourced from halal-certified suppliers. Alcohol is served on the premises. Menu items containing alcohol are indicated.",crossContactNote:"Please check directly with the establishment if you have concerns about shared preparation areas, utensils, grills, fryers, or equipment.",additionalNotes:"Menu items containing alcohol should be indicated on the menu or communicated clearly to customers.",declarationDate:"2026-07-09",lastUpdated:"2026-07-09"},{id:"sample-2",name:"Establishment Name 2",area:"East",address:"Address, Singapore",cuisine:"Cuisine Type",establishmentType:"Cafe",coordinates:{lat:1.3236,lng:103.9273},website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",status:"Self-declared Muslim-friendly",basisOfListing:"Independent self-declaration",halalCertified:false,certificationStatus:"Not halal-certified",certifyingBody:null,certificateExpiry:null,declarations:{noPorkDeclared:true,noLardDeclared:true,meatFromHalalCertifiedSources:true,alcoholServed:true,alcoholMenuItemsDisclosed:true},declarationProvided:"No pork. No lard. Meats sourced from halal-certified suppliers. Alcohol is served on the premises. Menu items containing alcohol are indicated.",crossContactNote:"Please check directly with the establishment if you have specific dietary concerns.",additionalNotes:"",declarationDate:"2026-07-09",lastUpdated:"2026-07-09"},{id:"sample-3",name:"Establishment Name 3",area:"West",address:"Address, Singapore",cuisine:"Cuisine Type",establishmentType:"Restaurant",coordinates:{lat:1.3404,lng:103.7090},website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",status:"Self-declared Muslim-friendly",basisOfListing:"Independent self-declaration",halalCertified:false,certificationStatus:"Not halal-certified",certifyingBody:null,certificateExpiry:null,declarations:{noPorkDeclared:true,noLardDeclared:true,meatFromHalalCertifiedSources:true,alcoholServed:false,alcoholMenuItemsDisclosed:false},declarationProvided:"No pork. No lard. Meats sourced from halal-certified suppliers. Alcohol is not served on the premises.",crossContactNote:"Please check directly with the establishment if you have concerns about preparation methods.",additionalNotes:"",declarationDate:"2026-07-09",lastUpdated:"2026-07-09"},{id:"sample-4",name:"Establishment Name 4",area:"North-East",address:"Address, Singapore",cuisine:"Cuisine Type",establishmentType:"Food Court",coordinates:{lat:1.3868,lng:103.8914},website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",status:"Self-declared Muslim-friendly",basisOfListing:"Independent self-declaration",halalCertified:false,certificationStatus:"Not halal-certified",certifyingBody:null,certificateExpiry:null,declarations:{noPorkDeclared:true,noLardDeclared:true,meatFromHalalCertifiedSources:null,alcoholServed:null,alcoholMenuItemsDisclosed:null},declarationProvided:"No pork. No lard. Meat sourcing and alcohol disclosures should be checked directly with the establishment.",crossContactNote:"Please check directly with the establishment if you have concerns about ingredients, shared equipment, or preparation methods.",additionalNotes:"Some declaration fields are not stated in this record. Contact the establishment directly.",declarationDate:"2026-07-09",lastUpdated:"2026-07-09"}];
+function normalizeRecord(r){return Object.assign({website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",additionalNotes:"",crossContactNote:"",establishmentType:"",coordinates:{lat:null,lng:null}},r,{declarations:Object.assign({noPorkDeclared:null,noLardDeclared:null,meatFromHalalCertifiedSources:null,alcoholServed:null,alcoholMenuItemsDisclosed:null},r.declarations||{})});}
+var establishments=RAW_ESTABLISHMENTS.map(normalizeRecord);
+function esc(v){return String(v??'').replace(/[&<>'"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;',"'":"&#39;",'"':'&quot;'}[c];});}
+function norm(v){return String(v??'').trim().toLowerCase();}
+function valStatus(v){if(v===true)return'yes';if(v===false)return'no';return'unknown';}
+function alcoholMenuStatus(r){var d=r.declarations;if(d.alcoholServed===false&&d.alcoholMenuItemsDisclosed===false)return'na';return valStatus(d.alcoholMenuItemsDisclosed);}
+function statusText(v,y,n,u){u=u||'Not stated';if(v===true)return y;if(v===false)return n;return u;}
+function dchip(label,ok){var icon=ok?'<svg viewBox="0 0 20 20"><path d="M4 10l4 4 8-8"/></svg>':'<svg viewBox="0 0 20 20"><path d="M10 5v6M10 14v.5"/></svg>';return'<span class="dchip '+(ok?'positive':'caution')+'">'+icon+label+'</span>';}
+function getUniqueOptions(field){return Array.from(new Set(establishments.map(function(r){return r[field];}).filter(Boolean))).sort();}
+var state={search:'',area:'all',cuisine:'all',alcohol:'all',meat:'all',pork:'all',lard:'all',sort:'name',selectedId:null,lastFocusEl:null};
+var els={searchInput:document.getElementById('searchInput'),areaFilter:document.getElementById('areaFilter'),cuisineFilter:document.getElementById('cuisineFilter'),alcoholFilter:document.getElementById('alcoholFilter'),meatFilter:document.getElementById('meatFilter'),porkFilter:document.getElementById('porkFilter'),lardFilter:document.getElementById('lardFilter'),sortSelect:document.getElementById('sortSelect'),clearFiltersBtn:document.getElementById('clearFiltersBtn'),searchSubmitBtn:document.getElementById('searchSubmitBtn'),emptyClearBtn:document.getElementById('emptyClearBtn'),recordsGrid:document.getElementById('recordsGrid'),emptyState:document.getElementById('emptyState'),activeChips:document.getElementById('activeChips'),topResultCount:document.getElementById('topResultCount'),resultsInlineCount:document.getElementById('resultsInlineCount'),drawer:document.getElementById('declDrawer'),backdrop:document.getElementById('declBackdrop'),drawerClose:document.getElementById('declDrawerClose'),drawerTitleArea:document.getElementById('drawerTitleArea'),drawerContent:document.getElementById('drawerContent')};
+function hasActiveCriteria(){return Boolean(state.search.trim())||state.area!=='all'||state.cuisine!=='all'||state.alcohol!=='all'||state.meat!=='all'||state.pork!=='all'||state.lard!=='all';}
+function getFiltered(){var q=norm(state.search);var rs=establishments.filter(function(r){if(q&&!(norm(r.name).includes(q)||norm(r.area).includes(q)||norm(r.cuisine).includes(q)||norm(r.address).includes(q)))return false;if(state.area!=='all'&&norm(r.area)!==norm(state.area))return false;if(state.cuisine!=='all'&&norm(r.cuisine)!==norm(state.cuisine))return false;if(state.alcohol!=='all'&&valStatus(r.declarations.alcoholServed)!==state.alcohol)return false;if(state.meat!=='all'&&valStatus(r.declarations.meatFromHalalCertifiedSources)!==state.meat)return false;if(state.pork!=='all'&&valStatus(r.declarations.noPorkDeclared)!==state.pork)return false;if(state.lard!=='all'&&valStatus(r.declarations.noLardDeclared)!==state.lard)return false;return true;});rs.sort(function(a,b){if(state.sort==='area')return String(a.area).localeCompare(String(b.area))||String(a.name).localeCompare(String(b.name));if(state.sort==='updated')return new Date(b.lastUpdated||0)-new Date(a.lastUpdated||0)||String(a.name).localeCompare(String(b.name));return String(a.name).localeCompare(String(b.name));});return rs;}
+function renderRow(r){var d=r.declarations;var chips=[dchip(d.noPorkDeclared===true?'No pork':'Pork not stated',d.noPorkDeclared===true),dchip(d.noLardDeclared===true?'No lard':'Lard not stated',d.noLardDeclared===true),dchip(d.meatFromHalalCertifiedSources===true?'Halal-sourced meat':'Meat source not stated',d.meatFromHalalCertifiedSources===true),d.alcoholServed===false?dchip('No alcohol served',true):dchip(d.alcoholServed===true?'Alcohol served':'Alcohol not stated',false)];var sel=state.selectedId===r.id;return'<article class="record-row'+(sel?' is-selected':'')+'" data-id="'+esc(r.id)+'" role="listitem"><div class="record-main"><h4>'+esc(r.name)+'</h4><p class="record-meta">'+esc(r.area)+' &middot; '+esc(r.cuisine)+'</p><div class="record-badges"><span class="badge badge-self">SELF-DECLARED</span><span class="badge badge-not-halal">NOT HALAL-CERTIFIED</span></div><div class="record-chips">'+chips.join('')+'</div></div><div class="record-foot"><span class="last-updated">Updated '+esc(r.lastUpdated||'Not stated')+'</span><button class="btn btn-dark btn-sm" type="button" data-open-record="'+esc(r.id)+'">View Declaration</button></div></article>';}
+var CHIP_LABELS={alcohol:{yes:'Alcohol: served',no:'Alcohol: not served',unknown:'Alcohol: not stated'},meat:{yes:'Halal-sourced meat',no:'Meat: not stated',unknown:'Meat: unknown'},pork:{yes:'No pork declared',no:'Pork: not declared'},lard:{yes:'No lard declared',no:'Lard: not declared'}};
+function renderChips(){var chips=[];if(state.search)chips.push({k:'search',l:'Search: '+state.search});if(state.area!=='all')chips.push({k:'area',l:'Area: '+state.area});if(state.cuisine!=='all')chips.push({k:'cuisine',l:'Cuisine: '+state.cuisine});if(state.alcohol!=='all')chips.push({k:'alcohol',l:(CHIP_LABELS.alcohol[state.alcohol]||state.alcohol)});if(state.meat!=='all')chips.push({k:'meat',l:(CHIP_LABELS.meat[state.meat]||state.meat)});if(state.pork!=='all')chips.push({k:'pork',l:(CHIP_LABELS.pork[state.pork]||state.pork)});if(state.lard!=='all')chips.push({k:'lard',l:(CHIP_LABELS.lard[state.lard]||state.lard)});if(!chips.length){els.activeChips.innerHTML='';return;}els.activeChips.innerHTML=chips.map(function(c){return'<span class="chip">'+esc(c.l)+' <button type="button" data-remove="'+esc(c.k)+'" aria-label="Remove filter: '+esc(c.l)+'">&times;</button></span>';}).join('');}
+var mapMarkers={};var mapInstance=null;
+function render(){var hasCriteria=hasActiveCriteria();var rs=hasCriteria?getFiltered():[];var countText=hasCriteria?'Showing '+rs.length+' of '+establishments.length+' establishments':'Search or filter to view '+establishments.length+' establishments';els.topResultCount.textContent=countText;if(els.resultsInlineCount)els.resultsInlineCount.textContent=countText;if(!hasCriteria){els.recordsGrid.innerHTML='';els.emptyState.classList.add('visible');els.emptyState.querySelector('h3').textContent='Start your search';els.emptyState.querySelector('p').textContent='Use the search bar, map markers, or advanced filters to display establishment records.';}else if(!rs.length){els.recordsGrid.innerHTML='';els.emptyState.classList.add('visible');els.emptyState.querySelector('h3').textContent='No matching records';els.emptyState.querySelector('p').textContent='Adjust the search or filters and try again.';}else{els.emptyState.classList.remove('visible');els.recordsGrid.innerHTML=rs.map(renderRow).join('');els.recordsGrid.querySelectorAll('[data-open-record]').forEach(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();var id=btn.getAttribute('data-open-record');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,btn);});});els.recordsGrid.querySelectorAll('.record-row[data-id]').forEach(function(row){row.addEventListener('click',function(e){if(e.target.closest('button'))return;var id=row.getAttribute('data-id');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,row);});});}Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===state.selectedId);});renderChips();}
+function renderDrawerContent(r){var d=r.declarations;var links=[];if(r.website)links.push('<a href="'+esc(r.website)+'" target="_blank" rel="noopener noreferrer">Website</a>');if(r.instagram)links.push('<a href="'+esc(r.instagram)+'" target="_blank" rel="noopener noreferrer">Instagram</a>');if(r.externalLocationUrl)links.push('<a href="'+esc(r.externalLocationUrl)+'" target="_blank" rel="noopener noreferrer">View Location</a>');if(r.externalDirectionsUrl)links.push('<a href="'+esc(r.externalDirectionsUrl)+'" target="_blank" rel="noopener noreferrer">Get Directions</a>');if(r.externalReviewsUrl)links.push('<a href="'+esc(r.externalReviewsUrl)+'" target="_blank" rel="noopener noreferrer">Read Reviews</a>');var amCopy=alcoholMenuStatus(r)==='na'?'Not applicable based on current declaration.':statusText(d.alcoholMenuItemsDisclosed,'Menu items containing alcohol are indicated.','Alcohol-containing menu item disclosure has not been stated.');return'<section><div class="drawer-sec-title">Record Summary</div><dl class="detail-list"><div><dt>Location</dt><dd>'+esc(r.address||r.area)+'</dd></div><div><dt>Cuisine</dt><dd>'+esc(r.cuisine)+'</dd></div>'+(r.establishmentType?'<div><dt>Type</dt><dd>'+esc(r.establishmentType)+'</dd></div>':'')+'<div><dt>Last Updated</dt><dd>'+esc(r.lastUpdated||'Not stated')+'</dd></div></dl>'+(links.length?'<div class="link-row">'+links.join('')+'</div>':'')+'</section><section><div class="drawer-sec-title">Basis of Listing</div><p class="drawer-plain">'+esc(r.basisOfListing)+'. '+esc(r.certificationStatus)+'.</p></section><section><div class="drawer-sec-title">Food Practice Declarations</div><div class="decl-list"><div class="decl-item '+(d.noPorkDeclared===true?'positive':'caution')+'"><span class="decl-marker">'+(d.noPorkDeclared===true?'YES':'CHECK')+'</span><div><strong>No pork</strong><p>'+esc(statusText(d.noPorkDeclared,'Declared no pork.','No pork declaration has been provided.'))+'</p></div></div><div class="decl-item '+(d.noLardDeclared===true?'positive':'caution')+'"><span class="decl-marker">'+(d.noLardDeclared===true?'YES':'CHECK')+'</span><div><strong>No lard</strong><p>'+esc(statusText(d.noLardDeclared,'Declared no lard.','No lard declaration has been provided.'))+'</p></div></div><div class="decl-item '+(d.meatFromHalalCertifiedSources===true?'positive':'caution')+'"><span class="decl-marker">'+(d.meatFromHalalCertifiedSources===true?'YES':'CHECK')+'</span><div><strong>Meat sourcing</strong><p>'+esc(statusText(d.meatFromHalalCertifiedSources,'Sourced from halal-certified suppliers.','Not stated to be sourced from halal-certified suppliers.'))+'</p></div></div></div></section><section><div class="drawer-sec-title">Alcohol Disclosure</div><div class="decl-list"><div class="decl-item '+(d.alcoholServed===false?'positive':'caution')+'"><span class="decl-marker">'+(d.alcoholServed===false?'NO':'NOTE')+'</span><div><strong>Alcohol served</strong><p>'+esc(statusText(d.alcoholServed,'Alcohol is served on the premises.','Alcohol is not stated to be served on the premises.'))+'</p></div></div><div class="decl-item '+(alcoholMenuStatus(r)==='yes'||alcoholMenuStatus(r)==='na'?'positive':'caution')+'"><span class="decl-marker">'+(alcoholMenuStatus(r)==='na'?'N/A':alcoholMenuStatus(r)==='yes'?'YES':'CHECK')+'</span><div><strong>Alcohol in menu items</strong><p>'+esc(amCopy)+'</p></div></div></div></section><section><div class="drawer-sec-title">Notes for Diners</div><p class="drawer-plain"><strong>Declaration:</strong> '+esc(r.declarationProvided)+'</p>'+(r.crossContactNote?'<p class="drawer-plain" style="margin-top:8px;"><strong>Cross-contact note:</strong> '+esc(r.crossContactNote)+'</p>':'')+(r.additionalNotes?'<p class="drawer-plain" style="margin-top:8px;"><strong>Additional notes:</strong> '+esc(r.additionalNotes)+'</p>':'')+'</section><p class="drawer-disclaimer">This information is presented for transparency. It is not halal certification, a religious ruling, official endorsement or statutory verification. Diners should make their own enquiries and decide according to their individual requirements and comfort level.</p>';}
+function openDeclDrawer(rec,trigger){if(mapInstance)mapInstance.closePopup();state.selectedId=rec.id;state.lastFocusEl=trigger||document.activeElement;Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===rec.id);});els.drawerTitleArea.innerHTML='<p class="mono" style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Record / '+esc(rec.id)+'</p><h2 id="drawerTitle">'+esc(rec.name)+'</h2><p style="font-size:11px;color:var(--muted);margin-top:2px;">'+esc(rec.area)+' &middot; '+esc(rec.cuisine)+'</p>';els.drawerContent.innerHTML=renderDrawerContent(rec);requestAnimationFrame(function(){els.backdrop.classList.add('is-open');els.backdrop.removeAttribute('aria-hidden');els.drawer.classList.add('is-open');els.drawer.setAttribute('aria-hidden','false');els.drawerClose.focus();});}
+function closeDeclDrawer(){els.backdrop.classList.remove('is-open');els.backdrop.setAttribute('aria-hidden','true');els.drawer.classList.remove('is-open');els.drawer.setAttribute('aria-hidden','true');if(state.lastFocusEl&&typeof state.lastFocusEl.focus==='function')state.lastFocusEl.focus();state.selectedId=null;}
+function trapFocus(e){if(!els.drawer.classList.contains('is-open')||e.key!=='Tab')return;var focusable=els.drawer.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])');if(!focusable.length)return;var first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+els.drawerClose.addEventListener('click',closeDeclDrawer);
+els.backdrop.addEventListener('click',closeDeclDrawer);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(els.drawer.classList.contains('is-open')){closeDeclDrawer();return;}}trapFocus(e);});
+window.viewFromMap=function(id){var r=establishments.find(function(x){return x.id===id;});if(!r)return;if(mapInstance)mapInstance.closePopup();state.search=r.name;state.selectedId=id;syncControls();render();openDeclDrawer(r);};
+function initMap(){var mapEl=document.getElementById('declarationMap');if(typeof L==='undefined'){mapEl.innerHTML='<div class="map-fallback">The interactive map could not be loaded. Use search and filters to browse establishments.</div>';return;}try{var m=L.map(mapEl,{scrollWheelZoom:false}).setView([1.3521,103.8198],11);mapInstance=m;L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(m);m.on('popupopen',function(ev){var btn=ev.popup.getElement()&&ev.popup.getElement().querySelector('[data-view-record]');if(btn)btn.addEventListener('click',function(){window.viewFromMap(btn.getAttribute('data-view-record'));});});establishments.forEach(function(r){var c=r.coordinates;if(typeof c.lat!=='number'||typeof c.lng!=='number')return;var mk=L.marker([c.lat,c.lng]).addTo(m);mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div><div class="lp-meta">'+esc(r.area)+' &middot; '+esc(r.cuisine)+'</div><span class="lp-badge">Not halal-certified</span><button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">View Declaration</button>');mk.on('click',function(){state.selectedId=r.id;state.search=r.name;syncControls();render();});mapMarkers[r.id]=mk;});m.on('focus',function(){m.scrollWheelZoom.enable();});m.on('blur',function(){m.scrollWheelZoom.disable();});var resizeTmr;window.addEventListener('resize',function(){clearTimeout(resizeTmr);resizeTmr=setTimeout(function(){m.invalidateSize();},200);});window.addEventListener('orientationchange',function(){setTimeout(function(){m.invalidateSize();},400);});}catch(err){mapEl.innerHTML='<div class="map-fallback">The interactive map could not be loaded. Use search and filters to browse establishments.</div>';}}
+function syncControls(){els.searchInput.value=state.search;els.areaFilter.value=state.area;els.cuisineFilter.value=state.cuisine;els.alcoholFilter.value=state.alcohol;els.meatFilter.value=state.meat;els.porkFilter.value=state.pork;els.lardFilter.value=state.lard;els.sortSelect.value=state.sort;}
+function resetAll(){state.search='';state.area='all';state.cuisine='all';state.alcohol='all';state.meat='all';state.pork='all';state.lard='all';state.sort='name';state.selectedId=null;syncControls();render();}
+function populateSelect(sel,vals){vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}
+function initFilters(){populateSelect(els.areaFilter,getUniqueOptions('area'));populateSelect(els.cuisineFilter,getUniqueOptions('cuisine'));}
+els.searchInput.addEventListener('input',function(){state.search=els.searchInput.value;render();});
+els.searchSubmitBtn.addEventListener('click',render);
+[[els.areaFilter,'area'],[els.cuisineFilter,'cuisine'],[els.alcoholFilter,'alcohol'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.sortSelect,'sort']].forEach(function(p){p[0].addEventListener('change',function(){state[p[1]]=p[0].value;render();});});
+els.clearFiltersBtn.addEventListener('click',resetAll);
+els.emptyClearBtn.addEventListener('click',resetAll);
+els.activeChips.addEventListener('click',function(e){var btn=e.target.closest('[data-remove]');if(!btn)return;var k=btn.getAttribute('data-remove');if(k==='search')state.search='';else if(k==='area')state.area='all';else if(k==='cuisine')state.cuisine='all';else if(k==='alcohol')state.alcohol='all';else if(k==='meat')state.meat='all';else if(k==='pork')state.pork='all';else if(k==='lard')state.lard='all';syncControls();render();});
+document.querySelectorAll('.fw-btn').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.fw-item'),wasOpen=item.classList.contains('is-open');document.querySelectorAll('.fw-item.is-open').forEach(function(i){i.classList.remove('is-open');i.querySelector('.fw-btn').setAttribute('aria-expanded','false');});if(!wasOpen){item.classList.add('is-open');btn.setAttribute('aria-expanded','true');}});});
+document.querySelectorAll('.faq-btn').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.faq-item'),wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-btn').setAttribute('aria-expanded','false');});if(!wasOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}});});
+initFilters();syncControls();render();initMap();
+</script>
+</body>
+</html>
