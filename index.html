@@ -12,13 +12,13 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>The Digital Systems Architect | Digital Transformation, Digital Systems & Digitalisation</title>
 <link rel="icon" type="image/png" href="/favicon.png">
-<meta name="description" content="The Digital Systems Architect provides digital transformation, digital systems, and digitalisation strategies to help organisations structure operational complexity through workflow automation, governance systems, finance processes, HR systems and digital infrastructure.">
-<meta name="keywords" content="digital transformation, digital systems, digitalisation, workflow automation, governance systems, finance processes, HR systems, digital infrastructure, Singapore">
+<meta name="description" content="The Digital Systems Architect builds operationally ready, digitally visible, commercially connected organisations — integrating digital systems, workflow automation and governance with halal and Muslim-friendly market access and digital visibility.">
+<meta name="keywords" content="digital transformation, digital systems, digitalisation, workflow automation, governance systems, finance processes, HR systems, digital infrastructure, halal advisory, Muslim-friendly market access, certification readiness, digital marketing, market visibility, Singapore">
 <meta name="robots" content="index, follow">
 <link rel="canonical" href="https://digi-architect.studio/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="The Digital Systems Architect">
-<meta property="og:description" content="Operational infrastructure, workflow automation and governance systems for organisations that need clarity, control and scale.">
+<meta property="og:description" content="Operational systems, market visibility, and halal &amp; Muslim-friendly market access — connected into one coherent practice for organisations that need clarity, control and reach.">
 <meta property="og:url" content="https://digi-architect.studio/">
 <meta name="twitter:card" content="summary">
 <script type="application/ld+json">
@@ -39,15 +39,20 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     "Governance dashboards",
     "Finance automation",
     "HR systems",
-    "Digital transformation operations"
+    "Digital transformation operations",
+    "Halal and Muslim-friendly market readiness",
+    "Certification readiness",
+    "Digital marketing and market visibility"
   ],
-  "description": "Operational infrastructure, workflow automation and governance systems for organisations that need clarity, control and scale.",
+  "description": "Operational systems, market visibility, and halal and Muslim-friendly market access, connected into one coherent practice for organisations that need clarity, control and reach.",
   "serviceType": [
     "Workflow automation",
     "Governance dashboards",
     "Financial automation",
     "HR and resource allocation systems",
-    "Cross-department integration"
+    "Cross-department integration",
+    "Halal and Muslim-friendly market readiness",
+    "Digital marketing and market visibility"
   ]
 }
 </script>
@@ -116,7 +121,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     100% { opacity: 1; transform: translateY(0); }
   }
   .view .eyebrow, .view .large-title, .view .subtitle,
-  .view .grid-2 > div, .view .grid-4 > div, .view .grid-5 > div {
+  .view .grid-2 > div, .view .grid-3 > div, .view .grid-4 > div, .view .grid-5 > div {
     opacity: 0;
   }
   .view.active .eyebrow { animation: elegantGlide 1.2s var(--ease-out) 0.1s both; }
@@ -125,10 +130,14 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .view.active .grid-2 > div:nth-child(1) { animation: elegantGlide 1.2s var(--ease-out) 0.3s both; }
   .view.active .grid-2 > div:nth-child(2) { animation: elegantGlide 1.2s var(--ease-out) 0.4s both; }
+  .view.active .grid-3 > div:nth-child(1) { animation: elegantGlide 1.2s var(--ease-out) 0.3s both; }
+  .view.active .grid-3 > div:nth-child(2) { animation: elegantGlide 1.2s var(--ease-out) 0.4s both; }
+  .view.active .grid-3 > div:nth-child(3) { animation: elegantGlide 1.2s var(--ease-out) 0.5s both; }
   .view.active .grid-4 > div:nth-child(1) { animation: elegantGlide 1.2s var(--ease-out) 0.2s both; }
   .view.active .grid-4 > div:nth-child(2) { animation: elegantGlide 1.2s var(--ease-out) 0.3s both; }
   .view.active .grid-4 > div:nth-child(3) { animation: elegantGlide 1.2s var(--ease-out) 0.4s both; }
   .view.active .grid-4 > div:nth-child(4) { animation: elegantGlide 1.2s var(--ease-out) 0.5s both; }
+  .view.active .grid-4 > div:nth-child(5) { animation: elegantGlide 1.2s var(--ease-out) 0.6s both; }
   .view.active .grid-5 > div:nth-child(1) { animation: elegantGlide 1.2s var(--ease-out) 0.2s both; }
   .view.active .grid-5 > div:nth-child(2) { animation: elegantGlide 1.2s var(--ease-out) 0.3s both; }
   .view.active .grid-5 > div:nth-child(3) { animation: elegantGlide 1.2s var(--ease-out) 0.4s both; }
@@ -156,6 +165,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .text-center { text-align: center; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
+  .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
   .grid-4 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
   .grid-5 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
   .card {
@@ -169,6 +179,40 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     transform: translateY(-6px);
     box-shadow: 0 15px 40px rgba(15, 23, 42, 0.08);
     border-color: rgba(204, 153, 64, 0.4);
+  }
+  .card-feature {
+    grid-column: 1 / -1;
+    position: relative; overflow: hidden;
+    background: linear-gradient(180deg, rgba(204,153,64,0.10) 0%, rgba(255,255,255,0.62) 55%);
+    border: 1px solid rgba(204,153,64,0.35);
+  }
+  .card-feature::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-light));
+  }
+  .card-feature h3 { color: var(--navy); }
+  .card-feature p { color: var(--grey); }
+  .card-feature .eyebrow { margin-bottom: 8px; }
+  .founder-line {
+    max-width: 780px; margin: 22px auto 0; text-align: center;
+    font-size: 12px; line-height: 1.7; color: var(--grey); font-weight: 500;
+    letter-spacing: 0.01em;
+  }
+  .founder-line b { color: var(--navy); font-weight: 700; }
+  .site-brand {
+    position: fixed; top: 22px; left: 28px; z-index: 2000;
+    display: flex; align-items: center; cursor: pointer;
+    opacity: 0.92; transition: opacity 0.3s, transform 0.3s;
+  }
+  .site-brand:hover { opacity: 1; transform: translateY(-1px); }
+  .site-brand img { height: 38px; width: auto; border-radius: 6px; display: block; }
+  @media (max-width: 768px) {
+    .site-brand { top: 14px; left: 16px; }
+    .site-brand img { height: 30px; }
+  }
+  @media (min-width: 1600px) {
+    .site-brand { top: 30px; left: 40px; }
+    .site-brand img { height: 44px; }
   }
   .menu-toggle {
     position: fixed; top: 24px; right: 24px; width: 44px; height: 44px;
@@ -231,8 +275,22 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
 
   .progression-area {
     position: fixed; bottom: 30px; right: 40px;
-    display: flex; justify-content: center; align-items: center; z-index: 1000;
+    display: flex; justify-content: center; align-items: center; gap: 14px; z-index: 1000;
   }
+  .back-btn {
+    display: none; align-items: center; justify-content: center;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(20px);
+    border: 1px solid rgba(15, 23, 42, 0.1); color: var(--navy);
+    cursor: pointer; box-shadow: 0 8px 20px rgba(15, 23, 42, 0.1);
+    transition: all 0.3s;
+  }
+  .back-btn.show { display: flex; }
+  .back-btn:hover {
+    background: var(--navy); color: var(--white);
+    transform: translateY(-2px) scale(1.05); box-shadow: 0 12px 30px rgba(15, 23, 42, 0.25);
+  }
+  .back-btn svg { width: 16px; height: 16px; }
   .pulse-btn {
     display: flex; align-items: center; gap: 12px;
     background: var(--navy); border-radius: 100px;
@@ -372,6 +430,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .subtitle { font-size: 17px; max-width: 720px; }
 
     .grid-2 { gap: 80px; }
+    .grid-3 { gap: 24px; }
     .grid-4 { gap: 24px; }
     .grid-5 { gap: 16px; }
 
@@ -386,6 +445,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .grid-5 h3 { font-size: 16px; }
     .grid-5 p { font-size: 13px; }
     .contact-signature { font-size: 11px; }
+    .founder-line { font-size: 13px; }
 
 
     /* hide native cursor only on actual desktops (with a precise pointer) */
@@ -401,6 +461,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .subtitle { font-size: 18px; max-width: 760px; margin-bottom: 32px; }
 
     .grid-2 { gap: 100px; }
+    .grid-3 { gap: 28px; }
     .grid-4 { gap: 28px; }
     .grid-5 { gap: 20px; }
 
@@ -415,6 +476,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .grid-5 h3 { font-size: 18px; }
     .grid-5 p { font-size: 14px; }
     .contact-signature { font-size: 12px; }
+    .founder-line { font-size: 14px; }
 
 
   
@@ -455,6 +517,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .grid-5 h3 { font-size: 20px; }
     .grid-5 p { font-size: 15px; }
     .contact-signature { font-size: 14px; }
+    .founder-line { font-size: 15px; }
 
   }
 
@@ -465,6 +528,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .large-title { font-size: 40px; }
     .subtitle { font-size: 15px; }
     .grid-2 { gap: 40px; }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); gap: 14px; }
     .grid-5 { grid-template-columns: repeat(5, 1fr); gap: 10px; }
     .card { padding: 20px; }
     .card h3 { font-size: 14px; }
@@ -477,6 +541,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .grid-5 h3 { font-size: 15px; }
     .grid-5 p { font-size: 12px; }
     .contact-signature { font-size: 10px; }
+    .founder-line { font-size: 11px; }
 
   }
 
@@ -497,6 +562,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     }
 
     .grid-2 { grid-template-columns: 1fr; gap: 24px; }
+    .grid-3 { grid-template-columns: 1fr; gap: 12px; }
     .grid-4 { grid-template-columns: 1fr; gap: 12px; }
     .grid-5 { display: flex; flex-direction: column; gap: 12px; }
     .card { padding: 16px 20px; }
@@ -510,6 +576,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .grid-5 h3 { font-size: 14px; }
     .grid-5 p { font-size: 11px; }
     .contact-signature { font-size: 9px; }
+    .founder-line { font-size: 11px; margin-top: 16px; }
 
     .menu-toggle { top: 16px; right: 16px; width: 40px; height: 40px; }
     .eq-container { top: 28px; right: 64px; left: auto; bottom: auto; }
@@ -517,6 +584,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
     .pulse-btn { width: 52px; height: 52px; padding: 0; justify-content: center; border-radius: 50%; box-shadow: 0 10px 25px rgba(15, 23, 42, 0.3); }
     .pulse-btn span { display: none; }
     .pulse-btn svg { margin: 0; width: 22px; height: 22px; }
+    .back-btn { width: 48px; height: 48px; }
+    .back-btn svg { width: 20px; height: 20px; }
 
     .global-nav { display: none; }
   }
@@ -556,6 +625,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
 <div class="ambient-glow" id="glow1"></div>
 <div class="ambient-glow-2" id="glow2"></div>
+<a class="site-brand" onclick="goToView(0)" title="The Digital Systems Architect — Home">
+  <img src="logo.png" alt="The Digital Systems Architect">
+</a>
 <div class="eq-container">
   <div class="eq-btn" id="eq-toggle" onclick="toggleMusic(true)">
     <div class="eq-bar" style="height: 6px;"></div>
@@ -572,15 +644,16 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="menu-item" onclick="goToView(0); toggleMenu();">01. Architecture</div>
   <div class="menu-item" onclick="goToView(1); toggleMenu();">02. Philosophy</div>
   <div class="menu-item" onclick="goToView(2); toggleMenu();">03. Methodology</div>
-  <div class="menu-item" onclick="goToView(3); toggleMenu();">04. Experience</div>
-  <div class="menu-item" onclick="goToView(4); toggleMenu();">05. Connect</div>
+  <div class="menu-item" onclick="goToView(3); toggleMenu();">04. Practice Areas</div>
+  <div class="menu-item" onclick="goToView(4); toggleMenu();">05. Experience</div>
+  <div class="menu-item" onclick="goToView(5); toggleMenu();">06. Connect</div>
 </div>
 <div class="app-container" id="app-container">
   <div class="view active" id="view-0">
     <div class="content-wrapper text-center">
       <div class="eyebrow">The Digital Systems Architect</div>
-      <h1 class="large-title">We bring structure to<br>operational complexity.</h1>
-      <p class="subtitle">More than 17 years of combined experience in operational, governance, regulatory compliance, finance, and digital transformation&mdash;engineering the scalable infrastructure your organisation requires.</p>
+      <h1 class="large-title">We turn operational complexity<br>into market advantage.</h1>
+      <p class="subtitle">More than 17 years across operations, governance, regulatory compliance, and finance&mdash;engineering the systems that make an organisation run, then connecting them to the visibility and market access that make it grow. Operationally ready, digitally visible, commercially connected.</p>
     </div>
   </div>
   <div class="view" id="view-1">
@@ -592,7 +665,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 
       <div class="grid-2">
         <div>
-          <p class="subtitle" style="margin-bottom: 12px;">Software alone cannot fix fragmented operations. We integrate human resources, finance, and operations management into a single, cohesive framework.</p>
+          <p class="subtitle" style="margin-bottom: 12px;">Software alone cannot fix fragmented operations&mdash;and visibility alone cannot fix a business that isn't ready to be seen. We connect what happens inside an organisation&mdash;people, finance, operations&mdash;to how it is discovered, trusted, and chosen in the market.</p>
           <p class="highlight-text">Real expertise applied directly to your bottlenecks.</p>
         </div>
         <div class="card" style="background: var(--navy); color: var(--white); border: none;">
@@ -606,8 +679,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
             <p class="core-p">If a system requires a 50-page manual, it is fundamentally broken.</p>
           </div>
           <div>
-            <h4 class="core-h4">03. Scale Requires Foundation</h4>
-            <p class="core-p">You cannot automate a process you haven't mathematically standardized.</p>
+            <h4 class="core-h4">03. Readiness Before Visibility</h4>
+            <p class="core-p">There is little value in being discovered before you are ready to deliver.</p>
           </div>
         </div>
       </div>
@@ -633,7 +706,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         <div class="card">
           <div class="eyebrow" style="margin-bottom: 4px;">03 / Integrate</div>
           <h3>Unify Operations</h3>
-          <p>Bridged siloed HR, finance, and operational systems into one truth.</p>
+          <p>Bridge siloed HR, finance, and operational systems into one source of truth.</p>
         </div>
         <div class="card">
           <div class="eyebrow" style="margin-bottom: 4px;">04 / Deploy</div>
@@ -642,13 +715,36 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="card">
           <div class="eyebrow" style="margin-bottom: 4px;">05 / Scale</div>
-          <h3>Optimize</h3>
-          <p>Post-launch refinement with built-in compliance monitoring.</p>
+          <h3>Optimise &amp; Extend</h3>
+          <p>Post-launch refinement and compliance monitoring, extended to the visibility and market-readiness that turn a stable operation into a growing one.</p>
         </div>
       </div>
     </div>
   </div>
   <div class="view" id="view-3">
+    <div class="content-wrapper">
+      <div class="text-center">
+        <div class="eyebrow">Practice Areas</div>
+        <h2 class="large-title" style="margin-bottom: 8px;">The whole system,<br>not the parts.</h2>
+        <p class="subtitle">Most firms sell one of these. We connect all three&mdash;because an organisation that runs well but can't be found, or is visible but not ready to serve, is only half-built.</p>
+      </div>
+      <div class="grid-3">
+        <div class="card">
+          <h3 style="color: var(--navy); margin-bottom: 6px;">Operational Systems</h3>
+          <p style="color: var(--grey);">Bespoke digital systems and workflow applications that give leadership visibility, accountability, and control. The foundation everything else depends on.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy); margin-bottom: 6px;">Market Visibility</h3>
+          <p style="color: var(--grey);">Websites, Google Business Profile, and visual storytelling&mdash;brand film, photography, and digital narrative&mdash;built for discoverability and trust.</p>
+        </div>
+        <div class="card">
+          <h3 style="color: var(--navy); margin-bottom: 6px;">Halal &amp; Muslim-Friendly Market Access</h3>
+          <p style="color: var(--grey);">Operational readiness, governance, and certification pathways that open Muslim consumer, export, and tourism markets&mdash;informed by direct experience inside halal certification.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="view" id="view-4">
     <div class="content-wrapper">
       <div class="text-center">
         <div class="eyebrow">Operational Experience</div>
@@ -665,16 +761,22 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
         </div>
         <div class="card">
           <h3 style="color: var(--navy); margin-bottom: 6px;">Regulatory Management</h3>
-          <p style="color: var(--grey);">Engineered centralized database architectures to modernize surveillance, ensure data integrity, and provide real-time executive oversight.</p>
+          <p style="color: var(--grey);">Engineered centralised database architectures to modernise surveillance, ensure data integrity, and provide real-time executive oversight.</p>
         </div>
         <div class="card">
-          <h3 style="color: var(--navy); margin-bottom: 6px;">Resource Optimization</h3>
-          <p style="color: var(--grey);">Developed dynamic tracking ecosystems to monitor institutional performance, optimize personnel deployment, and elevate reporting.</p>
+          <h3 style="color: var(--navy); margin-bottom: 6px;">Resource Optimisation</h3>
+          <p style="color: var(--grey);">Developed dynamic tracking ecosystems to monitor institutional performance, optimise personnel deployment, and elevate reporting.</p>
+        </div>
+        <div class="card card-feature">
+          <div class="eyebrow">International Mandate</div>
+          <h3 style="margin-bottom: 6px;">Halal &amp; Muslim-Friendly Market Access</h3>
+          <p>Led international halal certification and Muslim-friendly market initiatives across Japan, South Korea, China, and Europe&mdash;including collaboration with JTB on Muslim-friendly inbound tourism&mdash;opening consumer markets most operators cannot navigate.</p>
         </div>
       </div>
+      <p class="founder-line">Led by <b>Zan Johan</b>, whose experience spans Singapore's halal certification regulatory body (Muis), international halal certification across Japan, South Korea, China, and Europe, and collaboration with JTB on Muslim-friendly tourism&mdash;combined with finance, governance, and digital systems.</p>
     </div>
   </div>
-  <div class="view" id="view-4">
+  <div class="view" id="view-5">
     <div class="content-wrapper">
       <div class="grid-2">
         <div class="text-center">
@@ -685,7 +787,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <h2 class="large-title" style="margin-bottom: 8px;">Build Something That Lasts.</h2>
-          <p class="subtitle">We respond within 2 business days to <b style="color: var(--red-alert);">serious</b> operational inquiries.</p>
+          <p class="subtitle">We respond within 2 business days to <b style="color: var(--red-alert);">serious</b> inquiries.</p>
 
           <div class="social-dock" style="justify-content: center;">
             <a href="https://www.instagram.com/digital.systems.architect?igsh=NjZwOTFpaGRsaG01&utm_source=qr" class="social-icon" target="_blank" title="Instagram">
@@ -714,6 +816,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
                 <option>HR &amp; Resource Allocation Systems</option>
                 <option>Cross-Department Integration</option>
                 <option>Governance Dashboards</option>
+                <option>Halal &amp; Muslim-Friendly Market Readiness</option>
+                <option>Digital Visibility &amp; Market Presence</option>
                 <option>Other Operational Infrastructure</option>
                 <option>Just want to have a kopi chat &#9749;</option>
               </select>
@@ -736,6 +840,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a href="/governance-dashboard-singapore/" class="seo-pill">Governance Dashboards</a>
               <a href="/finance-automation-singapore/" class="seo-pill">Finance Automation</a>
               <a href="/hr-systems-singapore/" class="seo-pill">HR Systems</a>
+              <a href="/halal-muslim-friendly-singapore/" class="seo-pill">Halal &amp; Muslim-Friendly</a>
               <a href="/faq/" class="seo-pill">FAQ</a>
             </div>
           </div>
@@ -745,6 +850,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   </div>
 </div>
 <div class="progression-area">
+  <div class="back-btn" id="back-btn" onclick="prevView()" title="Previous">
+    <svg viewBox="0 0 24 24"><path d="M19 12H5M12 19l-7-7 7-7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
+  </div>
   <div class="pulse-btn" id="next-btn" onclick="nextView()">
     <span id="next-text">Enter Architecture</span>
     <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="2" fill="none"/></svg>
@@ -756,6 +864,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   <div class="nav-dot" onclick="goToView(2)">03</div>
   <div class="nav-dot" onclick="goToView(3)">04</div>
   <div class="nav-dot" onclick="goToView(4)">05</div>
+  <div class="nav-dot" onclick="goToView(5)">06</div>
 </nav>
 
 <!-- Hidden audio iframe — positioned off-screen at full size so YouTube
@@ -813,6 +922,7 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
   const buttonLabels = [
     "Enter Architecture",
     "View Methodology",
+    "See Practice Areas",
     "See Experience",
     "Discuss Systems",
     "Back to Start"
@@ -825,6 +935,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     views[currentViewIndex].classList.add('exit');
     dots.forEach(d => d.classList.remove('active'));
     dots[index].classList.add('active');
+    const backBtn = document.getElementById('back-btn');
+    if (backBtn) backBtn.classList.toggle('show', index > 0);
 
     nextBtnText.innerText = buttonLabels[index];
     const iconPath = document.querySelector('.pulse-btn svg');
@@ -850,6 +962,9 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
     } else {
       goToView(0);
     }
+  }
+  function prevView() {
+    if (currentViewIndex > 0) goToView(currentViewIndex - 1);
   }
   document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === ' ') {
@@ -1108,4 +1223,3 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 </script>
 </body>
 </html>
-
