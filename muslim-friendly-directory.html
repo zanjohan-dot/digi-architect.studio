@@ -104,7 +104,7 @@ p{color:var(--muted);}
 .panel-area{position:relative;overflow:hidden;height:100%;}
 .view{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;transition:opacity .4s var(--ease);-webkit-overflow-scrolling:touch;}
 .view.active{opacity:1;pointer-events:auto;}
-.panel-nav{position:fixed;bottom:28px;right:28px;z-index:200;display:flex;gap:8px;}
+.panel-nav{position:fixed;bottom:28px;right:28px;z-index:1050;display:flex;gap:8px;transition:bottom .22s var(--ease);}
 @media(max-width:480px){.panel-nav{bottom:16px;right:16px;}}
 .panel-nav-btn{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--white);border:0;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(10,15,30,0.22);}
 .panel-nav-btn:hover{background:var(--gold);transform:scale(1.08);box-shadow:var(--shadow-gold);}
@@ -253,11 +253,30 @@ p{color:var(--muted);}
 .inline-count{margin-left:8px;color:var(--gold);font-weight:700;}
 .fbtn-count{font-weight:700;}
 .dir-filters-inline[open] summary::after{content:'− Close';}
-.dir-filters-body{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.dir-filters-body{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;}
+@media(max-width:1100px){.dir-filters-body{grid-template-columns:1fr;}}
+/* Capped, internally scrolling filter body — the panel can never push results off-screen. */
+.dir-filters-scroll{max-height:min(34vh,272px);overflow-y:auto;overscroll-behavior:contain;margin-top:10px;padding-right:4px;}
+.dir-filters-scroll::-webkit-scrollbar{width:6px;}
+.dir-filters-scroll::-webkit-scrollbar-thumb{background:rgba(10,15,30,0.18);border-radius:3px;}
+/* Compact field metrics — scoped to the desktop panel only, so the mobile sheet keeps its 16px inputs (no iOS zoom). */
+.dir-filters-inline .filter-label{font-size:9px;margin-bottom:3px;letter-spacing:0.05em;}
+.dir-filters-inline .dir-select{padding:6px 8px;font-size:13px;}
+/* Collapsible advanced groups */
+.fgroup{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;}
+.fgroup>summary{list-style:none;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px;min-height:28px;transition:color .15s;}
+.fgroup>summary::-webkit-details-marker{display:none;}
+.fgroup>summary::before{content:'+';color:var(--gold);font-size:12px;width:10px;flex-shrink:0;}
+.fgroup[open]>summary::before{content:'\2212';}
+.fgroup>summary:hover{color:var(--ink);}
+.fgroup>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.fgroup .dir-filters-body{margin-top:6px;}
+.fgroup-count{margin-left:auto;color:var(--gold);font-weight:700;}
+
 .filter-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:4px;}
 .dir-select{width:100%;border:1px solid var(--line);border-radius:2px;background:var(--white);padding:8px 10px;font-size:14px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
 .dir-select:focus{border-color:var(--gold);}
-.dir-filter-actions{display:flex;gap:8px;margin-top:8px;grid-column:1/-1;}
+.dir-filter-actions{display:flex;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line);position:sticky;bottom:0;background:var(--sand);}
 /* Active chips */
 .active-chips{display:flex;flex-wrap:wrap;gap:5px;padding:8px 14px;flex-shrink:0;border-bottom:1px solid var(--line);}
 .active-chips:empty{padding:0;border-bottom:0;}
@@ -595,17 +614,20 @@ p{color:var(--muted);}
             <!-- Desktop inline filters -->
             <details class="dir-filters-inline" id="dirFiltersInline">
               <summary>Filter results<span class="inline-count" aria-live="polite"></span></summary>
-              <div class="dir-filters-body">
-                <div><label class="filter-label" for="areaFilter">Area / Prefecture</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div>
-                <div><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div>
-                <div><label class="filter-label" for="typeFilter">Establishment type</label><select class="dir-select" id="typeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="certFilter">Certification</label><select class="dir-select" id="certFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="listingFilter">Listing status</label><select class="dir-select" id="listingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
-                <div><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div>
-                <div><label class="filter-label" for="porkFilter">Pork</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div>
-                <div><label class="filter-label" for="lardFilter">Lard</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div>
-                <div><label class="filter-label" for="alcoholMenuFilter">Alcohol in menu items</label><select class="dir-select" id="alcoholMenuFilter"><option value="all">Any</option><option value="yes">Indicated</option><option value="no">Not indicated</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="prayerFilter">Prayer space</label><select class="dir-select" id="prayerFilter"><option value="all">Any</option><option value="yes">Available</option><option value="no">Not available</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="mapreadyFilter">Map location</label><select class="dir-select" id="mapreadyFilter"><option value="all">Any</option><option value="yes">Shown on map</option><option value="no">No map location</option></select></div><div><label class="filter-label" for="sortSelect">Sort</label><select class="dir-select" id="sortSelect"><option value="name">Name A&#8211;Z</option><option value="name_desc">Name Z&#8211;A</option><option value="area">Area / Prefecture</option><option value="updated">Recently updated</option><option value="cert">Certification status</option><option value="mapfirst">Map-ready first</option></select></div>
-                <div class="dir-filter-actions">
-                  <button class="btn btn-dark btn-sm" type="button" id="searchSubmitBtn">Apply &#8594;</button>
-                </div>
+              <div class="dir-filters-scroll">
+                <div class="dir-filters-body"><div><label class="filter-label" for="areaFilter">Area / Prefecture</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div><div><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div><div><label class="filter-label" for="typeFilter">Establishment type</label><select class="dir-select" id="typeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="certFilter">Certification</label><select class="dir-select" id="certFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="listingFilter">Listing status</label><select class="dir-select" id="listingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="sortSelect">Sort</label><select class="dir-select" id="sortSelect"><option value="name">Name A&#8211;Z</option><option value="name_desc">Name Z&#8211;A</option><option value="area">Area / Prefecture</option><option value="updated">Recently updated</option><option value="cert">Certification status</option><option value="mapfirst">Map-ready first</option></select></div></div>
+                <details class="fgroup" id="fgroupDietary">
+                  <summary>Dietary declarations<span class="fgroup-count" data-group="dietary"></span></summary>
+                  <div class="dir-filters-body"><div><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="alcoholMenuFilter">Alcohol in menu items</label><select class="dir-select" id="alcoholMenuFilter"><option value="all">Any</option><option value="yes">Indicated</option><option value="no">Not indicated</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="porkFilter">Pork</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div><div><label class="filter-label" for="lardFilter">Lard</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div></div>
+                </details>
+                <details class="fgroup" id="fgroupFacilities">
+                  <summary>Facilities &amp; location<span class="fgroup-count" data-group="facility"></span></summary>
+                  <div class="dir-filters-body"><div><label class="filter-label" for="prayerFilter">Prayer space</label><select class="dir-select" id="prayerFilter"><option value="all">Any</option><option value="yes">Available</option><option value="no">Not available</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="mapreadyFilter">Map location</label><select class="dir-select" id="mapreadyFilter"><option value="all">Any</option><option value="yes">Shown on map</option><option value="no">No map location</option></select></div></div>
+                </details>
+              </div>
+              <div class="dir-filter-actions">
+                <button class="btn btn-outline btn-sm" type="button" id="inlineResetBtn">Reset</button>
+                <button class="btn btn-dark btn-sm" type="button" id="searchSubmitBtn" style="flex:1;">Apply &#8594;</button>
               </div>
             </details>
             <!-- Active chips -->
@@ -726,6 +748,7 @@ function showPanel(id,fromNav){
   if(window.history&&window.history.replaceState)window.history.replaceState(null,'','#'+id);
   if(fromNav)closeDrawer();
   if(id==='directory'&&mapInstance){setTimeout(function(){mapInstance.invalidateSize();},60);}
+  if(typeof syncPanelNavOffset==='function')syncPanelNavOffset();
 }
 (function(){var hash=(window.location.hash||'').replace('#','');showPanel(PANELS.indexOf(hash)>-1?hash:'hero');})();
 document.addEventListener('keydown',function(e){
@@ -982,6 +1005,7 @@ function setView(v){
   if(bl){bl.classList.toggle('active',v==='list');bl.setAttribute('aria-pressed',v==='list'?'true':'false');}
   if(bm){bm.classList.toggle('active',v==='map');bm.setAttribute('aria-pressed',v==='map'?'true':'false');}
   if(v==='map'&&mapInstance){setTimeout(function(){mapInstance.invalidateSize();},80);}
+  syncPanelNavOffset();
 }
 document.getElementById('btnListView').addEventListener('click',function(){setView('list');});
 document.getElementById('btnMapView').addEventListener('click',function(){setView('map');if(mapInstance){setTimeout(function(){mapInstance.invalidateSize();},80);}});
@@ -993,7 +1017,21 @@ function openFilterSheet(){var s=document.getElementById('filterSheet'),b=docume
 function closeFilterSheet(){var s=document.getElementById('filterSheet'),b=document.getElementById('filterSheetBackdrop');s.classList.remove('is-open');b.classList.remove('is-open');s.setAttribute('aria-hidden','true');b.setAttribute('aria-hidden','true');var fb=document.getElementById('filterSheetBtn');if(fb)fb.focus();}
 function syncSheetFromState(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)el.value=state[map[id]];});}
 function applySheetFilters(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)state[map[id]]=el.value;});syncControls();render();closeFilterSheet();updateFilterBtnState();}
-function updateFilterBtnState(){var n=activeFilterCount();var btn=document.getElementById('filterSheetBtn');if(btn){btn.classList.toggle('has-filters',n>0);var lbl=btn.querySelector('.fbtn-count');if(lbl)lbl.textContent=n?' ('+n+')':'';btn.setAttribute('aria-label',n?'Open filters, '+n+' active':'Open filters');}var d=document.getElementById('dirFiltersInline');if(d){var sm=d.querySelector('.inline-count');if(sm)sm.textContent=n?n+' active':'';}}
+var FILTER_GROUPS={dietary:['alcohol','alcoholMenu','meat','pork','lard'],facility:['prayer','mapready']};
+function groupActiveCount(g){var n=0;FILTER_GROUPS[g].forEach(function(k){if(state[k]!=='all')n++;});return n;}
+function syncFilterGroups(){
+  Object.keys(FILTER_GROUPS).forEach(function(g){
+    var n=groupActiveCount(g);
+    var badge=document.querySelector('.fgroup-count[data-group="'+g+'"]');
+    if(badge)badge.textContent=n?n+'':'';
+    /* Never leave an active filter hidden inside a collapsed group */
+    if(n>0){
+      var det=document.getElementById(g==='dietary'?'fgroupDietary':'fgroupFacilities');
+      if(det&&!det.open)det.open=true;
+    }
+  });
+}
+function updateFilterBtnState(){var n=activeFilterCount();syncFilterGroups();var btn=document.getElementById('filterSheetBtn');if(btn){btn.classList.toggle('has-filters',n>0);var lbl=btn.querySelector('.fbtn-count');if(lbl)lbl.textContent=n?' ('+n+')':'';btn.setAttribute('aria-label',n?'Open filters, '+n+' active':'Open filters');}var d=document.getElementById('dirFiltersInline');if(d){var sm=d.querySelector('.inline-count');if(sm)sm.textContent=n?n+' active':'';}}
 var fsBtn=document.getElementById('filterSheetBtn');if(fsBtn)fsBtn.addEventListener('click',openFilterSheet);
 var fsClose=document.getElementById('filterSheetClose');if(fsClose)fsClose.addEventListener('click',closeFilterSheet);
 var fsBack=document.getElementById('filterSheetBackdrop');if(fsBack)fsBack.addEventListener('click',closeFilterSheet);
@@ -1155,10 +1193,26 @@ function showMapPreview(r){
     +(r.isDemo?'<div style="font-size:10px;color:#7C3AED;font-weight:600;text-transform:uppercase;font-family:monospace;letter-spacing:0.04em;margin-bottom:6px;">Demo listing</div>':'')
     +'<button class="btn btn-dark btn-sm" type="button" id="previewViewDecl" style="font-size:10px;padding:0 10px;min-height:32px;">View Declaration</button>';
   preview.removeAttribute('hidden');
+  syncPanelNavOffset();
   var pvd=document.getElementById('previewViewDecl');
   if(pvd)pvd.addEventListener('click',function(){openDeclDrawer(r,pvd);});
 }
-function hideMapPreview(){var p=document.getElementById('mapPreview');if(p)p.setAttribute('hidden','');state.selectedId=null;Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.remove('marker-selected');});renderRows();}
+/* Keep the fixed section-nav clear of the map preview card (they occupy the
+   same bottom-right corner). Height is measured, since the card grows when a
+   demo badge is present. Smooth, and reset the moment the card closes. */
+function syncPanelNavOffset(){
+  var nav=document.querySelector('.panel-nav');
+  var pv=document.getElementById('mapPreview');
+  if(!nav)return;
+  var open=pv&&!pv.hasAttribute('hidden')&&PANELS[currentIdx]==='directory';
+  if(open){
+    var h=pv.offsetHeight||0;
+    nav.style.bottom=(h+(window.innerWidth<=480?16:28)+12)+'px';
+  } else {
+    nav.style.bottom='';
+  }
+}
+function hideMapPreview(){var p=document.getElementById('mapPreview');if(p)p.setAttribute('hidden','');syncPanelNavOffset();state.selectedId=null;Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.remove('marker-selected');});renderRows();}
 var mpClose=document.getElementById('mapPreviewClose');if(mpClose)mpClose.addEventListener('click',hideMapPreview);
 
 function renderRows(){
@@ -1302,7 +1356,7 @@ function initMap(){
     if(allLatLngs.length>1){try{m.fitBounds(L.latLngBounds(allLatLngs),{padding:[40,40]});}catch(e){}}
     else if(allLatLngs.length===1){m.setView(allLatLngs[0],13);}
     var resizeTmr;
-    window.addEventListener('resize',function(){clearTimeout(resizeTmr);resizeTmr=setTimeout(function(){m.invalidateSize();},200);});
+    window.addEventListener('resize',function(){clearTimeout(resizeTmr);resizeTmr=setTimeout(function(){m.invalidateSize();syncPanelNavOffset();},200);});
     window.addEventListener('orientationchange',function(){setTimeout(function(){m.invalidateSize();},400);});
   }catch(err){mapEl.innerHTML='<div class="map-fallback">Interactive map could not be loaded. Browse the list to find establishments.</div>';}
 }
@@ -1341,8 +1395,21 @@ if(els.searchInput)els.searchInput.addEventListener('input',function(){
 });
 if(els.searchInput)els.searchInput.addEventListener('search',function(){clearTimeout(searchTmr);state.search=els.searchInput.value;render();});
 var ssb=document.getElementById('searchSubmitBtn');if(ssb)ssb.addEventListener('click',render);
+/* Panel open/close changes the column height. Re-measure the map after the
+   transition settles — size only, never re-fit, so the user's view is preserved. */
+var dfi=document.getElementById('dirFiltersInline');
+if(dfi)dfi.addEventListener('toggle',function(){
+  if(mapInstance)setTimeout(function(){mapInstance.invalidateSize({pan:false});},220);
+});
+document.querySelectorAll('.fgroup').forEach(function(g){
+  g.addEventListener('toggle',function(){
+    if(mapInstance)setTimeout(function(){mapInstance.invalidateSize({pan:false});},220);
+  });
+});
 [[els.areaFilter,'area'],[els.cuisineFilter,'cuisine'],[els.typeFilter,'type'],[els.certFilter,'cert'],[els.listingFilter,'listing'],[els.alcoholFilter,'alcohol'],[els.alcoholMenuFilter,'alcoholMenu'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.prayerFilter,'prayer'],[els.mapreadyFilter,'mapready'],[els.sortSelect,'sort']].forEach(function(p){if(p[0])p[0].addEventListener('change',function(){state[p[1]]=p[0].value;render();updateFilterBtnState();});});
 if(els.clearFiltersBtn)els.clearFiltersBtn.addEventListener('click',resetAll);
+var inlineReset=document.getElementById('inlineResetBtn');
+if(inlineReset)inlineReset.addEventListener('click',resetAll);
 if(els.emptyClearBtn)els.emptyClearBtn.addEventListener('click',resetAll);
 if(els.activeChips)els.activeChips.addEventListener('click',function(e){var btn=e.target.closest('[data-remove]');if(!btn)return;var k=btn.getAttribute('data-remove');if(k==='search')state.search='';else if(k in state)state[k]='all';syncControls();render();updateFilterBtnState();});
 document.querySelectorAll('.fw-btn').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.fw-item'),wasOpen=item.classList.contains('is-open');document.querySelectorAll('.fw-item.is-open').forEach(function(i){i.classList.remove('is-open');i.querySelector('.fw-btn').setAttribute('aria-expanded','false');});if(!wasOpen){item.classList.add('is-open');btn.setAttribute('aria-expanded','true');}});});
