@@ -209,45 +209,70 @@ p{color:var(--muted);}
 .notice-row p{font-size:13px;color:var(--muted);line-height:1.65;}
 .notice-row p mark{background:rgba(184,131,42,0.12);color:var(--ink);font-weight:600;padding:0 3px;}
 .notice-more{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);padding:12px 20px;border-top:1px solid var(--line);background:var(--sand);}
-#view-directory{background:var(--cream);}
+/* ── DIRECTORY PANEL — REDESIGNED ── */
+#view-directory{background:var(--cream);overflow:hidden;}
 .dir-panel-inner{height:100%;display:flex;flex-direction:column;}
-.dir-panel-top{flex-shrink:0;padding:clamp(28px,3.5vw,44px) clamp(24px,5vw,56px) 0;}
-.dir-panel-body{flex:1;min-height:0;display:grid;grid-template-columns:300px 1fr;border-top:1px solid var(--line);margin-top:20px;}
-@media(max-width:900px){.dir-panel-body{grid-template-columns:1fr;}}
-.dir-filter-col{padding:18px;border-right:1px solid var(--line);background:var(--sand);overflow-y:auto;}
-@media(max-width:900px){.dir-filter-col{border-right:0;border-bottom:1px solid var(--line);max-height:260px;}}
-.filter-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:5px;}
-.dir-field,.dir-select{width:100%;border:1px solid var(--line);border-radius:2px;background:var(--white);padding:9px 12px;font-size:16px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;margin-bottom:10px;}
-.dir-field:focus,.dir-select:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,131,42,0.12);}
+/* Top bar */
+.dir-panel-top{flex-shrink:0;padding:clamp(18px,2.5vw,32px) clamp(16px,3vw,32px) 0;}
+.dir-top-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px;}
+.dir-top-row h2{font-size:clamp(18px,2.5vw,28px);margin:0;}
+.dir-subtitle{font-size:12px;color:var(--muted);line-height:1.6;padding-bottom:14px;}
+/* View switcher */
+.view-switcher{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.vsw-btn{display:flex;align-items:center;gap:6px;padding:0 14px;height:36px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:var(--muted);transition:background .15s,color .15s;white-space:nowrap;}
+.vsw-btn+.vsw-btn{border-left:1px solid var(--line);}
+.vsw-btn.active{background:var(--ink);color:var(--white);}
+.vsw-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.vsw-btn:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+/* Body grid */
+.dir-panel-body{flex:1;min-height:0;display:grid;grid-template-columns:360px 1fr;border-top:1px solid var(--line);}
+@media(max-width:1100px){.dir-panel-body{grid-template-columns:300px 1fr;}}
+@media(max-width:767px){.dir-panel-body{display:block;position:relative;height:100%;}}
+/* Left column — search + filters + results */
+.dir-left-col{display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--line);}
+@media(max-width:767px){.dir-left-col{height:100%;}
+.dir-is-mapview .dir-left-col{display:none;}}
+/* Search row */
+.dir-search-row{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);flex-shrink:0;background:var(--cream);}
+.dir-search-wrap{flex:1;min-width:0;}
+.dir-field{width:100%;border:1px solid var(--line);border-radius:2px;background:var(--white);padding:9px 12px;font-size:16px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
+.dir-field:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,131,42,0.12);}
 .dir-field::placeholder{font-size:13px;color:var(--muted);}
-.adv-toggle{border:1px solid var(--line);border-radius:2px;margin:8px 0;overflow:hidden;background:var(--white);}
-.adv-toggle summary{list-style:none;cursor:pointer;padding:9px 12px;font-size:10px;font-weight:700;color:var(--ink);display:flex;justify-content:space-between;align-items:center;font-family:'JetBrains Mono',monospace;letter-spacing:0.04em;text-transform:uppercase;}
-.adv-toggle summary::-webkit-details-marker{display:none;}
-.adv-toggle summary::after{content:'+';color:var(--gold);}
-.adv-toggle[open] summary::after{content:'-';}
-.adv-toggle-body{padding:6px 12px 12px;display:grid;gap:8px;}
-.adv-fg{display:grid;gap:4px;}
-.action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
-.active-chips{display:flex;flex-wrap:wrap;gap:5px;padding:0 0 10px;}
-.chip{display:inline-flex;align-items:center;gap:5px;background:var(--sand);border:1px solid var(--line);color:var(--ink);border-radius:2px;padding:4px 8px;font-size:11px;font-weight:600;}
+.dir-filter-btn{display:flex;align-items:center;gap:5px;height:38px;padding:0 12px;border:1px solid var(--line);border-radius:2px;background:var(--white);color:var(--ink);font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:border-color .2s,background .2s;flex-shrink:0;}
+.dir-filter-btn:hover{border-color:var(--gold);}
+.dir-filter-btn.has-filters{border-color:var(--gold);background:rgba(184,131,42,0.06);color:var(--gold);}
+.dir-filter-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+/* Mobile filter button: only visible on mobile */
+@media(min-width:768px){.dir-filter-btn-mobile{display:none;}}
+/* Desktop inline filters */
+.dir-filters-inline{flex-shrink:0;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--sand);}
+@media(max-width:767px){.dir-filters-inline{display:none;}}
+.dir-filters-inline summary{list-style:none;cursor:pointer;font-size:10px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;}
+.dir-filters-inline summary::-webkit-details-marker{display:none;}
+.dir-filters-inline summary::after{content:'+ Filters';color:var(--gold);}
+.dir-filters-inline[open] summary::after{content:'− Close';}
+.dir-filters-body{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.filter-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:4px;}
+.dir-select{width:100%;border:1px solid var(--line);border-radius:2px;background:var(--white);padding:8px 10px;font-size:14px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
+.dir-select:focus{border-color:var(--gold);}
+.dir-filter-actions{display:flex;gap:8px;margin-top:8px;grid-column:1/-1;}
+/* Active chips */
+.active-chips{display:flex;flex-wrap:wrap;gap:5px;padding:8px 14px;flex-shrink:0;border-bottom:1px solid var(--line);}
+.active-chips:empty{padding:0;border-bottom:0;}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(184,131,42,0.08);border:1px solid rgba(184,131,42,0.25);color:var(--ink);border-radius:2px;padding:4px 8px;font-size:11px;font-weight:600;}
 .chip button{border:0;background:none;color:var(--muted);font-size:13px;line-height:1;padding:0 2px;cursor:pointer;}
 .chip button:hover{color:var(--gold);}
-.dir-main-col{display:flex;flex-direction:column;overflow:hidden;}
-.dir-map-el{width:100%;height:280px;flex-shrink:0;}
-@media(max-width:640px){.dir-map-el{height:200px;}}
-.map-caption{padding:6px 14px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--white);flex-shrink:0;}
-.leaflet-container{z-index:0;}
-.leaflet-pane,.leaflet-top,.leaflet-bottom{z-index:auto;}
+/* Result count row */
+.dir-topline{padding:8px 14px;border-bottom:1px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.dir-topline strong{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;}
+/* Results list */
 .dir-results{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
-.dir-topline{display:flex;justify-content:space-between;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);flex-wrap:wrap;gap:6px;flex-shrink:0;position:sticky;top:0;background:var(--cream);z-index:1;}
-.dir-topline strong{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--ink);text-transform:uppercase;letter-spacing:0.06em;}
-.result-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
-.records-list{border:0;}
-.record-row{display:flex;align-items:flex-start;gap:16px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--line);transition:background .15s;cursor:pointer;}
+.records-list{}
+.record-row{padding:14px 14px;border-bottom:1px solid var(--line);transition:background .15s;cursor:pointer;}
 .record-row:last-child{border-bottom:0;}
 .record-row:hover{background:var(--sand);}
 .record-row.is-selected{background:rgba(184,131,42,0.06);box-shadow:inset 3px 0 0 var(--gold);}
-.record-main{flex:1 1 200px;min-width:0;}
+.record-row.is-demo{border-left:3px solid #A78BFA;}
 .record-main h4{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink);font-weight:normal;margin-bottom:2px;}
 .record-meta{font-size:11px;color:var(--muted);margin-bottom:8px;}
 .record-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
@@ -255,19 +280,58 @@ p{color:var(--muted);}
 .badge-self{background:var(--sand);color:var(--ink);border:1px solid var(--line);}
 .badge-not-halal{background:var(--caution-bg);color:var(--caution);}
 .badge-halal{background:var(--good-bg);color:var(--good);}
-.record-chips{display:flex;flex-wrap:wrap;gap:4px;}
+.badge-demo{background:#EDE9FE;color:#5B21B6;border:1px solid #C4B5FD;}
+.record-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
 .dchip{font-size:10px;font-weight:600;border-radius:2px;padding:3px 7px 3px 5px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
 .dchip.positive{background:var(--good-bg);color:var(--good);}
 .dchip.caution{background:var(--caution-bg);color:var(--caution);}
+.dchip.neutral{background:var(--sand);color:var(--muted);border:1px solid var(--line);}
 .dchip svg{width:9px;height:9px;stroke-width:3;fill:none;stroke:currentColor;}
-.record-foot{display:flex;align-items:center;gap:10px;flex:none;flex-wrap:wrap;margin-top:6px;}
-.last-updated{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);white-space:nowrap;}
+.record-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.last-updated{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);white-space:nowrap;flex:1;}
+.demo-disclaimer{font-size:11px;color:#5B21B6;background:#EDE9FE;padding:8px 10px;border-left:2px solid #7C3AED;margin-top:8px;line-height:1.55;border-radius:0 2px 2px 0;}
 .empty-state{text-align:center;padding:40px 20px;color:var(--muted);display:none;}
 .empty-state.visible{display:block;}
 .empty-state h3{font-size:15px;color:var(--ink);margin-bottom:8px;}
 .empty-state p{font-size:13px;}
+/* Right column — map */
+.dir-right-col{display:flex;flex-direction:column;overflow:hidden;}
+@media(max-width:767px){
+  .dir-right-col{position:absolute;inset:0;display:none;}
+  .dir-is-mapview .dir-right-col{display:flex;}
+}
+#declarationMap{flex:1;min-height:0;width:100%;}
+.leaflet-container{z-index:0;height:100%!important;}
+.leaflet-pane,.leaflet-top,.leaflet-bottom{z-index:auto;}
+.map-fallback{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem;text-align:center;color:var(--muted);font-size:13px;}
 .marker-selected{filter:drop-shadow(0 0 6px rgba(184,131,42,0.9));}
-.map-fallback{padding:2rem;text-align:center;color:var(--muted);font-size:13px;height:100%;display:flex;align-items:center;justify-content:center;}
+/* Map selected preview */
+.map-preview{flex-shrink:0;border-top:1px solid var(--line);background:var(--white);padding:12px 16px;display:flex;align-items:flex-start;gap:12px;}
+.map-preview[hidden]{display:none;}
+.map-preview-content{flex:1;min-width:0;}
+.map-preview-name{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink);font-weight:normal;margin-bottom:2px;}
+.map-preview-meta{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.map-preview-close{border:1px solid var(--line);background:none;color:var(--muted);width:28px;height:28px;border-radius:2px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.map-preview-close:hover{border-color:var(--gold);color:var(--gold);}
+/* Mobile return bar */
+.map-return-bar{flex-shrink:0;padding:10px 14px;border-top:1px solid var(--line);background:var(--cream);display:none;}
+@media(max-width:767px){.dir-is-mapview .map-return-bar{display:flex;gap:8px;align-items:center;}}
+.lp-name{font-weight:700;color:var(--ink);font-size:13px;}
+.lp-meta{font-size:11px;color:var(--muted);margin:2px 0 7px;}
+.lp-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--caution);text-transform:uppercase;letter-spacing:0.03em;margin-bottom:7px;display:block;}
+.lp-btn{border:0;background:var(--ink);color:var(--white);font-size:11px;font-weight:700;padding:6px 10px;border-radius:2px;cursor:pointer;}
+/* Filter bottom sheet */
+.filter-sheet-backdrop{position:fixed;inset:0;background:rgba(10,15,30,0.45);z-index:490;display:none;opacity:0;transition:opacity .25s;}
+.filter-sheet-backdrop.is-open{display:block;opacity:1;}
+.filter-sheet{position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--cream);border-top:1px solid var(--line);border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform .3s var(--ease);max-height:82dvh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0);}
+.filter-sheet.is-open{transform:translateY(0);}
+.filter-sheet-header{display:flex;align-items:center;justify-content:space-between;padding:16px 20px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.filter-sheet-header span{font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink);}
+.filter-sheet-close{width:32px;height:32px;border:1px solid var(--line);border-radius:2px;background:none;cursor:pointer;font-size:18px;color:var(--muted);display:flex;align-items:center;justify-content:center;}
+.filter-sheet-close:hover{border-color:var(--gold);color:var(--gold);}
+.filter-sheet-body{overflow-y:auto;padding:16px 20px;display:grid;gap:14px;flex:1;}
+.filter-sheet-footer{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:10px;flex-shrink:0;}
+.result-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
 #view-how{background:var(--sand);}
 .how-intro{font-size:clamp(13px,1.5vw,15px);max-width:56ch;margin-top:10px;margin-bottom:28px;line-height:1.72;}
 .how-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);position:relative;}
@@ -348,6 +412,7 @@ p{color:var(--muted);}
 .lp-btn{border:0;background:var(--ink);color:var(--white);font-size:11px;font-weight:700;padding:6px 10px;border-radius:2px;cursor:pointer;}
 @media(prefers-reduced-motion:reduce){.view,.snav-dot,.btn,.fw-panel,.faq-panel,.decl-drawer,.nav-drawer{transition:none!important;animation:none!important;}}
 </style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 </head>
 <body>
 <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNG8MK4K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -356,7 +421,7 @@ p{color:var(--muted);}
   <a class="hdr-brand" href="/"><img src="/logo.png" alt="The Digital Systems Architect logo"><span>The Digital Systems Architect</span><span class="hdr-brand-sub">Directory</span></a>
   <div class="hdr-right">
     <span class="hdr-section-label" id="hdrLabel"></span>
-    <a class="hdr-back" href="/halal-muslim-friendly-singapore/">&#8592; Advisory</a>
+    <a class="hdr-back" href="/muslim-friendly-advisory/" target="_blank" rel="noopener noreferrer">&#8592; Business Advisory</a>
     <button class="hdr-cta" type="button" onclick="showPanel('directory')">Search the Directory</button>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navDrawer"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
   </div>
@@ -484,45 +549,87 @@ p{color:var(--muted);}
         </div>
       </div>
     </div>
-    <div class="view" id="view-directory">
+    <div class="view" id="view-directory" aria-label="Explore directory">
       <div class="dir-panel-inner">
+        <!-- Top: heading + view switcher -->
         <div class="dir-panel-top">
-          <div class="eyebrow">Disclosure Directory</div>
-          <div style="display:flex;flex-wrap:wrap;gap:10px;justify-content:space-between;align-items:flex-end;">
-            <h2 style="font-size:clamp(20px,2.8vw,32px);">Self-declared Muslim-friendly establishments.</h2>
-            <span class="result-count mono" id="topResultCount">Search or filter to view establishments</span>
+          <div class="dir-top-row">
+            <div>
+              <div class="eyebrow">Directory</div>
+              <h2>List of Muslim-friendly establishments</h2>
+            </div>
+            <div class="view-switcher" id="viewSwitcher" role="group" aria-label="View mode">
+              <button class="vsw-btn active" id="btnListView" type="button" aria-pressed="true">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+                List
+              </button>
+              <button class="vsw-btn" id="btnMapView" type="button" aria-pressed="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>
+                Map
+              </button>
+            </div>
           </div>
-          <p style="font-size:13px;color:var(--muted);max-width:60ch;line-height:1.6;margin-top:6px;">Search, select a map marker, or apply filters. Review each listing's declarations carefully before making a dining decision.</p>
         </div>
+        <!-- Body: left (results) + right (map) -->
         <div class="dir-panel-body">
-          <aside class="dir-filter-col" id="directoryControls" aria-label="Directory filters and search">
-            <div class="active-chips" id="activeChips" aria-live="polite"></div>
-            <label class="filter-label" for="searchInput">Search</label>
-            <input class="dir-field" id="searchInput" type="search" placeholder="Name, area, cuisine&#8230;" autocomplete="off" aria-label="Search establishments" />
-            <details class="adv-toggle">
-              <summary>Advanced Filters</summary>
-              <div class="adv-toggle-body">
-                <div class="adv-fg"><label class="filter-label" for="areaFilter">Area</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div>
-                <div class="adv-fg"><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div>
-                <div class="adv-fg"><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
-                <div class="adv-fg"><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared halal-sourced</option><option value="unknown">Not stated</option></select></div>
-                <div class="adv-fg"><label class="filter-label" for="porkFilter">Pork declaration</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div>
-                <div class="adv-fg"><label class="filter-label" for="lardFilter">Lard declaration</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div>
-                <div class="adv-fg"><label class="filter-label" for="sortSelect">Sort</label><select class="dir-select" id="sortSelect"><option value="name">Name A&#8211;Z</option><option value="area">Area</option><option value="updated">Recently updated</option></select></div>
+          <!-- LEFT: search + filters + results -->
+          <div class="dir-left-col" id="dirLeftCol">
+            <!-- Search row -->
+            <div class="dir-search-row">
+              <div class="dir-search-wrap">
+                <input class="dir-field" id="searchInput" type="search" placeholder="Name, area, cuisine, postal code&#8230;" autocomplete="off" aria-label="Search establishments" />
+              </div>
+              <!-- Filter button mobile only -->
+              <button class="dir-filter-btn dir-filter-btn-mobile" id="filterSheetBtn" type="button" aria-label="Open filters" aria-haspopup="dialog">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+                Filters
+              </button>
+              <button class="btn btn-outline btn-sm" type="button" id="clearFiltersBtn" style="flex-shrink:0;">Reset</button>
+            </div>
+            <!-- Desktop inline filters -->
+            <details class="dir-filters-inline" id="dirFiltersInline">
+              <summary>Filter results</summary>
+              <div class="dir-filters-body">
+                <div><label class="filter-label" for="areaFilter">Area / Prefecture</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div>
+                <div><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div>
+                <div><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
+                <div><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div>
+                <div><label class="filter-label" for="porkFilter">Pork</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div>
+                <div><label class="filter-label" for="lardFilter">Lard</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div>
+                <div><label class="filter-label" for="sortSelect">Sort</label><select class="dir-select" id="sortSelect"><option value="name">Name A&#8211;Z</option><option value="area">Area</option><option value="updated">Recently updated</option></select></div>
+                <div class="dir-filter-actions">
+                  <button class="btn btn-dark btn-sm" type="button" id="searchSubmitBtn">Apply &#8594;</button>
+                </div>
               </div>
             </details>
-            <div class="action-row">
-              <button class="btn btn-dark btn-sm" type="button" id="searchSubmitBtn">Search &#8594;</button>
-              <button class="btn btn-outline btn-sm" type="button" id="clearFiltersBtn">Reset</button>
+            <!-- Active chips -->
+            <div class="active-chips" id="activeChips" aria-live="polite"></div>
+            <!-- Result count -->
+            <div class="dir-topline">
+              <strong id="resultsInlineCount" aria-live="polite">Loading&hellip;</strong>
             </div>
-          </aside>
-          <div class="dir-main-col">
-            <div class="dir-map-el" id="declarationMap" role="application" aria-label="Map of establishment locations"></div>
-            <p class="map-caption">Tap a marker to view that establishment's declaration.</p>
-            <div class="dir-results">
-              <div class="dir-topline"><strong>Results</strong><span class="result-count" id="resultsInlineCount">Search or filter to view establishments</span></div>
+            <!-- Results -->
+            <div class="dir-results" id="dirResultsScroll">
               <div class="records-list" id="recordsGrid"></div>
-              <div class="empty-state" id="emptyState"><h3>Start your search</h3><p>Use the search bar, map markers, or advanced filters to display establishment records.</p><button class="btn btn-outline btn-sm" type="button" id="emptyClearBtn" style="margin-top:12px;">Reset filters</button></div>
+              <div class="empty-state" id="emptyState">
+                <h3>No results</h3>
+                <p>Adjust the search or filters and try again.</p>
+                <button class="btn btn-outline btn-sm" type="button" id="emptyClearBtn" style="margin-top:12px;">Reset filters</button>
+              </div>
+            </div>
+          </div>
+          <!-- RIGHT: map + preview -->
+          <div class="dir-right-col" id="dirRightCol">
+            <div id="declarationMap" role="application" aria-label="Map of establishment locations. Select a marker to view establishment details."></div>
+            <!-- Selected establishment preview -->
+            <div class="map-preview" id="mapPreview" hidden>
+              <div class="map-preview-content" id="mapPreviewContent"></div>
+              <button class="map-preview-close" id="mapPreviewClose" type="button" aria-label="Close preview">&times;</button>
+            </div>
+            <!-- Return to list (mobile only) -->
+            <div class="map-return-bar">
+              <button class="btn btn-dark btn-sm" type="button" id="btnReturnToList">&#8592; List View</button>
+              <span class="result-count" id="mapResultCount" style="margin-left:auto;"></span>
             </div>
           </div>
         </div>
@@ -561,17 +668,17 @@ p{color:var(--muted);}
                 <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-6"><span class="faq-q">What should I do if information appears incorrect?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-6"><div class="faq-answer">Contact the establishment directly to verify. You may also contact us at admin@digi-architect.studio. Where reliable updated information is received, listings will be reviewed and corrected where appropriate.</div></div></div>
               </div>
               <div class="footer-line">
-                <div class="footer-links-row"><a href="/">Home</a><a href="/halal-muslim-friendly-singapore/">Halal Advisory</a><a href="/workflow-automation-singapore/">Workflow Automation</a><a href="/governance-dashboard-singapore/">Governance</a><a href="/finance-automation-singapore/">Finance</a><a href="/hr-systems-singapore/">HR Systems</a></div>
-                The establishments listed on this platform may be halal-certified, self-declared Muslim-friendly, pending verification or community-suggested. Self-declared information is reproduced in good faith based on disclosures provided by the respective establishments and may change without prior notice. The platform does not provide halal certification, a religious ruling, official endorsement or statutory verification. Diners remain responsible for making their own enquiries. &mdash; The Digital Systems Architect | Zan J Private Limited (UEN: 202616105R) | <a href="mailto:admin@digi-architect.studio">admin@digi-architect.studio</a>
+                <div class="footer-links-row"><a href="/">The Digital Systems Architect</a><a href="/muslim-friendly-advisory/" target="_blank" rel="noopener noreferrer">Business Advisory</a><a href="/workflow-automation-singapore/">Workflow Automation</a><a href="/governance-dashboard-singapore/">Governance</a><a href="/finance-automation-singapore/">Finance</a><a href="/hr-systems-singapore/">HR Systems</a></div>
+                The establishments listed may be halal-certified, Muslim-friendly certified, self-declared Muslim-friendly, pending review or community-suggested. Each listing states the applicable status. Self-declared information is reproduced in good faith based on disclosures provided by the respective establishments and may change without prior notice. Muslim-friendly certification is not halal certification, and unless expressly stated, a listing does not constitute a religious ruling, government approval or statutory verification. Diners should review the listing and make their own enquiries where necessary. &mdash; The Digital Systems Architect | Zan J Private Limited (UEN: 202616105R) | <a href="mailto:admin@digi-architect.studio">admin@digi-architect.studio</a>
               </div>
             </div>
             <div>
               <div class="info-card">
                 <div class="eyebrow">Are You an Establishment?</div>
                 <h3>Improve transparency and reach more consumers.</h3>
-                <p>Businesses that wish to improve transparency, prepare a Muslim-friendly declaration, join the directory or explore digital promotion can learn more through our advisory page.</p>
+                <p>Businesses that wish to improve transparency, prepare a Muslim-friendly declaration, join the directory or explore digital promotion can learn more through our Business Advisory page.</p>
                 <div class="info-card-btns">
-                  <a class="btn btn-primary" href="/halal-muslim-friendly-singapore/">Explore Business Advisory &#8594;</a>
+                  <a class="btn btn-primary" href="/muslim-friendly-advisory/" target="_blank" rel="noopener noreferrer">Explore Business Advisory &#8594;</a>
                   <a class="btn btn-ghost-light" href="mailto:admin@digi-architect.studio?subject=Directory%20Listing%20Enquiry">Contact Us</a>
                 </div>
               </div>
@@ -629,47 +736,556 @@ document.getElementById('drawerClose').addEventListener('click',closeDrawer);
 document.getElementById('navBackdrop').addEventListener('click',closeDrawer);
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('navDrawer').classList.contains('is-open'))closeDrawer();});
 document.querySelectorAll('.drawer-nav-item[data-panel] button').forEach(function(btn){btn.addEventListener('click',function(){showPanel(btn.closest('[data-panel]').dataset.panel,true);});});
-var RAW_ESTABLISHMENTS=[{id:"sample-1",name:"Establishment Name 1",area:"Central",address:"Address, Singapore",cuisine:"Cuisine Type",establishmentType:"Restaurant",coordinates:{lat:1.3006,lng:103.8398},website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",status:"Self-declared Muslim-friendly",basisOfListing:"Independent self-declaration",halalCertified:false,certificationStatus:"Not halal-certified",certifyingBody:null,certificateExpiry:null,declarations:{noPorkDeclared:true,noLardDeclared:true,meatFromHalalCertifiedSources:true,alcoholServed:true,alcoholMenuItemsDisclosed:true},declarationProvided:"No pork. No lard. Meats sourced from halal-certified suppliers. Alcohol is served on the premises. Menu items containing alcohol are indicated.",crossContactNote:"Please check directly with the establishment if you have concerns about shared preparation areas, utensils, grills, fryers, or equipment.",additionalNotes:"Menu items containing alcohol should be indicated on the menu or communicated clearly to customers.",declarationDate:"2026-07-09",lastUpdated:"2026-07-09"},{id:"sample-2",name:"Establishment Name 2",area:"East",address:"Address, Singapore",cuisine:"Cuisine Type",establishmentType:"Cafe",coordinates:{lat:1.3236,lng:103.9273},website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",status:"Self-declared Muslim-friendly",basisOfListing:"Independent self-declaration",halalCertified:false,certificationStatus:"Not halal-certified",certifyingBody:null,certificateExpiry:null,declarations:{noPorkDeclared:true,noLardDeclared:true,meatFromHalalCertifiedSources:true,alcoholServed:true,alcoholMenuItemsDisclosed:true},declarationProvided:"No pork. No lard. Meats sourced from halal-certified suppliers. Alcohol is served on the premises. Menu items containing alcohol are indicated.",crossContactNote:"Please check directly with the establishment if you have specific dietary concerns.",additionalNotes:"",declarationDate:"2026-07-09",lastUpdated:"2026-07-09"},{id:"sample-3",name:"Establishment Name 3",area:"West",address:"Address, Singapore",cuisine:"Cuisine Type",establishmentType:"Restaurant",coordinates:{lat:1.3404,lng:103.7090},website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",status:"Self-declared Muslim-friendly",basisOfListing:"Independent self-declaration",halalCertified:false,certificationStatus:"Not halal-certified",certifyingBody:null,certificateExpiry:null,declarations:{noPorkDeclared:true,noLardDeclared:true,meatFromHalalCertifiedSources:true,alcoholServed:false,alcoholMenuItemsDisclosed:false},declarationProvided:"No pork. No lard. Meats sourced from halal-certified suppliers. Alcohol is not served on the premises.",crossContactNote:"Please check directly with the establishment if you have concerns about preparation methods.",additionalNotes:"",declarationDate:"2026-07-09",lastUpdated:"2026-07-09"},{id:"sample-4",name:"Establishment Name 4",area:"North-East",address:"Address, Singapore",cuisine:"Cuisine Type",establishmentType:"Food Court",coordinates:{lat:1.3868,lng:103.8914},website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",status:"Self-declared Muslim-friendly",basisOfListing:"Independent self-declaration",halalCertified:false,certificationStatus:"Not halal-certified",certifyingBody:null,certificateExpiry:null,declarations:{noPorkDeclared:true,noLardDeclared:true,meatFromHalalCertifiedSources:null,alcoholServed:null,alcoholMenuItemsDisclosed:null},declarationProvided:"No pork. No lard. Meat sourcing and alcohol disclosures should be checked directly with the establishment.",crossContactNote:"Please check directly with the establishment if you have concerns about ingredients, shared equipment, or preparation methods.",additionalNotes:"Some declaration fields are not stated in this record. Contact the establishment directly.",declarationDate:"2026-07-09",lastUpdated:"2026-07-09"}];
-function normalizeRecord(r){return Object.assign({website:"",instagram:"",externalLocationUrl:"",externalDirectionsUrl:"",externalReviewsUrl:"",additionalNotes:"",crossContactNote:"",establishmentType:"",coordinates:{lat:null,lng:null}},r,{declarations:Object.assign({noPorkDeclared:null,noLardDeclared:null,meatFromHalalCertifiedSources:null,alcoholServed:null,alcoholMenuItemsDisclosed:null},r.declarations||{})});}
-var establishments=RAW_ESTABLISHMENTS.map(normalizeRecord);
+/* ============================================================
+   EXCEL DATA LOADER
+   Reads /data/muslim-friendly-establishments.xlsx (root-absolute) via SheetJS.
+   Bump DATA_VERSION below after each workbook upload to bypass CDN cache.
+============================================================ */
+var establishments = [];
+/* Bump DATA_VERSION whenever the workbook is re-uploaded (YYYYMMDD). */
+var DATA_VERSION = '20260715';
+var DATA_URL = '/data/muslim-friendly-establishments.xlsx';
+var mapMarkers     = {};
+var mapInstance    = null;
+
+var DEMO_DISC_DEFAULT = "This sample listing is provided solely to demonstrate the directory interface. It does not represent a live declaration, verification, endorsement or participating establishment.";
+
+function trim2(v) {
+  if (v === null || v === undefined) return '';
+  return String(v).trim();
+}
+function parseBool(v) {
+  // Supports: TRUE/FALSE (Excel booleans or text), 1/0, Yes/No
+  // 'Not Stated', blank, null → null (treated as not declared)
+  if (v === null || v === undefined || v === '') return null;
+  if (typeof v === 'boolean') return v;
+  var s = String(v).trim().toUpperCase();
+  if (s === 'TRUE' || s === '1' || s === 'YES') return true;
+  if (s === 'FALSE' || s === '0' || s === 'NO') return false;
+  return null; // 'Not Stated' and unrecognised values → null
+}
+function fmtDate(v) {
+  if (!v) return '';
+  if (v instanceof Date && !isNaN(v.getTime())) return v.toISOString().slice(0,10);
+  var s = String(v).trim();
+  if (!s) return '';
+  var d = new Date(s);
+  if (!isNaN(d.getTime())) return d.toISOString().slice(0,10);
+  return s;
+}
+
+/* Normalise workbook headers to canonical snake_case keys.
+   'ID' -> id, 'Postal Code' -> postal_code, 'Area / Prefecture' -> area_prefecture,
+   'Halal-Certified Meat' -> halal_certified_meat, 'Cross-Contact Note' -> cross_contact_note.
+   Accepts both the human-readable Excel headers and raw snake_case. */
+function normKey(k) {
+  return String(k == null ? '' : k)
+    .trim().toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+function normaliseRow(row) {
+  var out = Object.create(null);
+  for (var k in row) {
+    if (!Object.prototype.hasOwnProperty.call(row, k)) continue;
+    var nk = normKey(k);
+    if (nk && !(nk in out)) out[nk] = row[k];
+  }
+  return out;
+}
+
+function parseRows(rows) {
+  var seen = Object.create(null);
+  var result = [];
+  rows.forEach(function(rawRow) {
+    var row  = normaliseRow(rawRow);
+    var id   = trim2(row['id']);
+    var name = trim2(row['name']);
+    if (!id || !name) return;
+    if (id.indexOf('_') === 0) return; // skip system rows (reserved prefix)
+    if (seen[id]) { console.warn('[Directory] Duplicate id skipped:', id); return; }
+    seen[id] = true;
+    var lat = parseFloat(row['latitude']);
+    var lng = parseFloat(row['longitude']);
+    var hasCoords = isFinite(lat) && isFinite(lng);
+    result.push({
+      id:                  id,
+      name:                name,
+      country:             trim2(row['country'])          || 'Singapore',
+      area:                trim2(row['area_prefecture'])   || '',  // reads from formula-generated column
+      address:             trim2(row['address'])          || '',
+      postalCode:          trim2(row['postal_code'])      || '',
+      postalSector:        trim2(row['postal_sector'])      || '',
+      postalDistrict:      trim2(row['postal_district'])     || '',
+      cuisine:             trim2(row['cuisine'])          || '',
+      establishmentType:   trim2(row['establishment_type']) || '',
+      coordinates:         hasCoords ? {lat:lat, lng:lng} : {lat:null, lng:null},
+      status:              trim2(row['listing_status'])   || '',
+      basisOfListing:      trim2(row['basis_of_listing']) || '',
+      halalCertified:      parseBool(row['halal_certified']),
+      certificationStatus: trim2(row['certification_status']) || '',
+      certifyingBody:      trim2(row['certifying_body'])  || '',
+      certificateExpiry:   fmtDate(row['certificate_expiry']),
+      declarations: {
+        noPorkDeclared:              parseBool(row['no_pork_declared']),
+        noLardDeclared:              parseBool(row['no_lard_declared']),
+        meatFromHalalCertifiedSources: parseBool(row['halal_certified_meat']),
+        alcoholServed:               parseBool(row['alcohol_served']),
+        alcoholMenuItemsDisclosed:   parseBool(row['alcohol_in_menu']),
+        sharedKitchen:               parseBool(row['shared_kitchen']),
+        sharedUtensils:              parseBool(row['shared_utensils']),
+        sharedFryer:                 parseBool(row['shared_fryer']),
+        sharedGrill:                 parseBool(row['shared_grill'])
+      },
+      facilities: {
+        prayerSpace:       parseBool(row['prayer_space']),
+        prayerMat:         parseBool(row['prayer_mat']),
+        qiblaDirection:    parseBool(row['qibla_direction']),
+        waterFacilities:   parseBool(row['water_facilities'])
+      },
+      declarationProvided: trim2(row['declaration_text'])    || '',
+      crossContactNote:    trim2(row['cross_contact_note'])  || '',
+      additionalNotes:     trim2(row['additional_notes'])    || '',
+      declarationDate:     fmtDate(row['declaration_date']),
+      lastUpdated:         fmtDate(row['last_updated']),
+      website:             trim2(row['website_url'])         || '',
+      instagram:           trim2(row['instagram_url'])       || '',
+      externalLocationUrl: trim2(row['location_url'])        || '',
+      externalDirectionsUrl: trim2(row['directions_url'])    || '',
+      externalReviewsUrl:  trim2(row['reviews_url'])         || '',
+      imageUrl:            trim2(row['image_url'])           || '',
+      isDemo:              parseBool(row['is_demo']) === true,
+      demoDisclaimer:      trim2(row['demo_disclaimer'])     || DEMO_DISC_DEFAULT
+    });
+  });
+  return result;
+}
+
+function showDirectoryError(msg) {
+  var ctr = document.getElementById('resultsInlineCount');
+  var grid = document.getElementById('recordsGrid');
+  var es = document.getElementById('emptyState');
+  if (ctr) ctr.textContent = 'Could not load directory.';
+  if (grid) grid.innerHTML = '';
+  if (es) {
+    es.classList.add('visible');
+    es.querySelector('h3').textContent = 'Directory unavailable';
+    es.querySelector('p').textContent = msg || 'The directory data could not be loaded. Please try again later.';
+  }
+}
+
+function loadDirectory() {
+  /* Show loading state */
+  var ctr = document.getElementById('resultsInlineCount');
+  var grid = document.getElementById('recordsGrid');
+  if (ctr) ctr.textContent = 'Loading establishments\u2026';
+  if (grid) grid.innerHTML = '<p style="padding:24px 14px;font-size:13px;color:var(--muted);">Loading establishments\u2026</p>';
+
+  if (typeof XLSX === 'undefined') {
+    console.error('[Directory] SheetJS (XLSX) is not available.');
+    showDirectoryError('Directory library failed to load. Please refresh the page.');
+    return;
+  }
+
+  fetch(DATA_URL + '?v=' + DATA_VERSION)
+    .then(function(resp) {
+      if (!resp.ok) throw new Error('HTTP ' + resp.status + ': ' + resp.url);
+      return resp.arrayBuffer();
+    })
+    .then(function(buf) {
+      var wb = XLSX.read(new Uint8Array(buf), {type:'array', cellDates:true, dateNF:'yyyy-mm-dd'});
+      if (!wb.SheetNames.length) throw new Error('Workbook is empty.');
+      var ws = wb.Sheets[wb.SheetNames[0]];
+      var rows = XLSX.utils.sheet_to_json(ws, {defval:null, raw:false});
+      establishments = parseRows(rows);
+      if (!establishments.length) throw new Error('No valid rows found in workbook.');
+      afterLoad();
+    })
+    .catch(function(err) {
+      console.error('[Directory] Load error:', err);
+      showDirectoryError('The directory data could not be loaded. Please try again later.');
+    });
+}
+
+function afterLoad() {
+  initFilters();
+  populateSheetSelects();
+  syncControls();
+  render();
+  initMap();
+}
+
+/* ── Helpers ── */
 function esc(v){return String(v??'').replace(/[&<>'"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;',"'":"&#39;",'"':'&quot;'}[c];});}
 function norm(v){return String(v??'').trim().toLowerCase();}
 function valStatus(v){if(v===true)return'yes';if(v===false)return'no';return'unknown';}
 function alcoholMenuStatus(r){var d=r.declarations;if(d.alcoholServed===false&&d.alcoholMenuItemsDisclosed===false)return'na';return valStatus(d.alcoholMenuItemsDisclosed);}
 function statusText(v,y,n,u){u=u||'Not stated';if(v===true)return y;if(v===false)return n;return u;}
-function dchip(label,ok){var icon=ok?'<svg viewBox="0 0 20 20"><path d="M4 10l4 4 8-8"/></svg>':'<svg viewBox="0 0 20 20"><path d="M10 5v6M10 14v.5"/></svg>';return'<span class="dchip '+(ok?'positive':'caution')+'">'+icon+label+'</span>';}
+function dchip(label,ok,neutral){var cls=neutral?'neutral':(ok?'positive':'caution');var icon=ok?'<svg viewBox="0 0 20 20"><path d="M4 10l4 4 8-8"/></svg>':neutral?'<svg viewBox="0 0 20 20"><path d="M10 8v4M10 14v.5"/></svg>':'<svg viewBox="0 0 20 20"><path d="M10 5v6M10 14v.5"/></svg>';return'<span class="dchip '+cls+'">'+icon+label+'</span>';}
 function getUniqueOptions(field){return Array.from(new Set(establishments.map(function(r){return r[field];}).filter(Boolean))).sort();}
-var state={search:'',area:'all',cuisine:'all',alcohol:'all',meat:'all',pork:'all',lard:'all',sort:'name',selectedId:null,lastFocusEl:null};
-var els={searchInput:document.getElementById('searchInput'),areaFilter:document.getElementById('areaFilter'),cuisineFilter:document.getElementById('cuisineFilter'),alcoholFilter:document.getElementById('alcoholFilter'),meatFilter:document.getElementById('meatFilter'),porkFilter:document.getElementById('porkFilter'),lardFilter:document.getElementById('lardFilter'),sortSelect:document.getElementById('sortSelect'),clearFiltersBtn:document.getElementById('clearFiltersBtn'),searchSubmitBtn:document.getElementById('searchSubmitBtn'),emptyClearBtn:document.getElementById('emptyClearBtn'),recordsGrid:document.getElementById('recordsGrid'),emptyState:document.getElementById('emptyState'),activeChips:document.getElementById('activeChips'),topResultCount:document.getElementById('topResultCount'),resultsInlineCount:document.getElementById('resultsInlineCount'),drawer:document.getElementById('declDrawer'),backdrop:document.getElementById('declBackdrop'),drawerClose:document.getElementById('declDrawerClose'),drawerTitleArea:document.getElementById('drawerTitleArea'),drawerContent:document.getElementById('drawerContent')};
+
+/* ── State + element cache ── */
+var state={search:'',area:'all',cuisine:'all',alcohol:'all',meat:'all',pork:'all',lard:'all',sort:'name',selectedId:null,lastFocusEl:null,view:'list'};
+var els={
+  searchInput:document.getElementById('searchInput'),
+  areaFilter:document.getElementById('areaFilter'),
+  cuisineFilter:document.getElementById('cuisineFilter'),
+  alcoholFilter:document.getElementById('alcoholFilter'),
+  meatFilter:document.getElementById('meatFilter'),
+  porkFilter:document.getElementById('porkFilter'),
+  lardFilter:document.getElementById('lardFilter'),
+  sortSelect:document.getElementById('sortSelect'),
+  clearFiltersBtn:document.getElementById('clearFiltersBtn'),
+  searchSubmitBtn:document.getElementById('searchSubmitBtn'),
+  emptyClearBtn:document.getElementById('emptyClearBtn'),
+  recordsGrid:document.getElementById('recordsGrid'),
+  emptyState:document.getElementById('emptyState'),
+  activeChips:document.getElementById('activeChips'),
+  resultsInlineCount:document.getElementById('resultsInlineCount'),
+  drawer:document.getElementById('declDrawer'),
+  backdrop:document.getElementById('declBackdrop'),
+  drawerClose:document.getElementById('declDrawerClose'),
+  drawerTitleArea:document.getElementById('drawerTitleArea'),
+  drawerContent:document.getElementById('drawerContent')
+};
+
+/* ── View switching ── */
+function setView(v){
+  state.view=v;
+  var dirView=document.getElementById('view-directory');
+  dirView.classList.toggle('dir-is-mapview',v==='map');
+  var bl=document.getElementById('btnListView'),bm=document.getElementById('btnMapView');
+  if(bl){bl.classList.toggle('active',v==='list');bl.setAttribute('aria-pressed',v==='list'?'true':'false');}
+  if(bm){bm.classList.toggle('active',v==='map');bm.setAttribute('aria-pressed',v==='map'?'true':'false');}
+  if(v==='map'&&mapInstance){setTimeout(function(){mapInstance.invalidateSize();},80);}
+}
+document.getElementById('btnListView').addEventListener('click',function(){setView('list');});
+document.getElementById('btnMapView').addEventListener('click',function(){setView('map');if(mapInstance){setTimeout(function(){mapInstance.invalidateSize();},80);}});
+var btnReturn=document.getElementById('btnReturnToList');
+if(btnReturn)btnReturn.addEventListener('click',function(){setView('list');});
+
+/* ── Filter sheet (mobile) ── */
+function openFilterSheet(){var s=document.getElementById('filterSheet'),b=document.getElementById('filterSheetBackdrop');syncSheetFromState();s.classList.add('is-open');b.classList.add('is-open');s.setAttribute('aria-hidden','false');b.removeAttribute('aria-hidden');var cl=document.getElementById('filterSheetClose');if(cl)cl.focus();}
+function closeFilterSheet(){var s=document.getElementById('filterSheet'),b=document.getElementById('filterSheetBackdrop');s.classList.remove('is-open');b.classList.remove('is-open');s.setAttribute('aria-hidden','true');b.setAttribute('aria-hidden','true');var fb=document.getElementById('filterSheetBtn');if(fb)fb.focus();}
+function syncSheetFromState(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetAlcoholFilter:'alcohol',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)el.value=state[map[id]];});}
+function applySheetFilters(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetAlcoholFilter:'alcohol',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)state[map[id]]=el.value;});syncControls();render();closeFilterSheet();updateFilterBtnState();}
+function updateFilterBtnState(){var hasF=state.area!=='all'||state.cuisine!=='all'||state.alcohol!=='all'||state.meat!=='all'||state.pork!=='all'||state.lard!=='all';var btn=document.getElementById('filterSheetBtn');if(btn)btn.classList.toggle('has-filters',hasF);}
+var fsBtn=document.getElementById('filterSheetBtn');if(fsBtn)fsBtn.addEventListener('click',openFilterSheet);
+var fsClose=document.getElementById('filterSheetClose');if(fsClose)fsClose.addEventListener('click',closeFilterSheet);
+var fsBack=document.getElementById('filterSheetBackdrop');if(fsBack)fsBack.addEventListener('click',closeFilterSheet);
+var fsApply=document.getElementById('filterSheetApply');if(fsApply)fsApply.addEventListener('click',applySheetFilters);
+var fsReset=document.getElementById('filterSheetReset');if(fsReset)fsReset.addEventListener('click',function(){state.area='all';state.cuisine='all';state.alcohol='all';state.meat='all';state.pork='all';state.lard='all';state.sort='name';state.search='';syncControls();syncSheetFromState();render();updateFilterBtnState();});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('filterSheet').classList.contains('is-open'))closeFilterSheet();});
+function populateSheetSelects(){var areas=getUniqueOptions('area');var cuisines=getUniqueOptions('cuisine');function fill(id,vals){var sel=document.getElementById(id);if(!sel)return;vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}fill('sheetAreaFilter',areas);fill('sheetCuisineFilter',cuisines);}
+
+/* ── Filters ── */
 function hasActiveCriteria(){return Boolean(state.search.trim())||state.area!=='all'||state.cuisine!=='all'||state.alcohol!=='all'||state.meat!=='all'||state.pork!=='all'||state.lard!=='all';}
-function getFiltered(){var q=norm(state.search);var rs=establishments.filter(function(r){if(q&&!(norm(r.name).includes(q)||norm(r.area).includes(q)||norm(r.cuisine).includes(q)||norm(r.address).includes(q)))return false;if(state.area!=='all'&&norm(r.area)!==norm(state.area))return false;if(state.cuisine!=='all'&&norm(r.cuisine)!==norm(state.cuisine))return false;if(state.alcohol!=='all'&&valStatus(r.declarations.alcoholServed)!==state.alcohol)return false;if(state.meat!=='all'&&valStatus(r.declarations.meatFromHalalCertifiedSources)!==state.meat)return false;if(state.pork!=='all'&&valStatus(r.declarations.noPorkDeclared)!==state.pork)return false;if(state.lard!=='all'&&valStatus(r.declarations.noLardDeclared)!==state.lard)return false;return true;});rs.sort(function(a,b){if(state.sort==='area')return String(a.area).localeCompare(String(b.area))||String(a.name).localeCompare(String(b.name));if(state.sort==='updated')return new Date(b.lastUpdated||0)-new Date(a.lastUpdated||0)||String(a.name).localeCompare(String(b.name));return String(a.name).localeCompare(String(b.name));});return rs;}
-function renderRow(r){var d=r.declarations;var chips=[dchip(d.noPorkDeclared===true?'No pork':'Pork not stated',d.noPorkDeclared===true),dchip(d.noLardDeclared===true?'No lard':'Lard not stated',d.noLardDeclared===true),dchip(d.meatFromHalalCertifiedSources===true?'Halal-sourced meat':'Meat source not stated',d.meatFromHalalCertifiedSources===true),d.alcoholServed===false?dchip('No alcohol served',true):dchip(d.alcoholServed===true?'Alcohol served':'Alcohol not stated',false)];var sel=state.selectedId===r.id;return'<article class="record-row'+(sel?' is-selected':'')+'" data-id="'+esc(r.id)+'" role="listitem"><div class="record-main"><h4>'+esc(r.name)+'</h4><p class="record-meta">'+esc(r.area)+' &middot; '+esc(r.cuisine)+'</p><div class="record-badges"><span class="badge badge-self">SELF-DECLARED</span><span class="badge badge-not-halal">NOT HALAL-CERTIFIED</span></div><div class="record-chips">'+chips.join('')+'</div></div><div class="record-foot"><span class="last-updated">Updated '+esc(r.lastUpdated||'Not stated')+'</span><button class="btn btn-dark btn-sm" type="button" data-open-record="'+esc(r.id)+'">View Declaration</button></div></article>';}
-var CHIP_LABELS={alcohol:{yes:'Alcohol: served',no:'Alcohol: not served',unknown:'Alcohol: not stated'},meat:{yes:'Halal-sourced meat',no:'Meat: not stated',unknown:'Meat: unknown'},pork:{yes:'No pork declared',no:'Pork: not declared'},lard:{yes:'No lard declared',no:'Lard: not declared'}};
-function renderChips(){var chips=[];if(state.search)chips.push({k:'search',l:'Search: '+state.search});if(state.area!=='all')chips.push({k:'area',l:'Area: '+state.area});if(state.cuisine!=='all')chips.push({k:'cuisine',l:'Cuisine: '+state.cuisine});if(state.alcohol!=='all')chips.push({k:'alcohol',l:(CHIP_LABELS.alcohol[state.alcohol]||state.alcohol)});if(state.meat!=='all')chips.push({k:'meat',l:(CHIP_LABELS.meat[state.meat]||state.meat)});if(state.pork!=='all')chips.push({k:'pork',l:(CHIP_LABELS.pork[state.pork]||state.pork)});if(state.lard!=='all')chips.push({k:'lard',l:(CHIP_LABELS.lard[state.lard]||state.lard)});if(!chips.length){els.activeChips.innerHTML='';return;}els.activeChips.innerHTML=chips.map(function(c){return'<span class="chip">'+esc(c.l)+' <button type="button" data-remove="'+esc(c.k)+'" aria-label="Remove filter: '+esc(c.l)+'">&times;</button></span>';}).join('');}
-var mapMarkers={};var mapInstance=null;
-function render(){var hasCriteria=hasActiveCriteria();var rs=hasCriteria?getFiltered():[];var countText=hasCriteria?'Showing '+rs.length+' of '+establishments.length+' establishments':'Search or filter to view '+establishments.length+' establishments';els.topResultCount.textContent=countText;if(els.resultsInlineCount)els.resultsInlineCount.textContent=countText;if(!hasCriteria){els.recordsGrid.innerHTML='';els.emptyState.classList.add('visible');els.emptyState.querySelector('h3').textContent='Start your search';els.emptyState.querySelector('p').textContent='Use the search bar, map markers, or advanced filters to display establishment records.';}else if(!rs.length){els.recordsGrid.innerHTML='';els.emptyState.classList.add('visible');els.emptyState.querySelector('h3').textContent='No matching records';els.emptyState.querySelector('p').textContent='Adjust the search or filters and try again.';}else{els.emptyState.classList.remove('visible');els.recordsGrid.innerHTML=rs.map(renderRow).join('');els.recordsGrid.querySelectorAll('[data-open-record]').forEach(function(btn){btn.addEventListener('click',function(e){e.stopPropagation();var id=btn.getAttribute('data-open-record');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,btn);});});els.recordsGrid.querySelectorAll('.record-row[data-id]').forEach(function(row){row.addEventListener('click',function(e){if(e.target.closest('button'))return;var id=row.getAttribute('data-id');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,row);});});}Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===state.selectedId);});renderChips();}
-function renderDrawerContent(r){var d=r.declarations;var links=[];if(r.website)links.push('<a href="'+esc(r.website)+'" target="_blank" rel="noopener noreferrer">Website</a>');if(r.instagram)links.push('<a href="'+esc(r.instagram)+'" target="_blank" rel="noopener noreferrer">Instagram</a>');if(r.externalLocationUrl)links.push('<a href="'+esc(r.externalLocationUrl)+'" target="_blank" rel="noopener noreferrer">View Location</a>');if(r.externalDirectionsUrl)links.push('<a href="'+esc(r.externalDirectionsUrl)+'" target="_blank" rel="noopener noreferrer">Get Directions</a>');if(r.externalReviewsUrl)links.push('<a href="'+esc(r.externalReviewsUrl)+'" target="_blank" rel="noopener noreferrer">Read Reviews</a>');var amCopy=alcoholMenuStatus(r)==='na'?'Not applicable based on current declaration.':statusText(d.alcoholMenuItemsDisclosed,'Menu items containing alcohol are indicated.','Alcohol-containing menu item disclosure has not been stated.');return'<section><div class="drawer-sec-title">Record Summary</div><dl class="detail-list"><div><dt>Location</dt><dd>'+esc(r.address||r.area)+'</dd></div><div><dt>Cuisine</dt><dd>'+esc(r.cuisine)+'</dd></div>'+(r.establishmentType?'<div><dt>Type</dt><dd>'+esc(r.establishmentType)+'</dd></div>':'')+'<div><dt>Last Updated</dt><dd>'+esc(r.lastUpdated||'Not stated')+'</dd></div></dl>'+(links.length?'<div class="link-row">'+links.join('')+'</div>':'')+'</section><section><div class="drawer-sec-title">Basis of Listing</div><p class="drawer-plain">'+esc(r.basisOfListing)+'. '+esc(r.certificationStatus)+'.</p></section><section><div class="drawer-sec-title">Food Practice Declarations</div><div class="decl-list"><div class="decl-item '+(d.noPorkDeclared===true?'positive':'caution')+'"><span class="decl-marker">'+(d.noPorkDeclared===true?'YES':'CHECK')+'</span><div><strong>No pork</strong><p>'+esc(statusText(d.noPorkDeclared,'Declared no pork.','No pork declaration has been provided.'))+'</p></div></div><div class="decl-item '+(d.noLardDeclared===true?'positive':'caution')+'"><span class="decl-marker">'+(d.noLardDeclared===true?'YES':'CHECK')+'</span><div><strong>No lard</strong><p>'+esc(statusText(d.noLardDeclared,'Declared no lard.','No lard declaration has been provided.'))+'</p></div></div><div class="decl-item '+(d.meatFromHalalCertifiedSources===true?'positive':'caution')+'"><span class="decl-marker">'+(d.meatFromHalalCertifiedSources===true?'YES':'CHECK')+'</span><div><strong>Meat sourcing</strong><p>'+esc(statusText(d.meatFromHalalCertifiedSources,'Sourced from halal-certified suppliers.','Not stated to be sourced from halal-certified suppliers.'))+'</p></div></div></div></section><section><div class="drawer-sec-title">Alcohol Disclosure</div><div class="decl-list"><div class="decl-item '+(d.alcoholServed===false?'positive':'caution')+'"><span class="decl-marker">'+(d.alcoholServed===false?'NO':'NOTE')+'</span><div><strong>Alcohol served</strong><p>'+esc(statusText(d.alcoholServed,'Alcohol is served on the premises.','Alcohol is not stated to be served on the premises.'))+'</p></div></div><div class="decl-item '+(alcoholMenuStatus(r)==='yes'||alcoholMenuStatus(r)==='na'?'positive':'caution')+'"><span class="decl-marker">'+(alcoholMenuStatus(r)==='na'?'N/A':alcoholMenuStatus(r)==='yes'?'YES':'CHECK')+'</span><div><strong>Alcohol in menu items</strong><p>'+esc(amCopy)+'</p></div></div></div></section><section><div class="drawer-sec-title">Notes for Diners</div><p class="drawer-plain"><strong>Declaration:</strong> '+esc(r.declarationProvided)+'</p>'+(r.crossContactNote?'<p class="drawer-plain" style="margin-top:8px;"><strong>Cross-contact note:</strong> '+esc(r.crossContactNote)+'</p>':'')+(r.additionalNotes?'<p class="drawer-plain" style="margin-top:8px;"><strong>Additional notes:</strong> '+esc(r.additionalNotes)+'</p>':'')+'</section><p class="drawer-disclaimer">This information is presented for transparency. It is not halal certification, a religious ruling, official endorsement or statutory verification. Diners should make their own enquiries and decide according to their individual requirements and comfort level.</p>';}
-function openDeclDrawer(rec,trigger){if(mapInstance)mapInstance.closePopup();state.selectedId=rec.id;state.lastFocusEl=trigger||document.activeElement;Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===rec.id);});els.drawerTitleArea.innerHTML='<p class="mono" style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Record / '+esc(rec.id)+'</p><h2 id="drawerTitle">'+esc(rec.name)+'</h2><p style="font-size:11px;color:var(--muted);margin-top:2px;">'+esc(rec.area)+' &middot; '+esc(rec.cuisine)+'</p>';els.drawerContent.innerHTML=renderDrawerContent(rec);requestAnimationFrame(function(){els.backdrop.classList.add('is-open');els.backdrop.removeAttribute('aria-hidden');els.drawer.classList.add('is-open');els.drawer.setAttribute('aria-hidden','false');els.drawerClose.focus();});}
+function getFiltered(){
+  var q=norm(state.search);
+  var rs=establishments.filter(function(r){
+    if(q&&!(norm(r.name).includes(q)||norm(r.area).includes(q)||norm(r.cuisine).includes(q)||norm(r.address||'').includes(q)||norm(r.postalCode||'').includes(q)||norm(r.establishmentType||'').includes(q)))return false;
+    if(state.area!=='all'&&norm(r.area)!==norm(state.area))return false;
+    if(state.cuisine!=='all'&&norm(r.cuisine)!==norm(state.cuisine))return false;
+    if(state.alcohol!=='all'&&valStatus(r.declarations.alcoholServed)!==state.alcohol)return false;
+    if(state.meat!=='all'&&valStatus(r.declarations.meatFromHalalCertifiedSources)!==state.meat)return false;
+    if(state.pork!=='all'&&valStatus(r.declarations.noPorkDeclared)!==state.pork)return false;
+    if(state.lard!=='all'&&valStatus(r.declarations.noLardDeclared)!==state.lard)return false;
+    return true;
+  });
+  rs.sort(function(a,b){
+    if(state.sort==='area')return String(a.area).localeCompare(String(b.area))||String(a.name).localeCompare(String(b.name));
+    if(state.sort==='updated')return (b.lastUpdated||'').localeCompare(a.lastUpdated||'')||String(a.name).localeCompare(String(b.name));
+    return String(a.name).localeCompare(String(b.name));
+  });
+  return rs;
+}
+
+function renderRow(r){
+  var d=r.declarations;
+  var chips=[
+    d.noPorkDeclared===null?dchip('Pork — not stated',false,true):dchip(d.noPorkDeclared?'No pork declared':'Pork not clear',d.noPorkDeclared===true),
+    d.noLardDeclared===null?dchip('Lard — not stated',false,true):dchip(d.noLardDeclared?'No lard declared':'Lard not clear',d.noLardDeclared===true),
+    d.meatFromHalalCertifiedSources===null?dchip('Meat — not stated',false,true):dchip(d.meatFromHalalCertifiedSources?'Halal-sourced meat':'Meat source unclear',d.meatFromHalalCertifiedSources===true),
+    d.alcoholServed===null?dchip('Alcohol — not stated',false,true):(d.alcoholServed===false?dchip('No alcohol served',true):dchip('Alcohol served',false))
+  ];
+  var sel=state.selectedId===r.id;
+  var certBadge=r.halalCertified===null?'<span class="badge badge-demo">UNVERIFIED</span>':r.halalCertified?'<span class="badge badge-halal">HALAL CERTIFIED</span>':'<span class="badge badge-not-halal">NOT HALAL-CERTIFIED</span>';
+  var demoBadge=r.isDemo?'<span class="badge badge-demo">DEMO LISTING</span>':'';
+  var demoDisc=r.isDemo?'<div class="demo-disclaimer">'+esc(r.demoDisclaimer)+'</div>':'';
+  return '<article class="record-row'+(sel?' is-selected':'')+(r.isDemo?' is-demo':'')+'" data-id="'+esc(r.id)+'" role="listitem">'
+    +'<div class="record-main"><h4>'+esc(r.name)+'</h4>'
+    +'<p class="record-meta">'+esc(r.area)+(r.cuisine?' &middot; '+esc(r.cuisine):'')+(r.establishmentType?' &middot; '+esc(r.establishmentType):'')+'</p>'
+    +'<div class="record-badges">'+demoBadge+'<span class="badge badge-self">SELF-DECLARED</span>'+certBadge+'</div>'
+    +'<div class="record-chips">'+chips.join('')+'</div>'
+    +demoDisc+'</div>'
+    +'<div class="record-foot">'
+    +'<span class="last-updated">'+(r.lastUpdated?'Updated '+esc(r.lastUpdated):'')+'</span>'
+    +'<button class="btn btn-outline btn-sm" type="button" data-view-on-map="'+esc(r.id)+'" style="font-size:10px;padding:0 10px;min-height:32px;">View on Map</button>'
+    +'<button class="btn btn-dark btn-sm" type="button" data-open-record="'+esc(r.id)+'">View Declaration</button>'
+    +'</div></article>';
+}
+
+var CHIP_LABELS={alcohol:{yes:'Alcohol: served',no:'Alcohol: none',unknown:'Alcohol: ?'},meat:{yes:'Meat: halal-sourced',no:'Meat: ?',unknown:'Meat: ?'},pork:{yes:'No pork declared',no:'Pork: not declared'},lard:{yes:'No lard declared',no:'Lard: not declared'}};
+function renderChips(){
+  var chips=[];
+  if(state.search)chips.push({k:'search',l:'Search: '+state.search});
+  if(state.area!=='all')chips.push({k:'area',l:'Area: '+state.area});
+  if(state.cuisine!=='all')chips.push({k:'cuisine',l:'Cuisine: '+state.cuisine});
+  if(state.alcohol!=='all')chips.push({k:'alcohol',l:CHIP_LABELS.alcohol[state.alcohol]||state.alcohol});
+  if(state.meat!=='all')chips.push({k:'meat',l:CHIP_LABELS.meat[state.meat]||state.meat});
+  if(state.pork!=='all')chips.push({k:'pork',l:CHIP_LABELS.pork[state.pork]||state.pork});
+  if(state.lard!=='all')chips.push({k:'lard',l:CHIP_LABELS.lard[state.lard]||state.lard});
+  if(!chips.length){els.activeChips.innerHTML='';return;}
+  els.activeChips.innerHTML=chips.map(function(c){return'<span class="chip">'+esc(c.l)+' <button type="button" data-remove="'+esc(c.k)+'" aria-label="Remove filter: '+esc(c.l)+'">&times;</button></span>';}).join('');
+}
+
+/* ── Map marker visibility + bounds ── */
+function updateMapMarkers(rs){
+  if(!mapInstance||typeof L==='undefined')return;
+  var matchIds={};rs.forEach(function(r){matchIds[r.id]=true;});
+  Object.keys(mapMarkers).forEach(function(id){
+    var mk=mapMarkers[id];if(!mk)return;
+    var el=mk.getElement?mk.getElement():null;
+    if(el){
+      el.style.display=matchIds[id]?'':'none';
+      el.classList.toggle('marker-selected',id===state.selectedId);
+    }
+  });
+  var visible=rs.filter(function(r){return mapMarkers[r.id];});
+  if(visible.length===1){
+    var ll=mapMarkers[visible[0].id].getLatLng();
+    mapInstance.setView(ll,15,{animate:true});
+  } else if(visible.length>1){
+    var lls=visible.map(function(r){return mapMarkers[r.id].getLatLng();});
+    try{mapInstance.fitBounds(L.latLngBounds(lls),{padding:[40,40],animate:true});}catch(e){}
+  }
+}
+
+/* ── View on Map ── */
+function viewOnMap(id){
+  var r=establishments.find(function(x){return x.id===id;});if(!r)return;
+  state.selectedId=id;
+  if(mapInstance&&r.coordinates&&typeof r.coordinates.lat==='number'){
+    mapInstance.setView([r.coordinates.lat,r.coordinates.lng],15,{animate:true});
+  }
+  Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===id);});
+  showMapPreview(r);
+  if(window.innerWidth<768){setView('map');}
+  renderRows();
+}
+
+/* ── Map preview ── */
+function showMapPreview(r){
+  var preview=document.getElementById('mapPreview');
+  var content=document.getElementById('mapPreviewContent');
+  if(!preview||!content)return;
+  content.innerHTML='<div class="map-preview-name">'+esc(r.name)+'</div>'
+    +'<div class="map-preview-meta">'+esc(r.area)+(r.cuisine?' &middot; '+esc(r.cuisine):'')+'</div>'
+    +(r.isDemo?'<div style="font-size:10px;color:#7C3AED;font-weight:600;text-transform:uppercase;font-family:monospace;letter-spacing:0.04em;margin-bottom:6px;">Demo listing</div>':'')
+    +'<button class="btn btn-dark btn-sm" type="button" id="previewViewDecl" style="font-size:10px;padding:0 10px;min-height:32px;">View Declaration</button>';
+  preview.removeAttribute('hidden');
+  var pvd=document.getElementById('previewViewDecl');
+  if(pvd)pvd.addEventListener('click',function(){openDeclDrawer(r,pvd);});
+}
+function hideMapPreview(){var p=document.getElementById('mapPreview');if(p)p.setAttribute('hidden','');state.selectedId=null;Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.remove('marker-selected');});renderRows();}
+var mpClose=document.getElementById('mapPreviewClose');if(mpClose)mpClose.addEventListener('click',hideMapPreview);
+
+function renderRows(){
+  var sel=state.selectedId;
+  els.recordsGrid.querySelectorAll('.record-row').forEach(function(row){row.classList.toggle('is-selected',row.getAttribute('data-id')===sel);});
+}
+
+/* ── Main render ── */
+function render(){
+  var rs=getFiltered();
+  var total=establishments.length;
+  var countText=rs.length+' of '+total+' establishment'+(total!==1?'s':'');
+  var ctr=document.getElementById('resultsInlineCount');if(ctr)ctr.textContent=countText;
+  var mc=document.getElementById('mapResultCount');if(mc)mc.textContent=countText;
+  if(!rs.length){
+    els.recordsGrid.innerHTML='';
+    els.emptyState.classList.add('visible');
+    els.emptyState.querySelector('h3').textContent='No establishments found';
+    els.emptyState.querySelector('p').textContent=hasActiveCriteria()?'Adjust the search or filters and try again.':'No listings are currently available.';
+  } else {
+    els.emptyState.classList.remove('visible');
+    els.recordsGrid.innerHTML=rs.map(renderRow).join('');
+    els.recordsGrid.querySelectorAll('[data-open-record]').forEach(function(btn){
+      btn.addEventListener('click',function(e){e.stopPropagation();var id=btn.getAttribute('data-open-record');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,btn);});
+    });
+    els.recordsGrid.querySelectorAll('[data-view-on-map]').forEach(function(btn){
+      btn.addEventListener('click',function(e){e.stopPropagation();viewOnMap(btn.getAttribute('data-view-on-map'));});
+    });
+    els.recordsGrid.querySelectorAll('.record-row[data-id]').forEach(function(row){
+      row.addEventListener('click',function(e){if(e.target.closest('button'))return;var id=row.getAttribute('data-id');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,row);});
+    });
+  }
+  updateMapMarkers(rs);
+  renderChips();
+  updateFilterBtnState();
+}
+
+/* ── Declaration drawer ── */
+function boolLabel(v,y,n){if(v===true)return y;if(v===false)return n;return'Not stated';}
+function renderDrawerContent(r){
+  var d=r.declarations;var f=r.facilities||{};
+  var links=[];
+  if(r.website)links.push('<a href="'+esc(r.website)+'" target="_blank" rel="noopener noreferrer">Website</a>');
+  if(r.instagram)links.push('<a href="'+esc(r.instagram)+'" target="_blank" rel="noopener noreferrer">Instagram</a>');
+  if(r.externalLocationUrl)links.push('<a href="'+esc(r.externalLocationUrl)+'" target="_blank" rel="noopener noreferrer">View Location</a>');
+  if(r.externalDirectionsUrl)links.push('<a href="'+esc(r.externalDirectionsUrl)+'" target="_blank" rel="noopener noreferrer">Get Directions</a>');
+  if(r.externalReviewsUrl)links.push('<a href="'+esc(r.externalReviewsUrl)+'" target="_blank" rel="noopener noreferrer">Read Reviews</a>');
+  var certBadgeColour=r.halalCertified===null?'color:var(--muted)':r.halalCertified?'color:var(--good)':'color:var(--caution)';
+  var certBadgeText=r.halalCertified===null?'Not assessed or verified':r.halalCertified?'Halal certified':'Not halal-certified';
+  return (r.isDemo?'<div style="padding:10px 14px;background:#EDE9FE;border-left:3px solid #7C3AED;font-size:12px;color:#5B21B6;line-height:1.55;margin-bottom:4px;">'+esc(r.demoDisclaimer)+'</div>':'')
+    +'<section><div class="drawer-sec-title">Record Summary</div>'
+    +'<dl class="detail-list">'
+    +'<div><dt>Location</dt><dd>'+esc(r.address||r.area||'Not stated')+'</dd></div>'
+    +(r.postalCode?'<div><dt>Postal code</dt><dd>'+esc(r.postalCode)+'</dd></div>':'')
+    +'<div><dt>Area</dt><dd>'+esc(r.area||'Not stated')+'</dd></div>'
+    +'<div><dt>Cuisine</dt><dd>'+esc(r.cuisine||'Not stated')+'</dd></div>'
+    +(r.establishmentType?'<div><dt>Type</dt><dd>'+esc(r.establishmentType)+'</dd></div>':'')
+    +'<div><dt>Last updated</dt><dd>'+esc(r.lastUpdated||'Not stated')+'</dd></div>'
+    +(r.declarationDate?'<div><dt>Declaration date</dt><dd>'+esc(r.declarationDate)+'</dd></div>':'')
+    +'</dl>'
+    +(links.length?'<div class="link-row">'+links.join('')+'</div>':'')
+    +'</section>'
+    +'<section><div class="drawer-sec-title">Certification & Listing Status</div>'
+    +'<p class="drawer-plain" style="'+certBadgeColour+';font-weight:600;">'+certBadgeText+'</p>'
+    +'<p class="drawer-plain" style="margin-top:6px;">'+esc(r.basisOfListing||'Not stated')+'</p>'
+    +(r.certifyingBody?'<p class="drawer-plain" style="margin-top:4px;font-size:12px;">Certifying body: '+esc(r.certifyingBody)+'</p>':'')
+    +(r.certificateExpiry?'<p class="drawer-plain" style="margin-top:4px;font-size:12px;">Certificate expiry: '+esc(r.certificateExpiry)+'</p>':'')
+    +'</section>'
+    +'<section><div class="drawer-sec-title">Food Practice Declarations</div><div class="decl-list">'
+    +'<div class="decl-item '+(d.noPorkDeclared===true?'positive':d.noPorkDeclared===false?'caution':'')+'"><span class="decl-marker">'+(d.noPorkDeclared===true?'YES':d.noPorkDeclared===false?'NO':'?')+'</span><div><strong>No pork</strong><p>'+boolLabel(d.noPorkDeclared,'Declared: no pork.','Not declared pork-free.')+'</p></div></div>'
+    +'<div class="decl-item '+(d.noLardDeclared===true?'positive':d.noLardDeclared===false?'caution':'')+'"><span class="decl-marker">'+(d.noLardDeclared===true?'YES':d.noLardDeclared===false?'NO':'?')+'</span><div><strong>No lard</strong><p>'+boolLabel(d.noLardDeclared,'Declared: no lard.','Not declared lard-free.')+'</p></div></div>'
+    +'<div class="decl-item '+(d.meatFromHalalCertifiedSources===true?'positive':d.meatFromHalalCertifiedSources===false?'caution':'')+'"><span class="decl-marker">'+(d.meatFromHalalCertifiedSources===true?'YES':d.meatFromHalalCertifiedSources===false?'NO':'?')+'</span><div><strong>Halal-sourced meat</strong><p>'+boolLabel(d.meatFromHalalCertifiedSources,'Sourced from halal-certified suppliers.','Not stated to be sourced from halal-certified suppliers.')+'</p></div></div>'
+    +'</div></section>'
+    +'<section><div class="drawer-sec-title">Alcohol Disclosure</div><div class="decl-list">'
+    +'<div class="decl-item '+(d.alcoholServed===false?'positive':d.alcoholServed===true?'caution':'')+'"><span class="decl-marker">'+(d.alcoholServed===false?'NO':d.alcoholServed===true?'YES':'?')+'</span><div><strong>Alcohol served</strong><p>'+boolLabel(d.alcoholServed,'Alcohol is served on the premises.','Alcohol is not served on the premises.')+'</p></div></div>'
+    +(d.alcoholMenuItemsDisclosed!==null?'<div class="decl-item '+(d.alcoholMenuItemsDisclosed===true?'positive':'caution')+'"><span class="decl-marker">'+(d.alcoholMenuItemsDisclosed===true?'YES':'NO')+'</span><div><strong>Alcohol in menu items</strong><p>'+boolLabel(d.alcoholMenuItemsDisclosed,'Menu items containing alcohol are indicated.','Alcohol-containing menu items are not explicitly indicated.')+'</p></div></div>':'')
+    +'</div></section>'
+    +(d.sharedKitchen!==null||d.sharedUtensils!==null||d.sharedFryer!==null||d.sharedGrill!==null?
+      '<section><div class="drawer-sec-title">Shared Equipment</div><div class="decl-list">'
+      +(d.sharedKitchen!==null?'<div class="decl-item '+(d.sharedKitchen?'caution':'positive')+'"><span class="decl-marker">'+(d.sharedKitchen?'YES':'NO')+'</span><div><strong>Shared kitchen</strong><p>'+boolLabel(d.sharedKitchen,'Shared kitchen area is used.','Shared kitchen is not used.')+'</p></div></div>':'')
+      +(d.sharedUtensils!==null?'<div class="decl-item '+(d.sharedUtensils?'caution':'positive')+'"><span class="decl-marker">'+(d.sharedUtensils?'YES':'NO')+'</span><div><strong>Shared utensils</strong><p>'+boolLabel(d.sharedUtensils,'Shared utensils are used.','Shared utensils are not used.')+'</p></div></div>':'')
+      +(d.sharedFryer!==null?'<div class="decl-item '+(d.sharedFryer?'caution':'positive')+'"><span class="decl-marker">'+(d.sharedFryer?'YES':'NO')+'</span><div><strong>Shared fryer</strong><p>'+boolLabel(d.sharedFryer,'A shared fryer is used.','A shared fryer is not used.')+'</p></div></div>':'')
+      +(d.sharedGrill!==null?'<div class="decl-item '+(d.sharedGrill?'caution':'positive')+'"><span class="decl-marker">'+(d.sharedGrill?'YES':'NO')+'</span><div><strong>Shared grill</strong><p>'+boolLabel(d.sharedGrill,'A shared grill is used.','A shared grill is not used.')+'</p></div></div>':'')
+      +'</div></section>':'')
+    +(f.prayerSpace!==null||f.prayerMat!==null||f.qiblaDirection!==null||f.waterFacilities!==null?
+      '<section><div class="drawer-sec-title">Muslim-Friendly Facilities</div><div class="decl-list">'
+      +(f.prayerSpace!==null?'<div class="decl-item '+(f.prayerSpace?'positive':'caution')+'"><span class="decl-marker">'+(f.prayerSpace?'YES':'NO')+'</span><div><strong>Prayer space</strong><p>'+boolLabel(f.prayerSpace,'Prayer space is available.','Prayer space is not available.')+'</p></div></div>':'')
+      +(f.prayerMat!==null?'<div class="decl-item '+(f.prayerMat?'positive':'caution')+'"><span class="decl-marker">'+(f.prayerMat?'YES':'NO')+'</span><div><strong>Prayer mat</strong><p>'+boolLabel(f.prayerMat,'Prayer mats are available.','Prayer mats are not available.')+'</p></div></div>':'')
+      +(f.qiblaDirection!==null?'<div class="decl-item '+(f.qiblaDirection?'positive':'caution')+'"><span class="decl-marker">'+(f.qiblaDirection?'YES':'NO')+'</span><div><strong>Qibla direction</strong><p>'+boolLabel(f.qiblaDirection,'Qibla direction is indicated.','Qibla direction is not indicated.')+'</p></div></div>':'')
+      +(f.waterFacilities!==null?'<div class="decl-item '+(f.waterFacilities?'positive':'caution')+'"><span class="decl-marker">'+(f.waterFacilities?'YES':'NO')+'</span><div><strong>Water facilities</strong><p>'+boolLabel(f.waterFacilities,'Water facilities are available.','Water facilities are not available.')+'</p></div></div>':'')
+      +'</div></section>':'')
+    +'<section><div class="drawer-sec-title">Declaration & Notes</div>'
+    +(r.declarationProvided?'<p class="drawer-plain"><strong>Declaration:</strong> '+esc(r.declarationProvided)+'</p>':'')
+    +(r.crossContactNote?'<p class="drawer-plain" style="margin-top:8px;"><strong>Cross-contact note:</strong> '+esc(r.crossContactNote)+'</p>':'')
+    +(r.additionalNotes?'<p class="drawer-plain" style="margin-top:8px;"><strong>Additional notes:</strong> '+esc(r.additionalNotes)+'</p>':'')
+    +'</section>'
+    +'<p class="drawer-disclaimer">This information is presented for transparency. Each listing states the applicable status. Self-declared information is reproduced in good faith based on disclosures provided by the establishment and may change without prior notice. Muslim-friendly certification is not halal certification, and unless expressly stated, this listing does not constitute a religious ruling, government approval or statutory verification. Diners should review the listing and make their own enquiries where necessary.</p>';
+}
+
+function openDeclDrawer(rec,trigger){
+  if(mapInstance)mapInstance.closePopup();
+  state.selectedId=rec.id;state.lastFocusEl=trigger||document.activeElement;
+  Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===rec.id);});
+  els.drawerTitleArea.innerHTML='<p class="mono" style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Record / '+esc(rec.id)+'</p><h2 id="drawerTitle">'+esc(rec.name)+'</h2><p style="font-size:11px;color:var(--muted);margin-top:2px;">'+esc(rec.area)+' &middot; '+esc(rec.cuisine)+'</p>';
+  els.drawerContent.innerHTML=renderDrawerContent(rec);
+  requestAnimationFrame(function(){els.backdrop.classList.add('is-open');els.backdrop.removeAttribute('aria-hidden');els.drawer.classList.add('is-open');els.drawer.setAttribute('aria-hidden','false');els.drawerClose.focus();});
+}
 function closeDeclDrawer(){els.backdrop.classList.remove('is-open');els.backdrop.setAttribute('aria-hidden','true');els.drawer.classList.remove('is-open');els.drawer.setAttribute('aria-hidden','true');if(state.lastFocusEl&&typeof state.lastFocusEl.focus==='function')state.lastFocusEl.focus();state.selectedId=null;}
 function trapFocus(e){if(!els.drawer.classList.contains('is-open')||e.key!=='Tab')return;var focusable=els.drawer.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])');if(!focusable.length)return;var first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
 els.drawerClose.addEventListener('click',closeDeclDrawer);
 els.backdrop.addEventListener('click',closeDeclDrawer);
 document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(els.drawer.classList.contains('is-open')){closeDeclDrawer();return;}}trapFocus(e);});
-window.viewFromMap=function(id){var r=establishments.find(function(x){return x.id===id;});if(!r)return;if(mapInstance)mapInstance.closePopup();state.search=r.name;state.selectedId=id;syncControls();render();openDeclDrawer(r);};
-function initMap(){var mapEl=document.getElementById('declarationMap');if(typeof L==='undefined'){mapEl.innerHTML='<div class="map-fallback">The interactive map could not be loaded. Use search and filters to browse establishments.</div>';return;}try{var m=L.map(mapEl,{scrollWheelZoom:false}).setView([1.3521,103.8198],11);mapInstance=m;L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:18,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'}).addTo(m);m.on('popupopen',function(ev){var btn=ev.popup.getElement()&&ev.popup.getElement().querySelector('[data-view-record]');if(btn)btn.addEventListener('click',function(){window.viewFromMap(btn.getAttribute('data-view-record'));});});establishments.forEach(function(r){var c=r.coordinates;if(typeof c.lat!=='number'||typeof c.lng!=='number')return;var mk=L.marker([c.lat,c.lng]).addTo(m);mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div><div class="lp-meta">'+esc(r.area)+' &middot; '+esc(r.cuisine)+'</div><span class="lp-badge">Not halal-certified</span><button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">View Declaration</button>');mk.on('click',function(){state.selectedId=r.id;state.search=r.name;syncControls();render();});mapMarkers[r.id]=mk;});m.on('focus',function(){m.scrollWheelZoom.enable();});m.on('blur',function(){m.scrollWheelZoom.disable();});var resizeTmr;window.addEventListener('resize',function(){clearTimeout(resizeTmr);resizeTmr=setTimeout(function(){m.invalidateSize();},200);});window.addEventListener('orientationchange',function(){setTimeout(function(){m.invalidateSize();},400);});}catch(err){mapEl.innerHTML='<div class="map-fallback">The interactive map could not be loaded. Use search and filters to browse establishments.</div>';}}
-function syncControls(){els.searchInput.value=state.search;els.areaFilter.value=state.area;els.cuisineFilter.value=state.cuisine;els.alcoholFilter.value=state.alcohol;els.meatFilter.value=state.meat;els.porkFilter.value=state.pork;els.lardFilter.value=state.lard;els.sortSelect.value=state.sort;}
-function resetAll(){state.search='';state.area='all';state.cuisine='all';state.alcohol='all';state.meat='all';state.pork='all';state.lard='all';state.sort='name';state.selectedId=null;syncControls();render();}
+
+window.viewFromMap=function(id){
+  var r=establishments.find(function(x){return x.id===id;});if(!r)return;
+  if(mapInstance)mapInstance.closePopup();
+  state.selectedId=id;
+  Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===id);});
+  showMapPreview(r);renderRows();openDeclDrawer(r);
+};
+
+function initMap(){
+  var mapEl=document.getElementById('declarationMap');
+  if(typeof L==='undefined'){mapEl.innerHTML='<div class="map-fallback">Interactive map unavailable. Browse the list to find establishments.</div>';return;}
+  try{
+    var m=L.map(mapEl,{scrollWheelZoom:true,dragging:true,touchZoom:true,doubleClickZoom:true,zoomControl:true}).setView([1.3521,103.8198],12);
+    mapInstance=m;
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(m);
+    m.zoomControl.setPosition('topright');
+    m.on('popupopen',function(ev){var btn=ev.popup.getElement()&&ev.popup.getElement().querySelector('[data-view-record]');if(btn)btn.addEventListener('click',function(){window.viewFromMap(btn.getAttribute('data-view-record'));});});
+    var allLatLngs=[];
+    establishments.forEach(function(r){
+      var c=r.coordinates;if(typeof c.lat!=='number'||typeof c.lng!=='number')return;
+      var mk=L.marker([c.lat,c.lng]).addTo(m);
+      var popupBadge=r.isDemo?'<span class="lp-badge" style="color:#5B21B6;">DEMO LISTING</span>':'<span class="lp-badge">'+esc(r.certificationStatus||'Not stated')+'</span>';
+      mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div><div class="lp-meta">'+esc(r.area)+' &middot; '+esc(r.cuisine)+'</div>'+popupBadge+'<button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">View Declaration</button>');
+      mk.on('click',function(){state.selectedId=r.id;Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===r.id);});showMapPreview(r);renderRows();});
+      mapMarkers[r.id]=mk;
+      allLatLngs.push([c.lat,c.lng]);
+    });
+    if(allLatLngs.length>1){try{m.fitBounds(L.latLngBounds(allLatLngs),{padding:[40,40]});}catch(e){}}
+    else if(allLatLngs.length===1){m.setView(allLatLngs[0],13);}
+    var resizeTmr;
+    window.addEventListener('resize',function(){clearTimeout(resizeTmr);resizeTmr=setTimeout(function(){m.invalidateSize();},200);});
+    window.addEventListener('orientationchange',function(){setTimeout(function(){m.invalidateSize();},400);});
+  }catch(err){mapEl.innerHTML='<div class="map-fallback">Interactive map could not be loaded. Browse the list to find establishments.</div>';}
+}
+
+function syncControls(){
+  if(els.searchInput)els.searchInput.value=state.search;
+  if(els.areaFilter)els.areaFilter.value=state.area;
+  if(els.cuisineFilter)els.cuisineFilter.value=state.cuisine;
+  if(els.alcoholFilter)els.alcoholFilter.value=state.alcohol;
+  if(els.meatFilter)els.meatFilter.value=state.meat;
+  if(els.porkFilter)els.porkFilter.value=state.pork;
+  if(els.lardFilter)els.lardFilter.value=state.lard;
+  if(els.sortSelect)els.sortSelect.value=state.sort;
+}
+function resetAll(){state.search='';state.area='all';state.cuisine='all';state.alcohol='all';state.meat='all';state.pork='all';state.lard='all';state.sort='name';state.selectedId=null;syncControls();render();hideMapPreview();updateFilterBtnState();}
 function populateSelect(sel,vals){vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}
-function initFilters(){populateSelect(els.areaFilter,getUniqueOptions('area'));populateSelect(els.cuisineFilter,getUniqueOptions('cuisine'));}
-els.searchInput.addEventListener('input',function(){state.search=els.searchInput.value;render();});
-els.searchSubmitBtn.addEventListener('click',render);
-[[els.areaFilter,'area'],[els.cuisineFilter,'cuisine'],[els.alcoholFilter,'alcohol'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.sortSelect,'sort']].forEach(function(p){p[0].addEventListener('change',function(){state[p[1]]=p[0].value;render();});});
-els.clearFiltersBtn.addEventListener('click',resetAll);
-els.emptyClearBtn.addEventListener('click',resetAll);
-els.activeChips.addEventListener('click',function(e){var btn=e.target.closest('[data-remove]');if(!btn)return;var k=btn.getAttribute('data-remove');if(k==='search')state.search='';else if(k==='area')state.area='all';else if(k==='cuisine')state.cuisine='all';else if(k==='alcohol')state.alcohol='all';else if(k==='meat')state.meat='all';else if(k==='pork')state.pork='all';else if(k==='lard')state.lard='all';syncControls();render();});
+function initFilters(){
+  var areas=getUniqueOptions('area');var cuisines=getUniqueOptions('cuisine');
+  if(els.areaFilter)populateSelect(els.areaFilter,areas);
+  if(els.cuisineFilter)populateSelect(els.cuisineFilter,cuisines);
+}
+if(els.searchInput)els.searchInput.addEventListener('input',function(){state.search=els.searchInput.value;render();});
+var ssb=document.getElementById('searchSubmitBtn');if(ssb)ssb.addEventListener('click',render);
+[[els.areaFilter,'area'],[els.cuisineFilter,'cuisine'],[els.alcoholFilter,'alcohol'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.sortSelect,'sort']].forEach(function(p){if(p[0])p[0].addEventListener('change',function(){state[p[1]]=p[0].value;render();updateFilterBtnState();});});
+if(els.clearFiltersBtn)els.clearFiltersBtn.addEventListener('click',resetAll);
+if(els.emptyClearBtn)els.emptyClearBtn.addEventListener('click',resetAll);
+if(els.activeChips)els.activeChips.addEventListener('click',function(e){var btn=e.target.closest('[data-remove]');if(!btn)return;var k=btn.getAttribute('data-remove');if(k==='search')state.search='';else if(k in state)state[k]='all';syncControls();render();updateFilterBtnState();});
 document.querySelectorAll('.fw-btn').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.fw-item'),wasOpen=item.classList.contains('is-open');document.querySelectorAll('.fw-item.is-open').forEach(function(i){i.classList.remove('is-open');i.querySelector('.fw-btn').setAttribute('aria-expanded','false');});if(!wasOpen){item.classList.add('is-open');btn.setAttribute('aria-expanded','true');}});});
 document.querySelectorAll('.faq-btn').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.faq-item'),wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-btn').setAttribute('aria-expanded','false');});if(!wasOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}});});
-initFilters();syncControls();render();initMap();
+
+/* START — triggers everything after DOM is ready */
+loadDirectory();
 </script>
+
+<!-- MOBILE FILTER BOTTOM SHEET -->
+<div class="filter-sheet-backdrop" id="filterSheetBackdrop" aria-hidden="true"></div>
+<div class="filter-sheet" id="filterSheet" role="dialog" aria-modal="true" aria-label="Filter establishments" aria-hidden="true">
+  <div class="filter-sheet-header">
+    <span>Filters</span>
+    <button class="filter-sheet-close" id="filterSheetClose" type="button" aria-label="Close filters">&times;</button>
+  </div>
+  <div class="filter-sheet-body">
+    <div><label class="filter-label" for="sheetAreaFilter">Area / Prefecture</label><select class="dir-select" id="sheetAreaFilter"><option value="all">Any area</option></select></div>
+    <div><label class="filter-label" for="sheetCuisineFilter">Cuisine</label><select class="dir-select" id="sheetCuisineFilter"><option value="all">Any cuisine</option></select></div>
+    <div><label class="filter-label" for="sheetAlcoholFilter">Alcohol served</label><select class="dir-select" id="sheetAlcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
+    <div><label class="filter-label" for="sheetMeatFilter">Meat source</label><select class="dir-select" id="sheetMeatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div>
+    <div><label class="filter-label" for="sheetPorkFilter">Pork declaration</label><select class="dir-select" id="sheetPorkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div>
+    <div><label class="filter-label" for="sheetLardFilter">Lard declaration</label><select class="dir-select" id="sheetLardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div>
+    <div><label class="filter-label" for="sheetSortSelect">Sort</label><select class="dir-select" id="sheetSortSelect"><option value="name">Name A&#8211;Z</option><option value="area">Area</option><option value="updated">Recently updated</option></select></div>
+  </div>
+  <div class="filter-sheet-footer">
+    <button class="btn btn-dark" type="button" id="filterSheetApply" style="flex:1;">Apply Filters &#8594;</button>
+    <button class="btn btn-outline btn-sm" type="button" id="filterSheetReset">Reset</button>
+  </div>
+</div>
 </body>
 </html>
