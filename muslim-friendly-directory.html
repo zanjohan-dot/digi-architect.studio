@@ -250,6 +250,8 @@ p{color:var(--muted);}
 .dir-filters-inline summary{list-style:none;cursor:pointer;font-size:10px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;}
 .dir-filters-inline summary::-webkit-details-marker{display:none;}
 .dir-filters-inline summary::after{content:'+ Filters';color:var(--gold);}
+.inline-count{margin-left:8px;color:var(--gold);font-weight:700;}
+.fbtn-count{font-weight:700;}
 .dir-filters-inline[open] summary::after{content:'− Close';}
 .dir-filters-body{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
 .filter-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:4px;}
@@ -289,13 +291,17 @@ p{color:var(--muted);}
 .dchip svg{width:9px;height:9px;stroke-width:3;fill:none;stroke:currentColor;}
 .record-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .last-updated{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);white-space:nowrap;flex:1;}
+.no-map-note{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);border:1px dashed var(--line);padding:4px 8px;border-radius:2px;white-space:nowrap;}
+.map-empty{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;background:rgba(254,252,247,0.94);font-size:13px;color:var(--muted);line-height:1.6;z-index:500;}
+.map-empty.visible{display:flex;}
+.decl-drawer-body,.filter-sheet-body,.dir-results{overscroll-behavior:contain;}
 .demo-disclaimer{font-size:11px;color:#5B21B6;background:#EDE9FE;padding:8px 10px;border-left:2px solid #7C3AED;margin-top:8px;line-height:1.55;border-radius:0 2px 2px 0;}
 .empty-state{text-align:center;padding:40px 20px;color:var(--muted);display:none;}
 .empty-state.visible{display:block;}
 .empty-state h3{font-size:15px;color:var(--ink);margin-bottom:8px;}
 .empty-state p{font-size:13px;}
 /* Right column — map */
-.dir-right-col{display:flex;flex-direction:column;overflow:hidden;}
+.dir-right-col{display:flex;flex-direction:column;overflow:hidden;position:relative;}
 @media(max-width:767px){
   .dir-right-col{position:absolute;inset:0;display:none;}
   .dir-is-mapview .dir-right-col{display:flex;}
@@ -582,21 +588,21 @@ p{color:var(--muted);}
               <!-- Filter button mobile only -->
               <button class="dir-filter-btn dir-filter-btn-mobile" id="filterSheetBtn" type="button" aria-label="Open filters" aria-haspopup="dialog">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
-                Filters
+                Filters<span class="fbtn-count"></span>
               </button>
               <button class="btn btn-outline btn-sm" type="button" id="clearFiltersBtn" style="flex-shrink:0;">Reset</button>
             </div>
             <!-- Desktop inline filters -->
             <details class="dir-filters-inline" id="dirFiltersInline">
-              <summary>Filter results</summary>
+              <summary>Filter results<span class="inline-count" aria-live="polite"></span></summary>
               <div class="dir-filters-body">
                 <div><label class="filter-label" for="areaFilter">Area / Prefecture</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div>
                 <div><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div>
-                <div><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
+                <div><label class="filter-label" for="typeFilter">Establishment type</label><select class="dir-select" id="typeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="certFilter">Certification</label><select class="dir-select" id="certFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="listingFilter">Listing status</label><select class="dir-select" id="listingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
                 <div><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div>
                 <div><label class="filter-label" for="porkFilter">Pork</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div>
                 <div><label class="filter-label" for="lardFilter">Lard</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div>
-                <div><label class="filter-label" for="sortSelect">Sort</label><select class="dir-select" id="sortSelect"><option value="name">Name A&#8211;Z</option><option value="area">Area</option><option value="updated">Recently updated</option></select></div>
+                <div><label class="filter-label" for="alcoholMenuFilter">Alcohol in menu items</label><select class="dir-select" id="alcoholMenuFilter"><option value="all">Any</option><option value="yes">Indicated</option><option value="no">Not indicated</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="prayerFilter">Prayer space</label><select class="dir-select" id="prayerFilter"><option value="all">Any</option><option value="yes">Available</option><option value="no">Not available</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="mapreadyFilter">Map location</label><select class="dir-select" id="mapreadyFilter"><option value="all">Any</option><option value="yes">Shown on map</option><option value="no">No map location</option></select></div><div><label class="filter-label" for="sortSelect">Sort</label><select class="dir-select" id="sortSelect"><option value="name">Name A&#8211;Z</option><option value="name_desc">Name Z&#8211;A</option><option value="area">Area / Prefecture</option><option value="updated">Recently updated</option><option value="cert">Certification status</option><option value="mapfirst">Map-ready first</option></select></div>
                 <div class="dir-filter-actions">
                   <button class="btn btn-dark btn-sm" type="button" id="searchSubmitBtn">Apply &#8594;</button>
                 </div>
@@ -621,6 +627,7 @@ p{color:var(--muted);}
           <!-- RIGHT: map + preview -->
           <div class="dir-right-col" id="dirRightCol">
             <div id="declarationMap" role="application" aria-label="Map of establishment locations. Select a marker to view establishment details."></div>
+            <div class="map-empty" id="mapEmpty" role="status" aria-live="polite"></div>
             <!-- Selected establishment preview -->
             <div class="map-preview" id="mapPreview" hidden>
               <div class="map-preview-content" id="mapPreviewContent"></div>
@@ -858,6 +865,17 @@ function parseRows(rows) {
       demoDisclaimer:      trim2(row['demo_disclaimer'])     || DEMO_DISC_DEFAULT
     });
   });
+  /* Precompute per-record search index + map readiness.
+     Built once on load so keystrokes never re-walk every field. */
+  result.forEach(function(r){
+    r.mapReady = r.coordinates.lat !== null && r.coordinates.lng !== null;
+    r.searchBlob = [
+      r.name, r.address, r.postalCode, r.postalSector, r.postalDistrict,
+      r.area, r.country, r.cuisine, r.establishmentType,
+      r.certificationStatus, r.status, r.basisOfListing, r.certifyingBody,
+      r.declarationProvided, r.crossContactNote, r.additionalNotes
+    ].join(' \u0001 ').toLowerCase();
+  });
   return result;
 }
 
@@ -925,11 +943,17 @@ function dchip(label,ok,neutral){var cls=neutral?'neutral':(ok?'positive':'cauti
 function getUniqueOptions(field){return Array.from(new Set(establishments.map(function(r){return r[field];}).filter(Boolean))).sort();}
 
 /* ── State + element cache ── */
-var state={search:'',area:'all',cuisine:'all',alcohol:'all',meat:'all',pork:'all',lard:'all',sort:'name',selectedId:null,lastFocusEl:null,view:'list'};
+var state={search:'',area:'all',cuisine:'all',type:'all',cert:'all',listing:'all',alcohol:'all',alcoholMenu:'all',meat:'all',pork:'all',lard:'all',prayer:'all',mapready:'all',sort:'name',selectedId:null,lastFocusEl:null,view:'list'};
 var els={
   searchInput:document.getElementById('searchInput'),
   areaFilter:document.getElementById('areaFilter'),
   cuisineFilter:document.getElementById('cuisineFilter'),
+  typeFilter:document.getElementById('typeFilter'),
+  certFilter:document.getElementById('certFilter'),
+  listingFilter:document.getElementById('listingFilter'),
+  alcoholMenuFilter:document.getElementById('alcoholMenuFilter'),
+  prayerFilter:document.getElementById('prayerFilter'),
+  mapreadyFilter:document.getElementById('mapreadyFilter'),
   alcoholFilter:document.getElementById('alcoholFilter'),
   meatFilter:document.getElementById('meatFilter'),
   porkFilter:document.getElementById('porkFilter'),
@@ -967,35 +991,52 @@ if(btnReturn)btnReturn.addEventListener('click',function(){setView('list');});
 /* ── Filter sheet (mobile) ── */
 function openFilterSheet(){var s=document.getElementById('filterSheet'),b=document.getElementById('filterSheetBackdrop');syncSheetFromState();s.classList.add('is-open');b.classList.add('is-open');s.setAttribute('aria-hidden','false');b.removeAttribute('aria-hidden');var cl=document.getElementById('filterSheetClose');if(cl)cl.focus();}
 function closeFilterSheet(){var s=document.getElementById('filterSheet'),b=document.getElementById('filterSheetBackdrop');s.classList.remove('is-open');b.classList.remove('is-open');s.setAttribute('aria-hidden','true');b.setAttribute('aria-hidden','true');var fb=document.getElementById('filterSheetBtn');if(fb)fb.focus();}
-function syncSheetFromState(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetAlcoholFilter:'alcohol',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)el.value=state[map[id]];});}
-function applySheetFilters(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetAlcoholFilter:'alcohol',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)state[map[id]]=el.value;});syncControls();render();closeFilterSheet();updateFilterBtnState();}
-function updateFilterBtnState(){var hasF=state.area!=='all'||state.cuisine!=='all'||state.alcohol!=='all'||state.meat!=='all'||state.pork!=='all'||state.lard!=='all';var btn=document.getElementById('filterSheetBtn');if(btn)btn.classList.toggle('has-filters',hasF);}
+function syncSheetFromState(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)el.value=state[map[id]];});}
+function applySheetFilters(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)state[map[id]]=el.value;});syncControls();render();closeFilterSheet();updateFilterBtnState();}
+function updateFilterBtnState(){var n=activeFilterCount();var btn=document.getElementById('filterSheetBtn');if(btn){btn.classList.toggle('has-filters',n>0);var lbl=btn.querySelector('.fbtn-count');if(lbl)lbl.textContent=n?' ('+n+')':'';btn.setAttribute('aria-label',n?'Open filters, '+n+' active':'Open filters');}var d=document.getElementById('dirFiltersInline');if(d){var sm=d.querySelector('.inline-count');if(sm)sm.textContent=n?n+' active':'';}}
 var fsBtn=document.getElementById('filterSheetBtn');if(fsBtn)fsBtn.addEventListener('click',openFilterSheet);
 var fsClose=document.getElementById('filterSheetClose');if(fsClose)fsClose.addEventListener('click',closeFilterSheet);
 var fsBack=document.getElementById('filterSheetBackdrop');if(fsBack)fsBack.addEventListener('click',closeFilterSheet);
 var fsApply=document.getElementById('filterSheetApply');if(fsApply)fsApply.addEventListener('click',applySheetFilters);
-var fsReset=document.getElementById('filterSheetReset');if(fsReset)fsReset.addEventListener('click',function(){state.area='all';state.cuisine='all';state.alcohol='all';state.meat='all';state.pork='all';state.lard='all';state.sort='name';state.search='';syncControls();syncSheetFromState();render();updateFilterBtnState();});
+var fsReset=document.getElementById('filterSheetReset');if(fsReset)fsReset.addEventListener('click',function(){clearAllFilters();syncControls();syncSheetFromState();render();updateFilterBtnState();});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('filterSheet').classList.contains('is-open'))closeFilterSheet();});
-function populateSheetSelects(){var areas=getUniqueOptions('area');var cuisines=getUniqueOptions('cuisine');function fill(id,vals){var sel=document.getElementById(id);if(!sel)return;vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}fill('sheetAreaFilter',areas);fill('sheetCuisineFilter',cuisines);}
+function populateSheetSelects(){function fill(id,vals){var sel=document.getElementById(id);if(!sel)return;vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}fill('sheetAreaFilter',getUniqueOptions('area'));fill('sheetCuisineFilter',getUniqueOptions('cuisine'));fill('sheetTypeFilter',getUniqueOptions('establishmentType'));fill('sheetCertFilter',getUniqueOptions('certificationStatus'));fill('sheetListingFilter',getUniqueOptions('status'));}
 
 /* ── Filters ── */
-function hasActiveCriteria(){return Boolean(state.search.trim())||state.area!=='all'||state.cuisine!=='all'||state.alcohol!=='all'||state.meat!=='all'||state.pork!=='all'||state.lard!=='all';}
+var FILTER_KEYS=['area','cuisine','type','cert','listing','alcohol','alcoholMenu','meat','pork','lard','prayer','mapready'];
+function activeFilterCount(){var n=0;FILTER_KEYS.forEach(function(k){if(state[k]!=='all')n++;});return n;}
+function hasActiveCriteria(){return Boolean(state.search.trim())||activeFilterCount()>0;}
 function getFiltered(){
-  var q=norm(state.search);
+  /* Multi-term AND search: every whitespace-separated term must appear
+     somewhere in the record's precomputed index. Case- and space-tolerant. */
+  var terms=norm(state.search).split(/\s+/).filter(Boolean);
   var rs=establishments.filter(function(r){
-    if(q&&!(norm(r.name).includes(q)||norm(r.area).includes(q)||norm(r.cuisine).includes(q)||norm(r.address||'').includes(q)||norm(r.postalCode||'').includes(q)||norm(r.establishmentType||'').includes(q)))return false;
+    for(var i=0;i<terms.length;i++){ if(r.searchBlob.indexOf(terms[i])===-1) return false; }
     if(state.area!=='all'&&norm(r.area)!==norm(state.area))return false;
     if(state.cuisine!=='all'&&norm(r.cuisine)!==norm(state.cuisine))return false;
+    if(state.type!=='all'&&norm(r.establishmentType)!==norm(state.type))return false;
+    if(state.cert!=='all'&&norm(r.certificationStatus)!==norm(state.cert))return false;
+    if(state.listing!=='all'&&norm(r.status)!==norm(state.listing))return false;
     if(state.alcohol!=='all'&&valStatus(r.declarations.alcoholServed)!==state.alcohol)return false;
+    if(state.alcoholMenu!=='all'&&valStatus(r.declarations.alcoholMenuItemsDisclosed)!==state.alcoholMenu)return false;
     if(state.meat!=='all'&&valStatus(r.declarations.meatFromHalalCertifiedSources)!==state.meat)return false;
     if(state.pork!=='all'&&valStatus(r.declarations.noPorkDeclared)!==state.pork)return false;
     if(state.lard!=='all'&&valStatus(r.declarations.noLardDeclared)!==state.lard)return false;
+    if(state.prayer!=='all'&&valStatus(r.facilities.prayerSpace)!==state.prayer)return false;
+    if(state.mapready==='yes'&&!r.mapReady)return false;
+    if(state.mapready==='no'&&r.mapReady)return false;
     return true;
   });
+  var byName=function(a,b){return String(a.name).localeCompare(String(b.name));};
   rs.sort(function(a,b){
-    if(state.sort==='area')return String(a.area).localeCompare(String(b.area))||String(a.name).localeCompare(String(b.name));
-    if(state.sort==='updated')return (b.lastUpdated||'').localeCompare(a.lastUpdated||'')||String(a.name).localeCompare(String(b.name));
-    return String(a.name).localeCompare(String(b.name));
+    switch(state.sort){
+      case 'name_desc': return String(b.name).localeCompare(String(a.name));
+      case 'area':      return String(a.area).localeCompare(String(b.area))||byName(a,b);
+      case 'updated':   return (b.lastUpdated||'').localeCompare(a.lastUpdated||'')||byName(a,b);
+      case 'cert':      return String(a.certificationStatus||'~').localeCompare(String(b.certificationStatus||'~'))||byName(a,b);
+      case 'mapfirst':  return (b.mapReady?1:0)-(a.mapReady?1:0)||byName(a,b);
+      default:          return byName(a,b);
+    }
   });
   return rs;
 }
@@ -1020,23 +1061,35 @@ function renderRow(r){
     +demoDisc+'</div>'
     +'<div class="record-foot">'
     +'<span class="last-updated">'+(r.lastUpdated?'Updated '+esc(r.lastUpdated):'')+'</span>'
-    +'<button class="btn btn-outline btn-sm" type="button" data-view-on-map="'+esc(r.id)+'" style="font-size:10px;padding:0 10px;min-height:32px;">View on Map</button>'
+    +(r.mapReady
+        ?'<button class="btn btn-outline btn-sm" type="button" data-view-on-map="'+esc(r.id)+'" style="font-size:10px;padding:0 10px;min-height:32px;">View on Map</button>'
+        :'<span class="no-map-note" title="This listing has no map location">Map location unavailable</span>')
     +'<button class="btn btn-dark btn-sm" type="button" data-open-record="'+esc(r.id)+'">View Declaration</button>'
     +'</div></article>';
 }
 
-var CHIP_LABELS={alcohol:{yes:'Alcohol: served',no:'Alcohol: none',unknown:'Alcohol: ?'},meat:{yes:'Meat: halal-sourced',no:'Meat: ?',unknown:'Meat: ?'},pork:{yes:'No pork declared',no:'Pork: not declared'},lard:{yes:'No lard declared',no:'Lard: not declared'}};
+var CHIP_LABELS={
+  alcohol:{yes:'Alcohol served',no:'No alcohol served',unknown:'Alcohol not stated'},
+  alcoholMenu:{yes:'Alcohol in menu indicated',no:'Alcohol in menu not indicated',unknown:'Menu alcohol not stated'},
+  meat:{yes:'Halal-sourced meat',no:'Meat not halal-sourced',unknown:'Meat source not stated'},
+  pork:{yes:'No pork declared',no:'Pork not declared',unknown:'Pork not stated'},
+  lard:{yes:'No lard declared',no:'Lard not declared',unknown:'Lard not stated'},
+  prayer:{yes:'Prayer space',no:'No prayer space',unknown:'Prayer space not stated'},
+  mapready:{yes:'Shown on map',no:'No map location'}
+};
+var CHIP_PREFIX={area:'Area',cuisine:'Cuisine',type:'Type',cert:'Certification',listing:'Listing'};
+function chipLabel(k){
+  if(CHIP_LABELS[k])return CHIP_LABELS[k][state[k]]||state[k];
+  return (CHIP_PREFIX[k]||k)+': '+state[k];
+}
 function renderChips(){
   var chips=[];
-  if(state.search)chips.push({k:'search',l:'Search: '+state.search});
-  if(state.area!=='all')chips.push({k:'area',l:'Area: '+state.area});
-  if(state.cuisine!=='all')chips.push({k:'cuisine',l:'Cuisine: '+state.cuisine});
-  if(state.alcohol!=='all')chips.push({k:'alcohol',l:CHIP_LABELS.alcohol[state.alcohol]||state.alcohol});
-  if(state.meat!=='all')chips.push({k:'meat',l:CHIP_LABELS.meat[state.meat]||state.meat});
-  if(state.pork!=='all')chips.push({k:'pork',l:CHIP_LABELS.pork[state.pork]||state.pork});
-  if(state.lard!=='all')chips.push({k:'lard',l:CHIP_LABELS.lard[state.lard]||state.lard});
+  if(state.search.trim())chips.push({k:'search',l:'Search: '+state.search.trim()});
+  FILTER_KEYS.forEach(function(k){ if(state[k]!=='all')chips.push({k:k,l:chipLabel(k)}); });
   if(!chips.length){els.activeChips.innerHTML='';return;}
-  els.activeChips.innerHTML=chips.map(function(c){return'<span class="chip">'+esc(c.l)+' <button type="button" data-remove="'+esc(c.k)+'" aria-label="Remove filter: '+esc(c.l)+'">&times;</button></span>';}).join('');
+  els.activeChips.innerHTML=chips.map(function(c){
+    return '<span class="chip">'+esc(c.l)+' <button type="button" data-remove="'+esc(c.k)+'" aria-label="Remove filter: '+esc(c.l)+'">&times;</button></span>';
+  }).join('');
 }
 
 /* ── Map marker visibility + bounds ── */
@@ -1052,6 +1105,19 @@ function updateMapMarkers(rs){
     }
   });
   var visible=rs.filter(function(r){return mapMarkers[r.id];});
+  /* State: results exist but none can be plotted */
+  var me=document.getElementById('mapEmpty');
+  if(me){
+    if(!rs.length){
+      me.classList.add('visible');
+      me.textContent='No establishments match the current search or filters.';
+    } else if(!visible.length){
+      me.classList.add('visible');
+      me.textContent=rs.length+' matching '+(rs.length===1?'establishment has':'establishments have')+' no map location. Switch to List view to see them.';
+    } else {
+      me.classList.remove('visible');
+    }
+  }
   if(visible.length===1){
     var ll=mapMarkers[visible[0].id].getLatLng();
     mapInstance.setView(ll,15,{animate:true});
@@ -1059,6 +1125,11 @@ function updateMapMarkers(rs){
     var lls=visible.map(function(r){return mapMarkers[r.id].getLatLng();});
     try{mapInstance.fitBounds(L.latLngBounds(lls),{padding:[40,40],animate:true});}catch(e){}
   }
+}
+/* Bring the matching card into view when a marker is chosen */
+function scrollRowIntoView(id){
+  var row=els.recordsGrid&&els.recordsGrid.querySelector('.record-row[data-id="'+(window.CSS&&CSS.escape?CSS.escape(id):id)+'"]');
+  if(row&&row.scrollIntoView)try{row.scrollIntoView({block:'nearest',behavior:'smooth'});}catch(e){row.scrollIntoView();}
 }
 
 /* ── View on Map ── */
@@ -1224,7 +1295,7 @@ function initMap(){
       var mk=L.marker([c.lat,c.lng]).addTo(m);
       var popupBadge=r.isDemo?'<span class="lp-badge" style="color:#5B21B6;">DEMO LISTING</span>':'<span class="lp-badge">'+esc(r.certificationStatus||'Not stated')+'</span>';
       mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div><div class="lp-meta">'+esc(r.area)+' &middot; '+esc(r.cuisine)+'</div>'+popupBadge+'<button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">View Declaration</button>');
-      mk.on('click',function(){state.selectedId=r.id;Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===r.id);});showMapPreview(r);renderRows();});
+      mk.on('click',function(){state.selectedId=r.id;Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===r.id);});showMapPreview(r);renderRows();scrollRowIntoView(r.id);});
       mapMarkers[r.id]=mk;
       allLatLngs.push([c.lat,c.lng]);
     });
@@ -1240,22 +1311,37 @@ function syncControls(){
   if(els.searchInput)els.searchInput.value=state.search;
   if(els.areaFilter)els.areaFilter.value=state.area;
   if(els.cuisineFilter)els.cuisineFilter.value=state.cuisine;
+  if(els.typeFilter)els.typeFilter.value=state.type;
+  if(els.certFilter)els.certFilter.value=state.cert;
+  if(els.listingFilter)els.listingFilter.value=state.listing;
+  if(els.alcoholMenuFilter)els.alcoholMenuFilter.value=state.alcoholMenu;
+  if(els.prayerFilter)els.prayerFilter.value=state.prayer;
+  if(els.mapreadyFilter)els.mapreadyFilter.value=state.mapready;
   if(els.alcoholFilter)els.alcoholFilter.value=state.alcohol;
   if(els.meatFilter)els.meatFilter.value=state.meat;
   if(els.porkFilter)els.porkFilter.value=state.pork;
   if(els.lardFilter)els.lardFilter.value=state.lard;
   if(els.sortSelect)els.sortSelect.value=state.sort;
 }
-function resetAll(){state.search='';state.area='all';state.cuisine='all';state.alcohol='all';state.meat='all';state.pork='all';state.lard='all';state.sort='name';state.selectedId=null;syncControls();render();hideMapPreview();updateFilterBtnState();}
+function clearAllFilters(){state.search='';FILTER_KEYS.forEach(function(k){state[k]='all';});state.sort='name';}
+function resetAll(){clearAllFilters();state.selectedId=null;syncControls();syncSheetFromState();render();hideMapPreview();updateFilterBtnState();}
 function populateSelect(sel,vals){vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}
 function initFilters(){
-  var areas=getUniqueOptions('area');var cuisines=getUniqueOptions('cuisine');
-  if(els.areaFilter)populateSelect(els.areaFilter,areas);
-  if(els.cuisineFilter)populateSelect(els.cuisineFilter,cuisines);
+  if(els.areaFilter)populateSelect(els.areaFilter,getUniqueOptions('area'));
+  if(els.cuisineFilter)populateSelect(els.cuisineFilter,getUniqueOptions('cuisine'));
+  if(els.typeFilter)populateSelect(els.typeFilter,getUniqueOptions('establishmentType'));
+  if(els.certFilter)populateSelect(els.certFilter,getUniqueOptions('certificationStatus'));
+  if(els.listingFilter)populateSelect(els.listingFilter,getUniqueOptions('status'));
 }
-if(els.searchInput)els.searchInput.addEventListener('input',function(){state.search=els.searchInput.value;render();});
+var searchTmr=null;
+if(els.searchInput)els.searchInput.addEventListener('input',function(){
+  state.search=els.searchInput.value;
+  clearTimeout(searchTmr);
+  searchTmr=setTimeout(render,180); /* debounce: keeps fast typing smooth */
+});
+if(els.searchInput)els.searchInput.addEventListener('search',function(){clearTimeout(searchTmr);state.search=els.searchInput.value;render();});
 var ssb=document.getElementById('searchSubmitBtn');if(ssb)ssb.addEventListener('click',render);
-[[els.areaFilter,'area'],[els.cuisineFilter,'cuisine'],[els.alcoholFilter,'alcohol'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.sortSelect,'sort']].forEach(function(p){if(p[0])p[0].addEventListener('change',function(){state[p[1]]=p[0].value;render();updateFilterBtnState();});});
+[[els.areaFilter,'area'],[els.cuisineFilter,'cuisine'],[els.typeFilter,'type'],[els.certFilter,'cert'],[els.listingFilter,'listing'],[els.alcoholFilter,'alcohol'],[els.alcoholMenuFilter,'alcoholMenu'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.prayerFilter,'prayer'],[els.mapreadyFilter,'mapready'],[els.sortSelect,'sort']].forEach(function(p){if(p[0])p[0].addEventListener('change',function(){state[p[1]]=p[0].value;render();updateFilterBtnState();});});
 if(els.clearFiltersBtn)els.clearFiltersBtn.addEventListener('click',resetAll);
 if(els.emptyClearBtn)els.emptyClearBtn.addEventListener('click',resetAll);
 if(els.activeChips)els.activeChips.addEventListener('click',function(e){var btn=e.target.closest('[data-remove]');if(!btn)return;var k=btn.getAttribute('data-remove');if(k==='search')state.search='';else if(k in state)state[k]='all';syncControls();render();updateFilterBtnState();});
@@ -1276,11 +1362,11 @@ loadDirectory();
   <div class="filter-sheet-body">
     <div><label class="filter-label" for="sheetAreaFilter">Area / Prefecture</label><select class="dir-select" id="sheetAreaFilter"><option value="all">Any area</option></select></div>
     <div><label class="filter-label" for="sheetCuisineFilter">Cuisine</label><select class="dir-select" id="sheetCuisineFilter"><option value="all">Any cuisine</option></select></div>
-    <div><label class="filter-label" for="sheetAlcoholFilter">Alcohol served</label><select class="dir-select" id="sheetAlcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
+    <div><label class="filter-label" for="sheetTypeFilter">Establishment type</label><select class="dir-select" id="sheetTypeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="sheetCertFilter">Certification</label><select class="dir-select" id="sheetCertFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="sheetListingFilter">Listing status</label><select class="dir-select" id="sheetListingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="sheetAlcoholFilter">Alcohol served</label><select class="dir-select" id="sheetAlcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
     <div><label class="filter-label" for="sheetMeatFilter">Meat source</label><select class="dir-select" id="sheetMeatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div>
     <div><label class="filter-label" for="sheetPorkFilter">Pork declaration</label><select class="dir-select" id="sheetPorkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div>
     <div><label class="filter-label" for="sheetLardFilter">Lard declaration</label><select class="dir-select" id="sheetLardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div>
-    <div><label class="filter-label" for="sheetSortSelect">Sort</label><select class="dir-select" id="sheetSortSelect"><option value="name">Name A&#8211;Z</option><option value="area">Area</option><option value="updated">Recently updated</option></select></div>
+    <div><label class="filter-label" for="sheetAlcoholMenuFilter">Alcohol in menu items</label><select class="dir-select" id="sheetAlcoholMenuFilter"><option value="all">Any</option><option value="yes">Indicated</option><option value="no">Not indicated</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="sheetPrayerFilter">Prayer space</label><select class="dir-select" id="sheetPrayerFilter"><option value="all">Any</option><option value="yes">Available</option><option value="no">Not available</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="sheetMapreadyFilter">Map location</label><select class="dir-select" id="sheetMapreadyFilter"><option value="all">Any</option><option value="yes">Shown on map</option><option value="no">No map location</option></select></div><div><label class="filter-label" for="sheetSortSelect">Sort</label><select class="dir-select" id="sheetSortSelect"><option value="name">Name A&#8211;Z</option><option value="name_desc">Name Z&#8211;A</option><option value="area">Area / Prefecture</option><option value="updated">Recently updated</option><option value="cert">Certification status</option><option value="mapfirst">Map-ready first</option></select></div>
   </div>
   <div class="filter-sheet-footer">
     <button class="btn btn-dark" type="button" id="filterSheetApply" style="flex:1;">Apply Filters &#8594;</button>
