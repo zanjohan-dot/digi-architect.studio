@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
   <url>
     <loc>https://digi-architect.studio/</loc>
@@ -9,27 +8,11 @@
     <priority>1.0</priority>
   </url>
 
-  <!-- Halal & Muslim-Friendly Advisory — EN / JA pair.
-       Both URLs declare the same alternates, in both directions.
-       Google discards one-way hreflang, so this must stay symmetrical. -->
   <url>
     <loc>https://digi-architect.studio/muslim-friendly-advisory</loc>
     <lastmod>2026-07-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://digi-architect.studio/muslim-friendly-advisory"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://digi-architect.studio/muslim-friendly-advisory-ja"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://digi-architect.studio/muslim-friendly-advisory"/>
-  </url>
-
-  <url>
-    <loc>https://digi-architect.studio/muslim-friendly-advisory-ja</loc>
-    <lastmod>2026-07-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.9</priority>
-    <xhtml:link rel="alternate" hreflang="en" href="https://digi-architect.studio/muslim-friendly-advisory"/>
-    <xhtml:link rel="alternate" hreflang="ja" href="https://digi-architect.studio/muslim-friendly-advisory-ja"/>
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://digi-architect.studio/muslim-friendly-advisory"/>
   </url>
 
   <!-- Consumer-facing directory. Data updates whenever the workbook is replaced. -->
