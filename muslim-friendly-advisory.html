@@ -9,11 +9,11 @@
 <meta name="description" content="Halal and Muslim-friendly market readiness for food businesses, restaurants, hotels and hospitality groups. Advisory, certification pathway preparation, directory participation and digital visibility.">
 <meta name="keywords" content="halal certification consultant Singapore, halal readiness, Muslim-friendly advisory, Muis halal preparation, halal compliance, Muslim-friendly directory, halal market access">
 <meta name="robots" content="index, follow">
-<link rel="canonical" href="https://digi-architect.studio/halal-muslim-friendly-singapore/">
+<link rel="canonical" href="https://digi-architect.studio/muslim-friendly-advisory/">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Halal &amp; Muslim-Friendly Advisory | The Digital Systems Architect">
 <meta property="og:description" content="Advisory, certification pathway preparation, directory participation and digital visibility for food businesses, restaurants and hospitality groups.">
-<meta property="og:url" content="https://digi-architect.studio/halal-muslim-friendly-singapore/">
+<meta property="og:url" content="https://digi-architect.studio/muslim-friendly-advisory/">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Service","serviceType":"Halal and Muslim-friendly market readiness","provider":{"@type":"ProfessionalService","name":"The Digital Systems Architect","url":"https://digi-architect.studio/","email":"admin@digi-architect.studio","areaServed":"Singapore"},"areaServed":["Singapore","Japan","South Korea","China","Europe"],"description":"Operational readiness, governance, staff capability, certification pathway preparation, directory participation and digital visibility."}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"What is the difference between halal certification and Muslim-friendly readiness?","acceptedAnswer":{"@type":"Answer","text":"Halal certification is a formal mark issued by a halal certification body such as Muis. Muslim-friendly readiness is broader — the operational practices, governance and service standards that let an establishment serve Muslim consumers appropriately."}},{"@type":"Question","name":"Do you issue certification?","acceptedAnswer":{"@type":"Answer","text":"Halal certification is always issued by a halal certification body. In Singapore our role is purely advisory. Overseas our scope varies by engagement."}},{"@type":"Question","name":"Does directory participation mean my establishment is halal-certified?","acceptedAnswer":{"@type":"Answer","text":"No. Directory participation and Muslim-friendly self-declaration are not equivalent to halal certification. Each listing clearly displays its actual certification or self-declaration status."}},{"@type":"Question","name":"Is every establishment automatically accepted into the directory?","acceptedAnswer":{"@type":"Answer","text":"No. Participation is subject to review, completeness of information and acceptance of the directory's disclosure requirements."}},{"@type":"Question","name":"Will every listed establishment receive social-media promotion?","acceptedAnswer":{"@type":"Answer","text":"Promotional support depends on the agreed engagement, selected scope, campaign objectives and availability of suitable content."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -440,6 +440,22 @@ p{color:var(--muted);}
 .footer-line a{color:var(--muted);transition:color .2s;}.footer-line a:hover{color:var(--gold);}
 .footer-links-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:6px;}
 
+
+/* ============================================================
+   SHOWCASE — RESTRUCTURED CHANNEL LAYOUT
+============================================================ */
+.showcase-section-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.18em;text-transform:uppercase;color:var(--muted);margin:20px 0 10px;display:flex;align-items:center;gap:10px;}
+.showcase-section-lbl::after{content:'';flex:1;height:1px;background:var(--line);}
+.channel-grid-2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+@media(max-width:640px){.channel-grid-2{grid-template-columns:1fr;}}
+.channel-grid-1{display:grid;grid-template-columns:1fr;gap:10px;margin-bottom:10px;}
+.channel-card-wide{display:flex;gap:24px;align-items:flex-start;}
+@media(max-width:700px){.channel-card-wide{flex-direction:column;gap:14px;}}
+.qr-block{display:flex;flex-direction:column;align-items:center;gap:8px;flex-shrink:0;}
+.qr-block img{width:100px;height:100px;border:1px solid var(--line);padding:4px;background:var(--white);image-rendering:pixelated;}
+@media(max-width:700px){.qr-block img{width:80px;height:80px;}}
+.qr-label{font-family:'JetBrains Mono',monospace;font-size:8px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);text-align:center;}
+.channel-card-content{flex:1;min-width:0;}
 /* ============================================================
    REDUCED MOTION
 ============================================================ */
@@ -748,13 +764,12 @@ p{color:var(--muted);}
           <p class="showcase-intro">Our work connects operational readiness with public visibility. Participating establishments may be presented through our consumer-facing Muslim-Friendly Directory and featured across selected digital and social-media channels.</p>
           <p class="showcase-qual">The specific channels and promotional formats included will depend on the agreed engagement and availability of suitable content.</p>
 
-          <div class="channel-grid">
-            <!-- Directory -->
+          <!-- Consumer Directory -->
+          <div class="showcase-section-lbl">Consumer Directory</div>
+          <div class="channel-grid-1">
             <div class="channel-card">
               <div class="channel-card-top">
-                <div class="channel-icon">
-                  <svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg>
-                </div>
+                <div class="channel-icon"><svg viewBox="0 0 24 24"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><path d="M9 12h6M9 16h4"/></svg></div>
                 <div class="channel-name">Muslim-Friendly Directory</div>
               </div>
               <p class="channel-desc">Explore the consumer-facing directory where participating establishments may be presented through structured profiles, declaration information, location details and relevant external links.</p>
@@ -764,60 +779,112 @@ p{color:var(--muted);}
                 <span class="content-label">Map Listing</span>
                 <span class="content-label">Consumer Discovery</span>
               </div>
-              <a class="channel-link" href="/muslim-friendly-directory/" target="_self">View the Directory &#8594;</a>
+              <a class="channel-link" href="/muslim-friendly-directory/" target="_blank" rel="noopener noreferrer">View the Directory &#8594;</a>
             </div>
-            <!-- Instagram -->
+          </div>
+
+          <!-- Singapore Channels -->
+          <div class="showcase-section-lbl">Singapore Channels</div>
+          <div class="channel-grid-2">
+            <!-- Instagram SG -->
             <div class="channel-card">
               <div class="channel-card-top">
-                <div class="channel-icon">
-                  <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg>
-                </div>
-                <div class="channel-name">Instagram</div>
+                <div class="channel-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></div>
+                <div class="channel-name">Instagram &mdash; Singapore</div>
               </div>
-              <p class="channel-desc">View establishment spotlights, dining features, visual stories, reels and consumer-facing content created for participating businesses, depending on the agreed scope.</p>
+              <div class="channel-card-wide">
+                <div class="qr-block">
+                  <a href="https://www.instagram.com/muslim.friendly.sg/" target="_blank" rel="noopener noreferrer" aria-label="Open Muslim Friendly Singapore Instagram in a new tab">
+                    <img src="/assets/qr-sg.png" alt="QR code for Muslim Friendly Singapore Instagram" width="100" height="100">
+                  </a>
+                  <span class="qr-label">@muslim.friendly.sg</span>
+                </div>
+                <div class="channel-card-content">
+                  <p class="channel-desc">View establishment features, dining content, visual stories and short-form content developed for Singapore audiences. Content may vary by agreed scope.</p>
+                  <div class="content-labels">
+                    <span class="content-label">Establishment Spotlight</span>
+                    <span class="content-label">Reels &amp; Stories</span>
+                    <span class="content-label">Dining Feature</span>
+                  </div>
+                  <a class="channel-link" href="https://www.instagram.com/muslim.friendly.sg/" target="_blank" rel="noopener noreferrer">View Singapore Instagram &#8594;</a>
+                </div>
+              </div>
+            </div>
+            <!-- Facebook SG -->
+            <div class="channel-card">
+              <div class="channel-card-top">
+                <div class="channel-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M13.8 8.2h1.7V5.8h-2c-1.9 0-2.9 1.2-2.9 3v1.7H9v2.4h1.6V19h2.5v-6.1h1.9l.4-2.4h-2.3v-1.2c0-.6.2-1.1 1.2-1.1z" fill="currentColor" stroke="none"/></svg></div>
+                <div class="channel-name">Facebook &mdash; Singapore</div>
+              </div>
+              <p class="channel-desc">View Singapore-focused establishment features, updates and shareable consumer content developed for participating businesses. Content may vary by agreed scope.</p>
               <div class="content-labels">
-                <span class="content-label">Establishment Spotlight</span>
-                <span class="content-label">Reels</span>
-                <span class="content-label">Photo Feature</span>
-                <span class="content-label">Dining Story</span>
+                <span class="content-label">Establishment Feature</span>
+                <span class="content-label">Business Update</span>
+                <span class="content-label">Consumer Content</span>
               </div>
-              <a class="channel-link" href="https://www.instagram.com/digital.systems.architect" target="_blank" rel="noopener noreferrer">View Instagram &#8594;</a>
+              <a class="channel-link" href="https://www.facebook.com/share/1BTRohTwcV/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">View Singapore Facebook &#8594;</a>
             </div>
-            <!-- YouTube -->
+          </div>
+
+          <!-- Japan Channels -->
+          <div class="showcase-section-lbl">Japan Channels</div>
+          <div class="channel-grid-2">
+            <!-- Instagram JP -->
             <div class="channel-card">
               <div class="channel-card-top">
-                <div class="channel-icon">
-                  <svg viewBox="0 0 24 24"><rect x="2" y="5.5" width="20" height="13" rx="3.5"/><path d="M10.3 9.3v5.4l4.6-2.7z" fill="currentColor" stroke="none"/></svg>
+                <div class="channel-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="1" fill="currentColor" stroke="none"/></svg></div>
+                <div class="channel-name">Instagram &mdash; Japan</div>
+              </div>
+              <div class="channel-card-wide">
+                <div class="qr-block">
+                  <a href="https://www.instagram.com/muslim.friendly.jp/" target="_blank" rel="noopener noreferrer" aria-label="Open Muslim Friendly Japan Instagram in a new tab">
+                    <img src="/assets/qr-jp.png" alt="QR code for Muslim Friendly Japan Instagram" width="100" height="100">
+                  </a>
+                  <span class="qr-label">@muslim.friendly.jp</span>
                 </div>
+                <div class="channel-card-content">
+                  <p class="channel-desc">View establishment features, dining content and Muslim-friendly market content developed for Japan audiences. Content may vary by agreed scope.</p>
+                  <div class="content-labels">
+                    <span class="content-label">Japan Market</span>
+                    <span class="content-label">Establishment Feature</span>
+                    <span class="content-label">Dining Content</span>
+                  </div>
+                  <a class="channel-link" href="https://www.instagram.com/muslim.friendly.jp/" target="_blank" rel="noopener noreferrer">View Japan Instagram &#8594;</a>
+                </div>
+              </div>
+            </div>
+            <!-- Facebook JP -->
+            <div class="channel-card">
+              <div class="channel-card-top">
+                <div class="channel-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M13.8 8.2h1.7V5.8h-2c-1.9 0-2.9 1.2-2.9 3v1.7H9v2.4h1.6V19h2.5v-6.1h1.9l.4-2.4h-2.3v-1.2c0-.6.2-1.1 1.2-1.1z" fill="currentColor" stroke="none"/></svg></div>
+                <div class="channel-name">Facebook &mdash; Japan</div>
+              </div>
+              <p class="channel-desc">View Japan-focused establishment features, updates and shareable consumer content developed for participating businesses. Content may vary by agreed scope.</p>
+              <div class="content-labels">
+                <span class="content-label">Japan Market</span>
+                <span class="content-label">Establishment Feature</span>
+                <span class="content-label">Consumer Content</span>
+              </div>
+              <a class="channel-link" href="https://www.facebook.com/share/1Gw22qNTbd/?mibextid=wwXIfr" target="_blank" rel="noopener noreferrer">View Japan Facebook &#8594;</a>
+            </div>
+          </div>
+
+          <!-- Shared Video -->
+          <div class="showcase-section-lbl">Shared Video Channel</div>
+          <div class="channel-grid-1">
+            <div class="channel-card">
+              <div class="channel-card-top">
+                <div class="channel-icon"><svg viewBox="0 0 24 24"><rect x="2" y="5.5" width="20" height="13" rx="3.5"/><path d="M10.3 9.3v5.4l4.6-2.7z" fill="currentColor" stroke="none"/></svg></div>
                 <div class="channel-name">YouTube</div>
               </div>
-              <p class="channel-desc">View video features, establishment introductions, dining content, interviews and educational videos relating to Muslim-friendly practices, depending on the agreed scope.</p>
+              <p class="channel-desc">View establishment introductions, interviews, educational features and longer-form Muslim-friendly content. Content may vary by agreed scope and availability.</p>
               <div class="content-labels">
                 <span class="content-label">Video Feature</span>
                 <span class="content-label">Interview</span>
                 <span class="content-label">Venue Introduction</span>
                 <span class="content-label">Educational Content</span>
               </div>
-              <!-- YouTube URL not yet confirmed — update href when available -->
-              <span class="channel-link-disabled">YouTube &#8212; link to be confirmed</span>
-            </div>
-            <!-- Facebook -->
-            <div class="channel-card">
-              <div class="channel-card-top">
-                <div class="channel-icon">
-                  <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M13.8 8.2h1.7V5.8h-2c-1.9 0-2.9 1.2-2.9 3v1.7H9v2.4h1.6V19h2.5v-6.1h1.9l.4-2.4h-2.3v-1.2c0-.6.2-1.1 1.2-1.1z" fill="currentColor" stroke="none"/></svg>
-                </div>
-                <div class="channel-name">Facebook</div>
-              </div>
-              <p class="channel-desc">View establishment features, updates, campaign posts and shareable content developed to strengthen consumer awareness of participating businesses, depending on the agreed scope.</p>
-              <div class="content-labels">
-                <span class="content-label">Establishment Feature</span>
-                <span class="content-label">Campaign Post</span>
-                <span class="content-label">Business Update</span>
-                <span class="content-label">Consumer Content</span>
-              </div>
-              <!-- Facebook URL not yet confirmed — update href when available -->
-              <span class="channel-link-disabled">Facebook &#8212; link to be confirmed</span>
+              <a class="channel-link" href="https://www.youtube.com/@digi.muslim.friendly" target="_blank" rel="noopener noreferrer">View YouTube &#8594;</a>
             </div>
           </div>
 
@@ -872,7 +939,7 @@ p{color:var(--muted);}
               <p>The consumer-facing directory allows diners to search establishments, review individual declarations and understand each listing&#39;s certification or self-declaration status.</p>
             </div>
             <div class="dir-preview-btns">
-              <a class="btn btn-primary" href="/muslim-friendly-directory/">View the Muslim-Friendly Directory</a>
+              <a class="btn btn-primary" href="/muslim-friendly-directory/" target="_blank" rel="noopener noreferrer">View the Muslim-Friendly Directory</a>
             </div>
           </div>
           <div class="participation-notice">
@@ -912,7 +979,7 @@ p{color:var(--muted);}
             </div>
             <div class="connected-strip">
               <p>Halal and Muslim-friendly readiness is one of three areas &#8212; alongside operational systems and market visibility. An establishment that is ready but invisible is only half-built.</p>
-              <a class="btn btn-primary" href="/">Explore the full practice</a>
+              <a class="btn btn-primary" href="/" target="_blank" rel="noopener noreferrer">Explore the full practice</a>
             </div>
           </div>
         </div>
@@ -970,7 +1037,7 @@ p{color:var(--muted);}
               <p>Speak with us about Muslim-friendly advisory, declaration preparation, directory participation and digital promotion for your establishment.</p>
               <div class="cta-btns">
                 <a class="btn btn-primary" href="mailto:admin@digi-architect.studio?subject=Business%20Onboarding%20%E2%80%94%20Halal%20%26%20Muslim-Friendly">Discuss Business Onboarding</a>
-                <a class="btn btn-ghost-light" href="/muslim-friendly-directory/">View the Consumer Directory</a>
+                <a class="btn btn-ghost-light" href="/muslim-friendly-directory/" target="_blank" rel="noopener noreferrer">View the Consumer Directory</a>
                 <a class="btn btn-ghost-light" href="https://wa.me/6589878714" target="_blank" rel="noopener noreferrer">WhatsApp Us</a>
               </div>
               <div class="cta-contact-strip" aria-label="Contact details">
