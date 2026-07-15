@@ -389,9 +389,21 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   .contact-signature {
     color: rgba(100, 116, 139, 0.8); text-align: center;
     margin-top: 24px; font-weight: 500; letter-spacing: 0.02em; line-height: 1.6;
+    max-width: 64ch; margin-inline: auto; text-wrap: balance;
   }
   .contact-signature a { color: var(--navy); text-decoration: none; border-bottom: 1px solid transparent; transition: 0.3s; font-weight: 600; }
   .contact-signature a:hover { color: var(--gold); border-bottom-color: var(--gold); }
+  /* Legal notice: present and findable, but quieter than the signature above it. */
+  /* Pill row now leads the footer; the signature follows beneath it. */
+  .seo-pill-row {
+    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px;
+    margin-bottom: 16px;
+  }
+  .sig-line { display: block; }
+  .rights-line {
+    display: block; margin: 8px auto 0; max-width: 46ch;
+    font-size: 0.85em; line-height: 1.5; opacity: 0.55; font-weight: 400;
+  }
 
   /* ============================================================
      CUSTOM GOLD CURSOR  (desktop + fine pointer only)
@@ -887,17 +899,23 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           </div>
 
           <div class="contact-signature">
-            Designed and built by The Digital Systems Architect | Zan J Private Limited (UEN: 202616105R) | <a href="mailto:admin@digi-architect.studio">admin@digi-architect.studio</a><br>&copy; 2026 Zan J Private Limited (UEN: 202616105R). All rights reserved. The design, code and content of this site may not be reproduced or adapted without written permission.
-            
-            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 16px;">
+            <nav class="seo-pill-row" aria-label="Related pages">
               <a href="/workflow-automation-singapore/" class="seo-pill">Workflow Automation</a>
+
               <a href="/governance-dashboard-singapore/" class="seo-pill">Governance Dashboards</a>
+
               <a href="/finance-automation-singapore/" class="seo-pill">Finance Automation</a>
+
               <a href="/hr-systems-singapore/" class="seo-pill">HR Systems</a>
+
               <a href="/muslim-friendly-advisory" class="seo-pill" target="_blank" rel="noopener noreferrer">Halal &amp; Muslim-Friendly</a>
+
               <a href="/muslim-friendly-directory" class="seo-pill" target="_blank" rel="noopener noreferrer">Muslim-Friendly Directory</a>
+
               <a href="/faq/" class="seo-pill">FAQ</a>
-            </div>
+            </nav>
+            <span class="sig-line">Designed and built by The Digital Systems Architect | Zan J Private Limited (UEN: 202616105R) | <a href="mailto:admin@digi-architect.studio">admin@digi-architect.studio</a></span>
+            <span class="rights-line">&copy; 2026 Zan J Private Limited. All rights reserved. No part of this site may be reproduced without written permission.</span>
           </div>
         </div>
       </div>
