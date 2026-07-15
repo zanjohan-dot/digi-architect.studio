@@ -611,6 +611,37 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   @media(max-width:768px) {
     .seo-pill { font-size: 9px; padding: 5px 10px; }
   }
+
+  /* Practice-area card as link */
+  .practice-card-link {
+    text-decoration: none;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .practice-card-link:hover {
+    transform: translateY(-3px);
+    border-color: rgba(204, 153, 64, 0.55);
+    box-shadow: 0 14px 36px rgba(15, 23, 42, 0.10);
+  }
+  .practice-card-link:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+  .card-explore-cue {
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--gold);
+    letter-spacing: 0.07em;
+    text-transform: uppercase;
+    margin-top: 14px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: gap 0.2s var(--ease-out);
+  }
+  .practice-card-link:hover .card-explore-cue { gap: 10px; }
 </style>
 </head>
 <body>
@@ -737,10 +768,11 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
           <h3 style="color: var(--navy); margin-bottom: 6px;">Market Visibility</h3>
           <p style="color: var(--grey);">Websites, Google Business Profile, and visual storytelling&mdash;brand film, photography, and digital narrative&mdash;built for discoverability and trust.</p>
         </div>
-        <div class="card">
+        <a class="card practice-card-link" href="/muslim-friendly-advisory/" target="_blank" rel="noopener noreferrer" aria-label="Open Halal and Muslim-Friendly Market Access advisory in a new tab">
           <h3 style="color: var(--navy); margin-bottom: 6px;">Halal &amp; Muslim-Friendly Market Access</h3>
           <p style="color: var(--grey);">Operational readiness, governance, and certification pathways that open Muslim consumer, export, and tourism markets&mdash;informed by direct experience inside halal certification.</p>
-        </div>
+          <span class="card-explore-cue" aria-hidden="true">Explore Advisory &#8594;</span>
+        </a>
       </div>
     </div>
   </div>
@@ -840,7 +872,8 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
               <a href="/governance-dashboard-singapore/" class="seo-pill">Governance Dashboards</a>
               <a href="/finance-automation-singapore/" class="seo-pill">Finance Automation</a>
               <a href="/hr-systems-singapore/" class="seo-pill">HR Systems</a>
-              <a href="/halal-muslim-friendly-singapore/" class="seo-pill">Halal &amp; Muslim-Friendly</a>
+              <a href="/muslim-friendly-advisory/" class="seo-pill" target="_blank" rel="noopener noreferrer">Halal &amp; Muslim-Friendly</a>
+              <a href="/muslim-friendly-directory/" class="seo-pill" target="_blank" rel="noopener noreferrer">Muslim-Friendly Directory</a>
               <a href="/faq/" class="seo-pill">FAQ</a>
             </div>
           </div>
