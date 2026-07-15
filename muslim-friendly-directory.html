@@ -468,11 +468,20 @@ body.sheet-open .panel-nav,body.drawer-open .panel-nav{opacity:0;pointer-events:
 .dir-title{min-width:0;flex:1 1 260px;}
 .dir-title h2{font-size:clamp(18px,2.5vw,28px);margin:0;}
 .dir-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex-shrink:0;}
-.dir-toolbar .dir-field{width:clamp(180px,22vw,280px);}
+.dir-search-wrap{position:relative;display:flex;align-items:center;width:clamp(200px,24vw,300px);}
+.dir-toolbar .dir-search-wrap .dir-field{width:100%;padding-left:34px;padding-right:40px;}
+.search-icon{position:absolute;left:11px;width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;pointer-events:none;transition:stroke .2s;}
+.dir-search-wrap:focus-within .search-icon{stroke:var(--gold);}
+.search-go{position:absolute;right:4px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:0;border-radius:2px;background:transparent;color:var(--muted);cursor:pointer;transition:background .2s,color .2s;}
+.search-go svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.search-go:hover{background:var(--ink);color:var(--white);}
+.search-go:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+/* type=search shows a native clear ✕; keep our button clear of it */
+.dir-field::-webkit-search-cancel-button{margin-right:34px;}
 @media(max-width:900px){
   .dir-top-row{align-items:stretch;}
   .dir-toolbar{width:100%;}
-  .dir-toolbar .dir-field{flex:1 1 160px;width:auto;}
+  .dir-toolbar .dir-search-wrap{flex:1 1 180px;width:auto;}
 }
 /* ── Desktop dropdown: overlays the map, so the map never resizes and
       the results never shift. Freed from the 360px column, 12 fields
@@ -651,7 +660,13 @@ body.sheet-open .panel-nav,body.drawer-open .panel-nav{opacity:0;pointer-events:
               <h2>List of Muslim-friendly establishments</h2>
             </div>
             <div class="dir-toolbar">
-              <input class="dir-field" id="searchInput" type="search" placeholder="Name, area, cuisine, postal code&#8230;" autocomplete="off" aria-label="Search establishments" />
+              <div class="dir-search-wrap">
+                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+                <input class="dir-field" id="searchInput" type="search" placeholder="Name, area, cuisine, postal code&#8230;" autocomplete="off" aria-label="Search establishments" />
+                <button class="search-go" id="searchGoBtn" type="button" aria-label="Search">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+                </button>
+              </div>
               <button class="dir-filter-btn dir-filter-btn-desktop" id="filterToggleBtn" type="button" aria-expanded="false" aria-controls="filterDropdown">
                 <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
                 Filters<span class="fbtn-count"></span>
@@ -675,7 +690,6 @@ body.sheet-open .panel-nav,body.drawer-open .panel-nav{opacity:0;pointer-events:
               <button class="btn btn-dark btn-sm" type="button" id="searchSubmitBtn">Apply &#8594;</button>
             </div>
           </div>
-        </div>
         </div>
         <!-- Body: left (results) + right (map) -->
         <div class="dir-panel-body">
@@ -1523,6 +1537,19 @@ if(els.searchInput)els.searchInput.addEventListener('input',function(){
   searchTmr=setTimeout(render,180); /* debounce: keeps fast typing smooth */
 });
 if(els.searchInput)els.searchInput.addEventListener('search',function(){clearTimeout(searchTmr);state.search=els.searchInput.value;render();});
+/* Submit now: cancels the pending debounce, renders immediately, and blurs so
+   the on-screen keyboard gets out of the way of the results it just produced. */
+function submitSearch(){
+  clearTimeout(searchTmr);
+  if(els.searchInput){state.search=els.searchInput.value;els.searchInput.blur();}
+  render();
+  closeDropdown();
+}
+var sgb=document.getElementById('searchGoBtn');
+if(sgb)sgb.addEventListener('click',submitSearch);
+if(els.searchInput)els.searchInput.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();submitSearch();}
+});
 var ssb=document.getElementById('searchSubmitBtn');if(ssb)ssb.addEventListener('click',function(){render();closeDropdown({refocus:true});});
 /* Dropdown overlays the map, so nothing resizes on open — no invalidateSize
    needed, and the map view is never disturbed. Three ways out: Escape,
