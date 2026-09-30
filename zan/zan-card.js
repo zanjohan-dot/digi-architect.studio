@@ -20,7 +20,7 @@ const CONTACT = {
   name: "Zan Johan",
   givenName: "Zan",
   familyName: "Johan",
-  title: "Executive Director, Digital Systems Architect | Halal | Finance | Legal",
+  title: "Founder, Digital Systems Architect | Halal | Finance | Legal",
   company: "The Digital Systems Architect",
 
   phoneDisplay: "+65 8987 8714",
