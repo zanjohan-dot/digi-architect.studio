@@ -1,6 +1,6 @@
 {
-  "_comment": "Administrator decisions for directory maintenance. See README.md.",
-  "osm_publishing_accepted": false,
+  "_comment": "Administrator decisions for directory maintenance. See README.md. OSM publishing accepted by Zan Johan on 2026-10-16 for the separate ODbL community-listings file only.",
+  "osm_publishing_accepted": true,
   "suspend_expired_certificates": true,
   "geocode_with_onemap": true,
   "reverify_days": 31,
