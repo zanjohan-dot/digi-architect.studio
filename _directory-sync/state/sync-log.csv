@@ -1,0 +1,2 @@
+run_at_sgt,trigger,status,sources,records_retrieved,new,updated,unchanged,no_longer_found,duplicates,needs_review,directory_issues,errors
+2026-10-16 14:46,workflow_dispatch,Successful,osm: Successful; permitted: No permitted dataset supplied this month.,329,329,0,0,0,0,329,0,
