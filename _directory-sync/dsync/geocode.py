@@ -81,8 +81,10 @@ def postal_for_address(address, lat, lon, session=None):
     if not parts:
         return "", "unparseable"
     blk, road = parts
+    first = re.sub(r"#\S+", " ", re.split(r",", str(address))[0]).strip()
+    first = re.sub(r"^(BLK|BLOCK)\s+", "", first, flags=re.I)
     try:
-        hits = _search(f"{blk} {road}", session or requests.Session())
+        hits = _search(first, session or requests.Session())  # search with the original wording
     except (requests.RequestException, ValueError):
         return "", "error"
     postals = set()
