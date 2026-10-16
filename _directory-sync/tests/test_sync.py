@@ -31,12 +31,12 @@ sys.path.insert(0, str(TOOL))
 from dsync.verification import VERIFICATION_FIELDS  # noqa: E402
 
 
-def node(i, name, postcode=None, lat=1.30, lon=103.85, **tags):
+def node(i, name, postcode=None, lat=1.30, lon=103.85, timestamp="2025-06-01T00:00:00Z", **tags):
     t = {"name": name, "amenity": "restaurant", "diet:halal": "yes"}
     if postcode:
         t["addr:postcode"] = postcode
     t.update(tags)
-    return {"type": "node", "id": i, "lat": lat, "lon": lon, "tags": t}
+    return {"type": "node", "id": i, "lat": lat, "lon": lon, "timestamp": timestamp, "tags": t}
 
 
 BASE = [
@@ -77,10 +77,11 @@ class Harness:
         for f in (self.tool / "inbox" / "permitted").glob("*.csv"):
             f.unlink()
         (self.dir / "data").mkdir()
-        shutil.copy(WORKBOOK, self.wb)
+        shutil.copy(WORKBOOK, self.wb)  # tests start from the production main workbook...
         shutil.copy(PAGE, self.dir / PAGE.name)
         s = json.loads((TOOL / "settings.json").read_text())
-        s.update({"geocode_with_onemap": False}, **(settings or {}))
+        # ...but never from production decisions or community data: each test opts in.
+        s.update({"geocode_with_onemap": False, "osm_publishing_accepted": False}, **(settings or {}))
         (self.tool / "settings.json").write_text(json.dumps(s))
 
     @property
@@ -125,14 +126,18 @@ class Harness:
                 r["review_status"] = "approved"
         self.write("candidates.csv", rows)
 
-    def listings(self):
-        ws = openpyxl.load_workbook(self.wb, data_only=True)["Establishments"]
+    @property
+    def cwb(self):
+        return self.dir / "data" / "community-listings.xlsx"
+
+    def listings(self, community=False):
+        ws = openpyxl.load_workbook(self.cwb if community else self.wb, data_only=True)["Establishments"]
         hdr = [c.value for c in ws[1]]
         return [dict(zip(hdr, r)) for r in ws.iter_rows(min_row=2, values_only=True) if r[hdr.index("Name")]]
 
-    def site_reads(self):
+    def site_reads(self, community=False):
         """Number of listings the website would show, or raise if it would break."""
-        r = subprocess.run(["node", str(TOOL / "tools" / "site_read_check.mjs"), str(self.wb)],
+        r = subprocess.run(["node", str(TOOL / "tools" / "site_read_check.mjs"), str(self.cwb if community else self.wb)],
                            capture_output=True, text=True, cwd=TOOL / "tools")
         if r.returncode:
             raise AssertionError(r.stdout + r.stderr)
@@ -153,6 +158,45 @@ class Base(unittest.TestCase):
 
 
 # --------------------------------------------------------------------- sync --
+
+class QualityGradeTests(unittest.TestCase):
+    def test_grades(self):
+        from dsync.quality import grade
+        today = dt.date(2026, 10, 31)
+        base = {"name": "X", "place_kind": "amenity=restaurant", "address": "1 Road", "postal_code": "123456",
+                "osm_last_edit": "2025-01-01", "lifecycle": "", "check_date": ""}
+        self.assertEqual(grade(base, today)[0], "publishable")
+        self.assertEqual(grade(dict(base, name=""), today)[0], "rejected")
+        self.assertEqual(grade(dict(base, place_kind="shop=supermarket"), today)[0], "rejected")
+        self.assertEqual(grade(dict(base, place_kind="shop=bakery"), today)[0], "publishable")
+        self.assertEqual(grade(dict(base, lifecycle="tagged was:amenity"), today)[0], "rejected")
+        self.assertEqual(grade(dict(base, address="", postal_code=""), today)[0], "needs_location")
+        self.assertEqual(grade(dict(base, osm_last_edit="2019-01-01"), today)[0], "needs_check")
+        self.assertEqual(grade(dict(base, osm_last_edit="2019-01-01", check_date="2025-12-01"), today)[0], "publishable")
+        self.assertIn("no postal code", grade(dict(base, postal_code=""), today)[1])
+        self.assertEqual(grade(dict(base, postal_code="000101"), today)[0], "needs_check")
+        self.assertEqual(grade(dict(base, latitude="3.15", longitude="101.7"), today)[0], "rejected")
+        self.assertEqual(grade(dict(base, address="#03-21", postal_code=""), today)[0], "needs_location")
+        self.assertEqual(grade(dict(base, address="#03-21"), today)[0], "publishable")  # postal code locates it
+        self.assertEqual(grade(dict(base, duplicate_of="osm:node/1"), today)[0], "needs_check")
+
+    def test_venue_detection(self):
+        from dsync.quality import is_venue
+        self.assertTrue(is_venue({"name": "Adam Food Centre"}))
+        self.assertTrue(is_venue({"name": "Kedai Kopi", "place_kind": "amenity=restaurant"}))
+        self.assertTrue(is_venue({"name": "X", "place_kind": "amenity=food_court"}))
+        self.assertFalse(is_venue({"name": "Prata Corner", "place_kind": "amenity=restaurant"}))
+
+    def test_same_name_within_50m_is_duplicate(self):
+        from dsync.match import dedupe_sources
+        a = {"source": "osm", "source_id": "osm:node/1", "name": "Nasi Lemak House", "postal_code": "730123",
+             "address": "12 Woodlands Ave 1", "latitude": 1.3, "longitude": 103.85}
+        b = dict(a, source_id="osm:way/2", postal_code="", address="", latitude=1.3002, longitude=103.8501)
+        c = dict(a, source_id="osm:node/3", postal_code="", address="", latitude=1.35, longitude=103.9)
+        self.assertEqual(dedupe_sources([a, b, c]), 1)
+        self.assertEqual(b["duplicate_of"], "osm:node/1")
+        self.assertNotIn("duplicate_of", c)  # same brand far away = separate branch
+
 
 class SyncTests(Base):
     def test_month_end_guard(self):
@@ -379,40 +423,105 @@ class ApplyTests(Base):
         self.assertIn("certifying_body", notes["V-body"])
         self.assertTrue(all(v["status"] == "approved" for v in self.h.read("verifications.csv")))
 
-    def test_certify_existing_listing_leaves_others_identical(self):
-        self.h.settings_override = None
-        s = json.loads((self.h.tool / "settings.json").read_text())
-        s["osm_publishing_accepted"] = True
-        (self.h.tool / "settings.json").write_text(json.dumps(s))
+    def enable_osm(self):
+        st = json.loads((self.h.tool / "settings.json").read_text())
+        st["osm_publishing_accepted"] = True
+        (self.h.tool / "settings.json").write_text(json.dumps(st))
+
+    def test_community_listings_go_to_separate_file_with_stable_ids(self):
+        self.enable_osm()
         self.h.sync(BASE)
         self.h.approve("osm:node/1", "osm:node/2", "osm:node/3")
         r = self.h.apply()
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-        rows = {x["Name"]: x for x in self.h.listings()}
+        self.assertEqual(self.h.listings(), [], "main workbook holds no community data")
+        rows = {x["Name"]: x for x in self.h.listings(community=True)}
         self.assertEqual(len(rows), 3)
-        target = rows["Prata Corner"]["ID"]
-        others = {k: v for k, v in rows.items() if k != "Prata Corner"}
+        self.assertTrue(all(x["ID"].startswith("com-") for x in rows.values()))
+        nasi = rows["Nasi Lemak House"]
+        self.assertEqual(nasi["Listing Status"], "Community suggested — not verified")
+        self.assertEqual(nasi["Certification Status"], "Not verified — community-suggested")
+        self.assertIn(str(nasi["Halal Certified"] or ""), ("", "None"))
+        self.assertIn("not evidence of halal certification", nasi["Basis of Listing"])
+        self.assertIn("OpenStreetMap", nasi["Additional Notes"])
+        self.assertEqual(nasi["Area / Prefecture"], "Woodlands")
+        self.assertNotIn("every stall", nasi["Basis of Listing"])
+        wb = openpyxl.load_workbook(self.h.cwb)
+        self.assertIn("Licence", wb.sheetnames)
+        if HAS_SHEETJS:
+            self.assertEqual(self.h.site_reads(community=True), 3)
+        self.h.sync(BASE, today="2026-11-30")
+        self.assertEqual(self.h.candidates()["osm:node/1"]["match_status"], "listed")
+        self.assertEqual(self.h.read("sync-log.csv")[-1]["new"], "0")
+
+    def test_quality_gates(self):
+        self.enable_osm()
+        stale = node(6, "Old Kopitiam", "123456", timestamp="2016-01-01T00:00:00Z")
+        shop = node(7, "Corner Mart", "234567", amenity=None, shop="convenience")
+        shop["tags"].pop("amenity")
+        closed = node(8, "Gone Cafe", "345678", **{"disused:amenity": "cafe"})
+        self.h.sync(BASE + [stale, shop, closed])
+        c = self.h.candidates()
+        self.assertEqual(c["osm:node/1"]["quality_tier"], "publishable")
+        self.assertEqual(c["osm:node/5"]["quality_tier"], "needs_location")
+        self.assertEqual(c["osm:node/6"]["quality_tier"], "needs_check")
+        self.assertEqual(c["osm:node/7"]["quality_tier"], "rejected")
+        self.assertEqual(c["osm:node/8"]["quality_tier"], "rejected")
+        self.h.approve("osm:node/5", "osm:node/6", "osm:node/7", "osm:node/8")
+        before = file_hash(self.h.wb)
+        r = self.h.apply()
+        self.assertEqual(r.stdout.count("REFUSED"), 4, r.stdout)
+        self.assertFalse(self.h.cwb.exists() and self.h.listings(community=True))
+        # An administrator who confirms the stale record still operates can publish it.
+        rows = self.h.read("candidates.csv")
+        for x in rows:
+            if x["source_id"] == "osm:node/6":
+                x["review_note"] = "checked open 2026-10"
+        self.h.write("candidates.csv", rows)
+        r = self.h.apply()
+        self.assertIn("1 community listing(s) added", r.stdout)
+        self.assertEqual(before, file_hash(self.h.wb))
+
+    def test_food_centre_wording_does_not_imply_every_stall_is_halal(self):
+        self.enable_osm()
+        venue = node(9, "Adam Food Centre", "289876", amenity="food_court")
+        self.h.sync(BASE + [venue])
+        self.h.approve("osm:node/9")
+        r = self.h.apply()
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        [row] = self.h.listings(community=True)
+        self.assertIn("does not mean every stall is halal", row["Basis of Listing"])
+
+    def test_certifying_a_community_listing_moves_it(self):
+        self.enable_osm()
+        self.h.sync(BASE)
+        self.h.approve("osm:node/1", "osm:node/2", "osm:node/3")
+        self.h.apply()
+        comm = {x["Name"]: x["ID"] for x in self.h.listings(community=True)}
         self.h.write("verifications.csv", [verification(
-            target=target, establishment_name="Prata Corner", address="1 Ang Mo Kio Ave 10",
+            target=comm["Prata Corner"], establishment_name="Prata Corner", address="1 Ang Mo Kio Ave 10",
             postal_code="560456")])
         r = self.h.apply()
         self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
-        after = {x["Name"]: x for x in self.h.listings()}
-        self.assertEqual(after["Prata Corner"]["Listing Status"], "Halal certified")
-        self.assertEqual(after["Prata Corner"]["ID"], target)
-        for k, v in others.items():
-            self.assertEqual(after[k], v, f"{k} must not change")
-        self.assertIn("OpenStreetMap", after["Nasi Lemak House"]["Additional Notes"])
-        self.assertEqual(after["Nasi Lemak House"]["Area / Prefecture"], "Woodlands")
-        self.assertEqual(after["Nasi Lemak House"]["Listing Status"], "Community suggested — not verified")
-        self.assertIn(str(after["Nasi Lemak House"]["Halal Certified"] or ""), ("", "None"))
+        [cert] = self.h.listings()
+        self.assertEqual((cert["Name"], cert["Listing Status"]), ("Prata Corner", "Halal certified"))
+        after = {x["Name"]: x["ID"] for x in self.h.listings(community=True)}
+        self.assertEqual(after, {k: v for k, v in comm.items() if k != "Prata Corner"}, "other IDs unchanged")
+        self.assertEqual(self.h.candidates()["osm:node/2"]["directory_id"], cert["ID"])
         if HAS_SHEETJS:
-            self.assertEqual(self.h.site_reads(), 3)
-        # Next month, promoted candidates are recognised as listed, not new.
-        self.h.sync(BASE, today="2026-11-30")
-        c = self.h.candidates()
-        self.assertEqual(c["osm:node/1"]["match_status"], "listed")
-        self.assertEqual(self.h.read("sync-log.csv")[-1]["new"], "0")
+            self.assertEqual(self.h.site_reads(), 1)
+            self.assertEqual(self.h.site_reads(community=True), 2)
+
+    def test_closure_after_publication_flagged_not_removed(self):
+        self.enable_osm()
+        self.h.sync(BASE)
+        self.h.approve("osm:node/1")
+        self.h.apply()
+        closed = [dict(e, tags=dict(e["tags"])) for e in BASE]
+        closed[0]["tags"]["disused:amenity"] = "restaurant"
+        self.h.sync(closed, today="2026-11-30")
+        self.assertEqual(len(self.h.listings(community=True)), 1)
+        self.assertIn("Source reports closed", {i["issue"] for i in self.h.read("directory-issues.csv")})
 
     def test_certify_candidate_by_source_id(self):
         self.h.sync(BASE)

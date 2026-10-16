@@ -36,7 +36,7 @@ area["ISO3166-1"="SG"][admin_level=2]->.sg;
   nwr["diet:halal"~"^(yes|only)$"](area.sg);
   nwr["cuisine"~"(^|;)halal(;|$)"](area.sg);
 );
-out tags center;
+out tags center meta;
 """
 
 AMENITY_TO_TYPE = {
@@ -116,8 +116,32 @@ def osm_record(el):
         "certificate_expiry": "",
         "source_url": f"https://www.openstreetmap.org/{el.get('type')}/{el.get('id')}",
         "licence": "ODbL-1.0 (© OpenStreetMap contributors)",
+        # Quality signals. The editor's user name is deliberately not kept.
+        "osm_last_edit": (el.get("timestamp") or "")[:10],
+        "place_kind": f"amenity={tags['amenity']}" if tags.get("amenity") else
+                      (f"shop={tags['shop']}" if tags.get("shop") else ""),
+        "lifecycle": lifecycle(tags),
+        "check_date": (tags.get("check_date") or tags.get("survey:date") or "")[:10],
         "raw": json.dumps(tags, ensure_ascii=False, sort_keys=True),
     }
+
+
+LIFECYCLE_PREFIXES = ("disused:", "abandoned:", "was:", "demolished:", "razed:", "removed:", "closed:")
+
+
+def lifecycle(tags):
+    """Return a short reason if OSM marks the place as closed, else ''."""
+    for k in tags:
+        if k.startswith(LIFECYCLE_PREFIXES):
+            return f"tagged {k}"
+    if tags.get("opening_hours", "").strip().lower() in ("closed", "off"):
+        return "opening_hours=closed"
+    if tags.get("end_date"):
+        return f"end_date {tags['end_date']}"
+    name = (tags.get("name") or "").lower()
+    if "(closed)" in name or "permanently closed" in name:
+        return "name says closed"
+    return ""
 
 
 # ---------------------------------------------------------------------------

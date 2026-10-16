@@ -29,11 +29,15 @@ sys.path.insert(0, str(HERE))
 
 from dsync import SGT_TZ  # noqa: E402
 from dsync.geocode import by_postal  # noqa: E402
+from dsync.quality import is_venue  # noqa: E402
 from dsync.normalise import norm_name, norm_postal  # noqa: E402
 from dsync.verification import VERIFICATION_FIELDS, certified_fields, validate  # noqa: E402
-from dsync.workbook import (append_records, bump_data_version, read_directory,  # noqa: E402
-                            update_records)
-from sync import CAND_FIELDS, STATE, WORKBOOK, load_settings, read_csv, write_csv  # noqa: E402
+import hashlib  # noqa: E402
+
+from dsync.workbook import (append_records, bump_data_version, create_community_workbook,  # noqa: E402
+                            remove_records, update_records)
+from sync import (CAND_FIELDS, STATE, WORKBOOK, community_path, load_settings, read_all,  # noqa: E402
+                  read_csv, write_csv)
 
 PAGE = HERE.parent / "muslim-friendly-directory.html"
 COMMUNITY_DECLARATION = "No declaration has been submitted. Contact the establishment directly."
@@ -41,8 +45,22 @@ SCHEME_TYPES = {"restaurant": "Restaurant", "hawker": "Hawker", "snack bar": "Ca
                 "food court": "Food Court", "caterer": "Caterer", "catering": "Caterer"}
 
 
+def community_id(source_id):
+    """Stable ID for a community listing, independent of row position."""
+    return "com-" + hashlib.sha1(source_id.encode()).hexdigest()[:8]
+
+
 def community_row(c, today):
+    if is_venue(c):
+        claim = ("OpenStreetMap contributors report that halal food is available at this food centre or "
+                 "coffee shop. This does not mean every stall is halal: check each stall's own certificate "
+                 "or declaration")
+    else:
+        claim = {"only": "OpenStreetMap contributors report that this place serves only halal food",
+                 "yes": "OpenStreetMap contributors report that halal food is available here"}.get(
+            c.get("halal_claim"), "Listed from OpenStreetMap community data")
     return {
+        "ID": community_id(c["source_id"]),
         "Name": c["name"], "Country": "Singapore", "Address": c["address"] or "",
         "Postal Code": c["postal_code"] or None, "Cuisine": c.get("cuisine") or None,
         "Establishment Type": c.get("establishment_type") or "Other",
@@ -50,10 +68,12 @@ def community_row(c, today):
         "Longitude": float(c["longitude"]) if c.get("longitude") else None,
         "Website URL": c.get("website") or None,
         "Listing Status": "Community suggested — not verified",
-        "Basis of Listing": "Community-sourced listing (OpenStreetMap). Declaration not yet submitted.",
-        "Certification Status": "Certification status not stated",
+        "Basis of Listing": (f"{claim}. This has not been verified, the establishment has not made a declaration, "
+                             "and it is not evidence of halal certification."),
+        "Certification Status": "Not verified — community-suggested",
         "Declaration Text Override": COMMUNITY_DECLARATION, "Declaration Text": COMMUNITY_DECLARATION,
-        "Additional Notes": "Location data © OpenStreetMap contributors (ODbL). Pending declaration.",
+        "Additional Notes": ("Source: OpenStreetMap (© OpenStreetMap contributors, ODbL). "
+                             f"OSM record last updated {c.get('osm_last_edit') or 'unknown'}."),
         "Last Updated": today, "Is Demo": "FALSE",
     }
 
@@ -95,7 +115,11 @@ def plan(today, settings, directory, candidates, verifications):
             refused.append(("verification", v.get("verification_id"), v.get("establishment_name"), problems))
             v["notes"] = "; ".join(problems)
             continue
-        if target in by_id:
+        if target in by_id and target.startswith("com-"):
+            # A verified certificate moves a community listing into the main file.
+            v["_move_from"] = target
+            new_rows.append(("verification", v, certified_row(v, settings)))
+        elif target in by_id:
             updates[target] = certified_fields(v)
             v["_apply"] = ("update", target)
         else:
@@ -106,6 +130,12 @@ def plan(today, settings, directory, candidates, verifications):
         problems = []
         if c.get("match_status") in ("listed", "possible_duplicate") or c.get("duplicate_of"):
             problems.append(f"{c['match_status']} {c.get('duplicate_of', '')} - resolve the duplicate first")
+        tier = c.get("quality_tier") or ""
+        if tier in ("rejected", "needs_location"):
+            problems.append(f"quality check: {tier} ({c.get('quality_notes')})")
+        elif tier == "needs_check" and "checked" not in (c.get("review_note") or "").lower():
+            problems.append(f"quality check: {c.get('quality_notes')} - confirm it still operates, "
+                            "then add 'checked' to review_note")
         if c["source"] == "osm" and not settings.get("osm_publishing_accepted"):
             problems.append("OpenStreetMap publishing is off (settings.json osm_publishing_accepted) - "
                             "decide on ODbL terms first, or invite the establishment to declare")
@@ -125,7 +155,7 @@ def main():
     today_d = dt.date.fromisoformat(args.today) if args.today else dt.datetime.now(ZoneInfo(SGT_TZ)).date()
     today = today_d.isoformat()
     settings = load_settings()
-    _, directory = read_directory(args.workbook)
+    directory = read_all(args.workbook)
     candidates = read_csv(STATE / "candidates.csv")
     verifications = read_csv(STATE / "verifications.csv")
     updates, new_rows, refused = plan(today_d, settings, directory, candidates, verifications)
@@ -147,33 +177,50 @@ def main():
             write_csv(STATE / "verifications.csv", VERIFICATION_FIELDS, verifications)
         return 1 if refused else 0
 
+    main_rows = [(k, src, row) for k, src, row in new_rows if k == "verification"]
+    comm_rows = [(k, src, row) for k, src, row in new_rows if k == "candidate"]
+    comm_path = community_path(args.workbook)
     if updates:
         update_records(args.workbook, updates)
-    ids = append_records(args.workbook, [row for _, _, row in new_rows]) if new_rows else []
+    main_ids = append_records(args.workbook, [row for _, _, row in main_rows]) if main_rows else []
+    comm_ids = []
+    if comm_rows:
+        if not comm_path.exists():
+            create_community_workbook(args.workbook, comm_path)
+        comm_ids = append_records(comm_path, [dict(row) for _, _, row in comm_rows])
+    moved = {src["_move_from"] for _, src, _ in main_rows if src.get("_move_from")}
+    if moved:
+        remove_records(comm_path, moved)
+    ids = main_ids + comm_ids
 
     xref = read_csv(STATE / "xref.csv")
     for v in verifications:
         if v.get("_apply"):
             v.update(status="applied", applied_on=today, applied_to=v["_apply"][1])
-    for (kind, src, _), new_id in zip(new_rows, ids):
-        if kind == "verification":
-            src.update(status="applied", applied_on=today, applied_to=new_id)
-            target = (src.get("target") or "").strip()
-            if target:
-                for c in candidates:
-                    if c["source_id"] == target:
-                        c.update(review_status="promoted", directory_id=new_id, match_status="listed")
-                xref.append({"source_id": target, "directory_id": new_id, "linked_on": today})
-        else:
-            src.update(review_status="promoted", directory_id=new_id, match_status="listed",
-                       review_note=(src.get("review_note", "") + f" listed {today} as {new_id}").strip())
-            xref.append({"source_id": src["source_id"], "directory_id": new_id, "linked_on": today})
+    for (_, src, _), new_id in zip(main_rows, main_ids):
+        src.update(status="applied", applied_on=today, applied_to=new_id)
+        target = (src.get("target") or "").strip()
+        if target and not target.startswith(("est-", "com-")):
+            for c in candidates:
+                if c["source_id"] == target:
+                    c.update(review_status="promoted", directory_id=new_id, match_status="listed")
+            xref.append({"source_id": target, "directory_id": new_id, "linked_on": today})
+        if src.get("_move_from"):
+            for c in candidates:
+                if c.get("directory_id") == src["_move_from"]:
+                    c["directory_id"] = new_id
+            xref = [dict(x, directory_id=new_id) if x["directory_id"] == src["_move_from"] else x for x in xref]
+    for (_, src, row), new_id in zip(comm_rows, comm_ids):
+        src.update(review_status="promoted", directory_id=new_id, match_status="listed",
+                   review_note=(src.get("review_note", "") + f" listed {today} as {new_id}").strip())
+        xref.append({"source_id": src["source_id"], "directory_id": new_id, "linked_on": today})
     write_csv(STATE / "verifications.csv", VERIFICATION_FIELDS, verifications)
     write_csv(STATE / "candidates.csv", CAND_FIELDS, candidates)
     write_csv(STATE / "xref.csv", ["source_id", "directory_id", "linked_on"], xref)
     if Path(args.workbook).resolve() == WORKBOOK.resolve():
         bump_data_version(PAGE, today_d.strftime("%Y%m%d"))
-    print(f"Applied: {len(updates)} certified, {len(ids)} added ({', '.join(ids) or '-'}); {len(refused)} refused.")
+    print(f"Applied: {len(updates) + len(main_ids)} certified, {len(comm_ids)} community listing(s) added, "
+          f"{len(moved)} moved to certified; {len(refused)} refused.")
     return 0
 
 

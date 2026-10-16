@@ -7,7 +7,7 @@ on:
     paths:
       - "_directory-sync/**"
       - ".github/workflows/directory-*.yml"
-      - "data/muslim-friendly-establishments.xlsx"
+      - "data/*.xlsx"
       - "muslim-friendly-directory.html"
   workflow_dispatch:
 
@@ -40,8 +40,10 @@ jobs:
           cat test.log
           python _directory-sync/tools/annotate_failures.py test.log
           exit $status
-      - name: Website can read the workbook
-        run: node _directory-sync/tools/site_read_check.mjs data/muslim-friendly-establishments.xlsx
+      - name: Website can read the workbooks
+        run: |
+          node _directory-sync/tools/site_read_check.mjs data/muslim-friendly-establishments.xlsx
+          node _directory-sync/tools/site_read_check.mjs data/community-listings.xlsx
       - name: Live dry run (OpenStreetMap, no writes)
         run: |
           python _directory-sync/sync.py --force --dry-run > dry.log

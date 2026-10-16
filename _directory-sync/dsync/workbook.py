@@ -204,10 +204,13 @@ def append_records(path, records):
         _fill_location(rec, lookup)
         r = target
         target += 1
+        fixed_id = rec.pop("ID", None)
         for h, v in rec.items():
             if h in col and h not in FORMULA_COLUMNS and v not in (None, ""):
                 ws.cell(r, col[h]).value = v
         _set_formulas(ws, col, r)
+        if fixed_id:  # stable IDs (community file) are values, not row-position formulas
+            ws.cell(r, col["ID"]).value = fixed_id
         new_rows.append(r)
     if new_rows and max(new_rows) > last_row:
         table.ref = f"{first}:{last_col}{max(new_rows)}"
@@ -283,6 +286,9 @@ def remove_records(path, listing_ids):
                 continue
             ws.cell(r, c).value = v
         _set_formulas(ws, col, r)
+        id_value = values[col["ID"] - 1]
+        if id_value and not (isinstance(id_value, str) and id_value.startswith("=")):
+            ws.cell(r, col["ID"]).value = id_value  # keep stable IDs (community file)
     end = max(2, 1 + len(keep))
     if not keep:
         _set_formulas(ws, col, 2)  # blank template row: formulas return "" until a name is entered
@@ -311,3 +317,45 @@ def bump_data_version(html_path, version):
     if n:
         html_path.write_text(new, encoding="utf-8")
     return bool(n)
+
+
+ODBL_NOTICE = [
+    ["Licence", "Open Database Licence (ODbL) 1.0 — https://opendatacommons.org/licenses/odbl/1-0/"],
+    ["Attribution", "Contains information from OpenStreetMap (© OpenStreetMap contributors), "
+                    "available under the ODbL. https://www.openstreetmap.org/copyright"],
+    ["Scope", "This file holds community-suggested listings derived from OpenStreetMap. It is a separate "
+              "database from muslim-friendly-establishments.xlsx (establishment declarations and verified "
+              "certifications), which is not covered by this licence."],
+    ["Status", "Community-suggested listings are NOT verified. An OpenStreetMap halal tag is not evidence "
+               "of halal certification."],
+]
+
+
+def create_community_workbook(template, path):
+    """Create an empty community workbook with the same columns as the main one.
+
+    IDs in this file are stable values (com-…), so the ID formula is removed.
+    """
+    wb = openpyxl.load_workbook(template)
+    ws = wb[SHEET]
+    col = _header(ws)
+    for r in range(2, ws.max_row + 1):
+        for c in range(1, ws.max_column + 1):
+            ws.cell(r, c).value = None
+    _set_formulas(ws, col, 2)
+    ws.cell(2, col["ID"]).value = None
+    first, last = ws.tables[TABLE].ref.split(":")
+    ws.tables[TABLE].ref = f"{first}:{re.sub(r'[0-9]', '', last)}2"
+    for name in ("Instructions", "Japan_Prefecture_Lookup"):
+        if name in wb.sheetnames:
+            del wb[name]
+    lic = wb.create_sheet("Licence")
+    for row in ODBL_NOTICE:
+        lic.append(row)
+    lic.column_dimensions["A"].width = 14
+    lic.column_dimensions["B"].width = 120
+    with tempfile.TemporaryDirectory() as tmp:
+        staged = Path(tmp) / Path(path).name
+        wb.save(staged)
+        out = recalc(staged, Path(tmp) / "out")
+        shutil.copyfile(out, path)
