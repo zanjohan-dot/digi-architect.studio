@@ -119,8 +119,10 @@ def directory_checks(directory, today, reverify_days=31, expiry_warning_days=30)
     for rec in directory:
         if str(rec.get("Is Demo", "")).lower() in TRUEISH:
             continue
-        key = _directory_key(rec)
-        if key[0] and key in seen:
+        name, postal = _directory_key(rec)
+        # Without a postal code, compare name + address so separate branches are not flagged.
+        key = (name, postal or "addr:" + norm_name(rec.get("Address")))
+        if name and key in seen:
             add(rec, "Duplicate record", f"Same name and postal code as {seen[key]}")
         seen.setdefault(key, rec.get("ID"))
 

@@ -180,6 +180,20 @@ class QualityGradeTests(unittest.TestCase):
         self.assertEqual(grade(dict(base, address="#03-21"), today)[0], "publishable")  # postal code locates it
         self.assertEqual(grade(dict(base, duplicate_of="osm:node/1"), today)[0], "needs_check")
 
+    def test_phone_check_ignores_listing_ids(self):
+        from dsync.verification import personal_data_flags
+        self.assertEqual(personal_data_flags("listed 2026-10-16 as com-94974045"), [])
+        self.assertTrue(personal_data_flags("call owner on 9123 4567"))
+        self.assertTrue(personal_data_flags("+65 8123-4567"))
+
+    def test_branches_without_postal_not_flagged_as_duplicates(self):
+        from dsync.match import directory_checks
+        rows = [{"ID": "com-1", "Name": "Subway", "Address": "1 Marine Parade Central", "Country": "Singapore"},
+                {"ID": "com-2", "Name": "Subway", "Address": "1 Jurong West Central 2", "Country": "Singapore"},
+                {"ID": "com-3", "Name": "Subway", "Address": "1 Jurong West Central 2", "Country": "Singapore"}]
+        dups = [i for i in directory_checks(rows, dt.date(2026, 10, 31)) if i["issue"] == "Duplicate record"]
+        self.assertEqual([d["directory_id"] for d in dups], ["com-3"])
+
     def test_venue_detection(self):
         from dsync.quality import is_venue
         self.assertTrue(is_venue({"name": "Adam Food Centre"}))

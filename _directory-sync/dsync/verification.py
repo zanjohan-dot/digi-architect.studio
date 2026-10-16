@@ -29,7 +29,7 @@ EVIDENCE_TYPES = {
 CERTIFYING_BODIES = {"Muis (Singapore)", "JAKIM (Malaysia)", "MUI (Indonesia)", "Other"}
 
 _EMAIL = re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")
-_PHONE = re.compile(r"(\+?65[\s-]?)?[689]\d{3}[\s-]?\d{4}\b")
+_PHONE = re.compile(r"(?<![\w-])(\+?65[\s-]?)?[689]\d{3}[\s-]?\d{4}\b")  # not inside IDs like com-94974045
 _URL_WITH_QUERY = re.compile(r"https?://\S*\?\S+")
 
 
