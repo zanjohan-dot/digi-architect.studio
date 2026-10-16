@@ -1443,6 +1443,7 @@ function renderRows(){
 
 /* ── Main render ── */
 function render(){
+  if(!establishments.length){showDirectoryEmpty();var mc0=document.getElementById('mapResultCount');if(mc0)mc0.textContent='0 establishments';return;}
   var rs=getFiltered();
   var total=establishments.length;
   var countText=rs.length+' of '+total+' establishment'+(total!==1?'s':'');
