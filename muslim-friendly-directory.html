@@ -326,6 +326,11 @@ body.sheet-open .panel-nav,body.drawer-open .panel-nav{opacity:0;pointer-events:
 .badge-not-halal{background:var(--caution-bg);color:var(--caution);}
 .badge-halal{background:var(--good-bg);color:var(--good);}
 .badge-demo{background:#EDE9FE;color:#5B21B6;border:1px solid #C4B5FD;}
+.badge-community{background:transparent;color:var(--muted);border:1px dashed var(--line);}
+.badge-unverified{background:transparent;color:var(--muted);border:1px dashed var(--muted);}
+.record-badges .badge+.badge{margin-left:4px;}
+.category-key{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:11px;line-height:1.5;color:var(--muted);margin:8px 14px 4px;}
+.category-key .badge{margin-right:4px;}
 .record-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
 .dchip{font-size:10px;font-weight:600;border-radius:2px;padding:3px 7px 3px 5px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
 .dchip.positive{background:var(--good-bg);color:var(--good);}
@@ -794,6 +799,7 @@ body.sheet-open .panel-nav,body.drawer-open .panel-nav{opacity:0;pointer-events:
                 <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-3"><span class="faq-q">Why are establishments that serve alcohol included?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-3"><div class="faq-answer">The directory is based on transparent disclosure. Where alcohol is served, this is clearly stated on the listing so diners can decide whether the establishment meets their individual requirements. The directory is not a recommendation to dine at any particular establishment.</div></div></div>
                 <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-4"><span class="faq-q">Should I dine at a self-declared establishment?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-4"><div class="faq-answer">That decision rests with each individual diner. Some diners may be comfortable after reviewing the declarations, while others may choose only halal-certified establishments. Both choices are valid and should be respected.</div></div></div>
                 <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-5"><span class="faq-q">Who checks the information?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-5"><div class="faq-answer">The information is primarily based on declarations submitted by the establishment. Where advisory support has been provided, this may be noted on the listing. The information is not subject to statutory verification or equivalent to halal certification.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-7"><span class="faq-q">What does &ldquo;community-suggested&rdquo; mean?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-7"><div class="faq-answer">Community-suggested listings come from OpenStreetMap, where volunteers have reported that halal food is available. They have not been verified by this directory, the establishment has not made a declaration, and they are not evidence of halal certification. They are listed so diners can discover places to look into. Check the certificate displayed at the premises or ask the establishment directly. Establishments can contact us to submit a declaration or certification details.</div></div></div>
                 <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-6"><span class="faq-q">What should I do if information appears incorrect?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-6"><div class="faq-answer">Contact the establishment directly to verify. You may also contact us at admin@digi-architect.studio. Where reliable updated information is received, listings will be reviewed and corrected where appropriate.</div></div></div>
               </div>
               <div class="footer-line">
@@ -912,6 +918,7 @@ var establishments = [];
 /* Bump DATA_VERSION whenever the workbook is re-uploaded (YYYYMMDD). */
 var DATA_VERSION = '20261016';
 var DATA_URL = '/data/muslim-friendly-establishments.xlsx';
+var COMMUNITY_URL = '/data/community-listings.xlsx';
 var mapMarkers     = {};
 var mapInstance    = null;
 
@@ -1081,16 +1088,26 @@ function loadDirectory() {
     return;
   }
 
+  function readRows(buf) {
+    var wb = XLSX.read(new Uint8Array(buf), {type:'array', cellDates:true, dateNF:'yyyy-mm-dd'});
+    if (!wb.SheetNames.length) throw new Error('Workbook is empty.');
+    return XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:null, raw:false});
+  }
+  /* Community listings (OpenStreetMap-derived, ODbL) are a separate, optional file. */
+  var community = fetch(COMMUNITY_URL + '?v=' + DATA_VERSION)
+    .then(function(resp) { return resp.ok ? resp.arrayBuffer().then(readRows) : []; })
+    .catch(function() { return []; });
+
   fetch(DATA_URL + '?v=' + DATA_VERSION)
     .then(function(resp) {
       if (!resp.ok) throw new Error('HTTP ' + resp.status + ': ' + resp.url);
       return resp.arrayBuffer();
     })
     .then(function(buf) {
-      var wb = XLSX.read(new Uint8Array(buf), {type:'array', cellDates:true, dateNF:'yyyy-mm-dd'});
-      if (!wb.SheetNames.length) throw new Error('Workbook is empty.');
-      var ws = wb.Sheets[wb.SheetNames[0]];
-      var rows = XLSX.utils.sheet_to_json(ws, {defval:null, raw:false});
+      var rows = readRows(buf);
+      return community.then(function(extra) { return rows.concat(extra); });
+    })
+    .then(function(rows) {
       establishments = parseRows(rows);
       if (!establishments.length) { showDirectoryEmpty(); try { initMap(); } catch (e) {} return; }
       afterLoad();
@@ -1111,12 +1128,31 @@ function addDataAttribution() {
   var p = document.createElement('p');
   p.id = 'osmAttribution';
   p.style.cssText = 'font-size:11px;color:var(--muted);margin:12px 14px;';
-  p.innerHTML = 'Some location data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, available under the <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">Open Database Licence</a>.';
+  p.innerHTML = 'Community-suggested listings contain information from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; OpenStreetMap contributors, available under the <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">Open Database Licence</a>. The community listings data is <a href="' + COMMUNITY_URL + '">available under the same licence</a>.';
   grid.parentNode.insertBefore(p, grid.nextSibling);
+}
+
+/* Key explaining the listing categories, shown above the results. */
+function addCategoryKey() {
+  var grid = document.getElementById('recordsGrid');
+  if (!grid || document.getElementById('categoryKey')) return;
+  var cats = {};
+  establishments.forEach(function(r){ cats[listingCategory(r)] = true; });
+  var parts = [];
+  if (cats.certified) parts.push('<span><span class="badge badge-halal">HALAL-CERTIFIED</span>certificate verified</span>');
+  if (cats.self) parts.push('<span><span class="badge badge-self">SELF-DECLARED</span>establishment’s own declaration</span>');
+  if (cats.community) parts.push('<span><span class="badge badge-community">COMMUNITY-SUGGESTED</span>from community data; halal status not verified</span>');
+  if (!parts.length) return;
+  var key = document.createElement('div');
+  key.id = 'categoryKey';
+  key.className = 'category-key';
+  key.innerHTML = parts.join('');
+  grid.parentNode.insertBefore(key, grid);
 }
 
 function afterLoad() {
   addDataAttribution();
+  addCategoryKey();
   initFilters();
   populateSheetSelects();
   syncControls();
@@ -1300,6 +1336,16 @@ function getFiltered(){
   return rs;
 }
 
+/* certified | self | community | pending | other. Drives badges; never inferred from names. */
+function listingCategory(r){
+  var s=norm(r.status);
+  if(r.halalCertified===true||s==='halal certified')return'certified';
+  if(s.indexOf('pending verification')===0)return'pending';
+  if(s.indexOf('community')===0)return'community';
+  if(s.indexOf('self-declared')===0)return'self';
+  return'other';
+}
+
 function renderRow(r){
   var d=r.declarations;
   var chips=[
@@ -1309,13 +1355,18 @@ function renderRow(r){
     d.alcoholServed===null?dchip('Alcohol — not stated',false,true):(d.alcoholServed===false?dchip('No alcohol served',true):dchip('Alcohol served',false))
   ];
   var sel=state.selectedId===r.id;
-  var certBadge=r.halalCertified===null?'<span class="badge badge-demo">UNVERIFIED</span>':r.halalCertified?'<span class="badge badge-halal">HALAL CERTIFIED</span>':'<span class="badge badge-not-halal">NOT HALAL-CERTIFIED</span>';
+  var cat=listingCategory(r);
+  var certBadge=cat==='certified'?'<span class="badge badge-halal">HALAL-CERTIFIED'+(r.certifyingBody?' &middot; '+esc(r.certifyingBody.split(' (')[0].toUpperCase()):'')+'</span>'
+    :cat==='community'?'<span class="badge badge-community">COMMUNITY-SUGGESTED</span><span class="badge badge-unverified">NOT VERIFIED</span>'
+    :cat==='pending'?'<span class="badge badge-unverified">CERTIFICATION PENDING RE-VERIFICATION</span>'
+    :cat==='self'?'<span class="badge badge-self">SELF-DECLARED</span>'+(r.halalCertified===false?'<span class="badge badge-not-halal">NOT HALAL-CERTIFIED</span>':'')
+    :'<span class="badge badge-unverified">NOT VERIFIED</span>';
   var demoBadge=r.isDemo?'<span class="badge badge-demo">DEMO LISTING</span>':'';
   var demoDisc=r.isDemo?'<div class="demo-disclaimer">'+esc(r.demoDisclaimer)+'</div>':'';
-  return '<article class="record-row'+(sel?' is-selected':'')+(r.isDemo?' is-demo':'')+'" data-id="'+esc(r.id)+'" role="listitem">'
+  return '<article class="record-row'+(sel?' is-selected':'')+(r.isDemo?' is-demo':'')+(cat==='community'?' is-community':'')+'" data-id="'+esc(r.id)+'" role="listitem">'
     +'<div class="record-main"><h4>'+esc(r.name)+'</h4>'
-    +'<p class="record-meta">'+esc(r.area)+(r.cuisine?' &middot; '+esc(r.cuisine):'')+(r.establishmentType?' &middot; '+esc(r.establishmentType):'')+'</p>'
-    +'<div class="record-badges">'+demoBadge+'<span class="badge badge-self">SELF-DECLARED</span>'+certBadge+'</div>'
+    +'<p class="record-meta">'+esc(r.area||r.address||'')+(r.cuisine?' &middot; '+esc(r.cuisine):'')+(r.establishmentType?' &middot; '+esc(r.establishmentType):'')+'</p>'
+    +'<div class="record-badges">'+demoBadge+certBadge+'</div>'
     +'<div class="record-chips">'+chips.join('')+'</div>'
     +demoDisc+'</div>'
     +'<div class="record-foot">'
@@ -1323,7 +1374,7 @@ function renderRow(r){
     +(r.mapReady
         ?'<button class="btn btn-outline btn-sm" type="button" data-view-on-map="'+esc(r.id)+'" style="font-size:10px;padding:0 10px;min-height:32px;">View on Map</button>'
         :'<span class="no-map-note" title="This listing has no map location">Map location unavailable</span>')
-    +'<button class="btn btn-dark btn-sm" type="button" data-open-record="'+esc(r.id)+'">View Declaration</button>'
+    +'<button class="btn btn-dark btn-sm" type="button" data-open-record="'+esc(r.id)+'">'+(cat==='self'?'View Declaration':'View Details')+'</button>'
     +'</div></article>';
 }
 

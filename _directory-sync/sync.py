@@ -31,6 +31,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from dsync import SGT_TZ  # noqa: E402
+from dsync.quality import grade  # noqa: E402
 from dsync.match import dedupe_sources, directory_checks, match_candidate, TRUEISH, _date  # noqa: E402
 from dsync.sources import SourceError, fetch_osm, load_permitted, osm_record  # noqa: E402
 from dsync.verification import VERIFICATION_FIELDS, personal_data_flags, suspended_fields  # noqa: E402
@@ -48,6 +49,21 @@ DEFAULT_SETTINGS = {"osm_publishing_accepted": False, "suspend_expired_certifica
                     "geocode_with_onemap": True, "reverify_days": 31, "expiry_warning_days": 30}
 
 
+def community_path(workbook):
+    """The ODbL community-listings file lives next to the main workbook."""
+    return Path(workbook).with_name("community-listings.xlsx")
+
+
+def read_all(workbook):
+    """Main workbook listings plus community listings (if the file exists)."""
+    _, listings = read_directory(workbook)
+    cp = community_path(workbook)
+    if cp.exists():
+        _, community = read_directory(cp)
+        listings = listings + community
+    return listings
+
+
 def load_settings():
     path = HERE / "settings.json"
     settings = dict(DEFAULT_SETTINGS)
@@ -60,6 +76,7 @@ CAND_FIELDS = [
     "source_id", "source", "name", "address", "postal_code", "unit", "latitude", "longitude",
     "establishment_type", "cuisine", "website", "halal_claim", "certificate_number",
     "certifying_body", "certificate_expiry", "source_url", "licence",
+    "osm_last_edit", "place_kind", "lifecycle", "check_date", "quality_tier", "quality_notes",
     "match_status", "directory_id", "match_note", "duplicate_of",
     "first_seen", "last_seen", "missing_runs", "change_note", "record_hash",
     "review_status", "review_note",
@@ -202,6 +219,8 @@ def suspend_expired(args, directory, today, errors):
         certified = str(rec.get("Halal Certified", "")).lower() in TRUEISH or \
             str(rec.get("Listing Status", "")).lower() == "halal certified"
         expiry = _date(rec.get("Certificate Expiry"))
+        if str(rec.get("ID", "")).startswith("com-"):
+            continue  # community listings never carry certification
         if certified and expiry and expiry < today and str(rec.get("Is Demo", "")).lower() not in TRUEISH:
             expired[rec["ID"]] = suspended_fields(rec, today)
     if not expired or args.dry_run:
@@ -235,7 +254,7 @@ def run(args):
     errors = []
 
     # 1. Directory health ---------------------------------------------------
-    _, directory = read_directory(args.workbook)
+    directory = read_all(args.workbook)
     issues = directory_checks(directory, today, settings["reverify_days"], settings["expiry_warning_days"])
     suspended = suspend_expired(args, directory, today, errors) if settings["suspend_expired_certificates"] else []
     for lid in suspended:
@@ -280,6 +299,9 @@ def run(args):
     for rec in fresh:
         rec = dict(rec)
         rec["latitude"], rec["longitude"] = fmt_coord(rec.get("latitude")), fmt_coord(rec.get("longitude"))
+        for k in ("osm_last_edit", "place_kind", "lifecycle", "check_date"):
+            rec.setdefault(k, "")
+        rec["quality_tier"], rec["quality_notes"] = grade(rec, today)
         status, dir_id, note = match_candidate(rec, directory, xref)
         rec.update(match_status=status, directory_id=dir_id or "", match_note=note,
                    duplicate_of=rec.get("duplicate_of", ""), last_seen=stamp, missing_runs="0",
@@ -304,6 +326,11 @@ def run(args):
             rec.update(first_seen=stamp, review_status="pending", review_note="",
                        change_note=f"{stamp}: first seen")
             counts["new"] += 1
+        if rec.get("lifecycle") and rec["review_status"] == "promoted":
+            issues.append({"directory_id": rec["directory_id"], "name": rec["name"],
+                           "issue": "Source reports closed",
+                           "detail": f"{rec['source_id']} {rec['lifecycle']}; check and update the listing "
+                                     "(it has not been removed)"})
         if status == "listed" and rec["review_status"] == "pending":
             rec["review_status"] = "already_listed"
         queue[rec["source_id"]] = rec
@@ -359,7 +386,7 @@ def run(args):
         })
         write_csv(STATE / "sync-log.csv", LOG_FIELDS, log)
     if suspended and not args.dry_run:
-        _, directory = read_directory(args.workbook)
+        directory = read_all(args.workbook)
     report = render_report(today, started, directory, issues, source_status, counts, duplicates,
                            needs_review, len(fresh), rows, run_status, verifications, len(private), settings)
     if not args.dry_run:
