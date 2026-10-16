@@ -149,29 +149,40 @@ MUIS_TYPE_MAP = {
 
 
 def _provenance(folder):
+    """Return (permission, publication_allowed) from PROVENANCE.md."""
     prov = folder / "PROVENANCE.md"
     if not prov.exists():
-        return None
-    text = prov.read_text(encoding="utf-8")
-    for line in text.splitlines():
-        if line.lower().startswith("permission:") and line.split(":", 1)[1].strip():
-            return line.split(":", 1)[1].strip()
-    return None
+        return None, False
+    permission, publication = None, False
+    for line in prov.read_text(encoding="utf-8").splitlines():
+        key, _, value = line.partition(":")
+        key, value = key.strip().lower(), value.strip()
+        if key == "permission" and value:
+            permission = value
+        if key == "publication":
+            publication = value.lower() in ("permitted", "yes", "allowed")
+    return permission, publication
 
 
 def load_permitted(folder):
-    """Load every CSV in inbox/permitted/. Returns (records, notes)."""
+    """Load every CSV in inbox/permitted/.
+
+    Returns (records, notes, publication_allowed). The CSV files themselves are
+    git-ignored. When the licence does not allow publication, the caller keeps
+    the records out of every committed file.
+    """
     folder = Path(folder)
     files = sorted(folder.glob("*.csv"))
     if not files:
-        return [], ["No permitted dataset supplied this month."]
-    permission = _provenance(folder)
+        return [], ["No permitted dataset supplied this month."], False
+    permission, publication = _provenance(folder)
     if not permission:
         return [], [
             f"{len(files)} file(s) in inbox/permitted/ were NOT read: PROVENANCE.md with a "
             "'Permission:' line is required before any third-party dataset is imported."
-        ]
-    records, notes = [], [f"Permitted datasets read under: {permission}"]
+        ], False
+    records, notes = [], [f"Permitted datasets read under: {permission}"
+                          + ("" if publication else " (publication not permitted: kept out of the public repository)")]
     for path in files:
         with path.open(newline="", encoding="utf-8-sig") as fh:
             reader = csv.DictReader(fh)
@@ -214,4 +225,4 @@ def load_permitted(folder):
                 })
                 n += 1
             notes.append(f"{path.name}: {n} records loaded.")
-    return records, notes
+    return records, notes, publication

@@ -1,3 +1,30 @@
+# This repository is public. Anything listed here must never be committed.
+
+# Python / temp
 __pycache__/
 *.pyc
 *.tmp
+*.writing
+
+# Licensed third-party datasets and their provenance (may not be republishable)
+inbox/permitted/*
+!inbox/permitted/.gitkeep
+!inbox/permitted/README.md
+
+# Review state for licensed records whose licence does not permit publication
+state/private/
+
+# Certification evidence and establishment submissions: keep in private storage
+evidence/
+submissions/
+*.pdf
+*.jpg
+*.jpeg
+*.png
+*.heic
+*.eml
+*.msg
+
+# Local tool installs
+tools/node_modules/
+tools/package-lock.json

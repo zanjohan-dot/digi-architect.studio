@@ -910,7 +910,7 @@ document.querySelectorAll('.drawer-nav-item[data-panel] button').forEach(functio
 ============================================================ */
 var establishments = [];
 /* Bump DATA_VERSION whenever the workbook is re-uploaded (YYYYMMDD). */
-var DATA_VERSION = '20260715';
+var DATA_VERSION = '20261016';
 var DATA_URL = '/data/muslim-friendly-establishments.xlsx';
 var mapMarkers     = {};
 var mapInstance    = null;
@@ -1052,6 +1052,22 @@ function showDirectoryError(msg) {
   }
 }
 
+/* Shown when the workbook loads correctly but holds no published listings yet. */
+function showDirectoryEmpty() {
+  var ctr = document.getElementById('resultsInlineCount');
+  var grid = document.getElementById('recordsGrid');
+  var es = document.getElementById('emptyState');
+  if (ctr) ctr.textContent = '0 establishments';
+  if (grid) grid.innerHTML = '';
+  if (es) {
+    es.classList.add('visible');
+    es.querySelector('h3').textContent = 'Listings are being verified';
+    es.querySelector('p').textContent = 'Establishments will appear here once their declarations or certification have been verified. Please check back soon.';
+    var btn = es.querySelector('button');
+    if (btn) btn.style.display = 'none';
+  }
+}
+
 function loadDirectory() {
   /* Show loading state */
   var ctr = document.getElementById('resultsInlineCount');
@@ -1076,7 +1092,7 @@ function loadDirectory() {
       var ws = wb.Sheets[wb.SheetNames[0]];
       var rows = XLSX.utils.sheet_to_json(ws, {defval:null, raw:false});
       establishments = parseRows(rows);
-      if (!establishments.length) throw new Error('No valid rows found in workbook.');
+      if (!establishments.length) { showDirectoryEmpty(); return; }
       afterLoad();
     })
     .catch(function(err) {
@@ -1085,7 +1101,22 @@ function loadDirectory() {
     });
 }
 
+/* ODbL attribution, shown only when a listing contains OpenStreetMap-derived data. */
+function addDataAttribution() {
+  var usesOsm = establishments.some(function(r){
+    return /openstreetmap/i.test((r.basisOfListing||'') + ' ' + (r.additionalNotes||''));
+  });
+  var grid = document.getElementById('recordsGrid');
+  if (!usesOsm || !grid || document.getElementById('osmAttribution')) return;
+  var p = document.createElement('p');
+  p.id = 'osmAttribution';
+  p.style.cssText = 'font-size:11px;color:var(--muted);margin:12px 14px;';
+  p.innerHTML = 'Some location data &copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap contributors</a>, available under the <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">Open Database Licence</a>.';
+  grid.parentNode.insertBefore(p, grid.nextSibling);
+}
+
 function afterLoad() {
+  addDataAttribution();
   initFilters();
   populateSheetSelects();
   syncControls();

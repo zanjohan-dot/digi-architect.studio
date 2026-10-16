@@ -31,16 +31,30 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from dsync import SGT_TZ  # noqa: E402
-from dsync.match import dedupe_sources, directory_checks, match_candidate, TRUEISH  # noqa: E402
+from dsync.match import dedupe_sources, directory_checks, match_candidate, TRUEISH, _date  # noqa: E402
 from dsync.sources import SourceError, fetch_osm, load_permitted, osm_record  # noqa: E402
-from dsync.workbook import read_directory  # noqa: E402
+from dsync.verification import VERIFICATION_FIELDS, personal_data_flags, suspended_fields  # noqa: E402
+from dsync.workbook import WorkbookError, bump_data_version, read_directory, update_records  # noqa: E402
 
 REPO = HERE.parent
 WORKBOOK = REPO / "data" / "muslim-friendly-establishments.xlsx"
+PAGE = REPO / "muslim-friendly-directory.html"
 STATE = HERE / "state"
+PRIVATE = STATE / "private"   # git-ignored: never committed to the public repository
 REPORTS = HERE / "reports"
 INBOX = HERE / "inbox" / "permitted"
 PARTIAL_THRESHOLD = 0.7  # a source returning <70% of last month's count is treated as incomplete
+DEFAULT_SETTINGS = {"osm_publishing_accepted": False, "suspend_expired_certificates": True,
+                    "geocode_with_onemap": True, "reverify_days": 31, "expiry_warning_days": 30}
+
+
+def load_settings():
+    path = HERE / "settings.json"
+    settings = dict(DEFAULT_SETTINGS)
+    if path.exists():
+        settings.update({k: v for k, v in json.loads(path.read_text(encoding="utf-8")).items()
+                         if not k.startswith("_")})
+    return settings
 
 CAND_FIELDS = [
     "source_id", "source", "name", "address", "postal_code", "unit", "latitude", "longitude",
@@ -115,9 +129,77 @@ def gather_sources(offline=None):
             results["osm"] = (recs, "ok", "Overpass API")
         except SourceError as exc:
             results["osm"] = (None, "failed", str(exc))
-    permitted, notes = load_permitted(INBOX)
+    try:
+        fetch_permitted_from_secret()
+    except SourceError as exc:
+        results["permitted"] = (None, "failed", str(exc))
+        return results, False
+    permitted, notes, publishable = load_permitted(INBOX)
     results["permitted"] = (permitted, "ok" if permitted else "none", " ".join(notes))
-    return results
+    return results, publishable
+
+
+def fetch_permitted_from_secret():
+    """In GitHub Actions, a licensed dataset can be supplied without committing it.
+
+    PERMITTED_DATASET_URL (secret): HTTPS link to the CSV.
+    PERMITTED_PROVENANCE (secret): the text of PROVENANCE.md.
+    Both are written into the git-ignored inbox for this run only.
+    """
+    url, prov = os.environ.get("PERMITTED_DATASET_URL"), os.environ.get("PERMITTED_PROVENANCE")
+    if not url or not prov:
+        return
+    import requests
+    INBOX.mkdir(parents=True, exist_ok=True)
+    try:
+        resp = requests.get(url, timeout=120)
+        resp.raise_for_status()
+    except requests.RequestException as exc:
+        # Never echo the URL: it is a secret and this message reaches committed files.
+        raise SourceError(f"licensed feed download failed ({type(exc).__name__})") from None
+    (INBOX / "licensed-feed.csv").write_bytes(resp.content)
+    (INBOX / "PROVENANCE.md").write_text(prov, encoding="utf-8")
+
+
+def privacy_scan(verifications, candidates):
+    """Flag free-text fields in committed files that look like personal data.
+
+    The detail names the field only, never the matched text.
+    """
+    found = []
+    for v in verifications:
+        for f in ("evidence_ref", "verified_by", "notes"):
+            for flag in personal_data_flags(v.get(f)):
+                found.append({"directory_id": v.get("applied_to", ""), "name": v.get("establishment_name", ""),
+                              "issue": "Possible personal data in a public file",
+                              "detail": f"verifications.csv {v.get('verification_id')} {f} {flag}; edit it out"})
+    for c in candidates:
+        for flag in personal_data_flags(c.get("review_note")):
+            found.append({"directory_id": c.get("directory_id", ""), "name": c.get("name", ""),
+                          "issue": "Possible personal data in a public file",
+                          "detail": f"candidates.csv {c['source_id']} review_note {flag}; edit it out"})
+    return found
+
+
+def suspend_expired(args, directory, today, errors):
+    """Withdraw certified status from listings whose recorded certificate has expired."""
+    expired = {}
+    for rec in directory:
+        certified = str(rec.get("Halal Certified", "")).lower() in TRUEISH or \
+            str(rec.get("Listing Status", "")).lower() == "halal certified"
+        expiry = _date(rec.get("Certificate Expiry"))
+        if certified and expiry and expiry < today and str(rec.get("Is Demo", "")).lower() not in TRUEISH:
+            expired[rec["ID"]] = suspended_fields(rec, today)
+    if not expired or args.dry_run:
+        return list(expired)
+    try:
+        update_records(args.workbook, expired)
+        if Path(args.workbook).resolve() == WORKBOOK.resolve():
+            bump_data_version(PAGE, today.strftime("%Y%m%d"))
+        return list(expired)
+    except (WorkbookError, OSError) as exc:
+        errors.append(f"Could not withdraw expired certifications ({exc}); workbook left unchanged")
+        return []
 
 
 def run(args):
@@ -128,16 +210,28 @@ def run(args):
         return 0
     STATE.mkdir(parents=True, exist_ok=True)
     REPORTS.mkdir(parents=True, exist_ok=True)
+    settings = load_settings()
     errors = []
 
     # 1. Directory health ---------------------------------------------------
     _, directory = read_directory(args.workbook)
-    issues = directory_checks(directory, today)
+    issues = directory_checks(directory, today, settings["reverify_days"], settings["expiry_warning_days"])
+    suspended = suspend_expired(args, directory, today, errors) if settings["suspend_expired_certificates"] else []
+    for lid in suspended:
+        issues.append({"directory_id": lid, "name": next(r["Name"] for r in directory if r["ID"] == lid),
+                       "issue": "Certified status withdrawn",
+                       "detail": "Certificate expired; listing set to Pending verification until renewal is verified"
+                                 + (" (dry run: not written)" if args.dry_run else "")})
+    verifications = read_csv(STATE / "verifications.csv")
+    if not (STATE / "verifications.csv").exists() and not args.dry_run:
+        write_csv(STATE / "verifications.csv", VERIFICATION_FIELDS, [])
+    issues.extend(privacy_scan(verifications, read_csv(STATE / "candidates.csv")))
 
     # 2. Sources ------------------------------------------------------------
     previous = {r["source_id"]: r for r in read_csv(STATE / "candidates.csv")}
+    previous.update({r["source_id"]: r for r in read_csv(PRIVATE / "candidates-permitted.csv")})
     xref = {r["source_id"]: r["directory_id"] for r in read_csv(STATE / "xref.csv")}
-    sources = gather_sources(args.offline)
+    sources, permitted_publishable = gather_sources(args.offline)
     source_status = {}
     fresh = []
     refreshed_sources = set()
@@ -221,8 +315,19 @@ def run(args):
         run_status = "Partial"
     else:
         run_status = "Successful"
+    private = [r for r in rows if r.get("source", "").startswith("permitted") and not permitted_publishable]
+    private_ids = {r["source_id"] for r in private}
+    public = []
+    for r in rows:
+        if r["source_id"] in private_ids:
+            continue
+        if r.get("duplicate_of") in private_ids:  # never leak a private identifier into a public file
+            r = dict(r, duplicate_of="licensed record (held privately)")
+        public.append(r)
     if not args.dry_run:
-        write_csv(STATE / "candidates.csv", CAND_FIELDS, rows)
+        write_csv(STATE / "candidates.csv", CAND_FIELDS, public)
+        if private or (PRIVATE / "candidates-permitted.csv").exists():
+            write_csv(PRIVATE / "candidates-permitted.csv", CAND_FIELDS, private)
         write_csv(STATE / "directory-issues.csv", ["directory_id", "name", "issue", "detail"], issues)
         log = read_csv(STATE / "sync-log.csv")
         log.append({
@@ -232,8 +337,10 @@ def run(args):
             "needs_review": needs_review, "directory_issues": len(issues), "errors": " | ".join(errors),
         })
         write_csv(STATE / "sync-log.csv", LOG_FIELDS, log)
+    if suspended and not args.dry_run:
+        _, directory = read_directory(args.workbook)
     report = render_report(today, started, directory, issues, source_status, counts, duplicates,
-                           needs_review, len(fresh), rows, run_status)
+                           needs_review, len(fresh), rows, run_status, verifications, len(private), settings)
     if not args.dry_run:
         (REPORTS / f"{today:%Y-%m}.md").write_text(report, encoding="utf-8")
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
@@ -245,7 +352,8 @@ def run(args):
 
 
 def render_report(today, started, directory, issues, source_status, counts, duplicates,
-                  needs_review, retrieved, rows, run_status):
+                  needs_review, retrieved, rows, run_status, verifications=(), private_count=0, settings=None):
+    settings = settings or DEFAULT_SETTINGS
     live = [r for r in directory if str(r.get("Is Demo", "")).lower() not in TRUEISH]
     certified = [r for r in live if str(r.get("Halal Certified", "")).lower() in TRUEISH
                  or str(r.get("Listing Status", "")).lower() == "halal certified"]
@@ -286,13 +394,26 @@ def render_report(today, started, directory, issues, source_status, counts, dupl
         f"| No longer found (kept, flagged) | {counts['no_longer_found']} |",
         f"| Cross-source duplicates detected | {duplicates} |",
         f"| Awaiting administrator review | {needs_review} |",
+        f"| Licensed records held privately (not published) | {private_count} |",
+        "",
+        "## Certification verification",
+        "",
+        "| Measure | Count |",
+        "|---|---|",
+        f"| Draft checks in progress | {sum(1 for v in verifications if v.get('status') in ('', 'draft'))} |",
+        f"| Approved, awaiting apply | {sum(1 for v in verifications if v.get('status') == 'approved')} |",
+        f"| Applied this month | {sum(1 for v in verifications if v.get('status') == 'applied' and str(v.get('applied_on', '')).startswith(f'{today:%Y-%m}'))} |",
+        f"| Applied to date | {sum(1 for v in verifications if v.get('status') == 'applied')} |",
         "",
         "## System status",
         "",
     ]
     out += [f"- **{k}:** {v}" for k, v in source_status.items()]
     out += ["- **Muis portal:** not queried (reuse requires Muis permission)",
-            "- **Published workbook:** not modified by this run",
+            ("- **Published workbook:** expired certified claims withdrawn (see below)"
+             if any(i["issue"] == "Certified status withdrawn" for i in issues)
+             else "- **Published workbook:** not modified by this run"),
+            f"- **OpenStreetMap publishing:** {'enabled' if settings.get('osm_publishing_accepted') else 'off (candidates used as leads only)'}",
             f"- **Next scheduled run:** {next_month_end(today):%d %b %Y}, 23:00 SGT", "",
             "## Administrative attention required", ""]
     if not by_issue and not pending:
@@ -310,7 +431,7 @@ def render_report(today, started, directory, issues, source_status, counts, dupl
         out.append(f"**Candidates to review** ({len(pending)}: "
                    + ", ".join(f"{v} {k.replace('_', ' ')}" for k, v in sorted(kinds.items())) + ")")
         out.append("Review in `_directory-sync/state/candidates.csv`: set review_status to "
-                   "`approved` or `rejected`, then run promote.py for approved rows.")
+                   "`approved` or `rejected`, then run the `apply` action.")
         out.append("")
     out += ["---",
             "Community data © OpenStreetMap contributors, ODbL 1.0. OpenStreetMap halal tags are "

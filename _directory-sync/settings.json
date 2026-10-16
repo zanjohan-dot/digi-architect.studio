@@ -1,0 +1,8 @@
+{
+  "_comment": "Administrator decisions for directory maintenance. See README.md.",
+  "osm_publishing_accepted": false,
+  "suspend_expired_certificates": true,
+  "geocode_with_onemap": true,
+  "reverify_days": 31,
+  "expiry_warning_days": 30
+}
