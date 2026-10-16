@@ -1,0 +1,52 @@
+name: Directory sync tests
+
+# Runs on every change to the sync tool. Executes the full test suite and a
+# live dry run against OpenStreetMap. Nothing is written or committed.
+on:
+  pull_request:
+    paths:
+      - "_directory-sync/**"
+      - ".github/workflows/directory-*.yml"
+      - "data/muslim-friendly-establishments.xlsx"
+      - "muslim-friendly-directory.html"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends libreoffice-calc-nogui
+          pip install -r _directory-sync/requirements.txt pyyaml
+          cd _directory-sync/tools && npm install --no-save --silent https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
+      - name: Test suite
+        run: |
+          set +e
+          python -m unittest discover -s _directory-sync/tests -v > test.log 2>&1
+          status=$?
+          cat test.log
+          python _directory-sync/tools/annotate_failures.py test.log
+          exit $status
+      - name: Website can read the workbook
+        run: node _directory-sync/tools/site_read_check.mjs data/muslim-friendly-establishments.xlsx
+      - name: Live dry run (OpenStreetMap, no writes)
+        run: |
+          python _directory-sync/sync.py --force --dry-run > dry.log
+          cat dry.log
+          for k in "Source records retrieved" "Cross-source duplicates detected" "Awaiting administrator review"; do
+            echo "::notice title=Live dry run::$(grep -m1 "$k" dry.log | tr -d '|' | xargs)"
+          done
+          echo "::notice title=Live dry run::$(grep -m1 'openstreetmap\|osm:' dry.log | xargs)"

@@ -1,0 +1,93 @@
+name: Directory month-end sync
+
+# Last calendar day of each month, 23:00 Singapore time (15:00 UTC).
+# GitHub cron cannot express "last day", so the job is scheduled for days
+# 28-31 and sync.py exits immediately unless today is month-end in SGT.
+# Scheduled runs only start from the default branch (main), and GitHub may
+# start them some minutes late at busy times.
+on:
+  schedule:
+    - cron: "0 15 28-31 * *"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "sync = run month-end checks now; apply = publish approved candidates and verifications"
+        required: true
+        default: sync
+        type: choice
+        options: [sync, apply]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: directory-sync
+  cancel-in-progress: false
+
+env:
+  SHEETJS: https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
+
+jobs:
+  run:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - uses: actions/setup-node@v5
+        with:
+          node-version: "22"
+      - name: Install tools
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq --no-install-recommends libreoffice-calc-nogui
+          pip install -r _directory-sync/requirements.txt
+          cd _directory-sync/tools && npm install --no-save --silent "$SHEETJS"
+
+      - name: Month-end checks
+        id: sync
+        if: github.event_name == 'schedule' || inputs.action == 'sync'
+        continue-on-error: true
+        env:
+          SYNC_TRIGGER: ${{ github.event_name }}
+          PERMITTED_DATASET_URL: ${{ secrets.PERMITTED_DATASET_URL }}
+          PERMITTED_PROVENANCE: ${{ secrets.PERMITTED_PROVENANCE }}
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ]; then
+            # One automatic retry after 20 minutes if a source was unavailable
+            # (still the same SGT date, so the month-end guard still passes).
+            python _directory-sync/sync.py || { sleep 1200; python _directory-sync/sync.py; }
+          else
+            python _directory-sync/sync.py --force
+          fi
+
+      - name: Apply approved changes
+        id: apply
+        if: github.event_name == 'workflow_dispatch' && inputs.action == 'apply'
+        continue-on-error: true
+        env:
+          ONEMAP_TOKEN: ${{ secrets.ONEMAP_TOKEN }}
+        run: python _directory-sync/apply.py --apply
+
+      # The audit log is committed even when a source failed, but nothing is
+      # committed at all unless the website can still read the workbook.
+      - name: Check workbook and commit
+        run: |
+          node _directory-sync/tools/site_read_check.mjs data/muslim-friendly-establishments.xlsx
+          git config user.name "directory-sync[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/muslim-friendly-establishments.xlsx muslim-friendly-directory.html \
+                  _directory-sync/state _directory-sync/reports
+          if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
+          git commit -m "Directory ${{ inputs.action || 'month-end sync' }} $(TZ=Asia/Singapore date +%Y-%m-%d)"
+          git pull --rebase --quiet origin "${GITHUB_REF_NAME}"
+          git push origin "HEAD:${GITHUB_REF_NAME}"
+
+      # Makes the run show as failed (GitHub emails the owner) after the log is saved.
+      - name: Flag failure
+        if: steps.sync.outcome == 'failure' || steps.apply.outcome == 'failure'
+        run: |
+          echo "::error::The run did not complete cleanly - see the report and _directory-sync/state/sync-log.csv"
+          exit 1
