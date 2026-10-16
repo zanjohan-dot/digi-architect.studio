@@ -192,6 +192,12 @@ def fetch_permitted_from_secret():
     (INBOX / "PROVENANCE.md").write_text(prov, encoding="utf-8")
 
 
+def _mask(text, private_ids):
+    for pid in private_ids:
+        text = text.replace(pid, "licensed record (held privately)")
+    return text
+
+
 def privacy_scan(verifications, candidates):
     """Flag free-text fields in committed files that look like personal data.
 
@@ -369,8 +375,9 @@ def run(args):
     for r in rows:
         if r["source_id"] in private_ids:
             continue
-        if r.get("duplicate_of") in private_ids:  # never leak a private identifier into a public file
-            r = dict(r, duplicate_of="licensed record (held privately)")
+        # Never leak a private identifier into a public file, in any field.
+        if private_ids and any(pid in str(v) for v in r.values() for pid in private_ids):
+            r = {k: (_mask(v, private_ids) if isinstance(v, str) else v) for k, v in r.items()}
         public.append(r)
     if not args.dry_run:
         write_csv(STATE / "candidates.csv", CAND_FIELDS, public)

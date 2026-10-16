@@ -175,6 +175,28 @@ class QualityGradeTests(unittest.TestCase):
         self.assertEqual(grade(dict(base, osm_last_edit="2019-01-01"), today)[0], "needs_check")
         self.assertEqual(grade(dict(base, osm_last_edit="2019-01-01", check_date="2025-12-01"), today)[0], "publishable")
         self.assertIn("no postal code", grade(dict(base, postal_code=""), today)[1])
+        self.assertEqual(grade(dict(base, postal_code="000101"), today)[0], "needs_check")
+        self.assertEqual(grade(dict(base, latitude="3.15", longitude="101.7"), today)[0], "rejected")
+        self.assertEqual(grade(dict(base, address="#03-21", postal_code=""), today)[0], "needs_location")
+        self.assertEqual(grade(dict(base, address="#03-21"), today)[0], "publishable")  # postal code locates it
+        self.assertEqual(grade(dict(base, duplicate_of="osm:node/1"), today)[0], "needs_check")
+
+    def test_venue_detection(self):
+        from dsync.quality import is_venue
+        self.assertTrue(is_venue({"name": "Adam Food Centre"}))
+        self.assertTrue(is_venue({"name": "Kedai Kopi", "place_kind": "amenity=restaurant"}))
+        self.assertTrue(is_venue({"name": "X", "place_kind": "amenity=food_court"}))
+        self.assertFalse(is_venue({"name": "Prata Corner", "place_kind": "amenity=restaurant"}))
+
+    def test_same_name_within_50m_is_duplicate(self):
+        from dsync.match import dedupe_sources
+        a = {"source": "osm", "source_id": "osm:node/1", "name": "Nasi Lemak House", "postal_code": "730123",
+             "address": "12 Woodlands Ave 1", "latitude": 1.3, "longitude": 103.85}
+        b = dict(a, source_id="osm:way/2", postal_code="", address="", latitude=1.3002, longitude=103.8501)
+        c = dict(a, source_id="osm:node/3", postal_code="", address="", latitude=1.35, longitude=103.9)
+        self.assertEqual(dedupe_sources([a, b, c]), 1)
+        self.assertEqual(b["duplicate_of"], "osm:node/1")
+        self.assertNotIn("duplicate_of", c)  # same brand far away = separate branch
 
 
 class SyncTests(Base):
@@ -424,6 +446,7 @@ class ApplyTests(Base):
         self.assertIn("not evidence of halal certification", nasi["Basis of Listing"])
         self.assertIn("OpenStreetMap", nasi["Additional Notes"])
         self.assertEqual(nasi["Area / Prefecture"], "Woodlands")
+        self.assertNotIn("every stall", nasi["Basis of Listing"])
         wb = openpyxl.load_workbook(self.h.cwb)
         self.assertIn("Licence", wb.sheetnames)
         if HAS_SHEETJS:
@@ -459,6 +482,16 @@ class ApplyTests(Base):
         r = self.h.apply()
         self.assertIn("1 community listing(s) added", r.stdout)
         self.assertEqual(before, file_hash(self.h.wb))
+
+    def test_food_centre_wording_does_not_imply_every_stall_is_halal(self):
+        self.enable_osm()
+        venue = node(9, "Adam Food Centre", "289876", amenity="food_court")
+        self.h.sync(BASE + [venue])
+        self.h.approve("osm:node/9")
+        r = self.h.apply()
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        [row] = self.h.listings(community=True)
+        self.assertIn("does not mean every stall is halal", row["Basis of Listing"])
 
     def test_certifying_a_community_listing_moves_it(self):
         self.enable_osm()

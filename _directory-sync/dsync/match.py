@@ -70,6 +70,26 @@ def dedupe_sources(cands):
             if similarity(lead["name"], other["name"]) >= 0.85:
                 other["duplicate_of"] = lead["source_id"]
                 dupes += 1
+    # Same name within 50 m (e.g. a node and a building outline for one outlet).
+    by_name = {}
+    for c in cands:
+        if not c.get("duplicate_of"):
+            by_name.setdefault(norm_name(c["name"]), []).append(c)
+    for name, members in by_name.items():
+        if not name or len(members) < 2:
+            continue
+        members.sort(key=lambda c: (not c.get("postal_code"), not c.get("address"), c["source_id"]))
+        for i, lead in enumerate(members):
+            if lead.get("duplicate_of"):
+                continue
+            for other in members[i + 1:]:
+                if other.get("duplicate_of"):
+                    continue
+                d = metres_between(lead.get("latitude"), lead.get("longitude"),
+                                   other.get("latitude"), other.get("longitude"))
+                if d is not None and d <= 50:
+                    other["duplicate_of"] = lead["source_id"]
+                    dupes += 1
     return dupes
 
 

@@ -29,6 +29,7 @@ sys.path.insert(0, str(HERE))
 
 from dsync import SGT_TZ  # noqa: E402
 from dsync.geocode import by_postal  # noqa: E402
+from dsync.quality import is_venue  # noqa: E402
 from dsync.normalise import norm_name, norm_postal  # noqa: E402
 from dsync.verification import VERIFICATION_FIELDS, certified_fields, validate  # noqa: E402
 import hashlib  # noqa: E402
@@ -50,9 +51,14 @@ def community_id(source_id):
 
 
 def community_row(c, today):
-    claim = {"only": "OpenStreetMap contributors report that this place serves only halal food",
-             "yes": "OpenStreetMap contributors report that halal food is available here"}.get(
-        c.get("halal_claim"), "Listed from OpenStreetMap community data")
+    if is_venue(c):
+        claim = ("OpenStreetMap contributors report that halal food is available at this food centre or "
+                 "coffee shop. This does not mean every stall is halal: check each stall's own certificate "
+                 "or declaration")
+    else:
+        claim = {"only": "OpenStreetMap contributors report that this place serves only halal food",
+                 "yes": "OpenStreetMap contributors report that halal food is available here"}.get(
+            c.get("halal_claim"), "Listed from OpenStreetMap community data")
     return {
         "ID": community_id(c["source_id"]),
         "Name": c["name"], "Country": "Singapore", "Address": c["address"] or "",
