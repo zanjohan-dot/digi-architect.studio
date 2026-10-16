@@ -1,0 +1,77 @@
+name: Directory month-end sync
+
+# Last calendar day of each month, 23:00 Singapore time (15:00 UTC).
+# GitHub cron cannot express "last day", so the job is scheduled for days
+# 28-31 and sync.py exits immediately unless today is month-end in SGT.
+# GitHub may start scheduled jobs a few minutes late at busy times.
+on:
+  schedule:
+    - cron: "0 15 28-31 * *"
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "sync = run checks now; promote = add approved candidates to the live workbook"
+        required: true
+        default: sync
+        type: choice
+        options: [sync, promote]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: directory-sync
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    if: github.event_name == 'schedule' || inputs.action == 'sync'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install -r _directory-sync/requirements.txt
+      - name: Run month-end checks
+        env:
+          SYNC_TRIGGER: ${{ github.event_name }}
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python _directory-sync/sync.py --force
+          else
+            python _directory-sync/sync.py
+          fi
+      - name: Commit report and audit trail
+        run: |
+          git config user.name "directory-sync[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _directory-sync/state _directory-sync/reports
+          if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
+          git commit -m "Directory month-end sync $(TZ=Asia/Singapore date +%Y-%m-%d)"
+          git push
+
+  promote:
+    if: github.event_name == 'workflow_dispatch' && inputs.action == 'promote'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libreoffice-calc-nogui
+          pip install -r _directory-sync/requirements.txt
+      - name: Add approved candidates to the workbook
+        run: python _directory-sync/promote.py --apply
+      - name: Commit updated directory
+        run: |
+          git config user.name "directory-sync[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/muslim-friendly-establishments.xlsx _directory-sync/state
+          if git diff --cached --quiet; then echo "Nothing approved"; exit 0; fi
+          git commit -m "Directory: add approved listings $(TZ=Asia/Singapore date +%Y-%m-%d)"
+          git push
