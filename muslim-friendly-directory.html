@@ -1092,7 +1092,7 @@ function loadDirectory() {
       var ws = wb.Sheets[wb.SheetNames[0]];
       var rows = XLSX.utils.sheet_to_json(ws, {defval:null, raw:false});
       establishments = parseRows(rows);
-      if (!establishments.length) { showDirectoryEmpty(); return; }
+      if (!establishments.length) { showDirectoryEmpty(); try { initMap(); } catch (e) {} return; }
       afterLoad();
     })
     .catch(function(err) {
