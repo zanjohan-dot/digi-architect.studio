@@ -1622,7 +1622,7 @@ function initMap(){
       var c=r.coordinates;if(typeof c.lat!=='number'||typeof c.lng!=='number')return;
       var mk=L.marker([c.lat,c.lng]).addTo(m);
       var popupBadge=r.isDemo?'<span class="lp-badge" style="color:#5B21B6;">DEMO LISTING</span>':'<span class="lp-badge">'+esc(r.certificationStatus||'Not stated')+'</span>';
-      mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div><div class="lp-meta">'+esc(r.area)+' &middot; '+esc(r.cuisine)+'</div>'+popupBadge+'<button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">'+(listingCategory(r)==='self'?'View Declaration':'View Details')+'</button>');
+      mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div><div class="lp-meta">'+[r.area||r.address,r.cuisine].filter(Boolean).map(esc).join(' &middot; ')+'</div>'+popupBadge+'<button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">'+(listingCategory(r)==='self'?'View Declaration':'View Details')+'</button>');
       mk.on('click',function(){state.selectedId=r.id;Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===r.id);});showMapPreview(r);renderRows();scrollRowIntoView(r.id);});
       mapMarkers[r.id]=mk;
       allLatLngs.push([c.lat,c.lng]);
