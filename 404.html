@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Page not found | The Digital Systems Architect</title>
+<script>
+/* Old and trailing-slash addresses that should reach a live page. */
+(function () {
+  var moved = {
+    "/muslim-friendly-directory/": "/muslim-friendly-directory",
+    "/muslim-friendly-advisory/": "/muslim-friendly-advisory",
+    "/halal-muslim-friendly-singapore": "/muslim-friendly-advisory",
+    "/halal-muslim-friendly-singapore/": "/muslim-friendly-advisory",
+    "/muslim-friendly-directory/index.html": "/muslim-friendly-directory",
+    "/muslim-friendly-advisory/index.html": "/muslim-friendly-advisory"
+  };
+  var path = location.pathname.toLowerCase();
+  var target = moved[path];
+  if (target) location.replace(target + location.search + location.hash);
+})();
+</script>
+<style>
+:root{--ink:#0B1A2E;--gold:#B8913A;--paper:#FAF8F4;--muted:#5C6878;}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--ink:#F2EEE6;--paper:#0B1A2E;--muted:#A8B3C2;}}
+body{margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;background:var(--paper);color:var(--ink);font-family:Georgia,'Times New Roman',serif;padding:16px;box-sizing:border-box;}
+main{max-width:520px;}
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);}
+h1{font-weight:normal;font-size:32px;margin:12px 0;}
+p{color:var(--muted);font-family:system-ui,sans-serif;font-size:15px;line-height:1.6;}
+a{color:var(--gold);}
+</style>
+</head>
+<body>
+<main>
+  <div class="eyebrow">404</div>
+  <h1>This page could not be found.</h1>
+  <p>It may have moved. Try the <a href="/muslim-friendly-directory">Muslim-Friendly Dining Directory</a>, the <a href="/muslim-friendly-advisory">Halal &amp; Muslim-Friendly Advisory</a>, or the <a href="/">home page</a>.</p>
+</main>
+</body>
+</html>

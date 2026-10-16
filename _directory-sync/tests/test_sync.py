@@ -79,6 +79,7 @@ class Harness:
         (self.dir / "data").mkdir()
         shutil.copy(WORKBOOK, self.wb)  # tests start from the production main workbook...
         shutil.copy(PAGE, self.dir / PAGE.name)
+        shutil.copy(REPO / "sitemap.xml", self.dir / "sitemap.xml")
         s = json.loads((TOOL / "settings.json").read_text())
         # ...but never from production decisions or community data: each test opts in.
         s.update({"geocode_with_onemap": False, "osm_publishing_accepted": False}, **(settings or {}))
@@ -526,6 +527,19 @@ class ApplyTests(Base):
             self.assertEqual(self.h.site_reads(), 1)
             self.assertEqual(self.h.site_reads(community=True), 2)
 
+    def test_published_listing_flagged_only_after_two_missing_runs(self):
+        self.enable_osm()
+        self.h.sync(BASE)
+        self.h.approve("osm:node/1")
+        self.h.apply()
+        self.h.sync(BASE[1:], today="2026-11-30")
+        issues = {i["issue"] for i in self.h.read("directory-issues.csv")}
+        self.assertNotIn("Source record no longer found", issues)
+        self.h.sync(BASE[1:], today="2026-12-31")
+        issues = {i["issue"] for i in self.h.read("directory-issues.csv")}
+        self.assertIn("Source record no longer found", issues)
+        self.assertEqual(len(self.h.listings(community=True)), 1, "never removed automatically")
+
     def test_closure_after_publication_flagged_not_removed(self):
         self.enable_osm()
         self.h.sync(BASE)
@@ -608,3 +622,99 @@ class ApplyTests(Base):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class GeocodeTests(unittest.TestCase):
+    class FakeSession:
+        def __init__(self, hits):
+            self.hits = hits
+
+        def get(self, url, params=None, headers=None, timeout=None):
+            hits = self.hits
+
+            class R:
+                status_code = 200
+
+                def raise_for_status(self):
+                    pass
+
+                def json(self):
+                    return {"found": len(hits), "results": hits}
+            return R()
+
+    def hit(self, blk, road, postal, lat=1.3264, lon=103.8434):
+        return {"BLK_NO": blk, "ROAD_NAME": road, "POSTAL": postal, "LATITUDE": str(lat), "LONGITUDE": str(lon)}
+
+    def test_address_parsing(self):
+        from dsync.geocode import split_address
+        self.assertEqual(split_address("601 Balestier Road, #01-02"), ("601", "BALESTIER RD"))
+        self.assertEqual(split_address("Blk 257 Ang Mo Kio Ave 4"), ("257", "ANG MO KIO AVE 4"))
+        self.assertIsNone(split_address("T2 Departure Public L3"))
+        self.assertIsNone(split_address("#03-21"))
+
+    def test_only_unambiguous_nearby_matches_accepted(self):
+        from dsync.geocode import postal_for_address
+        good = self.hit("601", "BALESTIER ROAD", "329903")
+        self.assertEqual(postal_for_address("601 Balestier Road", 1.3264, 103.8434, self.FakeSession([good])),
+                         ("329903", "matched"))
+        far = self.hit("601", "BALESTIER ROAD", "329903", lat=1.40)
+        self.assertEqual(postal_for_address("601 Balestier Road", 1.3264, 103.8434, self.FakeSession([far]))[1],
+                         "no_match")
+        other_road = self.hit("601", "BALESTIER LANE", "329903")
+        self.assertEqual(postal_for_address("601 Balestier Road", 1.3264, 103.8434,
+                                            self.FakeSession([other_road]))[1], "no_match")
+        two = [good, self.hit("601", "BALESTIER ROAD", "329904")]
+        self.assertEqual(postal_for_address("601 Balestier Road", 1.3264, 103.8434, self.FakeSession(two))[1],
+                         "ambiguous")
+
+
+@unittest.skipUnless(HAS_SOFFICE, "LibreOffice not installed")
+class EnrichAndSeoTests(Base):
+    def setUp(self):
+        super().setUp()
+        st = json.loads((self.h.tool / "settings.json").read_text())
+        st["osm_publishing_accepted"] = True
+        (self.h.tool / "settings.json").write_text(json.dumps(st))
+        self.place = node(20, "Balestier Biryani", None, 1.3264, 103.8434,
+                          **{"addr:street": "Balestier Road", "addr:housenumber": "601"})
+
+    def test_postal_codes_filled_from_cache_with_attribution(self):
+        self.h.sync(BASE + [self.place])
+        self.h.approve("osm:node/20")
+        self.h.apply()
+        [row] = self.h.listings(community=True)
+        self.assertIn(str(row["Postal Code"] or ""), ("", "None"))
+        self.h.write("onemap-postal-cache.csv", [{
+            "address_key": "601 BALESTIER RD", "latitude": "1.326400", "longitude": "103.843400",
+            "postal": "329903", "outcome": "matched", "checked_on": "2026-10-31"}])
+        r = self.h.run("enrich_postal.py", "--no-lookup", "--today", "2026-10-31")
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        [row] = self.h.listings(community=True)
+        self.assertEqual(str(row["Postal Code"]), "329903")
+        self.assertEqual(row["Area / Prefecture"], "Toa Payoh")  # from the workbook's own postal-sector lookup
+        self.assertIn("OneMap", row["Additional Notes"])
+        self.assertIn("OpenStreetMap", row["Additional Notes"])
+        wb = openpyxl.load_workbook(self.h.cwb)
+        self.assertTrue(any("OneMap" in str(c.value) for rw in wb["Licence"].iter_rows() for c in rw))
+        if HAS_SHEETJS:
+            self.assertEqual(self.h.site_reads(community=True), 1)
+
+    def test_seo_build_lists_published_only_and_makes_no_claims(self):
+        self.h.sync(BASE + [self.place])
+        self.h.approve("osm:node/1", "osm:node/3")
+        self.h.apply()
+        r = self.h.run("seo_build.py")
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        page = (self.h.dir / PAGE.name).read_text()
+        self.assertIn("<strong>Nasi Lemak House</strong>", page)
+        self.assertIn("Community-suggested, not verified", page)
+        self.assertNotIn("Balestier Biryani", page, "unpublished queue records never appear")
+        import re as _re
+        data = json.loads(_re.search(r'id="directory-itemlist">(.*?)</script>', page, _re.S).group(1))
+        self.assertEqual(data["numberOfItems"], 2)
+        flat = json.dumps(data).lower()
+        for word in ("rating", "review", "certif", "openinghours"):
+            self.assertNotIn(word, flat)
+        self.assertEqual(self.h.run("seo_build.py", "--check").returncode, 0)
+        sitemap = (self.h.dir / "sitemap.xml").read_text()
+        self.assertRegex(sitemap, r"muslim-friendly-directory</loc>\s*<lastmod>\d{4}-\d{2}-\d{2}")

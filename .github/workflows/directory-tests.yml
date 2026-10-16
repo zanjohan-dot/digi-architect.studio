@@ -9,6 +9,9 @@ on:
       - ".github/workflows/directory-*.yml"
       - "data/*.xlsx"
       - "muslim-friendly-directory.html"
+      - "muslim-friendly-advisory.html"
+      - "sitemap.xml"
+      - "404.html"
   workflow_dispatch:
 
 permissions:
@@ -44,6 +47,8 @@ jobs:
         run: |
           node _directory-sync/tools/site_read_check.mjs data/muslim-friendly-establishments.xlsx
           node _directory-sync/tools/site_read_check.mjs data/community-listings.xlsx
+      - name: Crawlable listings are up to date
+        run: python _directory-sync/seo_build.py --check
       - name: Live dry run (OpenStreetMap, no writes)
         run: |
           python _directory-sync/sync.py --force --dry-run > dry.log

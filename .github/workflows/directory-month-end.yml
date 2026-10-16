@@ -11,11 +11,11 @@ on:
   workflow_dispatch:
     inputs:
       action:
-        description: "sync = run month-end checks now; apply = publish approved candidates and verifications"
+        description: "sync = run month-end checks now; apply = publish approved candidates and verifications; enrich = fill missing postal codes from OneMap"
         required: true
         default: sync
         type: choice
-        options: [sync, apply]
+        options: [sync, apply, enrich]
 
 permissions:
   contents: write
@@ -71,6 +71,22 @@ jobs:
           ONEMAP_TOKEN: ${{ secrets.ONEMAP_TOKEN }}
         run: python _directory-sync/apply.py --apply
 
+      # Postal codes from OneMap: monthly after the sync, or on demand.
+      - name: Fill missing postal codes
+        id: enrich
+        if: github.event_name == 'schedule' || inputs.action == 'sync' || inputs.action == 'enrich'
+        continue-on-error: true
+        run: |
+          if [ "${{ github.event_name }}" = "schedule" ] && [ "$(TZ=Asia/Singapore date -d tomorrow +%d)" != "01" ] && [ "$(TZ=Asia/Singapore date +%d)" != "01" ]; then
+            echo "Not month-end; skipping."
+          else
+            python _directory-sync/enrich_postal.py
+          fi
+
+      # Search engines: refresh the crawlable listing and structured data.
+      - name: Refresh crawlable listings and sitemap
+        run: python _directory-sync/seo_build.py
+
       # The audit log is committed even when a source failed, but nothing is
       # committed at all unless the website can still read the workbook.
       - name: Check workbook and commit
@@ -82,7 +98,7 @@ jobs:
           git config user.name "directory-sync[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add data/muslim-friendly-establishments.xlsx data/community-listings.xlsx muslim-friendly-directory.html \
-                  _directory-sync/state _directory-sync/reports
+                  sitemap.xml _directory-sync/state _directory-sync/reports
           if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
           git commit -m "Directory ${{ inputs.action || 'month-end sync' }} $(TZ=Asia/Singapore date +%Y-%m-%d)"
           git pull --rebase --quiet origin "${GITHUB_REF_NAME}"
@@ -90,7 +106,7 @@ jobs:
 
       # Makes the run show as failed (GitHub emails the owner) after the log is saved.
       - name: Flag failure
-        if: steps.sync.outcome == 'failure' || steps.apply.outcome == 'failure'
+        if: steps.sync.outcome == 'failure' || steps.apply.outcome == 'failure' || steps.enrich.outcome == 'failure'
         run: |
           echo "::error::The run did not complete cleanly - see the report and _directory-sync/state/sync-log.csv"
           exit 1

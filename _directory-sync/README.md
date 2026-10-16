@@ -144,7 +144,7 @@ and shows the attribution automatically.
 
 If a community listing's certificate is later verified (target = its `com-`
 ID), it moves to the main workbook as a certified listing. If OSM later marks a
-published place closed, it is flagged for review, never removed automatically.
+published place closed, it is flagged for review, never removed automatically. A published listing missing from OpenStreetMap is flagged only after two consecutive months (servers can lag).
 
 OpenStreetMap rows are refused while `settings.json` has
 `"osm_publishing_accepted": false`, which is the default.

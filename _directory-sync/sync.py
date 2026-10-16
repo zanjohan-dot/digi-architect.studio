@@ -76,7 +76,7 @@ CAND_FIELDS = [
     "source_id", "source", "name", "address", "postal_code", "unit", "latitude", "longitude",
     "establishment_type", "cuisine", "website", "halal_claim", "certificate_number",
     "certifying_body", "certificate_expiry", "source_url", "licence",
-    "osm_last_edit", "place_kind", "lifecycle", "check_date", "quality_tier", "quality_notes",
+    "osm_last_edit", "place_kind", "lifecycle", "check_date", "postal_source", "quality_tier", "quality_notes",
     "match_status", "directory_id", "match_note", "duplicate_of",
     "first_seen", "last_seen", "missing_runs", "change_note", "record_hash",
     "review_status", "review_note",
@@ -298,6 +298,8 @@ def run(args):
             refreshed_sources.add(name)
 
     duplicates = dedupe_sources(fresh)
+    from enrich_postal import cached_postal, load_cache
+    postal_cache = load_cache()
 
     # 3. Merge into review queue -------------------------------------------
     stamp = today.isoformat()
@@ -305,8 +307,12 @@ def run(args):
     for rec in fresh:
         rec = dict(rec)
         rec["latitude"], rec["longitude"] = fmt_coord(rec.get("latitude")), fmt_coord(rec.get("longitude"))
-        for k in ("osm_last_edit", "place_kind", "lifecycle", "check_date"):
+        for k in ("osm_last_edit", "place_kind", "lifecycle", "check_date", "postal_source"):
             rec.setdefault(k, "")
+        if not rec.get("postal_code"):  # OneMap postal codes found earlier by enrich_postal.py
+            cached = cached_postal(postal_cache, rec.get("address"), rec["latitude"], rec["longitude"])
+            if cached:
+                rec["postal_code"], rec["postal_source"] = cached, "onemap"
         rec["quality_tier"], rec["quality_notes"] = grade(rec, today)
         status, dir_id, note = match_candidate(rec, directory, xref)
         rec.update(match_status=status, directory_id=dir_id or "", match_note=note,
@@ -350,7 +356,8 @@ def run(args):
             kept["missing_runs"] = str(int(old.get("missing_runs") or 0) + 1)
             kept["change_note"] = f"{stamp}: not found in latest {src} extract ({kept['missing_runs']} run(s))"
             counts["no_longer_found"] += 1
-            if old.get("review_status") == "promoted":
+            # One missing month can be a lagging OpenStreetMap server; flag from the second.
+            if old.get("review_status") == "promoted" and int(kept["missing_runs"]) >= 2:
                 issues.append({"directory_id": old.get("directory_id"), "name": old.get("name"),
                                "issue": "Source record no longer found",
                                "detail": f"{sid} missing from {src} for {kept['missing_runs']} run(s); "

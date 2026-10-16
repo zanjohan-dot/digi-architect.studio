@@ -17,6 +17,8 @@ Service area: Based in Singapore, serving organisations in Japan and the wider r
 - Operational infrastructure
 - Digital transformation and systems architecture
 - Cross-department integration
+- Halal certification preparation and Muslim-friendly market readiness (advisory; the studio does not issue halal certification)
+- Muslim-Friendly Dining Directory for Singapore (each listing states whether it is halal-certified, self-declared or community-suggested)
 
 ## Important pages
 
@@ -26,6 +28,8 @@ Service area: Based in Singapore, serving organisations in Japan and the wider r
 - Finance Automation Singapore: https://digi-architect.studio/finance-automation-singapore/
 - HR Systems Singapore: https://digi-architect.studio/hr-systems-singapore/
 - FAQ: https://digi-architect.studio/faq/
+- Halal & Muslim-Friendly Advisory: https://digi-architect.studio/muslim-friendly-advisory
+- Muslim-Friendly Dining Directory, Singapore: https://digi-architect.studio/muslim-friendly-directory
 
 ## Suggested citation
 
