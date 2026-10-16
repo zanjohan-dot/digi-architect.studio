@@ -527,6 +527,19 @@ class ApplyTests(Base):
             self.assertEqual(self.h.site_reads(), 1)
             self.assertEqual(self.h.site_reads(community=True), 2)
 
+    def test_published_listing_flagged_only_after_two_missing_runs(self):
+        self.enable_osm()
+        self.h.sync(BASE)
+        self.h.approve("osm:node/1")
+        self.h.apply()
+        self.h.sync(BASE[1:], today="2026-11-30")
+        issues = {i["issue"] for i in self.h.read("directory-issues.csv")}
+        self.assertNotIn("Source record no longer found", issues)
+        self.h.sync(BASE[1:], today="2026-12-31")
+        issues = {i["issue"] for i in self.h.read("directory-issues.csv")}
+        self.assertIn("Source record no longer found", issues)
+        self.assertEqual(len(self.h.listings(community=True)), 1, "never removed automatically")
+
     def test_closure_after_publication_flagged_not_removed(self):
         self.enable_osm()
         self.h.sync(BASE)

@@ -356,7 +356,8 @@ def run(args):
             kept["missing_runs"] = str(int(old.get("missing_runs") or 0) + 1)
             kept["change_note"] = f"{stamp}: not found in latest {src} extract ({kept['missing_runs']} run(s))"
             counts["no_longer_found"] += 1
-            if old.get("review_status") == "promoted":
+            # One missing month can be a lagging OpenStreetMap server; flag from the second.
+            if old.get("review_status") == "promoted" and int(kept["missing_runs"]) >= 2:
                 issues.append({"directory_id": old.get("directory_id"), "name": old.get("name"),
                                "issue": "Source record no longer found",
                                "detail": f"{sid} missing from {src} for {kept['missing_runs']} run(s); "
