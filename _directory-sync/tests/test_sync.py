@@ -77,12 +77,11 @@ class Harness:
         for f in (self.tool / "inbox" / "permitted").glob("*.csv"):
             f.unlink()
         (self.dir / "data").mkdir()
-        shutil.copy(WORKBOOK, self.wb)
-        if (REPO / "data" / "community-listings.xlsx").exists():
-            shutil.copy(REPO / "data" / "community-listings.xlsx", self.dir / "data" / "community-listings.xlsx")
+        shutil.copy(WORKBOOK, self.wb)  # tests start from the production main workbook...
         shutil.copy(PAGE, self.dir / PAGE.name)
         s = json.loads((TOOL / "settings.json").read_text())
-        s.update({"geocode_with_onemap": False}, **(settings or {}))
+        # ...but never from production decisions or community data: each test opts in.
+        s.update({"geocode_with_onemap": False, "osm_publishing_accepted": False}, **(settings or {}))
         (self.tool / "settings.json").write_text(json.dumps(s))
 
     @property
