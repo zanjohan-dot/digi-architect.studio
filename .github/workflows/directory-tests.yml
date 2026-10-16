@@ -16,7 +16,7 @@ permissions:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
@@ -25,7 +25,7 @@ jobs:
           python-version: "3.12"
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
       - name: Install tools
         run: |
           sudo apt-get update -qq
@@ -43,4 +43,10 @@ jobs:
       - name: Website can read the workbook
         run: node _directory-sync/tools/site_read_check.mjs data/muslim-friendly-establishments.xlsx
       - name: Live dry run (OpenStreetMap, no writes)
-        run: python _directory-sync/sync.py --force --dry-run
+        run: |
+          python _directory-sync/sync.py --force --dry-run > dry.log
+          cat dry.log
+          for k in "Source records retrieved" "Cross-source duplicates detected" "Awaiting administrator review"; do
+            echo "::notice title=Live dry run::$(grep -m1 "$k" dry.log | tr -d '|' | xargs)"
+          done
+          echo "::notice title=Live dry run::$(grep -m1 'openstreetmap\|osm:' dry.log | xargs)"
