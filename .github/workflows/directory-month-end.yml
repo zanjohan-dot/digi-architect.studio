@@ -30,7 +30,7 @@ env:
 jobs:
   run:
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
@@ -56,7 +56,9 @@ jobs:
           PERMITTED_PROVENANCE: ${{ secrets.PERMITTED_PROVENANCE }}
         run: |
           if [ "${{ github.event_name }}" = "schedule" ]; then
-            python _directory-sync/sync.py
+            # One automatic retry after 20 minutes if a source was unavailable
+            # (still the same SGT date, so the month-end guard still passes).
+            python _directory-sync/sync.py || { sleep 1200; python _directory-sync/sync.py; }
           else
             python _directory-sync/sync.py --force
           fi

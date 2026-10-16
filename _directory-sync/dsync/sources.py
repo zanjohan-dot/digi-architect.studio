@@ -23,7 +23,9 @@ from .normalise import norm_postal, unit_from
 
 OVERPASS_ENDPOINTS = [
     "https://overpass-api.de/api/interpreter",
+    "https://overpass.private.coffee/api/interpreter",
     "https://overpass.kumi.systems/api/interpreter",
+    "https://maps.mail.ru/osm/tools/overpass/api/interpreter",
 ]
 USER_AGENT = "digi-architect.studio directory maintenance (admin@digi-architect.studio)"
 
@@ -53,7 +55,7 @@ class SourceError(RuntimeError):
     pass
 
 
-def fetch_osm(retries=3, backoff=20, session=None):
+def fetch_osm(retries=2, backoff=45, session=None):
     """Return a list of normalised candidate dicts from OpenStreetMap."""
     session = session or requests.Session()
     last = None
@@ -64,7 +66,7 @@ def fetch_osm(retries=3, backoff=20, session=None):
                     url,
                     data={"data": OSM_QUERY},
                     headers={"User-Agent": USER_AGENT},
-                    timeout=180,
+                    timeout=90,
                 )
                 if resp.status_code == 200:
                     payload = resp.json()
@@ -74,8 +76,10 @@ def fetch_osm(retries=3, backoff=20, session=None):
                         raise SourceError("Overpass reported: " + payload["remark"][:200])
                     return [osm_record(e) for e in payload["elements"]]
                 last = f"{url} HTTP {resp.status_code}"
+                print(f"Overpass {url}: HTTP {resp.status_code}", flush=True)
             except (requests.RequestException, ValueError, SourceError) as exc:
-                last = f"{url}: {exc}"
+                last = f"{url}: {type(exc).__name__}: {str(exc)[:150]}"
+                print(f"Overpass {last}", flush=True)
         time.sleep(backoff * (attempt + 1))
     raise SourceError(f"OpenStreetMap fetch failed after {retries} attempts ({last})")
 

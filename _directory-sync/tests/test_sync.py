@@ -284,6 +284,39 @@ class ScheduleTests(unittest.TestCase):
                 self.assertEqual(fires, [dt.date(year, m, calendar.monthrange(year, m)[1])])
 
 
+class LateStartTests(unittest.TestCase):
+    """GitHub can start scheduled jobs late; the guard must neither skip nor double-run a month."""
+
+    def setUp(self):
+        import sync
+        self.sync = sync
+        self.tmp = Path(tempfile.mkdtemp())
+        self._state = sync.STATE
+        sync.STATE = self.tmp
+
+    def tearDown(self):
+        self.sync.STATE = self._state
+        shutil.rmtree(self.tmp, ignore_errors=True)
+
+    def at(self, *a):
+        from zoneinfo import ZoneInfo
+        return dt.datetime(*a, tzinfo=ZoneInfo("Asia/Singapore"))
+
+    def test_last_day_job_starting_after_midnight_still_runs(self):
+        self.assertEqual(self.sync.late_start_date(self.at(2026, 11, 1, 0, 40), None), dt.date(2026, 10, 31))
+
+    def test_not_rerun_if_month_already_logged(self):
+        (self.tmp / "sync-log.csv").write_text("run_at_sgt,status\n2026-10-31 23:02,Successful\n")
+        self.assertIsNone(self.sync.late_start_date(self.at(2026, 11, 1, 0, 40), None))
+
+    def test_rerun_if_logged_run_failed(self):
+        (self.tmp / "sync-log.csv").write_text("run_at_sgt,status\n2026-10-31 23:02,Failed\n")
+        self.assertEqual(self.sync.late_start_date(self.at(2026, 11, 1, 0, 40), None), dt.date(2026, 10, 31))
+
+    def test_daytime_on_first_is_not_month_end(self):
+        self.assertIsNone(self.sync.late_start_date(self.at(2026, 11, 1, 9, 0), None))
+
+
 # ------------------------------------------------------------ workbook writes --
 
 @unittest.skipUnless(HAS_SOFFICE, "LibreOffice not installed")

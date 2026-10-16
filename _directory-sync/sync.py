@@ -79,6 +79,20 @@ def is_month_end(day):
     return day.day == calendar.monthrange(day.year, day.month)[1]
 
 
+def late_start_date(started, override):
+    """GitHub sometimes starts scheduled jobs late. If the 23:00 month-end job
+    starts after midnight (before 06:00 SGT on the 1st) and last month has no
+    run logged yet, run it for last month's final day instead of skipping."""
+    if override or started.day != 1 or started.hour >= 6:
+        return None
+    last_day = started.date() - dt.timedelta(days=1)
+    month = f"{last_day:%Y-%m}"
+    if any(r.get("run_at_sgt", "").startswith(month) and r.get("status") != "Failed"
+           for r in read_csv(STATE / "sync-log.csv")):
+        return None
+    return last_day
+
+
 def next_month_end(day):
     y, m = day.year, day.month
     if is_month_end(day):
@@ -205,9 +219,16 @@ def suspend_expired(args, directory, today, errors):
 def run(args):
     started = now_sgt()
     today = dt.date.fromisoformat(args.today) if args.today else started.date()
-    if not args.force and not is_month_end(today):
-        print(f"{today} is not the last day of the month in Singapore; nothing to do.")
+    if not args.force and not args.today and is_month_end(today) and started.hour < 6:
+        print("This is the previous day's scheduled job starting late; the month-end run happens at 23:00 tonight.")
         return 0
+    if not args.force and not is_month_end(today):
+        late = late_start_date(started, args.today)
+        if not late:
+            print(f"{today} is not the last day of the month in Singapore; nothing to do.")
+            return 0
+        print(f"Scheduled job started late ({started:%d %b %H:%M} SGT); running for {late:%d %b %Y}.")
+        today = late
     STATE.mkdir(parents=True, exist_ok=True)
     REPORTS.mkdir(parents=True, exist_ok=True)
     settings = load_settings()
@@ -343,6 +364,9 @@ def run(args):
                            needs_review, len(fresh), rows, run_status, verifications, len(private), settings)
     if not args.dry_run:
         (REPORTS / f"{today:%Y-%m}.md").write_text(report, encoding="utf-8")
+    if os.environ.get("GITHUB_ACTIONS"):
+        for e in errors:
+            print(f"::error title=Directory sync::{e}".replace("\n", " "))
     summary = os.environ.get("GITHUB_STEP_SUMMARY")
     if summary:
         with open(summary, "a", encoding="utf-8") as fh:

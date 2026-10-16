@@ -67,8 +67,13 @@ Each run:
 
 **Failure handling:**
 
-- **Source down.** Nothing changes, and the run is logged as Failed. GitHub
-  marks the workflow failed and emails the owner.
+- **Source down.** Nothing changes, and the run is logged as Failed. The
+  scheduled job retries once after 20 minutes, across four Overpass servers.
+  If it still fails, GitHub marks the workflow failed and emails the owner.
+- **Late start.** GitHub sometimes starts scheduled jobs late. A month-end job
+  that starts after midnight still runs for the month just ended, unless that
+  month already has a successful run logged. A job for an earlier day that
+  starts after midnight on the last day does not run early.
 - **Small extract.** If a source returns under 70% of last month's count, the
   run is Partial. Previous data is kept, and nothing is marked missing.
 - **Workbook not verified.** If any workbook write cannot be verified, the
@@ -202,6 +207,6 @@ the columns below; no code changes are required.
 python -m unittest discover -s _directory-sync/tests -v
 ```
 
-There are 24 end-to-end tests. They run automatically on every pull request
+There are 28 end-to-end tests. They run automatically on every pull request
 (`.github/workflows/directory-tests.yml`), followed by a live dry run against
 OpenStreetMap.
