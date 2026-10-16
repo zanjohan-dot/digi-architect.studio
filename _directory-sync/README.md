@@ -123,9 +123,28 @@ requires one. If the lookup fails, the listing is added and flagged
 
 ## Candidates (community suggestions)
 
+Every candidate gets a quality grade (`quality_tier`, `quality_notes`) from
+its OpenStreetMap data:
+
+| Tier | Meaning | Can be published? |
+|---|---|---|
+| `publishable` | Named dining place with an address, updated in OSM within 4 years (or surveyed within 2) | Yes, once approved |
+| `needs_check` | Not updated for a long time; may have closed | Only if `review_note` contains "checked" |
+| `needs_location` | No street address or postal code | No |
+| `rejected` | No name, not a dining place (e.g. convenience store), or marked closed | No |
+
 In `state/candidates.csv`, set `review_status` to `approved` or `rejected`.
-Approved rows are listed as "Community suggested — not verified" by the
-`apply` action.
+Approved rows are added by the `apply` action to
+**`data/community-listings.xlsx`**, as "Community suggested — not verified".
+They get stable `com-` IDs.
+
+This file is separate from the main workbook so that only OpenStreetMap-derived
+data carries ODbL terms. It includes a Licence sheet. The page loads both files
+and shows the attribution automatically.
+
+If a community listing's certificate is later verified (target = its `com-`
+ID), it moves to the main workbook as a certified listing. If OSM later marks a
+published place closed, it is flagged for review, never removed automatically.
 
 OpenStreetMap rows are refused while `settings.json` has
 `"osm_publishing_accepted": false`, which is the default.
@@ -207,6 +226,6 @@ the columns below; no code changes are required.
 python -m unittest discover -s _directory-sync/tests -v
 ```
 
-There are 28 end-to-end tests. They run automatically on every pull request
+There are 32 end-to-end tests. They run automatically on every pull request
 (`.github/workflows/directory-tests.yml`), followed by a live dry run against
 OpenStreetMap.
