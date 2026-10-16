@@ -3,3 +3,4 @@ run_at_sgt,trigger,status,sources,records_retrieved,new,updated,unchanged,no_lon
 2026-10-16 15:29,workflow_dispatch,Successful,osm: Successful; permitted: No permitted dataset supplied this month.,329,0,0,329,0,0,329,0,
 2026-10-16 15:45,workflow_dispatch,Successful,osm: Successful; permitted: No permitted dataset supplied this month.,329,0,0,329,0,1,108,0,
 2026-10-16 15:54,workflow_dispatch,Successful,osm: Successful; permitted: No permitted dataset supplied this month.,330,1,0,329,0,1,119,95,
+2026-10-16 16:00,workflow_dispatch,Successful,osm: Successful; permitted: No permitted dataset supplied this month.,330,0,0,330,0,1,119,80,

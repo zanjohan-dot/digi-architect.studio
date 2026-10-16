@@ -1,6 +1,5 @@
 directory_id,name,issue,detail
 com-9bccb436,4Fingers Crispy Chicken,Incomplete record,Missing or invalid Singapore postal code
-com-f0b8ee20,4Fingers Crispy Chicken,Duplicate record,Same name and postal code as com-9bccb436
 com-f0b8ee20,4Fingers Crispy Chicken,Incomplete record,Missing or invalid Singapore postal code
 com-5eadf3bc,97 Nasi Lemak,Incomplete record,Missing or invalid Singapore postal code
 com-00cc4591,ABC King Pte. Ltd.,Incomplete record,Missing or invalid Singapore postal code
@@ -17,7 +16,6 @@ com-89f22afe,Annie’s Halal Cuisine,Incomplete record,Missing or invalid Singap
 com-ad89df3d,Bobmi,Incomplete record,Missing or invalid Singapore postal code
 com-6cdf593c,Bungkus,Incomplete record,Missing or invalid Singapore postal code
 com-d22bd224,Burger King,Incomplete record,Missing or invalid Singapore postal code
-com-9be9781e,Burger King,Duplicate record,Same name and postal code as com-d22bd224
 com-9be9781e,Burger King,Incomplete record,Missing or invalid Singapore postal code
 com-da817d18,Cahaya Singapura,Incomplete record,Missing or invalid Singapore postal code
 com-8b5d8eef,Changi Village Food Centre,Incomplete record,Missing or invalid Singapore postal code
@@ -26,7 +24,6 @@ com-a197360d,Dajie Makan Place,Incomplete record,Missing or invalid Singapore po
 com-cc6fd6de,Dil 'B Restaurant,Incomplete record,Missing or invalid Singapore postal code
 com-44481503,Délifrance,Incomplete record,Missing or invalid Singapore postal code
 com-7e21007a,Encik Tan,Incomplete record,Missing or invalid Singapore postal code
-com-5e106ab9,Encik Tan,Duplicate record,Same name and postal code as com-7e21007a
 com-5e106ab9,Encik Tan,Incomplete record,Missing or invalid Singapore postal code
 com-c3046418,Fayidha,Incomplete record,Missing or invalid Singapore postal code
 com-29856750,Food Fair,Incomplete record,Missing or invalid Singapore postal code
@@ -46,9 +43,7 @@ com-2702a408,Long John Silver's,Incomplete record,Missing or invalid Singapore p
 com-85c5dd9e,Ma Mum,Incomplete record,Missing or invalid Singapore postal code
 com-7f4a4ee4,Makansutra Gluttons Bay,Incomplete record,Missing or invalid Singapore postal code
 com-4fd2b978,McDonald's,Incomplete record,Missing or invalid Singapore postal code
-com-b6bf6545,McDonald's,Duplicate record,Same name and postal code as com-4fd2b978
 com-b6bf6545,McDonald's,Incomplete record,Missing or invalid Singapore postal code
-com-14074101,McDonald's,Duplicate record,Same name and postal code as com-4fd2b978
 com-14074101,McDonald's,Incomplete record,Missing or invalid Singapore postal code
 com-ba299d99,Monster Planet モンスタープラネット,Incomplete record,Missing or invalid Singapore postal code
 com-4356a2e0,Mr Uncle,Incomplete record,Missing or invalid Singapore postal code
@@ -65,32 +60,22 @@ com-06b93b01,PrimaDéli,Incomplete record,Missing or invalid Singapore postal co
 com-4b4c0a08,Red Ginger,Incomplete record,Missing or invalid Singapore postal code
 com-f99d580a,Sai Kitchen,Incomplete record,Missing or invalid Singapore postal code
 com-48dc2d18,Sanook Kitchen,Incomplete record,Missing or invalid Singapore postal code
-com-bb965fce,Sanook Kitchen,Duplicate record,Same name and postal code as com-48dc2d18
 com-bb965fce,Sanook Kitchen,Incomplete record,Missing or invalid Singapore postal code
-com-aad1ae1e,Sanook Kitchen,Duplicate record,Same name and postal code as com-48dc2d18
 com-aad1ae1e,Sanook Kitchen,Incomplete record,Missing or invalid Singapore postal code
 com-cf0d9217,Springleaf Prata,Incomplete record,Missing or invalid Singapore postal code
 com-81fa7841,Stuff’d,Incomplete record,Missing or invalid Singapore postal code
-com-b1085543,Stuff’d,Duplicate record,Same name and postal code as com-81fa7841
 com-b1085543,Stuff’d,Incomplete record,Missing or invalid Singapore postal code
 com-882a4ac8,Subway,Incomplete record,Missing or invalid Singapore postal code
-com-c647a41e,Subway,Duplicate record,Same name and postal code as com-882a4ac8
 com-c647a41e,Subway,Incomplete record,Missing or invalid Singapore postal code
-com-94974045,Subway,Duplicate record,Same name and postal code as com-882a4ac8
 com-94974045,Subway,Incomplete record,Missing or invalid Singapore postal code
-com-724748f3,Subway,Duplicate record,Same name and postal code as com-882a4ac8
 com-724748f3,Subway,Incomplete record,Missing or invalid Singapore postal code
 com-411644ed,Sukiya すき家,Incomplete record,Missing or invalid Singapore postal code
 com-66319b3f,Swensen's,Incomplete record,Missing or invalid Singapore postal code
 com-06f46014,Syams Corner,Incomplete record,Missing or invalid Singapore postal code
 com-d5bf3db4,Tandoori Khazana,Incomplete record,Missing or invalid Singapore postal code
 com-8b1b6e42,The Malayan Council,Incomplete record,Missing or invalid Singapore postal code
-com-cd03318a,The Malayan Council,Duplicate record,Same name and postal code as com-8b1b6e42
 com-cd03318a,The Malayan Council,Incomplete record,Missing or invalid Singapore postal code
 com-60168d66,Wan Aneka Selera,Incomplete record,Missing or invalid Singapore postal code
 com-7069d474,Wingstop,Incomplete record,Missing or invalid Singapore postal code
 com-4fb7394e,Yakader Muslim Food,Incomplete record,Missing or invalid Singapore postal code
 com-86c646aa,Zheng Hua 257 Coffee Shop,Incomplete record,Missing or invalid Singapore postal code
-com-66832548,Adinda by Gerai Nenek Obek,Possible personal data in a public file,candidates.csv osm:node/12143316832 review_note contains a phone number; edit it out
-com-94974045,Subway,Possible personal data in a public file,candidates.csv osm:node/12891751918 review_note contains a phone number; edit it out
-com-96777331,Wok Hey,Possible personal data in a public file,candidates.csv osm:node/8658867050 review_note contains a phone number; edit it out
