@@ -30,10 +30,16 @@ jobs:
         run: |
           sudo apt-get update -qq
           sudo apt-get install -y -qq --no-install-recommends libreoffice-calc-nogui
-          pip install -r _directory-sync/requirements.txt
+          pip install -r _directory-sync/requirements.txt pyyaml
           cd _directory-sync/tools && npm install --no-save --silent https://cdn.sheetjs.com/xlsx-0.20.3/xlsx-0.20.3.tgz
       - name: Test suite
-        run: python -m unittest discover -s _directory-sync/tests -v
+        run: |
+          set +e
+          python -m unittest discover -s _directory-sync/tests -v > test.log 2>&1
+          status=$?
+          cat test.log
+          python _directory-sync/tools/annotate_failures.py test.log
+          exit $status
       - name: Website can read the workbook
         run: node _directory-sync/tools/site_read_check.mjs data/muslim-friendly-establishments.xlsx
       - name: Live dry run (OpenStreetMap, no writes)
