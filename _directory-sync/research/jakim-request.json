@@ -1,0 +1,25 @@
+{
+ "probe": true,
+ "queries": [
+  {
+   "key": "probe-sugarbun-13",
+   "negeri": "13",
+   "cari": "SugarBun"
+  },
+  {
+   "key": "probe-marrybrown-13",
+   "negeri": "13",
+   "cari": "Marrybrown"
+  },
+  {
+   "key": "probe-sushizanmai-14",
+   "negeri": "14",
+   "cari": "Sushi Zanmai"
+  },
+  {
+   "key": "probe-sofea",
+   "negeri": "13",
+   "cari": "Sofea"
+  }
+ ]
+}
