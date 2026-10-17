@@ -13,6 +13,7 @@ import csv
 import datetime as dt
 import gzip
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -20,7 +21,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
 
 from dsync.intl import (COUNTRIES, SCOPE, TownIndex, address_for, dedupe_intl,  # noqa: E402
-                        names_for, norm_postal_intl)
+                        has_cjk, names_for, norm_postal_intl)
 from dsync.quality import DINING_AMENITIES, DINING_SHOPS, FRESH_YEARS, SURVEY_FRESH_YEARS, is_venue  # noqa: E402
 from dsync.sources import AMENITY_TO_TYPE, SHOP_TO_TYPE, lifecycle  # noqa: E402
 
@@ -29,13 +30,18 @@ RESEARCH = HERE / "research"
 STATE = HERE / "state"
 
 CAND_FIELDS = ["source_id", "country", "state", "city", "city_basis", "name", "local_name", "address",
+               "local_address", "address_basis",
                "postal_code", "latitude", "longitude", "establishment_type", "cuisine", "halal_claim",
                "halal_scope", "certification_claim", "website", "opening_hours", "osm_last_edit",
                "check_date", "lifecycle", "place_kind", "duplicate_of", "quality_tier", "quality_notes",
                "source_url", "review_status", "review_note"]
 
-NEW_COLUMNS = ["Local Name", "State / Prefecture", "City", "Halal Scope", "Muslim-Owned",
+NEW_COLUMNS = ["Local Name", "Local Address", "State / Prefecture", "City", "Halal Scope", "Muslim-Owned",
                "Opening Hours", "Source URL", "Last Verified", "Verification Notes"]
+
+NOT_OPEN = re.compile(r"opening soon|coming soon|under construction|temporarily closed|\btutup\b|akan dibuka|閉店|休業|準備中|近日オープン", re.I)
+
+PORK_HINT = re.compile(r"\bpork\b|\bbabi\b|bak ?kut ?teh|char ?siew|char ?siu|siu ?yuk|\bbacon\b|\bham\b|tonkatsu|\bbuta\b|豚|とんかつ|トンカツ|豬|猪肉|叉烧|叉燒|肉骨茶", re.I)
 
 COMMUNITY_DECLARATION = "No declaration has been submitted. Contact the establishment directly."
 
@@ -47,15 +53,62 @@ def years_since(text, today):
         return None
 
 
-def record(el, cc, state, towns):
+GEOCODE = HERE / "research" / "geocode-cache.json"
+
+
+def load_geocode():
+    return json.loads(GEOCODE.read_text(encoding="utf-8")) if GEOCODE.exists() else {}
+
+
+COUNCIL = re.compile(r"^(Majlis (Bandaraya|Perbandaran|Daerah) )|\s+(City|Municipal|District|Town) Council$|^(Dewan Bandaraya) ", re.I)
+
+
+def _town(a):
+    t = a.get("city") or a.get("town") or a.get("village") or a.get("municipality") or ""
+    return COUNCIL.sub("", t).strip()
+
+
+def _compose(a, cc):
+    """Readable address from a reverse-geocoder result (no state, no postcode)."""
+    if cc == "JP":
+        parts = [a.get("neighbourhood"), a.get("quarter"), a.get("suburb"), a.get("city_district"), _town(a)]
+    else:
+        street = " ".join(x for x in (a.get("house_number"), a.get("road")) if x)
+        parts = [street, a.get("neighbourhood") or a.get("suburb"), _town(a)]
+    out = []
+    for p in parts:
+        if p and p not in out:
+            out.append(p)
+    return ", ".join(out)
+
+
+def record(el, cc, state, towns, geo=None):
     tags = el.get("tags") or {}
     lat = el.get("lat", (el.get("center") or {}).get("lat"))
     lon = el.get("lon", (el.get("center") or {}).get("lon"))
     name, local = names_for(tags, cc)
+    g = (geo or {}).get(f"osm:{el['type']}/{el['id']}", {})
+    en, ja = g.get("en") or {}, g.get("ja") or {}
     city, basis = tags.get("addr:city") or "", "address"
+    if city and cc == "JP" and has_cjk(city) and _town(en):
+        city, basis = _town(en), "map position"          # keep town names in English
+    if not city and _town(en):
+        city, basis = _town(en), "map position"
     if not city:
         t = towns.nearest(lat, lon)
         city, basis = (t["name"], "nearest town") if t else ("", "")
+    address, address_basis = address_for(tags, cc), "OpenStreetMap address tags"
+    if cc == "JP" and has_cjk(address) and _compose(en, cc):
+        address, address_basis = _compose(en, cc), "map position (OpenStreetMap reverse geocoding)"
+    if not address and _compose(en, cc):
+        address, address_basis = _compose(en, cc), "map position (OpenStreetMap reverse geocoding)"
+    local_address = ""
+    if cc == "JP":
+        local_address = tags.get("addr:full") if has_cjk(tags.get("addr:full") or "") else ""
+        if not local_address and ja:
+            local_address = "".join(x for x in (ja.get("province"), _town(ja), ja.get("city_district"), ja.get("suburb"),
+                                                 ja.get("quarter"), ja.get("neighbourhood")) if x)
+    postal = norm_postal_intl(tags.get("addr:postcode"), cc) or norm_postal_intl(en.get("postcode"), cc)
     claim = tags.get("diet:halal") or ("cuisine" if "halal" in (tags.get("cuisine") or "") else "")
     cert = " ".join(f"{k}={v}" for k, v in tags.items()
                     if "halal" in k and ("cert" in k or "operator" in k or "authority" in k))
@@ -64,8 +117,8 @@ def record(el, cc, state, towns):
     return {
         "source_id": f"osm:{el['type']}/{el['id']}", "country": COUNTRIES[cc]["name"], "state": state,
         "city": city, "city_basis": basis, "name": name, "local_name": local,
-        "address": address_for(tags, cc),
-        "postal_code": norm_postal_intl(tags.get("addr:postcode"), cc),
+        "address": address, "local_address": local_address, "address_basis": address_basis,
+        "postal_code": postal,
         "latitude": lat, "longitude": lon,
         "establishment_type": AMENITY_TO_TYPE.get(tags.get("amenity")) or SHOP_TO_TYPE.get(tags.get("shop")) or "Other",
         "cuisine": ", ".join(c.replace("_", " ").title() for c in (tags.get("cuisine") or "").split(";")
@@ -76,6 +129,8 @@ def record(el, cc, state, towns):
         "osm_last_edit": (el.get("timestamp") or "")[:10],
         "check_date": (tags.get("check_date") or tags.get("survey:date") or "")[:10],
         "lifecycle": lifecycle(tags), "place_kind": kind, "duplicate_of": "",
+        "conflict": "diet:non-halal=" + tags["diet:non-halal"]
+                    if claim and tags.get("diet:non-halal") in ("yes", "only") else "",
         "source_url": f"https://www.openstreetmap.org/{el['type']}/{el['id']}",
     }
 
@@ -92,13 +147,23 @@ def grade(rec, cc, today):
             return "rejected", f"not a dining establishment ({kind})"
     if rec["lifecycle"]:
         return "rejected", f"reported closed ({rec['lifecycle']})"
+    pork = PORK_HINT.search(f"{rec['name']} {rec.get('local_name') or ''} {rec.get('cuisine') or ''}")
+    if pork:
+        return "needs_check", f"name or cuisine suggests pork ({pork.group(0).strip()}); check before listing"
+    if rec.get("conflict"):
+        return "needs_check", f"contradictory tags ({rec['conflict']} alongside a halal tag); check before listing"
+    status_word = NOT_OPEN.search(f"{rec['name']} {rec.get('local_name') or ''}")
+    if status_word:
+        return "needs_check", f"name suggests it is not open ({status_word.group(0).strip()})"
     b = COUNTRIES[cc]["bounds"]
     if rec["latitude"] is None or not (b[0] <= rec["latitude"] <= b[1] and b[2] <= rec["longitude"] <= b[3]):
         return "rejected", "no coordinates or outside the country"
     if rec["duplicate_of"]:
         return "needs_check", f"possible duplicate of {rec['duplicate_of']}"
     if not rec["address"] and not rec["postal_code"]:
-        notes.append("no street address in OpenStreetMap; located by map position")
+        notes.append("no address; located by map position only")
+    elif rec.get("address_basis", "").startswith("map position"):
+        notes.append("address derived from map position")
     if not rec["postal_code"]:
         notes.append("no postcode")
     if rec["halal_claim"] == "limited":
@@ -128,6 +193,8 @@ def listing_row(c, today, community_id):
              f"{c['osm_last_edit'] or 'unknown'}."]
     if c["city_basis"] == "nearest town":
         notes.append(f"Town shown is the nearest town on the map ({c['city']}).")
+    if c.get("address_basis", "").startswith("map position"):
+        notes.append("Address derived from the map position; confirm before visiting.")
     if c["certification_claim"]:
         notes.append("OpenStreetMap also carries a certification note that has not been checked.")
     return {
@@ -145,7 +212,8 @@ def listing_row(c, today, community_id):
         "Declaration Text Override": COMMUNITY_DECLARATION, "Declaration Text": COMMUNITY_DECLARATION,
         "Additional Notes": " ".join(notes), "Website URL": c["website"] or None,
         "Last Updated": today.isoformat(), "Is Demo": "FALSE",
-        "Local Name": c["local_name"] or None, "State / Prefecture": c["state"], "City": c["city"] or None,
+        "Local Name": c["local_name"] or None, "Local Address": c.get("local_address") or None,
+        "State / Prefecture": c["state"], "City": c["city"] or None,
         "Halal Scope": c["halal_scope"] or None, "Muslim-Owned": "Unknown",
         "Opening Hours": c["opening_hours"] or None, "Source URL": c["source_url"],
         "Last Verified": None,
@@ -180,10 +248,11 @@ def build(cc, today, write_data):
     from apply import community_id
     data = json.load(gzip.open(RESEARCH / f"osm-{cc}.json.gz", "rt", encoding="utf-8"))
     towns = TownIndex(data["places"])
+    geo = load_geocode()
     cands, coverage = [], []
     for code, area in data["areas"].items():
         for el in area["elements"]:
-            cands.append(dict(record(el, cc, area["name"], towns), _area=code))
+            cands.append(dict(record(el, cc, area["name"], towns, geo), _area=code))
     dupes = dedupe_intl(cands)
     for c in cands:
         c["quality_tier"], c["quality_notes"] = grade(c, cc, today)

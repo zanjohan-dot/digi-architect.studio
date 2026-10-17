@@ -92,12 +92,12 @@ jobs:
       - name: Check workbook and commit
         run: |
           node _directory-sync/tools/site_read_check.mjs data/muslim-friendly-establishments.xlsx
-          if [ -f data/community-listings.xlsx ]; then
-            node _directory-sync/tools/site_read_check.mjs data/community-listings.xlsx
-          fi
+          for f in data/community-listings*.xlsx; do
+            node _directory-sync/tools/site_read_check.mjs "$f"
+          done
           git config user.name "directory-sync[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/muslim-friendly-establishments.xlsx data/community-listings.xlsx muslim-friendly-directory.html \
+          git add data/muslim-friendly-establishments.xlsx data/community-listings*.xlsx muslim-friendly-directory*.html \
                   sitemap.xml _directory-sync/state _directory-sync/reports
           if git diff --cached --quiet; then echo "No changes to commit"; exit 0; fi
           git commit -m "Directory ${{ inputs.action || 'month-end sync' }} $(TZ=Asia/Singapore date +%Y-%m-%d)"

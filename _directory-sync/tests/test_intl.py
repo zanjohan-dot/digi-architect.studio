@@ -78,6 +78,23 @@ class Classification(unittest.TestCase):
         r = self.rec({"diet:halal": "yes"}, lat=1.3, lon=103.8)
         self.assertEqual(rb.grade(r, "JP", TODAY)[0], "rejected")
 
+    def test_not_open_or_pork_held_back(self):
+        r = self.rec({"diet:halal": "yes", "name": "Sajian Warisan (opening soon)"})
+        self.assertEqual(rb.grade(r, "JP", TODAY)[0], "needs_check")
+        r = self.rec({"diet:halal": "yes", "name": "とんかつ 山田"})
+        tier, notes = rb.grade(r, "JP", TODAY)
+        self.assertEqual(tier, "needs_check")
+        self.assertIn("pork", notes)
+        r = rb.record(el(7, {"amenity": "restaurant", "name": "Restoran Bak Kut Teh", "diet:halal": "yes"},
+                         lat=1.46, lon=103.76), "MY", "Johor", TOWNS)
+        self.assertEqual(rb.grade(r, "MY", TODAY)[0], "needs_check")
+
+    def test_contradictory_halal_and_non_halal_held_back(self):
+        r = self.rec({"diet:halal": "yes", "diet:non-halal": "yes"})
+        tier, notes = rb.grade(r, "JP", TODAY)
+        self.assertEqual(tier, "needs_check")
+        self.assertIn("contradictory", notes)
+
     def test_food_court_wording(self):
         r = rb.record(el(5, {"amenity": "food_court", "name": "Food Court A", "diet:halal": "yes"},
                          lat=1.46, lon=103.76), "MY", "Johor", TOWNS)

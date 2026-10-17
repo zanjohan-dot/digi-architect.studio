@@ -1049,6 +1049,7 @@ function parseRows(rows) {
       region:              trim2(row['state_prefecture'])  || trim2(row['area_prefecture']) || '',
       city:                trim2(row['city'])              || '',
       localName:           trim2(row['local_name'])        || '',
+      localAddress:        trim2(row['local_address'])     || '',
       halalScope:          trim2(row['halal_scope'])       || '',
       muslimOwned:         trim2(row['muslim_owned'])      || '',
       openingHours:        trim2(row['opening_hours'])     || '',
@@ -1105,7 +1106,7 @@ function parseRows(rows) {
   result.forEach(function(r){
     r.mapReady = r.coordinates.lat !== null && r.coordinates.lng !== null;
     r.searchBlob = [
-      r.name, r.localName, r.address, r.postalCode, r.postalSector, r.postalDistrict,
+      r.name, r.localName, r.address, r.localAddress, r.postalCode, r.postalSector, r.postalDistrict,
       r.area, r.region, r.city, r.country, r.cuisine, r.establishmentType, r.halalScope,
       r.certificationStatus, r.status, r.basisOfListing, r.certifyingBody,
       r.declarationProvided, r.crossContactNote, r.additionalNotes
@@ -1709,6 +1710,7 @@ function renderDrawerContent(r){
     +'<dl class="detail-list">'
     +(r.localName?'<div><dt>Local name</dt><dd lang="'+(r.country==='Japan'?'ja':'ms')+'">'+esc(r.localName)+'</dd></div>':'')
     +'<div><dt>Location</dt><dd>'+esc(r.address||r.area||'Not stated')+'</dd></div>'
+    +(r.localAddress?'<div><dt>Address (Japanese)</dt><dd lang="ja">'+esc(r.localAddress)+'</dd></div>':'')
     +(r.country!=='Singapore'?'<div><dt>Country</dt><dd>'+esc(r.country)+'</dd></div>':'')
     +(r.city?'<div><dt>City / town</dt><dd>'+esc(r.city)+'</dd></div>':'')
     +(r.halalScope?'<div><dt>Halal scope</dt><dd>'+esc(r.halalScope)+'</dd></div>':'')

@@ -82,7 +82,7 @@ def names_for(tags, cc):
         display = en or local
         return display, (ja if ja and ja != display else "")
     en = tags.get("name:en") or ""
-    ms = tags.get("name:ms") or (local if en and local != en else "")
+    ms = tags.get("name:ms") or ""          # only an explicitly tagged Malay name
     display = en or local
     return display, (ms if ms and ms != display else "")
 

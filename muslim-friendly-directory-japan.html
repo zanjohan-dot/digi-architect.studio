@@ -1,0 +1,1915 @@
+<!DOCTYPE html>
+<!--
+  ============================================================================
+  © 2026 Zan J Private Limited (UEN: 202616105R)
+  The Digital Systems Architect — https://digi-architect.studio
+
+  This page — its design, layout, code, structure, copy and data schema — is
+  the property of Zan J Private Limited (UEN: 202616105R) and is protected by copyright
+  under the Copyright Act 2021 (Singapore) and applicable international
+  conventions.
+
+  Reproduction, redistribution, adaptation, or use of any part of this page,
+  in whole or in part, for any purpose other than viewing it in a browser, is
+  prohibited without prior written permission.
+
+  Licensing and permission enquiries: admin@digi-architect.studio
+  ============================================================================
+-->
+<html lang="en">
+<head>
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WNG8MK4K');</script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Halal &amp; Muslim-Friendly Restaurants Japan | Dining Directory by Prefecture</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<meta name="description" content="Find halal and Muslim-friendly places to eat across Japan, from Tokyo, Osaka and Kyoto to Hokkaido and Okinawa. Each listing shows whether the whole menu or only selected dishes are reported halal, and what is not verified.">
+<meta name="copyright" content="© 2026 Zan J Private Limited (UEN: 202616105R). All rights reserved.">
+<meta name="author" content="The Digital Systems Architect — Zan J Private Limited (UEN: 202616105R)">
+<meta name="rights" content="All rights reserved. Reproduction prohibited without written permission.">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://digi-architect.studio/muslim-friendly-directory-japan">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Halal &amp; Muslim-Friendly Restaurants Japan | Dining Directory by Prefecture">
+<meta property="og:description" content="Find halal and Muslim-friendly places to eat across Japan, from Tokyo, Osaka and Kyoto to Hokkaido and Okinawa. Each listing shows whether the whole menu or only selected dishes are reported halal, and what is not verified.">
+<meta property="og:url" content="https://digi-architect.studio/muslim-friendly-directory-japan">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" crossorigin=""/>
+<style>
+:root{
+  --ink:#0A0F1E;--ink-2:#1C2438;
+  --gold:#B8832A;--gold-l:#D4A855;--gold-xl:#F0CF8E;
+  --sand:#F5F0E8;--cream:#FEFCF7;--muted:#6B7280;
+  --line:rgba(10,15,30,0.10);--line-w:rgba(255,255,255,0.12);
+  --sage:#3D5A47;--sage-bg:#EBF2EC;
+  --good:#2F7A52;--good-bg:#EAF3EE;
+  --caution:#92400E;--caution-bg:#FEF3C7;
+  --white:#FFFFFF;--ease:cubic-bezier(0.16,1,0.3,1);
+  --nav-w:220px;--hdr-h:60px;
+  --shadow-sm:0 2px 8px rgba(10,15,30,0.06);
+  --shadow-md:0 6px 20px rgba(10,15,30,0.09);
+  --shadow-gold:0 8px 28px rgba(184,131,42,0.22);
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+html,body{height:100%;overflow:hidden;}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--cream);color:var(--ink);-webkit-font-smoothing:antialiased;}
+::selection{background:var(--gold);color:#fff;}
+a{color:inherit;text-decoration:none;}
+img,svg{display:block;}
+h1,h2,h3,h4{font-family:Georgia,'Times New Roman',serif;font-weight:normal;line-height:1.2;color:var(--ink);}
+p{color:var(--muted);}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;}
+.page-bg{position:fixed;inset:0;pointer-events:none;z-index:-1;
+  background:radial-gradient(ellipse 70% 50% at 80% 0%,rgba(184,131,42,0.09) 0%,transparent 60%),
+             radial-gradient(ellipse 50% 60% at 0% 100%,rgba(61,90,71,0.06) 0%,transparent 60%),
+             radial-gradient(ellipse 40% 40% at 50% 50%,rgba(184,131,42,0.02) 0%,transparent 70%);}
+.site-header{position:fixed;top:0;left:0;right:0;height:var(--hdr-h);z-index:300;background-color:rgba(254,252,247,0.97);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,3vw,28px);gap:12px;}
+.hdr-brand{display:flex;align-items:center;gap:10px;font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink);min-width:0;flex-shrink:1;overflow:hidden;white-space:nowrap;}
+.hdr-brand img{height:30px;width:auto;border-radius:4px;flex-shrink:0;}
+.hdr-brand-sub{font-size:11px;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;padding-left:10px;border-left:1px solid var(--line);margin-left:2px;}
+@media(max-width:860px){.hdr-brand-sub{display:none;}}
+@media(max-width:640px){.hdr-brand span:not(.hdr-brand-sub){display:none;}}
+.hdr-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.hdr-back{font-size:12px;font-weight:600;color:var(--muted);letter-spacing:0.02em;transition:color .2s;min-height:44px;display:flex;align-items:center;}
+.hdr-back:hover{color:var(--gold);}
+@media(max-width:768px){.hdr-back{display:none;}}
+.hdr-section-label{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--muted);display:none;}
+@media(min-width:1025px){.hdr-section-label{display:block;}}
+.hdr-cta{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--white);background:var(--ink);padding:0 18px;height:38px;border-radius:2px;transition:background .25s,box-shadow .25s;display:inline-flex;align-items:center;white-space:nowrap;cursor:pointer;border:0;}
+.hdr-cta:hover{background:var(--gold);box-shadow:var(--shadow-gold);}
+.nav-toggle{display:none;width:44px;height:44px;background:none;border:1px solid var(--line);border-radius:2px;cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;padding:0;flex-shrink:0;transition:border-color .2s;}
+.nav-toggle:hover{border-color:var(--gold);}
+.nav-toggle span{display:block;width:18px;height:2px;background:var(--ink);border-radius:1px;transition:transform .25s var(--ease),opacity .25s;}
+.nav-toggle[aria-expanded="true"] span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-toggle[aria-expanded="true"] span:nth-child(2){opacity:0;}
+.nav-toggle[aria-expanded="true"] span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+@media(max-width:1024px){.nav-toggle{display:flex;}}
+.nav-backdrop{display:none;position:fixed;inset:0;z-index:390;background:rgba(10,15,30,0.45);opacity:0;transition:opacity .25s;}
+.nav-backdrop.is-open{display:block;opacity:1;}
+.nav-drawer{position:fixed;top:0;left:0;bottom:0;z-index:400;width:min(300px,85vw);background:var(--cream);border-right:1px solid var(--line);transform:translateX(-100%);transition:transform .3s var(--ease);overflow-y:auto;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0);}
+.nav-drawer.is-open{transform:translateX(0);}
+@media(min-width:1025px){.nav-drawer,.nav-backdrop{display:none!important;}}
+.drawer-header{height:var(--hdr-h);display:flex;align-items:center;justify-content:space-between;padding:0 20px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.drawer-brand{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink);}
+.drawer-close{width:36px;height:36px;border:1px solid var(--line);border-radius:2px;background:none;cursor:pointer;font-size:18px;color:var(--muted);display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.drawer-close:hover{border-color:var(--gold);color:var(--gold);}
+.drawer-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);padding:24px 20px 12px;}
+.drawer-nav-list{list-style:none;padding:0 0 24px;}
+.drawer-nav-item button{display:flex;align-items:center;gap:12px;padding:11px 20px;font-size:13px;font-weight:500;color:var(--muted);transition:all .15s;min-height:44px;width:100%;background:none;border:0;text-align:left;cursor:pointer;}
+.drawer-nav-item button:hover{color:var(--ink);background:var(--sand);}
+.drawer-nav-item.active button{color:var(--ink);font-weight:700;background:rgba(184,131,42,0.06);}
+.drawer-nav-dot{width:8px;height:8px;border-radius:50%;border:1.5px solid var(--line);background:var(--cream);flex-shrink:0;transition:all .2s;}
+.drawer-nav-item.active .drawer-nav-dot{background:var(--gold);border-color:var(--gold);}
+.drawer-cta{padding:20px;border-top:1px solid var(--line);margin-top:auto;}
+.drawer-cta button{display:flex;align-items:center;justify-content:center;padding:13px;background:var(--ink);color:var(--white);font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;border-radius:2px;transition:background .2s;min-height:44px;width:100%;border:0;cursor:pointer;}
+.drawer-cta button:hover{background:var(--gold);}
+.page-body{position:fixed;top:var(--hdr-h);left:0;right:0;bottom:0;display:grid;grid-template-columns:var(--nav-w) 1fr;}
+@media(max-width:1024px){.page-body{grid-template-columns:1fr;}:root{--nav-w:0px;}}
+.side-nav{height:100%;overflow-y:auto;padding:40px 0 40px 28px;border-right:1px solid var(--line);display:flex;flex-direction:column;background:var(--cream);}
+@media(max-width:1024px){.side-nav{display:none;}}
+.side-nav-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:28px;}
+.snav-list{display:flex;flex-direction:column;position:relative;list-style:none;}
+.snav-list::before{content:'';position:absolute;left:9px;top:12px;bottom:12px;width:1px;background:linear-gradient(to bottom,transparent,rgba(10,15,30,0.08) 15%,rgba(10,15,30,0.08) 85%,transparent);}
+.snav-item{display:flex;align-items:center;gap:12px;padding:7px 0;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:color .2s;position:relative;background:none;border:0;text-align:left;width:100%;min-height:38px;}
+.snav-item:hover{color:var(--ink);}
+.snav-item.active{color:var(--ink);font-weight:700;}
+.snav-item:focus-visible{outline:2px solid var(--gold);outline-offset:2px;border-radius:2px;}
+.snav-dot{width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(10,15,30,0.12);background:var(--cream);flex-shrink:0;z-index:1;display:flex;align-items:center;justify-content:center;transition:all .3s;}
+.snav-item.active .snav-dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 4px rgba(184,131,42,0.12);}
+.snav-item:hover:not(.active) .snav-dot{border-color:var(--gold);background:rgba(184,131,42,0.07);}
+.snav-dot-inner{width:6px;height:6px;border-radius:50%;background:var(--white);opacity:0;}
+.snav-item.active .snav-dot-inner{opacity:1;}
+.panel-area{position:relative;overflow:hidden;height:100%;}
+.view{position:absolute;inset:0;overflow-y:auto;overflow-x:hidden;opacity:0;pointer-events:none;transition:opacity .4s var(--ease);-webkit-overflow-scrolling:touch;}
+.view.active{opacity:1;pointer-events:auto;}
+.panel-nav{position:fixed;bottom:28px;right:28px;z-index:200;display:flex;gap:8px;transition:bottom .22s var(--ease),opacity .2s;}
+/* The nav shares the bottom-right corner with the filter sheet and the drawer.
+   Get out of the way rather than fight over z-index. */
+body.sheet-open .panel-nav,body.drawer-open .panel-nav{opacity:0;pointer-events:none;}
+@media(max-width:480px){.panel-nav{bottom:16px;right:16px;}}
+.panel-nav-btn{width:40px;height:40px;border-radius:50%;background:var(--ink);color:var(--white);border:0;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:background .2s,transform .2s,box-shadow .2s;box-shadow:0 4px 16px rgba(10,15,30,0.22);}
+.panel-nav-btn:hover{background:var(--gold);transform:scale(1.08);box-shadow:var(--shadow-gold);}
+.panel-nav-btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+.panel-nav-btn:disabled{opacity:0.2;cursor:default;transform:none;box-shadow:none;}
+.panel-counter{height:40px;padding:0 16px;border-radius:20px;background:rgba(10,15,30,0.05);border:1px solid var(--line);display:flex;align-items:center;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;color:var(--muted);white-space:nowrap;letter-spacing:0.04em;}
+.panel-pad{padding:clamp(40px,5vw,64px) clamp(24px,5vw,56px);}
+.section-inner{max-width:820px;}
+.section-inner.wide{max-width:1060px;}
+.eyebrow{display:inline-flex;align-items:center;gap:10px;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;}
+.eyebrow::before{content:'';width:24px;height:1px;background:var(--gold);opacity:0.6;}
+.eyebrow.light{color:var(--gold-l);}.eyebrow.light::before{background:var(--gold-l);}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font-family:'Inter',sans-serif;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;padding:0 26px;min-height:44px;border-radius:2px;cursor:pointer;transition:all .25s;border:1.5px solid transparent;}
+.btn-primary{background:var(--gold);color:var(--ink);border-color:var(--gold);}
+.btn-primary:hover{background:var(--gold-l);box-shadow:var(--shadow-gold);transform:translateY(-1px);}
+.btn-ghost-light{background:transparent;color:rgba(255,255,255,0.85);border-color:rgba(255,255,255,0.28);}
+.btn-ghost-light:hover{border-color:var(--gold-l);color:var(--gold-xl);}
+.btn-dark{background:var(--ink);color:var(--white);border-color:var(--ink);}
+.btn-dark:hover{background:var(--gold);border-color:var(--gold);color:var(--ink);box-shadow:var(--shadow-gold);}
+.btn-sm{min-height:36px;padding:0 16px;font-size:11px;}
+.btn-outline{background:transparent;color:var(--ink);border-color:var(--line);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+.btn:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+#view-hero{background:var(--ink);}
+#view-hero::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 75% 85% at 95% -5%,rgba(184,131,42,0.20) 0%,transparent 55%),radial-gradient(ellipse 55% 55% at -5% 105%,rgba(61,90,71,0.16) 0%,transparent 55%);}
+#view-hero::after{content:'';position:absolute;top:0;right:0;width:420px;height:420px;pointer-events:none;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:40px 40px;mask-image:radial-gradient(ellipse 80% 80% at 80% 20%,black 0%,transparent 70%);-webkit-mask-image:radial-gradient(ellipse 80% 80% at 80% 20%,black 0%,transparent 70%);}
+.hero-inner{max-width:780px;height:100%;display:flex;flex-direction:column;justify-content:center;position:relative;z-index:1;}
+.hero-h1{font-size:clamp(36px,5.5vw,66px);color:var(--white);letter-spacing:-0.028em;line-height:1.04;max-width:15ch;margin-bottom:22px;}
+.hero-h1 em{font-style:normal;color:var(--gold-l);}
+/* The topic label is the page H1 for search engines; keep its label styling. */
+h1.eyebrow{line-height:normal;margin-top:0;}
+p.hero-h1{font-family:Georgia,'Times New Roman',serif;font-weight:normal;}
+.hero-p{font-size:clamp(14px,1.8vw,16px);color:rgba(255,255,255,0.68);max-width:52ch;margin-bottom:32px;line-height:1.78;}
+.hero-btns{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:40px;}
+.hero-notice{padding:16px 20px;border:1px solid rgba(255,255,255,0.10);background:rgba(255,255,255,0.04);}
+.hero-notice-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-l);margin-bottom:7px;}
+.hero-notice p{font-size:12px;color:rgba(255,255,255,0.55);line-height:1.65;max-width:60ch;}
+.hero-notice p b{color:rgba(255,255,255,0.8);font-weight:600;}
+.hero-coord{position:absolute;bottom:clamp(24px,4vw,44px);right:clamp(24px,4vw,44px);font-family:'JetBrains Mono',monospace;font-size:9px;color:rgba(255,255,255,0.18);letter-spacing:0.12em;text-transform:uppercase;z-index:1;}
+#view-meaning{background:var(--sand);}
+.meaning-layout{display:grid;grid-template-columns:1fr 1px 1fr;gap:0;height:100%;align-items:center;}
+@media(max-width:860px){.meaning-layout{grid-template-columns:1fr;gap:32px;height:auto;}}
+.meaning-left{padding-right:clamp(24px,4vw,56px);}
+.meaning-divider{background:linear-gradient(to bottom,transparent,var(--gold) 20%,var(--gold) 80%,transparent);opacity:0.35;align-self:stretch;}
+@media(max-width:860px){.meaning-divider{display:none;}}
+.meaning-right{padding-left:clamp(24px,4vw,56px);display:flex;flex-direction:column;gap:20px;}
+.meaning-quote{font-family:Georgia,'Times New Roman',serif;font-size:clamp(20px,3vw,32px);color:var(--ink);line-height:1.3;margin:18px 0 22px;}
+.meaning-body{font-size:clamp(13px,1.5vw,15px);color:var(--muted);max-width:42ch;line-height:1.75;}
+.meaning-annotation{padding:16px 18px;border:1px solid var(--line);background:var(--cream);}
+.meaning-annotation strong{display:block;font-size:12px;color:var(--ink);margin-bottom:6px;}
+.meaning-annotation p{font-size:12px;color:var(--muted);line-height:1.65;}
+#view-framework{background:var(--cream);}
+.framework-intro{font-size:clamp(13px,1.5vw,15px);max-width:56ch;margin-top:10px;margin-bottom:28px;line-height:1.72;}
+.fw-accordion{border:1px solid var(--line);max-width:780px;}
+.fw-item{border-bottom:1px solid var(--line);}
+.fw-item:last-child{border-bottom:0;}
+.fw-btn{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 20px;background:none;border:0;cursor:pointer;text-align:left;min-height:52px;transition:background .15s;}
+.fw-btn:hover{background:var(--sand);}
+.fw-btn-left{display:flex;align-items:center;gap:14px;}
+.fw-num{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;flex-shrink:0;}
+.fw-title{font-family:Georgia,'Times New Roman',serif;font-size:clamp(13px,1.6vw,15px);color:var(--ink);font-weight:normal;line-height:1.3;transition:color .2s;}
+.fw-btn:hover .fw-title{color:var(--gold);}
+.fw-toggle{width:20px;height:20px;flex-shrink:0;border:1.5px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .22s;position:relative;}
+.fw-btn:hover .fw-toggle{border-color:var(--gold);}
+.fw-item.is-open .fw-toggle{background:var(--gold);border-color:var(--gold);}
+.fw-toggle::before,.fw-toggle::after{content:'';position:absolute;background:var(--muted);border-radius:1px;transition:all .22s;}
+.fw-toggle::before{width:8px;height:1.5px;}
+.fw-toggle::after{width:1.5px;height:8px;}
+.fw-item.is-open .fw-toggle::before,.fw-item.is-open .fw-toggle::after{background:var(--white);}
+.fw-item.is-open .fw-toggle::after{transform:rotate(90deg);opacity:0;}
+.fw-panel{overflow:hidden;max-height:0;transition:max-height .32s var(--ease);}
+.fw-item.is-open .fw-panel{max-height:300px;}
+.fw-body{padding:0 20px 18px calc(20px + 14px + 34px);font-size:13px;color:var(--muted);line-height:1.7;max-width:66ch;}
+#view-why{background:var(--sand);}
+.why-intro{font-size:clamp(13px,1.5vw,15px);max-width:58ch;margin-top:10px;margin-bottom:28px;line-height:1.72;}
+.pro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--line);}
+@media(max-width:780px){.pro-grid{grid-template-columns:1fr;}}
+.pro-cell{padding:clamp(22px,3vw,32px) clamp(18px,2.5vw,28px);border-right:1px solid var(--line);background:var(--cream);}
+.pro-cell:last-child{border-right:0;}
+@media(max-width:780px){.pro-cell{border-right:0;border-bottom:1px solid var(--line);}.pro-cell:last-child{border-bottom:0;}}
+.pro-cell.dark{background:var(--ink);}
+.pro-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold);margin-bottom:10px;}
+.pro-cell.dark .pro-label{color:var(--gold-l);}
+.pro-cell h3{font-size:15px;color:var(--ink);margin-bottom:10px;}
+.pro-cell.dark h3{color:var(--white);}
+.pro-cell p{font-size:13px;line-height:1.65;}
+.pro-cell.dark p{color:rgba(255,255,255,0.6);}
+.why-method{margin-top:28px;border:1px solid var(--line);display:grid;grid-template-columns:repeat(4,1fr);}
+@media(max-width:700px){.why-method{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:400px){.why-method{grid-template-columns:1fr;}}
+.method-cell{padding:18px 16px;border-right:1px solid var(--line);}
+.method-cell:last-child{border-right:0;}
+@media(max-width:700px){.method-cell:nth-child(2n){border-right:0;}.method-cell{border-bottom:1px solid var(--line);}.method-cell:nth-last-child(-n+2){border-bottom:0;}}
+@media(max-width:400px){.method-cell{border-right:0!important;border-bottom:1px solid var(--line);}.method-cell:last-child{border-bottom:0;}}
+.method-idx{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--gold);letter-spacing:0.08em;text-transform:uppercase;margin-bottom:8px;}
+.method-cell h3{font-size:13px;color:var(--ink);margin-bottom:5px;}
+.method-cell p{font-size:12px;line-height:1.55;}
+#view-notice{background:var(--cream);}
+.notice-intro{font-size:clamp(13px,1.5vw,15px);max-width:56ch;margin-top:10px;margin-bottom:24px;line-height:1.72;}
+.notice-box{border:1px solid var(--line);max-width:820px;}
+.notice-head{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:var(--gold);padding:14px 20px;border-bottom:1px solid var(--line);background:var(--sand);}
+.notice-row{display:flex;gap:16px;align-items:flex-start;padding:12px 20px;border-bottom:1px solid var(--line);}
+.notice-row:last-of-type{border-bottom:0;}
+.notice-n{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--gold);flex-shrink:0;letter-spacing:0.06em;padding-top:2px;min-width:20px;}
+.notice-row p{font-size:13px;color:var(--muted);line-height:1.65;}
+.notice-row p mark{background:rgba(184,131,42,0.12);color:var(--ink);font-weight:600;padding:0 3px;}
+.notice-more{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);padding:12px 20px;border-top:1px solid var(--line);background:var(--sand);}
+/* ── DIRECTORY PANEL — REDESIGNED ── */
+#view-directory{background:var(--cream);overflow:hidden;}
+.dir-panel-inner{height:100%;display:flex;flex-direction:column;}
+/* Top bar */
+.dir-panel-top{flex-shrink:0;padding:clamp(18px,2.5vw,32px) clamp(16px,3vw,32px) 0;}
+.dir-top-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:6px;}
+.dir-top-row h2{font-size:clamp(18px,2.5vw,28px);margin:0;}
+.dir-subtitle{font-size:12px;color:var(--muted);line-height:1.6;padding-bottom:14px;}
+/* View switcher */
+.view-switcher{display:flex;border:1px solid var(--line);border-radius:2px;overflow:hidden;flex-shrink:0;}
+.vsw-btn{display:flex;align-items:center;gap:6px;padding:0 14px;height:36px;font-size:11px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;background:none;border:0;cursor:pointer;color:var(--muted);transition:background .15s,color .15s;white-space:nowrap;}
+.vsw-btn+.vsw-btn{border-left:1px solid var(--line);}
+.vsw-btn.active{background:var(--ink);color:var(--white);}
+.vsw-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.vsw-btn:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+/* Body grid */
+.dir-panel-body{flex:1;min-height:0;display:grid;grid-template-columns:360px 1fr;border-top:1px solid var(--line);}
+@media(max-width:1100px){.dir-panel-body{grid-template-columns:300px 1fr;}}
+@media(max-width:767px){.dir-panel-body{display:block;position:relative;height:100%;}}
+/* Left column — search + filters + results */
+.dir-left-col{display:flex;flex-direction:column;overflow:hidden;border-right:1px solid var(--line);}
+@media(max-width:767px){.dir-left-col{height:100%;}
+.dir-is-mapview .dir-left-col{display:none;}}
+/* Search row */
+.dir-search-row{display:flex;align-items:center;gap:8px;padding:10px 14px;border-bottom:1px solid var(--line);flex-shrink:0;background:var(--cream);}
+.dir-search-wrap{flex:1;min-width:0;}
+.dir-field{width:100%;border:1px solid var(--line);border-radius:2px;background:var(--white);padding:9px 12px;font-size:16px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
+.dir-field:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,131,42,0.12);}
+.dir-field::placeholder{font-size:13px;color:var(--muted);}
+.dir-filter-btn{display:flex;align-items:center;gap:5px;height:38px;padding:0 12px;border:1px solid var(--line);border-radius:2px;background:var(--white);color:var(--ink);font-size:11px;font-weight:700;letter-spacing:0.05em;text-transform:uppercase;cursor:pointer;white-space:nowrap;transition:border-color .2s,background .2s;flex-shrink:0;}
+.dir-filter-btn:hover{border-color:var(--gold);}
+.dir-filter-btn.has-filters{border-color:var(--gold);background:rgba(184,131,42,0.06);color:var(--gold);}
+.dir-filter-btn svg{width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;}
+/* Mobile filter button: only visible on mobile */
+
+/* Desktop inline filters */
+.dir-filters-inline{flex-shrink:0;padding:10px 14px;border-bottom:1px solid var(--line);background:var(--sand);}
+
+.dir-filters-inline>summary{list-style:none;cursor:pointer;font-size:10px;font-weight:700;color:var(--muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.06em;text-transform:uppercase;display:flex;align-items:center;justify-content:space-between;min-height:34px;}
+.dir-filters-inline>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.dir-filters-inline>summary::-webkit-details-marker{display:none;}
+.dir-filters-inline>summary::after{content:'+ Filters';color:var(--gold);}
+.inline-count{margin-left:8px;color:var(--gold);font-weight:700;}
+.fbtn-count{font-weight:700;}
+.dir-filters-inline[open]>summary::after{content:'− Close';}
+.dir-filters-body{display:grid;grid-template-columns:1fr 1fr;gap:6px 8px;}
+@media(max-width:1100px){.dir-filters-body{grid-template-columns:1fr;}}
+/* Capped, internally scrolling filter body — the panel can never push results off-screen. */
+.dir-filters-scroll{max-height:min(34vh,272px);overflow-y:auto;overscroll-behavior:contain;margin-top:10px;padding-right:4px;}
+.dir-filters-scroll::-webkit-scrollbar{width:6px;}
+.dir-filters-scroll::-webkit-scrollbar-thumb{background:rgba(10,15,30,0.18);border-radius:3px;}
+/* Compact field metrics — scoped to the desktop panel only, so the mobile sheet keeps its 16px inputs (no iOS zoom). */
+.dir-filters-inline .filter-label{font-size:9px;margin-bottom:3px;letter-spacing:0.05em;}
+.dir-filters-inline .dir-select{padding:6px 8px;font-size:13px;}
+/* Collapsible advanced groups */
+.fgroup{border-top:1px solid var(--line);margin-top:8px;padding-top:8px;}
+.fgroup>summary{list-style:none;cursor:pointer;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:6px;min-height:28px;transition:color .15s;}
+.fgroup>summary::-webkit-details-marker{display:none;}
+.fgroup>summary::before{content:'+';color:var(--gold);font-size:12px;width:10px;flex-shrink:0;}
+.fgroup[open]>summary::before{content:'\2212';}
+.fgroup>summary:hover{color:var(--ink);}
+.fgroup>summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.fgroup .dir-filters-body{margin-top:6px;}
+.fgroup-count{margin-left:auto;color:var(--gold);font-weight:700;}
+
+.filter-label{font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-family:'JetBrains Mono',monospace;display:block;margin-bottom:4px;}
+.dir-select{width:100%;border:1px solid var(--line);border-radius:2px;background:var(--white);padding:8px 10px;font-size:14px;color:var(--ink);font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
+.dir-select:focus{border-color:var(--gold);}
+.dir-filter-actions{display:flex;gap:8px;margin-top:8px;padding-top:8px;border-top:1px solid var(--line);position:sticky;bottom:0;background:var(--sand);}
+/* Active chips */
+.active-chips{display:flex;flex-wrap:wrap;gap:5px;padding:8px 14px;flex-shrink:0;border-bottom:1px solid var(--line);}
+.active-chips:empty{padding:0;border-bottom:0;}
+.chip{display:inline-flex;align-items:center;gap:5px;background:rgba(184,131,42,0.08);border:1px solid rgba(184,131,42,0.25);color:var(--ink);border-radius:2px;padding:4px 8px;font-size:11px;font-weight:600;}
+.chip button{border:0;background:none;color:var(--muted);font-size:13px;line-height:1;padding:0 2px;cursor:pointer;}
+.chip button:hover{color:var(--gold);}
+/* Result count row */
+.dir-topline{padding:8px 14px;border-bottom:1px solid var(--line);flex-shrink:0;display:flex;align-items:center;justify-content:space-between;gap:8px;}
+.dir-topline strong{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;}
+/* Results list */
+.dir-results{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;}
+.records-list{}
+.record-row{padding:14px 14px;border-bottom:1px solid var(--line);transition:background .15s;cursor:pointer;}
+.record-row:last-child{border-bottom:0;}
+.record-row:hover{background:var(--sand);}
+.record-row.is-selected{background:rgba(184,131,42,0.06);box-shadow:inset 3px 0 0 var(--gold);}
+.record-row.is-demo{border-left:3px solid #A78BFA;}
+.record-main h4{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink);font-weight:normal;margin-bottom:2px;}
+.record-meta{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.record-badges{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+.badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;padding:2px 7px;border-radius:2px;letter-spacing:0.03em;white-space:nowrap;}
+.badge-self{background:var(--sand);color:var(--ink);border:1px solid var(--line);}
+.badge-not-halal{background:var(--caution-bg);color:var(--caution);}
+.badge-halal{background:var(--good-bg);color:var(--good);}
+.badge-demo{background:#EDE9FE;color:#5B21B6;border:1px solid #C4B5FD;}
+.static-listings{list-style:none;margin:0;padding:8px 14px;font-size:13px;line-height:1.5;}
+.static-listings li{padding:10px 0;border-bottom:1px solid var(--line);}
+.badge-community{background:transparent;color:var(--muted);border:1px dashed var(--line);}
+.badge-unverified{background:transparent;color:var(--muted);border:1px dashed var(--muted);}
+.record-badges .badge+.badge{margin-left:4px;}
+.category-key{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:11px;line-height:1.5;color:var(--muted);margin:8px 14px 4px;}
+.category-key .badge{margin-right:4px;}
+.country-switch{display:inline-flex;gap:0;margin-top:8px;border:1px solid var(--line);border-radius:2px;overflow:hidden;}
+.country-switch button{min-height:32px;padding:0 12px;border:0;border-right:1px solid var(--line);background:var(--white);color:var(--ink);font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;font-family:inherit;}
+.country-switch button:last-child{border-right:0;}
+.country-switch button[aria-pressed="true"]{background:var(--ink);color:var(--white);}
+.country-switch button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+.badge-scope{background:transparent;color:var(--caution,#9a6b00);border:1px solid currentColor;}
+.record-local{font-size:12px;color:var(--muted);margin:-2px 0 4px;}
+.show-more-row{display:flex;justify-content:center;padding:14px;}
+.record-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
+.dchip{font-size:10px;font-weight:600;border-radius:2px;padding:3px 7px 3px 5px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
+.dchip.positive{background:var(--good-bg);color:var(--good);}
+.dchip.caution{background:var(--caution-bg);color:var(--caution);}
+.dchip.neutral{background:var(--sand);color:var(--muted);border:1px solid var(--line);}
+.dchip svg{width:9px;height:9px;stroke-width:3;fill:none;stroke:currentColor;}
+.record-foot{display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
+.last-updated{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);white-space:nowrap;flex:1;}
+.no-map-note{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);border:1px dashed var(--line);padding:4px 8px;border-radius:2px;white-space:nowrap;}
+.map-empty{position:absolute;inset:0;display:none;align-items:center;justify-content:center;text-align:center;padding:24px;background:rgba(254,252,247,0.94);font-size:13px;color:var(--muted);line-height:1.6;z-index:500;}
+.map-empty.visible{display:flex;}
+.decl-drawer-body,.filter-sheet-body,.dir-results{overscroll-behavior:contain;}
+.demo-disclaimer{font-size:11px;color:#5B21B6;background:#EDE9FE;padding:8px 10px;border-left:2px solid #7C3AED;margin-top:8px;line-height:1.55;border-radius:0 2px 2px 0;}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted);display:none;}
+.empty-state.visible{display:block;}
+.empty-state h3{font-size:15px;color:var(--ink);margin-bottom:8px;}
+.empty-state p{font-size:13px;}
+/* Right column — map */
+.dir-right-col{display:flex;flex-direction:column;overflow:hidden;position:relative;}
+@media(max-width:767px){
+  .dir-right-col{position:absolute;inset:0;display:none;}
+  .dir-is-mapview .dir-right-col{display:flex;}
+}
+#declarationMap{flex:1;min-height:0;width:100%;}
+.leaflet-container{z-index:0;height:100%!important;}
+.leaflet-pane,.leaflet-top,.leaflet-bottom{z-index:auto;}
+.map-fallback{flex:1;display:flex;align-items:center;justify-content:center;padding:2rem;text-align:center;color:var(--muted);font-size:13px;}
+.marker-selected{filter:drop-shadow(0 0 6px rgba(184,131,42,0.9));}
+/* Map selected preview */
+.map-preview{flex-shrink:0;border-top:1px solid var(--line);background:var(--white);padding:12px 16px;display:flex;align-items:flex-start;gap:12px;}
+.map-preview[hidden]{display:none;}
+.map-preview-content{flex:1;min-width:0;}
+.map-preview-name{font-family:Georgia,'Times New Roman',serif;font-size:14px;color:var(--ink);font-weight:normal;margin-bottom:2px;}
+.map-preview-meta{font-size:11px;color:var(--muted);margin-bottom:8px;}
+.map-preview-close{border:1px solid var(--line);background:none;color:var(--muted);width:28px;height:28px;border-radius:2px;cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.map-preview-close:hover{border-color:var(--gold);color:var(--gold);}
+/* Mobile return bar */
+.map-return-bar{flex-shrink:0;padding:10px 14px;border-top:1px solid var(--line);background:var(--cream);display:none;}
+@media(max-width:767px){.dir-is-mapview .map-return-bar{display:flex;gap:8px;align-items:center;}}
+.lp-name{font-weight:700;color:var(--ink);font-size:13px;}
+.lp-meta{font-size:11px;color:var(--muted);margin:2px 0 7px;}
+.lp-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--caution);text-transform:uppercase;letter-spacing:0.03em;margin-bottom:7px;display:block;}
+.lp-btn{border:0;background:var(--ink);color:var(--white);font-size:11px;font-weight:700;padding:6px 10px;border-radius:2px;cursor:pointer;}
+/* Filter bottom sheet */
+.filter-sheet-backdrop{position:fixed;inset:0;background:rgba(10,15,30,0.45);z-index:490;display:none;opacity:0;transition:opacity .25s;}
+.filter-sheet-backdrop.is-open{display:block;opacity:1;}
+.filter-sheet{position:fixed;bottom:0;left:0;right:0;z-index:500;background:var(--cream);border-top:1px solid var(--line);border-radius:16px 16px 0 0;transform:translateY(100%);transition:transform .3s var(--ease);max-height:82dvh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom,0);}
+.filter-sheet.is-open{transform:translateY(0);}
+/* Grab handle — the affordance that tells a thumb this can be pulled down. */
+.sheet-grab{padding:10px 0 4px;display:flex;justify-content:center;cursor:grab;touch-action:none;flex-shrink:0;}
+.sheet-grab span{display:block;width:44px;height:5px;border-radius:3px;background:rgba(10,15,30,0.18);transition:background .2s;}
+.filter-sheet.is-dragging{transition:none;}
+.filter-sheet.is-dragging .sheet-grab span{background:var(--gold);}
+.sheet-count{color:var(--gold);font-family:'JetBrains Mono',monospace;font-size:11px;margin-left:8px;}
+.filter-sheet-header{display:flex;align-items:center;justify-content:space-between;padding:8px 20px 14px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.filter-sheet-header span{font-family:Georgia,'Times New Roman',serif;font-size:15px;color:var(--ink);}
+.filter-sheet-close{width:44px;height:44px;border:1px solid var(--line);border-radius:2px;background:none;cursor:pointer;font-size:22px;color:var(--ink);display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.filter-sheet-close:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.filter-sheet-close:hover{border-color:var(--gold);color:var(--gold);}
+.filter-sheet-body{overflow-y:auto;padding:16px 20px;display:grid;gap:14px;flex:1;}
+.filter-sheet-footer{padding:14px 20px;border-top:1px solid var(--line);display:flex;gap:10px;flex-shrink:0;}
+.result-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);}
+#view-how{background:var(--sand);}
+.how-intro{font-size:clamp(13px,1.5vw,15px);max-width:56ch;margin-top:10px;margin-bottom:28px;line-height:1.72;}
+.how-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:0;border:1px solid var(--line);position:relative;}
+.how-grid::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--gold),rgba(184,131,42,0.15));z-index:1;}
+@media(max-width:900px){.how-grid{grid-template-columns:repeat(2,1fr);}.how-grid::before{width:3px;height:auto;background:linear-gradient(to bottom,var(--gold),rgba(184,131,42,0.15));top:0;bottom:0;left:0;right:auto;}}
+@media(max-width:440px){.how-grid{grid-template-columns:1fr;}}
+.how-step{padding:clamp(20px,2.5vw,28px) clamp(14px,1.8vw,20px);border-right:1px solid var(--line);}
+.how-step:last-child{border-right:0;}
+@media(max-width:900px){.how-step:nth-child(2n){border-right:0;}.how-step{border-bottom:1px solid var(--line);}.how-step:nth-last-child(-n+2){border-bottom:0;}}
+@media(max-width:440px){.how-step{border-right:0!important;border-bottom:1px solid var(--line);}.how-step:last-child{border-bottom:0;}}
+.how-n{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:600;color:var(--gold);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.how-n-dot{width:20px;height:20px;border-radius:50%;border:1.5px solid var(--gold);display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:9px;font-weight:700;color:var(--gold);background:var(--sand);}
+.how-step:hover .how-n-dot{background:var(--gold);color:var(--white);}
+.how-step h3{font-size:13px;color:var(--ink);margin-bottom:6px;font-family:Georgia,'Times New Roman',serif;font-weight:normal;}
+.how-step p{font-size:12px;line-height:1.58;}
+.how-outcome{margin-top:22px;padding:16px 22px;background:var(--ink);display:flex;align-items:center;gap:16px;flex-wrap:wrap;}
+.how-outcome-label{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-l);white-space:nowrap;flex-shrink:0;}
+.how-outcome p{font-size:13px;color:rgba(255,255,255,0.65);line-height:1.6;}
+#view-faq{background:var(--cream);}
+.faq-info-layout{display:grid;grid-template-columns:1fr 320px;gap:40px;max-width:1020px;}
+@media(max-width:860px){.faq-info-layout{grid-template-columns:1fr;gap:28px;}}
+.faq-list{max-width:640px;}
+.faq-item{border-bottom:1px solid var(--line);}
+.faq-btn{width:100%;display:flex;align-items:flex-start;justify-content:space-between;gap:16px;padding:16px 0;background:none;border:0;cursor:pointer;text-align:left;min-height:44px;}
+.faq-q{font-family:Georgia,'Times New Roman',serif;font-size:clamp(13px,1.6vw,15px);color:var(--ink);font-weight:normal;line-height:1.35;transition:color .2s;}
+.faq-btn:hover .faq-q{color:var(--gold);}
+.faq-btn:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.faq-icon{width:20px;height:20px;flex-shrink:0;margin-top:2px;border:1.5px solid var(--line);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .22s;position:relative;}
+.faq-btn:hover .faq-icon{border-color:var(--gold);}
+.faq-item.open .faq-icon{background:var(--gold);border-color:var(--gold);}
+.faq-icon::before,.faq-icon::after{content:'';position:absolute;background:var(--muted);border-radius:1px;transition:all .22s;}
+.faq-icon::before{width:8px;height:1.5px;}
+.faq-icon::after{width:1.5px;height:8px;}
+.faq-item.open .faq-icon::before,.faq-item.open .faq-icon::after{background:var(--white);}
+.faq-item.open .faq-icon::after{transform:rotate(90deg);opacity:0;}
+.faq-panel{overflow:hidden;max-height:0;transition:max-height .32s var(--ease);}
+.faq-item.open .faq-panel{max-height:400px;}
+.faq-answer{padding:0 0 16px;font-size:13px;color:var(--muted);line-height:1.72;}
+.info-card{background:var(--ink);padding:clamp(24px,3vw,36px);border-radius:2px;position:relative;overflow:hidden;display:flex;flex-direction:column;gap:16px;box-shadow:0 16px 52px rgba(10,15,30,0.16);}
+.info-card::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(to bottom,var(--gold),rgba(184,131,42,0.3));}
+.info-card::after{content:'';position:absolute;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(184,131,42,0.14) 0%,transparent 70%);top:-60px;right:-60px;pointer-events:none;}
+.info-card .eyebrow{color:var(--gold-l);}.info-card .eyebrow::before{background:var(--gold-l);}
+.info-card h3{color:var(--white);font-size:clamp(16px,2vw,20px);line-height:1.22;}
+.info-card p{font-size:13px;color:rgba(255,255,255,0.58);line-height:1.68;}
+.info-card-btns{display:flex;flex-direction:column;gap:8px;}
+.footer-line{margin-top:24px;padding-top:16px;border-top:1px solid var(--line);font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--muted);letter-spacing:0.05em;line-height:2.1;max-width:640px;}
+.footer-line a{color:var(--muted);transition:color .2s;}.footer-line a:hover{color:var(--gold);}
+.footer-links-row{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:8px;}
+.drawer-backdrop{position:fixed;inset:0;background:rgba(10,15,30,0.55);z-index:1000;opacity:0;transition:opacity .2s;display:none;}
+.drawer-backdrop.is-open{opacity:1;display:block;}
+.decl-drawer{position:fixed;top:0;right:0;height:100%;width:min(460px,100%);background:var(--white);z-index:1100;transform:translateX(100%);transition:transform .22s var(--ease);display:flex;flex-direction:column;box-shadow:-8px 0 32px rgba(10,15,30,0.15);}
+.decl-drawer.is-open{transform:translateX(0);}
+@media(max-width:520px){.decl-drawer{width:100%;}}
+.decl-drawer-hdr{display:flex;justify-content:space-between;gap:12px;align-items:flex-start;padding:20px;border-bottom:1px solid var(--line);flex-shrink:0;}
+.decl-drawer-hdr h2{font-size:17px;color:var(--ink);}
+.decl-drawer-close{border:1px solid var(--line);background:none;color:var(--ink);width:32px;height:32px;font-size:18px;line-height:1;flex-shrink:0;border-radius:2px;cursor:pointer;display:flex;align-items:center;justify-content:center;}
+.decl-drawer-close:hover{background:var(--ink);color:var(--white);}
+.decl-drawer-body{padding:16px 20px 40px;overflow-y:auto;display:grid;gap:20px;flex:1;}
+.drawer-sec-title{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:0.08em;color:var(--gold);margin-bottom:10px;}
+.detail-list{display:grid;gap:7px;}
+.detail-list div{display:flex;justify-content:space-between;gap:12px;font-size:13px;border-bottom:1px dashed var(--line);padding-bottom:6px;}
+.detail-list dt{color:var(--muted);}
+.detail-list dd{margin:0;font-weight:600;color:var(--ink);text-align:right;}
+.link-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:8px;}
+.link-row a{font-size:12px;font-weight:700;color:var(--ink);text-decoration:underline;text-decoration-color:var(--gold);}
+.decl-list{display:grid;gap:8px;}
+.decl-item{display:flex;gap:10px;align-items:flex-start;padding:10px;border-left:2px solid transparent;}
+.decl-item.positive{background:var(--good-bg);border-left-color:var(--good);}
+.decl-item.caution{background:var(--caution-bg);border-left-color:var(--caution);}
+.decl-marker{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.04em;padding:2px 5px;background:rgba(255,255,255,0.6);flex-shrink:0;margin-top:2px;}
+.decl-item div strong{display:block;font-size:13px;color:var(--ink);margin-bottom:3px;}
+.decl-item div p{font-size:12px;color:var(--muted);line-height:1.45;}
+.drawer-plain{font-size:13px;color:var(--ink);line-height:1.6;}
+.drawer-disclaimer{font-size:12px;color:var(--muted);line-height:1.6;font-style:italic;border-top:1px solid var(--line);padding-top:14px;}
+.lp-name{font-weight:700;color:var(--ink);font-size:13px;}
+.lp-meta{font-size:11px;color:var(--muted);margin:2px 0 7px;}
+.lp-badge{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;color:var(--caution);text-transform:uppercase;letter-spacing:0.03em;margin-bottom:7px;display:block;}
+.lp-btn{border:0;background:var(--ink);color:var(--white);font-size:11px;font-weight:700;padding:6px 10px;border-radius:2px;cursor:pointer;}
+@media(prefers-reduced-motion:reduce){.view,.snav-dot,.btn,.fw-panel,.faq-panel,.decl-drawer,.nav-drawer{transition:none!important;animation:none!important;}}
+
+/* ============================================================
+   FILTER SURFACE — chosen by INPUT, not by screen width.
+   A 30px dropdown is fine under a cursor and hostile under a thumb;
+   that is true at 768px and at 1366px. Width then decides density.
+   An iPad with a Magic Keyboard reports pointer:fine and correctly
+   gets the dropdown — the layout follows how the device is held.
+============================================================ */
+@media (hover: hover) and (pointer: fine){
+  .dir-filter-btn-mobile{display:none;}
+}
+@media (hover: none),(pointer: coarse){
+  .dir-filter-btn-desktop{display:none;}
+  .filter-dropdown{display:none!important;}
+}
+/* ── Top row: title + toolbar ── */
+.dir-panel-top{position:relative;z-index:20;}
+.dir-top-row{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:10px;}
+.dir-title{min-width:0;flex:1 1 260px;}
+.dir-title h2{font-size:clamp(18px,2.5vw,28px);margin:0;}
+.dir-toolbar{display:flex;align-items:center;gap:8px;flex-wrap:wrap;flex-shrink:0;}
+.dir-search-wrap{position:relative;display:flex;align-items:center;width:clamp(200px,24vw,300px);}
+.dir-toolbar .dir-search-wrap .dir-field{width:100%;padding-left:34px;padding-right:40px;}
+.search-icon{position:absolute;left:11px;width:15px;height:15px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;pointer-events:none;transition:stroke .2s;}
+.dir-search-wrap:focus-within .search-icon{stroke:var(--gold);}
+.search-go{position:absolute;right:4px;width:32px;height:32px;display:flex;align-items:center;justify-content:center;border:0;border-radius:2px;background:transparent;color:var(--muted);cursor:pointer;transition:background .2s,color .2s;}
+.search-go svg{width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;}
+.search-go:hover{background:var(--ink);color:var(--white);}
+.search-go:focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+/* type=search shows a native clear ✕; keep our button clear of it */
+.dir-field::-webkit-search-cancel-button{margin-right:34px;}
+@media(max-width:900px){
+  .dir-top-row{align-items:stretch;}
+  .dir-toolbar{width:100%;}
+  .dir-toolbar .dir-search-wrap{flex:1 1 180px;width:auto;}
+}
+/* ── Desktop dropdown: overlays the map, so the map never resizes and
+      the results never shift. Freed from the 360px column, 12 fields
+      fit in 3 rows across the full width — no disclosure groups needed. ── */
+.filter-dropdown{
+  position:absolute;top:100%;left:0;right:0;z-index:450;
+  background:var(--cream);border:1px solid var(--line);border-top:0;
+  box-shadow:0 18px 44px rgba(10,15,30,0.14);
+  padding:16px clamp(16px,3vw,32px) 14px;
+  max-height:min(52vh,420px);overflow-y:auto;overscroll-behavior:contain;
+}
+.filter-dropdown[hidden]{display:none;}
+.fd-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px 14px;}
+@media(min-width:1500px){.fd-grid{grid-template-columns:repeat(4,1fr);}}
+@media(max-width:1000px){.fd-grid{grid-template-columns:repeat(2,1fr);}}
+.filter-dropdown .filter-label{font-size:9px;margin-bottom:3px;}
+.filter-dropdown .dir-select{padding:7px 9px;font-size:13px;}
+.fd-actions{display:flex;align-items:center;gap:8px;justify-content:flex-end;margin-top:14px;padding-top:12px;border-top:1px solid var(--line);position:sticky;bottom:-14px;background:var(--cream);}
+.fd-count{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--gold);font-weight:700;margin-right:auto;}
+.dir-filter-btn[aria-expanded="true"]{background:var(--ink);color:var(--white);border-color:var(--ink);}
+/* ── Sort belongs with the results, not the filters ── */
+.dir-topline{gap:12px;}
+.sort-inline{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.sort-lbl{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;color:var(--muted);}
+.sort-inline .dir-select{width:auto;padding:5px 8px;font-size:12px;border:1px solid var(--line);}
+/* ── Sheet density: iPad is not a stretched phone ── */
+@media(min-width:600px){
+  .filter-sheet-body{grid-template-columns:1fr 1fr;gap:14px 16px;}
+  .filter-sheet{max-height:76dvh;}
+}
+.rights-line{display:block;margin-top:8px;max-width:52ch;font-size:0.92em;line-height:1.7;opacity:0.6;}
+@media(max-width:480px){}
+.social-block{margin-top:26px;padding-top:20px;border-top:1px solid var(--line);text-align:center;}
+.social-heading{display:block;font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:0.14em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+.social-row{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:12px;}
+.soc-chip{display:inline-flex;align-items:center;gap:6px;text-decoration:none;padding:4px;border-radius:8px;transition:transform .2s var(--ease);}
+.soc-logo{width:22px;height:22px;display:block;object-fit:contain;}
+.soc-mkt{font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700;letter-spacing:0.06em;padding:1px 5px;border-radius:3px;background:rgba(184,131,42,0.14);color:var(--gold);}
+.soc-chip:hover{transform:translateY(-2px);}
+.soc-chip:focus-visible{outline:2px solid var(--gold);outline-offset:3px;}
+</style>
+<script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "copyrightYear": "2026",
+  "copyrightHolder": {
+    "@type": "Organization",
+    "name": "Zan J Private Limited",
+    "identifier": "UEN 202616105R",
+    "url": "https://digi-architect.studio/"
+  },
+  "creator": {
+    "@type": "Organization",
+    "name": "The Digital Systems Architect"
+  },
+  "license": "https://digi-architect.studio/#terms",
+  "name": "Muslim-Friendly Dining Directory, Japan",
+  "url": "https://digi-architect.studio/muslim-friendly-directory-japan",
+  "inLanguage": "en",
+  "description": "Find halal and Muslim-friendly places to eat across Japan, from Tokyo, Osaka and Kyoto to Hokkaido and Okinawa. Each listing shows whether the whole menu or only selected dishes are reported halal, and what is not verified.",
+  "about": [
+    "Muslim-friendly dining in Japan",
+    "Halal food in Japan"
+  ],
+  "spatialCoverage": {
+    "@type": "Country",
+    "name": "Japan"
+  },
+  "isPartOf": {
+    "@type": "WebSite",
+    "name": "The Digital Systems Architect",
+    "url": "https://digi-architect.studio/"
+  },
+  "relatedLink": "https://digi-architect.studio/muslim-friendly-advisory"
+}
+</script>
+<!-- DIRECTORY-ITEMLIST:START --><script type="application/ld+json" id="directory-itemlist">{"@context":"https://schema.org","@type":"ItemList","name":"Muslim-Friendly Dining Directory, Japan","url":"https://digi-architect.studio/muslim-friendly-directory-japan","numberOfItems":46,"itemListElement":[{"@type":"ListItem","position":1,"item":{"@type":"Restaurant","name":"LA TOQUE","alternateName":"ラ・トック","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Furugome, Narita","postalCode":"286-8585","addressLocality":"Narita","addressRegion":"Chiba"},"geo":{"@type":"GeoCoordinates","latitude":35.772973,"longitude":140.389397},"servesCuisine":"Curry"}},{"@type":"ListItem","position":2,"item":{"@type":"Restaurant","name":"SOJIBOU","alternateName":"信州そば処 そじ坊","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Furugome, Narita","postalCode":"282-0004","addressLocality":"Narita","addressRegion":"Chiba"},"geo":{"@type":"GeoCoordinates","latitude":35.774664,"longitude":140.388049}}},{"@type":"ListItem","position":3,"item":{"@type":"Restaurant","name":"Hana pizza Joint & Dessert","alternateName":"ハナ ピザ ジョイント & デザート","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Osakidai, Noda","postalCode":"270-0234","addressLocality":"Noda","addressRegion":"Chiba"},"geo":{"@type":"GeoCoordinates","latitude":35.977003,"longitude":139.834481},"servesCuisine":"Pizza, Burger"}},{"@type":"ListItem","position":4,"item":{"@type":"Restaurant","name":"mumtaz","alternateName":"ムムターズ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"河原子, Shiroi","postalCode":"270-1403","addressLocality":"Shiroi","addressRegion":"Chiba"},"geo":{"@type":"GeoCoordinates","latitude":35.815327,"longitude":140.059196},"servesCuisine":"パキスタン料理"}},{"@type":"ListItem","position":5,"item":{"@type":"Restaurant","name":"GYUMON","alternateName":"牛門","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Hondori, Naka Ward, Hiroshima","postalCode":"730-0035","addressLocality":"Hiroshima","addressRegion":"Hiroshima"},"geo":{"@type":"GeoCoordinates","latitude":34.392843,"longitude":132.45865},"servesCuisine":"Ramen"}},{"@type":"ListItem","position":6,"item":{"@type":"CafeOrCoffeeShop","name":"agt","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Minami 17-jo Nishi 4-chome, Chuo Ward, Sapporo","postalCode":"064-8611","addressLocality":"Sapporo","addressRegion":"Hokkaido"},"geo":{"@type":"GeoCoordinates","latitude":43.038464,"longitude":141.355392}}},{"@type":"ListItem","position":7,"item":{"@type":"Restaurant","name":"Al-Hilal Halal Ramen","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Nakayamatedori 2-chome, Chuo Ward, Kobe","postalCode":"650-0004","addressLocality":"Kobe","addressRegion":"Hyogo"},"geo":{"@type":"GeoCoordinates","latitude":34.696417,"longitude":135.188839},"servesCuisine":"Ramen"}},{"@type":"ListItem","position":8,"item":{"@type":"Restaurant","name":"Ayman","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Sakura 2-chome, Shibasaki, Tsukuba","postalCode":"305-0003","addressLocality":"Tsukuba","addressRegion":"Ibaraki"},"geo":{"@type":"GeoCoordinates","latitude":36.111206,"longitude":140.110443},"servesCuisine":"Indian"}},{"@type":"ListItem","position":9,"item":{"@type":"Restaurant","name":"ホットマサラ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Hamamachi, Marugame","postalCode":"763-0022","addressLocality":"Marugame","addressRegion":"Kagawa"},"geo":{"@type":"GeoCoordinates","latitude":34.292455,"longitude":133.794148},"servesCuisine":"Indian"}},{"@type":"ListItem","position":10,"item":{"@type":"Restaurant","name":"ドゥーニャ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Nakajincho, Takamatsu","postalCode":"760-0053","addressLocality":"Takamatsu","addressRegion":"Kagawa"},"geo":{"@type":"GeoCoordinates","latitude":34.337436,"longitude":134.047544},"servesCuisine":"Nepalese"}},{"@type":"ListItem","position":11,"item":{"@type":"Restaurant","name":"Pam's Dine & Grill","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Hakone 81-11","postalCode":"250-0521","addressLocality":"Hakone","addressRegion":"Kanagawa"},"geo":{"@type":"GeoCoordinates","latitude":35.190251,"longitude":139.025958},"servesCuisine":"Mediterranean, Middle Eastern, Burger, Lebanese"}},{"@type":"ListItem","position":12,"item":{"@type":"Restaurant","name":"舵屋","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Komachi 2-chome, Kamakura","postalCode":"248-0006","addressLocality":"Kamakura","addressRegion":"Kanagawa"},"geo":{"@type":"GeoCoordinates","latitude":35.321454,"longitude":139.552354}}},{"@type":"ListItem","position":13,"item":{"@type":"Restaurant","name":"Nan Tandoori","alternateName":"ナン タンドリ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Kunimi 1-chome, Aoba Ward, Sendai","postalCode":"981-8522","addressLocality":"Sendai","addressRegion":"Miyagi"},"geo":{"@type":"GeoCoordinates","latitude":38.278657,"longitude":140.8493},"servesCuisine":"Indian"}},{"@type":"ListItem","position":14,"item":{"@type":"Restaurant","name":"A Che Che","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Hokancho 3-chome, Kotobukicho, North Ward, Okayama","postalCode":"700-0026","addressLocality":"Okayama","addressRegion":"Okayama"},"geo":{"@type":"GeoCoordinates","latitude":34.668946,"longitude":133.917305},"servesCuisine":"Thai"}},{"@type":"ListItem","position":15,"item":{"@type":"Restaurant","name":"CBD GREEN","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Koseicho 3-chome, North Ward, Okayama","postalCode":"700-0985","addressLocality":"Okayama","addressRegion":"Okayama"},"geo":{"@type":"GeoCoordinates","latitude":34.657275,"longitude":133.916395}}},{"@type":"ListItem","position":16,"item":{"@type":"Restaurant","name":"milenga","alternateName":"ミレンガ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Heiwacho, Iwatacho, North Ward, Okayama","postalCode":"700-0827","addressLocality":"Okayama","addressRegion":"Okayama"},"geo":{"@type":"GeoCoordinates","latitude":34.666683,"longitude":133.922964},"servesCuisine":"Indian"}},{"@type":"ListItem","position":17,"item":{"@type":"Restaurant","name":"Adlon French Tacos","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Motomachi 3-chome, Naniwa Ward, Osaka","postalCode":"556-0016","addressLocality":"Osaka","addressRegion":"Osaka"},"geo":{"@type":"GeoCoordinates","latitude":34.660239,"longitude":135.497272},"servesCuisine":"French, French Tacos"}},{"@type":"ListItem","position":18,"item":{"@type":"Restaurant","name":"Momo's","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Shinsaibashisuji 2, Chūō Ward, Osaka","postalCode":"542-0084","addressLocality":"Osaka","addressRegion":"Osaka"},"geo":{"@type":"GeoCoordinates","latitude":34.670298,"longitude":135.501599}}},{"@type":"ListItem","position":19,"item":{"@type":"Restaurant","name":"吐魯蕃　なんば本店","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Nanba 1-chōme, Chūō Ward, Osaka","postalCode":"542-0071","addressLocality":"Osaka","addressRegion":"Osaka"},"geo":{"@type":"GeoCoordinates","latitude":34.667531,"longitude":135.501828},"servesCuisine":"ウイグルハラル料理"}},{"@type":"ListItem","position":20,"item":{"@type":"Restaurant","name":"周記蘭州牛肉面","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Nanba-naka 3, Naniwa Ward, Osaka","postalCode":"556-0015","addressLocality":"Osaka","addressRegion":"Osaka"},"geo":{"@type":"GeoCoordinates","latitude":34.659765,"longitude":135.498239},"servesCuisine":"Noodle"}},{"@type":"ListItem","position":21,"item":{"@type":"Restaurant","name":"玄米菜食Dan","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"くすのき台一丁目, 日吉町, Tokorozawa","postalCode":"359-1123","addressLocality":"Tokorozawa","addressRegion":"Saitama"},"geo":{"@type":"GeoCoordinates","latitude":35.789237,"longitude":139.471941},"servesCuisine":"Japanese"}},{"@type":"ListItem","position":22,"item":{"@type":"Restaurant","name":"Master Kebab","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Hakusan 1, Hakusan, Bunkyō","postalCode":"113-0001","addressLocality":"Bunkyō","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.722286,"longitude":139.752634},"servesCuisine":"Kebab"}},{"@type":"ListItem","position":23,"item":{"@type":"Restaurant","name":"カリーシュダ六義園","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Honkomagome 6, Honkomagome, Bunkyō","postalCode":"170-0003","addressLocality":"Bunkyō","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.733782,"longitude":139.747937},"servesCuisine":"Curry"}},{"@type":"ListItem","position":24,"item":{"@type":"Restaurant","name":"Antep Kebab","alternateName":"アンテップ　ケバブ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Soto-Kanda 1, Soto-Kanda, Chiyoda","postalCode":"101-0021","addressLocality":"Chiyoda","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.698472,"longitude":139.770225},"servesCuisine":"Kebab, Turkish"}},{"@type":"ListItem","position":25,"item":{"@type":"Restaurant","name":"Moses's Kebab","alternateName":"モーゼスさんのケバブ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Soto-Kanda 3, Soto-Kanda, Chiyoda","postalCode":"101-0021","addressLocality":"Chiyoda","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.701697,"longitude":139.770411},"servesCuisine":"Kebab"}},{"@type":"ListItem","position":26,"item":{"@type":"Restaurant","name":"Star Kebab","alternateName":"スターケバブ アキバテラス","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Soto-Kanda 3, Soto-Kanda, Chiyoda","postalCode":"101-0021","addressLocality":"Chiyoda","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.701377,"longitude":139.770902},"servesCuisine":"Kebab"}},{"@type":"ListItem","position":27,"item":{"@type":"Restaurant","name":"Anam Authentic Indian Cuisine Ginza Branch","alternateName":"アナム　本格インド料理　銀座店","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Ginza 8, Ginza, Chuo","postalCode":"104-0061","addressLocality":"Chuo","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.667471,"longitude":139.762034},"servesCuisine":"Indian"}},{"@type":"ListItem","position":28,"item":{"@type":"Restaurant","name":"Nirvanam","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Ariake 3, Ariake, Koto","postalCode":"135-0063","addressLocality":"Koto","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.631246,"longitude":139.790971},"servesCuisine":"Indian"}},{"@type":"ListItem","position":29,"item":{"@type":"Restaurant","name":"Indian Restaurant Mumbai + Tandoori Grill","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Daiba 1, Daiba, Minato","postalCode":"135-0091","addressLocality":"Minato","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.627511,"longitude":139.772854},"servesCuisine":"Indian"}},{"@type":"ListItem","position":30,"item":{"@type":"Restaurant","name":"The Oven - American Buffet","alternateName":"The Oven アクアシティお台場店 - アメリカンハウス","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Daiba 1, Daiba, Minato","postalCode":"135-0091","addressLocality":"Minato","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.627303,"longitude":139.772442},"servesCuisine":"American, Buffet"}},{"@type":"ListItem","position":31,"item":{"@type":"Restaurant","name":"Food Therapy Diner Chabuzen","alternateName":"薬膳食堂ちゃぶ膳","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Ōhara 1, Ōhara, Setagaya","postalCode":"156-0041","addressLocality":"Setagaya","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.666861,"longitude":139.663363},"servesCuisine":"Ramen"}},{"@type":"ListItem","position":32,"item":{"@type":"Restaurant","name":"Andhra Dining SHIBUYA","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Udagawachō, Shibuya","postalCode":"150-0042","addressLocality":"Shibuya","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.661195,"longitude":139.697138},"servesCuisine":"Indian, Andhra Pradesh, Andhra, South Indian"}},{"@type":"ListItem","position":33,"item":{"@type":"Restaurant","name":"Namaste Indian Asian Dining","alternateName":"ナマステインドアジアンダイニング","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Shibuya 4, Shibuya","postalCode":"150-0001","addressLocality":"Shibuya","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.662739,"longitude":139.708954},"servesCuisine":"Curry, Indian"}},{"@type":"ListItem","position":34,"item":{"@type":"Restaurant","name":"マモケバブ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Udagawachō, Shibuya","postalCode":"150-0042","addressLocality":"Shibuya","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.660492,"longitude":139.698522},"servesCuisine":"Kebab"}},{"@type":"ListItem","position":35,"item":{"@type":"Restaurant","name":"Halal and Vegan Ramen Dattebayo!","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Hanakawado 2, Hanakawado, Taito","postalCode":"111-0033","addressLocality":"Taito","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.714801,"longitude":139.801691},"servesCuisine":"Ramen"}},{"@type":"ListItem","position":36,"item":{"@type":"Restaurant","name":"Sukiyaki KAWASHINA","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Kaminarimon 1, Kaminarimon, Taito","postalCode":"111-0034","addressLocality":"Taito","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.711211,"longitude":139.792625},"servesCuisine":"すき焼き, 和牛, しゃぶしゃぶ, 和食, イスラム"}},{"@type":"ListItem","position":37,"item":{"@type":"Restaurant","name":"Sultan Indian & Pakistan Restaurant","alternateName":"スルターン","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Ueno 5, Ueno, Taito","postalCode":"110-0005","addressLocality":"Taito","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.703485,"longitude":139.775565},"servesCuisine":"Indian"}},{"@type":"ListItem","position":38,"item":{"@type":"Restaurant","name":"Tadım Turkish Restaurant & Halal Kebab","alternateName":"トルコBBQレストラン TADIM Turkish Restaurant","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"3 Chome-30-11 Senzoku, Taito City, Tokyo 111-0031","postalCode":"111-0031","addressLocality":"Taito","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.724261,"longitude":139.792821},"servesCuisine":"Turkish, Kebab"}},{"@type":"ListItem","position":39,"item":{"@type":"Restaurant","name":"Vege Herb Saga","alternateName":"ヴェジハーブサーガ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Ueno 5, Ueno, Taito","postalCode":"110-0005","addressLocality":"Taito","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.706,"longitude":139.775318},"servesCuisine":"Indian"}},{"@type":"ListItem","position":40,"item":{"@type":"Restaurant","name":"三休","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Ueno 1, Ueno, Taito","postalCode":"110-0005","addressLocality":"Taito","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.705739,"longitude":139.771223},"servesCuisine":"Japanese"}},{"@type":"ListItem","position":41,"item":{"@type":"Restaurant","name":"アリヤ 清真美食 池袋店","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Nishi-Ikebukuro 1, Nishi-Ikebukuro, Toshima","postalCode":"171-0021","addressLocality":"Toshima","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.732923,"longitude":139.711413},"servesCuisine":"Chinese"}},{"@type":"ListItem","position":42,"item":{"@type":"Restaurant","name":"T's TanTan Ecute Ueno","alternateName":"T's たんたん","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"台東区 上野七丁目 1-1, ecute上野","postalCode":"110-0005","addressLocality":"台東区","addressRegion":"Tokyo"},"geo":{"@type":"GeoCoordinates","latitude":35.714178,"longitude":139.777241},"servesCuisine":"Ramen"}},{"@type":"ListItem","position":43,"item":{"@type":"Restaurant","name":"Alladin Indo Restaurant & Kebab House","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Funatsu, Fujikawaguchiko","postalCode":"401-0301","addressLocality":"Fujikawaguchiko","addressRegion":"Yamanashi"},"geo":{"@type":"GeoCoordinates","latitude":35.503321,"longitude":138.769735},"servesCuisine":"Indian, Kebab"}},{"@type":"ListItem","position":44,"item":{"@type":"Restaurant","name":"Shuujuu","alternateName":"臭獣","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"Fujiyoshida","postalCode":"403-0012","addressLocality":"Fujiyoshida","addressRegion":"Yamanashi"},"geo":{"@type":"GeoCoordinates","latitude":35.496569,"longitude":138.787973},"servesCuisine":"Okonomiyaki, Japanese"}},{"@type":"ListItem","position":45,"item":{"@type":"Restaurant","name":"Kariamudhu","alternateName":"カリアムドゥ","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"富士吉田市 下吉田 3 6-28","postalCode":"403-0004","addressLocality":"富士吉田市","addressRegion":"Yamanashi"},"geo":{"@type":"GeoCoordinates","latitude":35.492684,"longitude":138.803836},"servesCuisine":"Indian, Curry"}},{"@type":"ListItem","position":46,"item":{"@type":"Restaurant","name":"The Spice Hut","alternateName":"ザ・スパイス・ハット","address":{"@type":"PostalAddress","addressCountry":"JP","streetAddress":"富士河口湖町 船津 4224-4","postalCode":"401-0301","addressLocality":"富士河口湖町","addressRegion":"Yamanashi"},"geo":{"@type":"GeoCoordinates","latitude":35.503067,"longitude":138.769705},"servesCuisine":"Indian"}}]}</script><!-- DIRECTORY-ITEMLIST:END -->
+<script>window.DIRECTORY_COUNTRY = "Japan";</script>
+</head>
+<body>
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WNG8MK4K" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<div class="page-bg" aria-hidden="true"></div>
+<header class="site-header">
+  <a class="hdr-brand" href="/"><img src="/logo.png" alt="The Digital Systems Architect logo"><span>The Digital Systems Architect</span><span class="hdr-brand-sub">Directory</span></a>
+  <div class="hdr-right">
+    <span class="hdr-section-label" id="hdrLabel"></span>
+    <a class="hdr-back" href="/muslim-friendly-advisory" target="_blank" rel="noopener noreferrer">&#8592; Business Advisory</a>
+    <button class="hdr-cta" type="button" onclick="showPanel('directory')">Search the Directory</button>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Open navigation" aria-expanded="false" aria-controls="navDrawer"><span aria-hidden="true"></span><span aria-hidden="true"></span><span aria-hidden="true"></span></button>
+  </div>
+</header>
+<div class="nav-backdrop" id="navBackdrop" aria-hidden="true"></div>
+<nav class="nav-drawer" id="navDrawer" aria-label="Page sections" aria-hidden="true" role="dialog">
+  <div class="drawer-header"><span class="drawer-brand">Directory</span><button class="drawer-close" id="drawerClose" type="button" aria-label="Close navigation">&times;</button></div>
+  <div class="drawer-label mono">Sections</div>
+  <ul class="drawer-nav-list" id="drawerNavList">
+    <li class="drawer-nav-item" data-panel="hero"><button type="button"><span class="drawer-nav-dot"></span>Overview</button></li>
+    <li class="drawer-nav-item" data-panel="meaning"><button type="button"><span class="drawer-nav-dot"></span>What It Means</button></li>
+    <li class="drawer-nav-item" data-panel="framework"><button type="button"><span class="drawer-nav-dot"></span>Declaration Framework</button></li>
+    <li class="drawer-nav-item" data-panel="why"><button type="button"><span class="drawer-nav-dot"></span>Why This Exists</button></li>
+    <li class="drawer-nav-item" data-panel="notice"><button type="button"><span class="drawer-nav-dot"></span>Important Notice</button></li>
+    <li class="drawer-nav-item" data-panel="directory"><button type="button"><span class="drawer-nav-dot"></span>Explore Directory</button></li>
+    <li class="drawer-nav-item" data-panel="how"><button type="button"><span class="drawer-nav-dot"></span>How to Use</button></li>
+    <li class="drawer-nav-item" data-panel="faq"><button type="button"><span class="drawer-nav-dot"></span>FAQ &amp; Information</button></li>
+  </ul>
+  <div class="drawer-cta"><button type="button" onclick="showPanel('directory');closeDrawer();">Search the Directory</button></div>
+</nav>
+<div class="page-body">
+  <nav class="side-nav" aria-label="Page sections">
+    <div class="side-nav-label mono">Contents</div>
+    <ul class="snav-list" id="snavList">
+      <li><button class="snav-item active" data-panel="hero" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Overview</button></li>
+      <li><button class="snav-item" data-panel="meaning" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>What It Means</button></li>
+      <li><button class="snav-item" data-panel="framework" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Declaration Framework</button></li>
+      <li><button class="snav-item" data-panel="why" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Why This Exists</button></li>
+      <li><button class="snav-item" data-panel="notice" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Important Notice</button></li>
+      <li><button class="snav-item" data-panel="directory" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>Explore Directory</button></li>
+      <li><button class="snav-item" data-panel="how" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>How to Use</button></li>
+      <li><button class="snav-item" data-panel="faq" type="button"><span class="snav-dot"><span class="snav-dot-inner"></span></span>FAQ &amp; Information</button></li>
+    </ul>
+  </nav>
+  <div class="panel-area" id="panelArea">
+    <div class="view active" id="view-hero">
+      <div class="panel-pad" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="hero-inner">
+          <h1 class="eyebrow light">Muslim-Friendly Dining Directory, Japan</h1>
+          <p class="hero-h1">Clearer information<br>for more <em>informed</em> dining.</p>
+          <p class="hero-p">This independent directory presents information voluntarily disclosed by establishments about their food practices, meat sourcing and alcohol policies. It is designed to help Muslim diners review each declaration before deciding whether an establishment meets their requirements. Community-suggested places are also listed, clearly marked as not verified.</p>
+          <div class="hero-btns">
+            <button class="btn btn-primary" type="button" onclick="showPanel('directory')">Search the Directory</button>
+            <button class="btn btn-ghost-light" type="button" onclick="showPanel('meaning')">Understand the Declaration</button>
+          </div>
+          <div class="hero-notice">
+            <div class="hero-notice-title">Important before you browse</div>
+            <p><b>Self-declared Muslim-friendly is not the same as halal-certified.</b> The declaration is made by the establishment. The final dining decision rests with each individual diner. Some establishments listed here may serve alcohol on the premises.</p>
+          </div>
+        </div>
+        <div class="hero-coord" aria-hidden="true">Self-declared &bull; Not halal-certified &bull; Diner decides</div>
+      </div>
+    </div>
+    <div class="view" id="view-meaning">
+      <div class="panel-pad" style="height:100%;display:flex;flex-direction:column;justify-content:center;">
+        <div class="meaning-layout">
+          <div class="meaning-left">
+            <div class="eyebrow">What It Means</div>
+            <div class="meaning-quote">Self-declared is not<br>halal-certified.</div>
+            <p class="meaning-body">A self-declared Muslim-friendly establishment has voluntarily provided information about its food ingredients, preparation practices, meat sourcing and alcohol policies. It does not necessarily hold halal certification. The directory presents each disclosure separately so diners can review the information and make their own informed decision.</p>
+            <div style="margin-top:28px;"><button class="btn btn-dark" type="button" onclick="showPanel('framework')">See the Declaration Framework &#8594;</button></div>
+          </div>
+          <div class="meaning-divider" aria-hidden="true"></div>
+          <div class="meaning-right">
+            <div class="meaning-annotation"><strong>The distinction</strong><p>Halal certification is a formal mark issued by a Japanese halal certification body (standards and recognition differ between bodies). Self-declared Muslim-friendly is a voluntary disclosure of specific practices. The two are not equivalent. Each listing shows which applies.</p></div>
+            <div class="meaning-annotation"><strong>What this means in practice</strong><p>Some establishments on this directory serve alcohol, use shared equipment, or have not yet certified. That information is displayed clearly on each listing. The directory is not a recommendation. The diner decides.</p></div>
+            <div class="meaning-annotation"><strong>Your responsibility as a diner</strong><p>Review each declaration carefully. Where a requirement is essential to you, contact the establishment directly before visiting. Your dining decision is your own.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-framework">
+      <div class="panel-pad">
+        <div class="section-inner">
+          <div class="eyebrow">Declaration Framework</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:8px;">Five declaration categories.</h2>
+          <p class="framework-intro">Each establishment that joins this directory declares its position on five specific categories. These are self-declarations only and do not constitute halal certification.</p>
+          <div class="fw-accordion" id="fwAccordion">
+            <div class="fw-item is-open"><button class="fw-btn" type="button" aria-expanded="true" aria-controls="fw-panel-0"><span class="fw-btn-left"><span class="fw-num">01 / 05</span><span class="fw-title">No pork declared</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-0"><div class="fw-body">Pork and pork-derived ingredients are declared not to be part of the menu. This declaration is made by the establishment. It does not confirm halal certification or exclude all animal-derived ingredients of concern.</div></div></div>
+            <div class="fw-item"><button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel-1"><span class="fw-btn-left"><span class="fw-num">02 / 05</span><span class="fw-title">No lard declared</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-1"><div class="fw-body">Lard is declared not to be used in cooking or food preparation. This is a voluntary declaration by the establishment. Diners should contact the establishment directly if they have specific concerns about cooking fats or shared equipment.</div></div></div>
+            <div class="fw-item"><button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel-2"><span class="fw-btn-left"><span class="fw-num">03 / 05</span><span class="fw-title">Meat source declared</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-2"><div class="fw-body">Where meat is served, the establishment declares whether it is sourced from halal-certified suppliers. A declaration does not substitute for confirmation from the establishment directly. Diners concerned about meat sourcing should verify before dining.</div></div></div>
+            <div class="fw-item"><button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel-3"><span class="fw-btn-left"><span class="fw-num">04 / 05</span><span class="fw-title">Alcohol disclosure</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-3"><div class="fw-body">The establishment declares whether alcohol is served on the premises and whether alcohol is used in food items. Some establishments on this directory serve alcohol. That information is displayed clearly on each listing. The diner decides whether this is acceptable to them.</div></div></div>
+            <div class="fw-item"><button class="fw-btn" type="button" aria-expanded="false" aria-controls="fw-panel-4"><span class="fw-btn-left"><span class="fw-num">05 / 05</span><span class="fw-title">Certification status</span></span><span class="fw-toggle" aria-hidden="true"></span></button><div class="fw-panel" id="fw-panel-4"><div class="fw-body">The establishment's halal-certification status is clearly displayed on each listing. A self-declared listing must not be treated as halal-certified unless a valid certificate from the relevant authority is expressly shown. Diners who require halal-certified establishments should choose accordingly.</div></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-why">
+      <div class="panel-pad">
+        <div class="section-inner wide">
+          <div class="eyebrow">Why This Directory Exists</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:8px;">Transparency, not endorsement.</h2>
+          <p class="why-intro">Some establishments cannot presently meet full halal-certification requirements, often due to alcohol service or an operating model that does not permit full compliance. Muslim diners are often left to guess. This directory is a structured response to that gap.</p>
+          <div class="pro-grid">
+            <div class="pro-cell"><div class="pro-label">The Issue</div><h3>Information gaps</h3><p>Some establishments cannot presently meet full halal-certification requirements. Muslim diners are often left to guess about food practices, meat sourcing and alcohol policies.</p></div>
+            <div class="pro-cell"><div class="pro-label">The Response</div><h3>Voluntary disclosure</h3><p>Establishments may voluntarily disclose their food practices, meat sourcing, alcohol policies and facilities so that Muslim diners can review the information and make their own informed personal decision.</p></div>
+            <div class="pro-cell dark"><div class="pro-label">The Outcome</div><h3>Informed decision</h3><p>Diners understand each establishment's position clearly before deciding whether they are comfortable visiting. Diners who prefer only halal-certified establishments should continue to make that choice.</p></div>
+          </div>
+          <div class="why-method">
+            <div class="method-cell"><div class="method-idx">01 / Consult</div><h3>Understand dietary concerns</h3><p>Common Muslim dietary requirements and diner expectations.</p></div>
+            <div class="method-cell"><div class="method-idx">02 / Guide</div><h3>Advise on disclosure</h3><p>Sourcing, menu labelling, declaration preparation and clear communication to consumers.</p></div>
+            <div class="method-cell"><div class="method-idx">03 / Review</div><h3>Review declarations</h3><p>Review declaration completeness and consistency before listing is published.</p></div>
+            <div class="method-cell"><div class="method-idx">04 / Clarify</div><h3>Set clear boundaries</h3><p>This is not certification, a religious ruling, endorsement or statutory verification.</p></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-notice">
+      <div class="panel-pad">
+        <div class="section-inner">
+          <div class="eyebrow">Important Notice</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:8px;">Read before using this directory.</h2>
+          <p class="notice-intro">These notices apply to every listing in this directory. Please read carefully before making a dining decision.</p>
+          <div class="notice-box">
+            <div class="notice-head">Before you make a dining decision</div>
+            <div class="notice-row"><span class="notice-n">01</span><p>Self-declared Muslim-friendly establishments are <mark>not necessarily halal-certified</mark>. Each listing clearly states its certification or self-declaration status.</p></div>
+            <div class="notice-row"><span class="notice-n">02</span><p>Some establishments on this directory <mark>may serve alcohol</mark> on the premises. This is disclosed on each listing.</p></div>
+            <div class="notice-row"><span class="notice-n">03</span><p>Some establishments may use shared kitchens, utensils, fryers, grills or equipment. Contact the establishment directly where this is an essential concern.</p></div>
+            <div class="notice-row"><span class="notice-n">04</span><p>Information submitted by establishments may change after the declaration date. Where requirements are essential, verify directly with the establishment before visiting.</p></div>
+            <div class="notice-row"><span class="notice-n">05</span><p>The information displayed is based on the establishment's own declaration. It is not halal certification, a fatwa, official religious endorsement or statutory verification.</p></div>
+            <div class="notice-row"><span class="notice-n">06</span><p>The <mark>final dining decision rests with each individual diner</mark> based on their own requirements, comfort level and religious understanding.</p></div>
+            <div class="notice-row"><span class="notice-n">07</span><p>Diners who prefer to dine only at halal-certified establishments should continue to make that choice. That preference is fully respected.</p></div>
+            <div class="notice-more">A full disclaimer appears in the FAQ &amp; Information section.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-directory" aria-label="Explore directory">
+      <div class="dir-panel-inner">
+        <!-- Top: heading + view switcher -->
+        <div class="dir-panel-top">
+          <div class="dir-top-row">
+            <div class="dir-title">
+              <div class="eyebrow">Directory</div>
+              <h2>List of Muslim-friendly establishments</h2>
+              <div class="country-switch" id="countrySwitch" role="group" aria-label="Country"><button type="button" data-country="Singapore" aria-pressed="true">Singapore</button><button type="button" data-country="Malaysia" aria-pressed="false">Malaysia</button><button type="button" data-country="Japan" aria-pressed="false">Japan</button></div>
+            </div>
+            <div class="dir-toolbar">
+              <div class="dir-search-wrap">
+                <svg class="search-icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>
+                <input class="dir-field" id="searchInput" type="search" placeholder="Name, area, cuisine, postal code&#8230;" autocomplete="off" aria-label="Search establishments" />
+                <button class="search-go" id="searchGoBtn" type="button" aria-label="Search">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="13 6 19 12 13 18"/></svg>
+                </button>
+              </div>
+              <button class="dir-filter-btn dir-filter-btn-desktop" id="filterToggleBtn" type="button" aria-expanded="false" aria-controls="filterDropdown">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+                Filters<span class="fbtn-count"></span>
+              </button>
+              <button class="dir-filter-btn dir-filter-btn-mobile" id="filterSheetBtn" type="button" aria-label="Open filters" aria-haspopup="dialog">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="4" y1="6" x2="20" y2="6"/><line x1="6" y1="12" x2="18" y2="12"/><line x1="9" y1="18" x2="15" y2="18"/></svg>
+                Filters<span class="fbtn-count-m"></span>
+              </button>
+              <button class="btn btn-outline btn-sm" type="button" id="clearFiltersBtn">Reset</button>
+              <div class="view-switcher" id="viewSwitcher" role="group" aria-label="View mode">
+                <button class="vsw-btn active" id="btnListView" type="button" aria-pressed="true"><svg viewBox="0 0 24 24" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>List</button>
+                <button class="vsw-btn" id="btnMapView" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="1 6 1 22 8 18 16 22 23 18 23 2 16 6 8 2 1 6"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg>Map</button>
+              </div>
+            </div>
+          </div>
+          <div class="filter-dropdown" id="filterDropdown" role="region" aria-label="Filter establishments" hidden>
+            <div class="fd-grid"><div><label class="filter-label" for="areaFilter">Area / Prefecture</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div><div><label class="filter-label" for="cityFilter">City / town</label><select class="dir-select" id="cityFilter"><option value="all">Any city or town</option></select></div><div><label class="filter-label" for="scopeFilter">Halal scope</label><select class="dir-select" id="scopeFilter"><option value="all">Any</option><option value="entire">Entire menu reported halal</option><option value="selected">Selected items only</option><option value="other">Other / not stated</option></select></div><div><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div><div><label class="filter-label" for="typeFilter">Establishment type</label><select class="dir-select" id="typeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="certFilter">Certification</label><select class="dir-select" id="certFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="listingFilter">Listing status</label><select class="dir-select" id="listingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="alcoholMenuFilter">Alcohol in menu items</label><select class="dir-select" id="alcoholMenuFilter"><option value="all">Any</option><option value="yes">Indicated</option><option value="no">Not indicated</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="porkFilter">Pork</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div><div><label class="filter-label" for="lardFilter">Lard</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div><div><label class="filter-label" for="prayerFilter">Prayer space</label><select class="dir-select" id="prayerFilter"><option value="all">Any</option><option value="yes">Available</option><option value="no">Not available</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="mapreadyFilter">Map location</label><select class="dir-select" id="mapreadyFilter"><option value="all">Any</option><option value="yes">Shown on map</option><option value="no">No map location</option></select></div></div>
+            <div class="fd-actions">
+              <span class="fd-count" id="fdCount" aria-live="polite"></span>
+              <button class="btn btn-outline btn-sm" type="button" id="inlineResetBtn">Reset</button>
+              <button class="btn btn-dark btn-sm" type="button" id="searchSubmitBtn">Apply &#8594;</button>
+            </div>
+          </div>
+        </div>
+        <!-- Body: left (results) + right (map) -->
+        <div class="dir-panel-body">
+          <!-- LEFT: search + filters + results -->
+          <div class="dir-left-col" id="dirLeftCol">
+                                    
+            <!-- Active chips -->
+            <div class="active-chips" id="activeChips" aria-live="polite"></div>
+            <!-- Result count -->
+            <div class="dir-topline">
+              <strong id="resultsInlineCount" aria-live="polite">Loading&hellip;</strong>
+              <label class="sort-inline" for="sortSelect"><span class="sort-lbl">Sort</span><select class="dir-select" id="sortSelect"><option value="name">Name A&#8211;Z</option><option value="name_desc">Name Z&#8211;A</option><option value="area">Area / Prefecture</option><option value="updated">Recently updated</option><option value="cert">Certification status</option><option value="mapfirst">Map-ready first</option></select></label>
+            </div>
+            <!-- Results -->
+            <div class="dir-results" id="dirResultsScroll">
+              <div class="records-list" id="recordsGrid"><!-- STATIC-LISTINGS:START --><div aria-label="Published listings by prefecture"><h3 class="static-region">Chiba (4)</h3><ul class="static-listings"><li><strong>LA TOQUE</strong> <span lang="ja">(ラ・トック)</span><br>Narita · Restaurant · Curry<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>SOJIBOU</strong> <span lang="ja">(信州そば処 そじ坊)</span><br>Narita · Restaurant<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Hana pizza Joint &amp; Dessert</strong> <span lang="ja">(ハナ ピザ ジョイント &amp; デザート)</span><br>Noda · Restaurant · Pizza, Burger<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>mumtaz</strong> <span lang="ja">(ムムターズ)</span><br>Shiroi · Restaurant · パキスタン料理<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Hiroshima (1)</h3><ul class="static-listings"><li><strong>GYUMON</strong> <span lang="ja">(牛門)</span><br>Hiroshima · Restaurant · Ramen<br><em>Community-suggested, not verified; Entire menu reported halal (community report)</em></li></ul><h3 class="static-region">Hokkaido (1)</h3><ul class="static-listings"><li><strong>agt</strong><br>Sapporo · Café<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Hyogo (1)</h3><ul class="static-listings"><li><strong>Al-Hilal Halal Ramen</strong><br>Kobe · Restaurant · Ramen<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Ibaraki (1)</h3><ul class="static-listings"><li><strong>Ayman</strong><br>Tsukuba · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Kagawa (2)</h3><ul class="static-listings"><li><strong>ホットマサラ</strong><br>Marugame · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>ドゥーニャ</strong><br>Takamatsu · Restaurant · Nepalese<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Kanagawa (2)</h3><ul class="static-listings"><li><strong>Pam&#x27;s Dine &amp; Grill</strong><br>Hakone · Restaurant · Mediterranean, Middle Eastern, Burger, Lebanese<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>舵屋</strong><br>Kamakura · Restaurant<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Miyagi (1)</h3><ul class="static-listings"><li><strong>Nan Tandoori</strong> <span lang="ja">(ナン タンドリ)</span><br>Sendai · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Okayama (3)</h3><ul class="static-listings"><li><strong>A Che Che</strong><br>Okayama · Restaurant · Thai<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>CBD GREEN</strong><br>Okayama · Restaurant<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>milenga</strong> <span lang="ja">(ミレンガ)</span><br>Okayama · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Osaka (4)</h3><ul class="static-listings"><li><strong>Adlon French Tacos</strong><br>Osaka · Restaurant · French, French Tacos<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Momo&#x27;s</strong><br>Osaka · Restaurant<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>吐魯蕃　なんば本店</strong><br>Osaka · Restaurant · ウイグルハラル料理<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>周記蘭州牛肉面</strong><br>Osaka · Restaurant · Noodle<br><em>Community-suggested, not verified; Entire menu reported halal (community report)</em></li></ul><h3 class="static-region">Saitama (1)</h3><ul class="static-listings"><li><strong>玄米菜食Dan</strong><br>Tokorozawa · Restaurant · Japanese<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul><h3 class="static-region">Tokyo (21)</h3><ul class="static-listings"><li><strong>Master Kebab</strong><br>Bunkyō · Restaurant · Kebab<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>カリーシュダ六義園</strong><br>Bunkyō · Restaurant · Curry<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Antep Kebab</strong> <span lang="ja">(アンテップ　ケバブ)</span><br>Chiyoda · Restaurant · Kebab, Turkish<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Moses&#x27;s Kebab</strong> <span lang="ja">(モーゼスさんのケバブ)</span><br>Chiyoda · Restaurant · Kebab<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Star Kebab</strong> <span lang="ja">(スターケバブ アキバテラス)</span><br>Chiyoda · Restaurant · Kebab<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Anam Authentic Indian Cuisine Ginza Branch</strong> <span lang="ja">(アナム　本格インド料理　銀座店)</span><br>Chuo · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Nirvanam</strong><br>Koto · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Indian Restaurant Mumbai + Tandoori Grill</strong><br>Minato · Restaurant · Indian<br><em>Community-suggested, not verified; Entire menu reported halal (community report)</em></li><li><strong>The Oven - American Buffet</strong> <span lang="ja">(The Oven アクアシティお台場店 - アメリカンハウス)</span><br>Minato · Restaurant · American, Buffet<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Food Therapy Diner Chabuzen</strong> <span lang="ja">(薬膳食堂ちゃぶ膳)</span><br>Setagaya · Restaurant · Ramen<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Andhra Dining SHIBUYA</strong><br>Shibuya · Restaurant · Indian, Andhra Pradesh, Andhra, South Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Namaste Indian Asian Dining</strong> <span lang="ja">(ナマステインドアジアンダイニング)</span><br>Shibuya · Restaurant · Curry, Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>マモケバブ</strong><br>Shibuya · Restaurant · Kebab<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Halal and Vegan Ramen Dattebayo!</strong><br>Taito · Restaurant · Ramen<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Sukiyaki KAWASHINA</strong><br>Taito · Restaurant · すき焼き, 和牛, しゃぶしゃぶ, 和食, イスラム<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Sultan Indian &amp; Pakistan Restaurant</strong> <span lang="ja">(スルターン)</span><br>Taito · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Tadım Turkish Restaurant &amp; Halal Kebab</strong> <span lang="ja">(トルコBBQレストラン TADIM Turkish Restaurant)</span><br>Taito · Restaurant · Turkish, Kebab<br><em>Community-suggested, not verified; Entire menu reported halal (community report)</em></li><li><strong>Vege Herb Saga</strong> <span lang="ja">(ヴェジハーブサーガ)</span><br>Taito · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>三休</strong><br>Taito · Restaurant · Japanese<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>アリヤ 清真美食 池袋店</strong><br>Toshima · Restaurant · Chinese<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>T&#x27;s TanTan Ecute Ueno</strong> <span lang="ja">(T&#x27;s たんたん)</span><br>台東区 · Restaurant · Ramen<br><em>Community-suggested, not verified; Entire menu reported halal (community report)</em></li></ul><h3 class="static-region">Yamanashi (4)</h3><ul class="static-listings"><li><strong>Alladin Indo Restaurant &amp; Kebab House</strong><br>Fujikawaguchiko · Restaurant · Indian, Kebab<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Shuujuu</strong> <span lang="ja">(臭獣)</span><br>Fujiyoshida · Restaurant · Okonomiyaki, Japanese<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>Kariamudhu</strong> <span lang="ja">(カリアムドゥ)</span><br>富士吉田市 · Restaurant · Indian, Curry<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li><li><strong>The Spice Hut</strong> <span lang="ja">(ザ・スパイス・ハット)</span><br>富士河口湖町 · Restaurant · Indian<br><em>Community-suggested, not verified; Halal food reported available (community report)</em></li></ul></div><!-- STATIC-LISTINGS:END --></div>
+              <div class="empty-state" id="emptyState">
+                <h3>No results</h3>
+                <p>Adjust the search or filters and try again.</p>
+                <button class="btn btn-outline btn-sm" type="button" id="emptyClearBtn" style="margin-top:12px;">Reset filters</button>
+              </div>
+            </div>
+          </div>
+          <!-- RIGHT: map + preview -->
+          <div class="dir-right-col" id="dirRightCol">
+            <div id="declarationMap" role="application" aria-label="Map of establishment locations. Select a marker to view establishment details."></div>
+            <div class="map-empty" id="mapEmpty" role="status" aria-live="polite"></div>
+            <!-- Selected establishment preview -->
+            <div class="map-preview" id="mapPreview" hidden>
+              <div class="map-preview-content" id="mapPreviewContent"></div>
+              <button class="map-preview-close" id="mapPreviewClose" type="button" aria-label="Close preview">&times;</button>
+            </div>
+            <!-- Return to list (mobile only) -->
+            <div class="map-return-bar">
+              <button class="btn btn-dark btn-sm" type="button" id="btnReturnToList">&#8592; List View</button>
+              <span class="result-count" id="mapResultCount" style="margin-left:auto;"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-how">
+      <div class="panel-pad">
+        <div class="section-inner wide">
+          <div class="eyebrow">How to Use This Directory</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:8px;">Five steps to a more informed decision.</h2>
+          <p class="how-intro">This directory provides information, not endorsement. Use it as a starting point, not as a substitute for your own enquiries where requirements are essential.</p>
+          <div class="how-grid">
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">01</span></div><h3>Review the certification status</h3><p>Check whether the establishment is halal-certified or self-declared only. These are not equivalent.</p></div>
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">02</span></div><h3>Review each declaration</h3><p>Read what the establishment has declared about pork, lard, meat sourcing and alcohol. Declarations vary between listings.</p></div>
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">03</span></div><h3>Check alcohol and cross-contact</h3><p>Review the alcohol disclosure and any notes about shared equipment, utensils, fryers or preparation areas.</p></div>
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">04</span></div><h3>Contact the establishment</h3><p>Where a requirement is essential to you, contact the establishment directly before visiting to verify current practices.</p></div>
+            <div class="how-step"><div class="how-n"><span class="how-n-dot">05</span></div><h3>Decide for yourself</h3><p>Make your decision based on your own requirements, comfort level and religious understanding. The directory does not decide for you.</p></div>
+          </div>
+          <div class="how-outcome"><span class="how-outcome-label">Reminder</span><p>This directory provides information for diners. It is not halal certification, a religious ruling, official endorsement or statutory verification. The final decision rests with each individual diner.</p></div>
+        </div>
+      </div>
+    </div>
+    <div class="view" id="view-faq">
+      <div class="panel-pad">
+        <div class="section-inner wide">
+          <div class="eyebrow">Questions</div>
+          <h2 style="font-size:clamp(22px,3vw,36px);margin-bottom:20px;">Frequently asked questions.</h2>
+          <div class="faq-info-layout">
+            <div>
+              <div class="faq-list">
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-1"><span class="faq-q">Are all establishments in this directory halal-certified?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-1"><div class="faq-answer">No. Each listing clearly states its certification or self-declaration status. Self-declared Muslim-friendly establishments should not be treated as halal-certified unless a valid certificate from the relevant authority is expressly shown.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-2"><span class="faq-q">Does Muslim-friendly mean halal?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-2"><div class="faq-answer">No. Muslim-friendly is not a legal or religious equivalent to halal certification. It describes specific practices or policies declared by the establishment. Each listing's individual declarations should be reviewed before making a dining decision.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-3"><span class="faq-q">Why are establishments that serve alcohol included?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-3"><div class="faq-answer">The directory is based on transparent disclosure. Where alcohol is served, this is clearly stated on the listing so diners can decide whether the establishment meets their individual requirements. The directory is not a recommendation to dine at any particular establishment.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-4"><span class="faq-q">Should I dine at a self-declared establishment?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-4"><div class="faq-answer">That decision rests with each individual diner. Some diners may be comfortable after reviewing the declarations, while others may choose only halal-certified establishments. Both choices are valid and should be respected.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-5"><span class="faq-q">Who checks the information?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-5"><div class="faq-answer">The information is primarily based on declarations submitted by the establishment. Where advisory support has been provided, this may be noted on the listing. The information is not subject to statutory verification or equivalent to halal certification.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-7"><span class="faq-q">What does &ldquo;community-suggested&rdquo; mean?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-7"><div class="faq-answer">Community-suggested listings come from OpenStreetMap, where volunteers have reported that halal food is available. They have not been verified by this directory, the establishment has not made a declaration, and they are not evidence of halal certification. They are listed so diners can discover places to look into. Check the certificate displayed at the premises or ask the establishment directly. Establishments can contact us to submit a declaration or certification details.</div></div></div>
+                <div class="faq-item"><button class="faq-btn" type="button" aria-expanded="false" aria-controls="cfaq-6"><span class="faq-q">What should I do if information appears incorrect?</span><span class="faq-icon" aria-hidden="true"></span></button><div class="faq-panel" id="cfaq-6"><div class="faq-answer">Contact the establishment directly to verify. You may also contact us at admin@digi-architect.studio. Where reliable updated information is received, listings will be reviewed and corrected where appropriate.</div></div></div>
+              </div>
+              <div class="footer-line">
+                <div class="footer-links-row"><a href="/">The Digital Systems Architect | </a><a href="/muslim-friendly-advisory" target="_blank" rel="noopener noreferrer">Business Advisory | </a><a href="/workflow-automation-singapore/">Workflow Automation | </a><a href="/governance-dashboard-singapore/">Governance | </a><a href="/finance-automation-singapore/">Finance | </a><a href="/hr-systems-singapore/">HR Systems | </a></div>
+                The establishments listed may be halal-certified, Muslim-friendly certified, self-declared Muslim-friendly, pending review or community-suggested. Each listing states the applicable status. <br>
+                <br> Self-declared information is reproduced in good faith based on disclosures provided by the respective establishments and may change without prior notice. <br>
+                <br> Muslim-friendly certification is not halal certification, and unless expressly stated, a listing does not constitute a religious ruling, government approval or statutory verification. <br>
+               <br>  Diners should review the listing and make their own enquiries where necessary. <br> 
+              <br> <br> &mdash; The Digital Systems Architect | <a href="mailto:admin@digi-architect.studio">admin@digi-architect.studio</a><br><br>&copy; 2026 Zan J Private Limited (UEN: 202616105R). All rights reserved. The design, code and content of this site may not be reproduced or adapted without written permission.
+            
+              <div class="social-block">
+                <span class="social-heading">Follow Muslim-Friendly</span>
+                <div class="social-row">
+                  <a class="soc-chip" href="https://www.instagram.com/muslim.friendly.sg/" target="_blank" rel="noopener noreferrer" aria-label="Muslim-Friendly Singapore on Instagram"><img class="soc-logo" src="/instagram.png" alt="" width="22" height="22" loading="lazy"><span class="soc-mkt">SG</span></a>
+                  <a class="soc-chip" href="https://www.instagram.com/muslim.friendly.jp/" target="_blank" rel="noopener noreferrer" aria-label="Muslim-Friendly Japan on Instagram"><img class="soc-logo" src="/instagram.png" alt="" width="22" height="22" loading="lazy"><span class="soc-mkt">JP</span></a>
+                  <a class="soc-chip" href="https://www.facebook.com/people/muslimfriendlysg/61591905841478/" target="_blank" rel="noopener noreferrer" aria-label="Muslim-Friendly Singapore on Facebook"><img class="soc-logo" src="/facebook.png" alt="" width="22" height="22" loading="lazy"><span class="soc-mkt">SG</span></a>
+                  <a class="soc-chip" href="https://www.facebook.com/people/muslimfriendlyjp/61591936319967/" target="_blank" rel="noopener noreferrer" aria-label="Muslim-Friendly Japan on Facebook"><img class="soc-logo" src="/facebook.png" alt="" width="22" height="22" loading="lazy"><span class="soc-mkt">JP</span></a>
+                  <a class="soc-chip" href="https://www.youtube.com/@muslim.friendly.studio" target="_blank" rel="noopener noreferrer" aria-label="Muslim-Friendly on YouTube"><img class="soc-logo" src="/youtube.png" alt="" width="22" height="22" loading="lazy"></a>
+                </div>
+              </div>
+            </div>
+            </div>
+            <div>
+              <div class="info-card">
+                <div class="eyebrow">Are You an Establishment?</div>
+                <h3>Improve transparency and reach more consumers.</h3>
+                <p>Businesses that wish to improve transparency, prepare a Muslim-friendly declaration, join the directory or explore digital promotion can learn more through our Business Advisory page.</p>
+                <div class="info-card-btns">
+                  <a class="btn btn-primary" href="/muslim-friendly-advisory" target="_blank" rel="noopener noreferrer">Explore Business Advisory &#8594;</a>
+                  <a class="btn btn-ghost-light" href="mailto:admin@digi-architect.studio?subject=Directory%20Listing%20Enquiry">Contact Us</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="panel-nav" role="navigation" aria-label="Section navigation">
+  <button class="panel-nav-btn" id="prevBtn" type="button" aria-label="Previous section">&#8593;</button>
+  <span class="panel-counter" id="panelCounter" aria-live="polite"></span>
+  <button class="panel-nav-btn" id="nextBtn" type="button" aria-label="Next section">&#8594;</button>
+</div>
+<div class="drawer-backdrop" id="declBackdrop" aria-hidden="true"></div>
+<aside class="decl-drawer" id="declDrawer" aria-hidden="true" aria-labelledby="drawerTitle" role="dialog" aria-modal="true">
+  <div class="decl-drawer-hdr"><div id="drawerTitleArea"></div><button class="decl-drawer-close" type="button" id="declDrawerClose" aria-label="Close declaration record">&times;</button></div>
+  <div class="decl-drawer-body" id="drawerContent"></div>
+</aside>
+<!-- MOBILE FILTER BOTTOM SHEET -->
+<div class="filter-sheet-backdrop" id="filterSheetBackdrop" aria-hidden="true"></div>
+<div class="filter-sheet" id="filterSheet" role="dialog" aria-modal="true" aria-label="Filter establishments" aria-hidden="true">
+  <div class="sheet-grab" id="sheetGrab" aria-hidden="true"><span></span></div>
+  <div class="filter-sheet-header">
+    <span>Filters<span class="sheet-count" id="sheetCount"></span></span>
+    <button class="filter-sheet-close" id="filterSheetClose" type="button" aria-label="Close filters">&times;</button>
+  </div>
+  <div class="filter-sheet-body">
+    <div><label class="filter-label" for="sheetAreaFilter">Area / Prefecture</label><select class="dir-select" id="sheetAreaFilter"><option value="all">Any area</option></select></div><div><label class="filter-label" for="sheetCityFilter">City / town</label><select class="dir-select" id="sheetCityFilter"><option value="all">Any city or town</option></select></div><div><label class="filter-label" for="sheetScopeFilter">Halal scope</label><select class="dir-select" id="sheetScopeFilter"><option value="all">Any</option><option value="entire">Entire menu reported halal</option><option value="selected">Selected items only</option><option value="other">Other / not stated</option></select></div>
+    <div><label class="filter-label" for="sheetCuisineFilter">Cuisine</label><select class="dir-select" id="sheetCuisineFilter"><option value="all">Any cuisine</option></select></div>
+    <div><label class="filter-label" for="sheetTypeFilter">Establishment type</label><select class="dir-select" id="sheetTypeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="sheetCertFilter">Certification</label><select class="dir-select" id="sheetCertFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="sheetListingFilter">Listing status</label><select class="dir-select" id="sheetListingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="sheetAlcoholFilter">Alcohol served</label><select class="dir-select" id="sheetAlcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
+    <div><label class="filter-label" for="sheetMeatFilter">Meat source</label><select class="dir-select" id="sheetMeatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div>
+    <div><label class="filter-label" for="sheetPorkFilter">Pork declaration</label><select class="dir-select" id="sheetPorkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div>
+    <div><label class="filter-label" for="sheetLardFilter">Lard declaration</label><select class="dir-select" id="sheetLardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div>
+    <div><label class="filter-label" for="sheetAlcoholMenuFilter">Alcohol in menu items</label><select class="dir-select" id="sheetAlcoholMenuFilter"><option value="all">Any</option><option value="yes">Indicated</option><option value="no">Not indicated</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="sheetPrayerFilter">Prayer space</label><select class="dir-select" id="sheetPrayerFilter"><option value="all">Any</option><option value="yes">Available</option><option value="no">Not available</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="sheetMapreadyFilter">Map location</label><select class="dir-select" id="sheetMapreadyFilter"><option value="all">Any</option><option value="yes">Shown on map</option><option value="no">No map location</option></select></div><div><label class="filter-label" for="sheetSortSelect">Sort</label><select class="dir-select" id="sheetSortSelect"><option value="name">Name A&#8211;Z</option><option value="name_desc">Name Z&#8211;A</option><option value="area">Area / Prefecture</option><option value="updated">Recently updated</option><option value="cert">Certification status</option><option value="mapfirst">Map-ready first</option></select></div>
+  </div>
+  <div class="filter-sheet-footer">
+    <button class="btn btn-dark" type="button" id="filterSheetApply" style="flex:1;">Apply Filters &#8594;</button>
+    <button class="btn btn-outline btn-sm" type="button" id="filterSheetReset">Reset</button>
+  </div>
+</div>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin=""></script>
+<script>
+var PANELS=['hero','meaning','framework','why','notice','directory','how','faq'];
+var PANEL_LABELS=['Overview','What It Means','Declaration Framework','Why This Exists','Important Notice','Explore Directory','How to Use','FAQ & Information'];
+var currentIdx=0;
+function showPanel(id,fromNav){
+  var idx=PANELS.indexOf(id);if(idx<0)return;
+  var prev=document.querySelector('.view.active');if(prev)prev.classList.remove('active');
+  var next=document.getElementById('view-'+id);
+  if(next){next.classList.add('active');next.scrollTop=0;}
+  currentIdx=idx;
+  document.querySelectorAll('.snav-item').forEach(function(btn){btn.classList.toggle('active',btn.dataset.panel===id);});
+  document.querySelectorAll('.drawer-nav-item').forEach(function(li){li.classList.toggle('active',li.dataset.panel===id);});
+  var lbl=document.getElementById('hdrLabel');if(lbl)lbl.textContent=PANEL_LABELS[idx]||'';
+  var ctr=document.getElementById('panelCounter');if(ctr)ctr.textContent=(idx+1)+' / '+PANELS.length;
+  var prevBtn=document.getElementById('prevBtn');var nextBtn=document.getElementById('nextBtn');
+  if(prevBtn)prevBtn.disabled=(idx===0);if(nextBtn)nextBtn.disabled=(idx===PANELS.length-1);
+  if(window.history&&window.history.replaceState)window.history.replaceState(null,'','#'+id);
+  if(fromNav)closeDrawer();
+  if(id==='directory'&&mapInstance){setTimeout(function(){mapInstance.invalidateSize();},60);}
+  if(typeof syncPanelNavOffset==='function')syncPanelNavOffset();
+}
+(function(){var hash=(window.location.hash||'').replace('#','');showPanel(PANELS.indexOf(hash)>-1?hash:'hero');})();
+document.addEventListener('keydown',function(e){
+  if(e.target.tagName==='INPUT'||e.target.tagName==='SELECT'||e.target.tagName==='TEXTAREA')return;
+  if(e.key==='ArrowRight'||e.key==='ArrowDown'){e.preventDefault();if(currentIdx<PANELS.length-1)showPanel(PANELS[currentIdx+1]);}
+  if(e.key==='ArrowLeft'||e.key==='ArrowUp'){e.preventDefault();if(currentIdx>0)showPanel(PANELS[currentIdx-1]);}
+});
+document.getElementById('prevBtn').addEventListener('click',function(){if(currentIdx>0)showPanel(PANELS[currentIdx-1]);});
+document.getElementById('nextBtn').addEventListener('click',function(){if(currentIdx<PANELS.length-1)showPanel(PANELS[currentIdx+1]);});
+document.querySelectorAll('.snav-item[data-panel]').forEach(function(btn){btn.addEventListener('click',function(){showPanel(btn.dataset.panel,true);});});
+function openDrawer(){var d=document.getElementById('navDrawer'),b=document.getElementById('navBackdrop');d.classList.add('is-open');b.classList.add('is-open');document.getElementById('navToggle').setAttribute('aria-expanded','true');d.setAttribute('aria-hidden','false');b.removeAttribute('aria-hidden');document.body.style.overflow='hidden';var cl=document.getElementById('drawerClose');if(cl)cl.focus();}
+function closeDrawer(){var d=document.getElementById('navDrawer'),b=document.getElementById('navBackdrop');if(!d)return;d.classList.remove('is-open');b.classList.remove('is-open');document.getElementById('navToggle').setAttribute('aria-expanded','false');d.setAttribute('aria-hidden','true');b.setAttribute('aria-hidden','true');document.body.style.overflow='';}
+document.getElementById('navToggle').addEventListener('click',function(){document.getElementById('navDrawer').classList.contains('is-open')?closeDrawer():openDrawer();});
+document.getElementById('drawerClose').addEventListener('click',closeDrawer);
+document.getElementById('navBackdrop').addEventListener('click',closeDrawer);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('navDrawer').classList.contains('is-open'))closeDrawer();});
+document.querySelectorAll('.drawer-nav-item[data-panel] button').forEach(function(btn){btn.addEventListener('click',function(){showPanel(btn.closest('[data-panel]').dataset.panel,true);});});
+/* ============================================================
+   EXCEL DATA LOADER
+   Reads /data/muslim-friendly-establishments.xlsx (root-absolute) via SheetJS.
+   Bump DATA_VERSION below after each workbook upload to bypass CDN cache.
+============================================================ */
+var establishments = [];
+/* Bump DATA_VERSION whenever the workbook is re-uploaded (YYYYMMDD). */
+var DATA_VERSION = '20261016b';
+var DATA_URL = '/data/muslim-friendly-establishments.xlsx';
+var COMMUNITY_URL = '/data/community-listings.xlsx';
+/* Other countries are separate files, fetched only when that country is chosen,
+   so the Singapore directory loads exactly as before. */
+var COUNTRY_FILES = {Malaysia:'/data/community-listings-my.xlsx', Japan:'/data/community-listings-jp.xlsx'};
+var COUNTRY_VIEW = {Singapore:[1.3521,103.8198,11], Malaysia:[4.2,108.0,6], Japan:[36.2,138.3,5]};
+var loadedCountries = {Singapore:true};
+var DEFAULT_COUNTRY = (function(){var q=(location.search.match(/[?&]country=([a-z]+)/i)||[])[1];var m={singapore:'Singapore',malaysia:'Malaysia',japan:'Japan'};return m[(q||'').toLowerCase()]||window.DIRECTORY_COUNTRY||'Singapore';})();
+var clusterGroup = null;
+var PAGE_SIZE = 60, shownCount = PAGE_SIZE;
+var mapMarkers     = {};
+var mapInstance    = null;
+
+var DEMO_DISC_DEFAULT = "This sample listing is provided solely to demonstrate the directory interface. It does not represent a live declaration, verification, endorsement or participating establishment.";
+
+function trim2(v) {
+  if (v === null || v === undefined) return '';
+  return String(v).trim();
+}
+function parseBool(v) {
+  // Supports: TRUE/FALSE (Excel booleans or text), 1/0, Yes/No
+  // 'Not Stated', blank, null → null (treated as not declared)
+  if (v === null || v === undefined || v === '') return null;
+  if (typeof v === 'boolean') return v;
+  var s = String(v).trim().toUpperCase();
+  if (s === 'TRUE' || s === '1' || s === 'YES') return true;
+  if (s === 'FALSE' || s === '0' || s === 'NO') return false;
+  return null; // 'Not Stated' and unrecognised values → null
+}
+function fmtDate(v) {
+  if (!v) return '';
+  if (v instanceof Date && !isNaN(v.getTime())) return v.toISOString().slice(0,10);
+  var s = String(v).trim();
+  if (!s) return '';
+  var d = new Date(s);
+  if (!isNaN(d.getTime())) return d.toISOString().slice(0,10);
+  return s;
+}
+
+/* Normalise workbook headers to canonical snake_case keys.
+   'ID' -> id, 'Postal Code' -> postal_code, 'Area / Prefecture' -> area_prefecture,
+   'Halal-Certified Meat' -> halal_certified_meat, 'Cross-Contact Note' -> cross_contact_note.
+   Accepts both the human-readable Excel headers and raw snake_case. */
+function normKey(k) {
+  return String(k == null ? '' : k)
+    .trim().toLowerCase()
+    .replace(/[^a-z0-9]+/g, '_')
+    .replace(/^_+|_+$/g, '');
+}
+function normaliseRow(row) {
+  var out = Object.create(null);
+  for (var k in row) {
+    if (!Object.prototype.hasOwnProperty.call(row, k)) continue;
+    var nk = normKey(k);
+    if (nk && !(nk in out)) out[nk] = row[k];
+  }
+  return out;
+}
+
+function parseRows(rows) {
+  var seen = Object.create(null);
+  var result = [];
+  rows.forEach(function(rawRow) {
+    var row  = normaliseRow(rawRow);
+    var id   = trim2(row['id']);
+    var name = trim2(row['name']);
+    if (!id || !name) return;
+    if (id.indexOf('_') === 0) return; // skip system rows (reserved prefix)
+    if (seen[id]) { console.warn('[Directory] Duplicate id skipped:', id); return; }
+    seen[id] = true;
+    var lat = parseFloat(row['latitude']);
+    var lng = parseFloat(row['longitude']);
+    var hasCoords = isFinite(lat) && isFinite(lng);
+    result.push({
+      id:                  id,
+      name:                name,
+      country:             trim2(row['country'])          || 'Singapore',
+      area:                trim2(row['area_prefecture'])   || '',  // reads from formula-generated column
+      region:              trim2(row['state_prefecture'])  || trim2(row['area_prefecture']) || '',
+      city:                trim2(row['city'])              || '',
+      localName:           trim2(row['local_name'])        || '',
+      localAddress:        trim2(row['local_address'])     || '',
+      halalScope:          trim2(row['halal_scope'])       || '',
+      muslimOwned:         trim2(row['muslim_owned'])      || '',
+      openingHours:        trim2(row['opening_hours'])     || '',
+      sourceUrl:           trim2(row['source_url'])        || '',
+      lastVerified:        fmtDate(row['last_verified']),
+      verificationNotes:   trim2(row['verification_notes'])|| '',
+      address:             trim2(row['address'])          || '',
+      postalCode:          trim2(row['postal_code'])      || '',
+      postalSector:        trim2(row['postal_sector'])      || '',
+      postalDistrict:      trim2(row['postal_district'])     || '',
+      cuisine:             trim2(row['cuisine'])          || '',
+      establishmentType:   trim2(row['establishment_type']) || '',
+      coordinates:         hasCoords ? {lat:lat, lng:lng} : {lat:null, lng:null},
+      status:              trim2(row['listing_status'])   || '',
+      basisOfListing:      trim2(row['basis_of_listing']) || '',
+      halalCertified:      parseBool(row['halal_certified']),
+      certificationStatus: trim2(row['certification_status']) || '',
+      certifyingBody:      trim2(row['certifying_body'])  || '',
+      certificateExpiry:   fmtDate(row['certificate_expiry']),
+      declarations: {
+        noPorkDeclared:              parseBool(row['no_pork_declared']),
+        noLardDeclared:              parseBool(row['no_lard_declared']),
+        meatFromHalalCertifiedSources: parseBool(row['halal_certified_meat']),
+        alcoholServed:               parseBool(row['alcohol_served']),
+        alcoholMenuItemsDisclosed:   parseBool(row['alcohol_in_menu']),
+        sharedKitchen:               parseBool(row['shared_kitchen']),
+        sharedUtensils:              parseBool(row['shared_utensils']),
+        sharedFryer:                 parseBool(row['shared_fryer']),
+        sharedGrill:                 parseBool(row['shared_grill'])
+      },
+      facilities: {
+        prayerSpace:       parseBool(row['prayer_space']),
+        prayerMat:         parseBool(row['prayer_mat']),
+        qiblaDirection:    parseBool(row['qibla_direction']),
+        waterFacilities:   parseBool(row['water_facilities'])
+      },
+      declarationProvided: trim2(row['declaration_text'])    || '',
+      crossContactNote:    trim2(row['cross_contact_note'])  || '',
+      additionalNotes:     trim2(row['additional_notes'])    || '',
+      declarationDate:     fmtDate(row['declaration_date']),
+      lastUpdated:         fmtDate(row['last_updated']),
+      website:             trim2(row['website_url'])         || '',
+      instagram:           trim2(row['instagram_url'])       || '',
+      externalLocationUrl: trim2(row['location_url'])        || '',
+      externalDirectionsUrl: trim2(row['directions_url'])    || '',
+      externalReviewsUrl:  trim2(row['reviews_url'])         || '',
+      imageUrl:            trim2(row['image_url'])           || '',
+      isDemo:              parseBool(row['is_demo']) === true,
+      demoDisclaimer:      trim2(row['demo_disclaimer'])     || DEMO_DISC_DEFAULT
+    });
+  });
+  /* Precompute per-record search index + map readiness.
+     Built once on load so keystrokes never re-walk every field. */
+  result.forEach(function(r){
+    r.mapReady = r.coordinates.lat !== null && r.coordinates.lng !== null;
+    r.searchBlob = [
+      r.name, r.localName, r.address, r.localAddress, r.postalCode, r.postalSector, r.postalDistrict,
+      r.area, r.region, r.city, r.country, r.cuisine, r.establishmentType, r.halalScope,
+      r.certificationStatus, r.status, r.basisOfListing, r.certifyingBody,
+      r.declarationProvided, r.crossContactNote, r.additionalNotes
+    ].join(' \u0001 ').toLowerCase();
+  });
+  return result;
+}
+
+function showDirectoryError(msg) {
+  var ctr = document.getElementById('resultsInlineCount');
+  var grid = document.getElementById('recordsGrid');
+  var es = document.getElementById('emptyState');
+  if (ctr) ctr.textContent = 'Could not load directory.';
+  if (grid) grid.innerHTML = '';
+  if (es) {
+    es.classList.add('visible');
+    es.querySelector('h3').textContent = 'Directory unavailable';
+    es.querySelector('p').textContent = msg || 'The directory data could not be loaded. Please try again later.';
+  }
+}
+
+/* Shown when the workbook loads correctly but holds no published listings yet. */
+function showDirectoryEmpty() {
+  var ctr = document.getElementById('resultsInlineCount');
+  var grid = document.getElementById('recordsGrid');
+  var es = document.getElementById('emptyState');
+  if (ctr) ctr.textContent = '0 establishments';
+  if (grid) grid.innerHTML = '';
+  if (es) {
+    es.classList.add('visible');
+    es.querySelector('h3').textContent = 'Listings are being verified';
+    es.querySelector('p').textContent = 'Establishments will appear here once their declarations or certification have been verified. Please check back soon.';
+    var btn = es.querySelector('button');
+    if (btn) btn.style.display = 'none';
+  }
+}
+
+function loadDirectory() {
+  /* Show loading state */
+  var ctr = document.getElementById('resultsInlineCount');
+  var grid = document.getElementById('recordsGrid');
+  if (ctr) ctr.textContent = 'Loading establishments\u2026';
+  if (grid) grid.innerHTML = '<p style="padding:24px 14px;font-size:13px;color:var(--muted);">Loading establishments\u2026</p>';
+
+  if (typeof XLSX === 'undefined') {
+    console.error('[Directory] SheetJS (XLSX) is not available.');
+    showDirectoryError('Directory library failed to load. Please refresh the page.');
+    return;
+  }
+
+  function readRows(buf) {
+    var wb = XLSX.read(new Uint8Array(buf), {type:'array', cellDates:true, dateNF:'yyyy-mm-dd'});
+    if (!wb.SheetNames.length) throw new Error('Workbook is empty.');
+    return XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:null, raw:false});
+  }
+  /* Community listings (OpenStreetMap-derived, ODbL) are a separate, optional file. */
+  var community = fetch(COMMUNITY_URL + '?v=' + DATA_VERSION)
+    .then(function(resp) { return resp.ok ? resp.arrayBuffer().then(readRows) : []; })
+    .catch(function() { return []; });
+
+  fetch(DATA_URL + '?v=' + DATA_VERSION)
+    .then(function(resp) {
+      if (!resp.ok) throw new Error('HTTP ' + resp.status + ': ' + resp.url);
+      return resp.arrayBuffer();
+    })
+    .then(function(buf) {
+      var rows = readRows(buf);
+      return community.then(function(extra) { return rows.concat(extra); });
+    })
+    .then(function(rows) {
+      establishments = parseRows(rows);
+      state.country = DEFAULT_COUNTRY;
+      if (DEFAULT_COUNTRY !== 'Singapore') { return loadCountry(DEFAULT_COUNTRY).then(afterLoad); }
+      if (!establishments.length) { showDirectoryEmpty(); try { initMap(); } catch (e) {} return; }
+      afterLoad();
+    })
+    .catch(function(err) {
+      console.error('[Directory] Load error:', err);
+      showDirectoryError('The directory data could not be loaded. Please try again later.');
+    });
+}
+
+/* ODbL attribution, shown only when a listing contains OpenStreetMap-derived data. */
+function addDataAttribution() {
+  var usesOsm = establishments.some(function(r){
+    return /openstreetmap/i.test((r.basisOfListing||'') + ' ' + (r.additionalNotes||''));
+  });
+  var grid = document.getElementById('recordsGrid');
+  if (!usesOsm || !grid || document.getElementById('osmAttribution')) return;
+  var p = document.createElement('p');
+  p.id = 'osmAttribution';
+  p.style.cssText = 'font-size:11px;color:var(--muted);margin:12px 14px;';
+  p.innerHTML = 'Community-suggested listings contain information from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; OpenStreetMap contributors, available under the <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">Open Database Licence</a>. The community listings data is available under the same licence: '
+    + '<a href="' + COMMUNITY_URL + '">Singapore</a>, <a href="' + COUNTRY_FILES.Malaysia + '">Malaysia</a>, <a href="' + COUNTRY_FILES.Japan + '">Japan</a>.';
+  grid.parentNode.insertBefore(p, grid.nextSibling);
+}
+
+/* Key explaining the listing categories, shown above the results. */
+function addCategoryKey() {
+  var grid = document.getElementById('recordsGrid');
+  if (!grid || document.getElementById('categoryKey')) return;
+  var cats = {};
+  establishments.forEach(function(r){ cats[listingCategory(r)] = true; });
+  var parts = [];
+  if (cats.certified) parts.push('<span><span class="badge badge-halal">HALAL-CERTIFIED</span>certificate verified</span>');
+  if (cats.self) parts.push('<span><span class="badge badge-self">SELF-DECLARED</span>establishment’s own declaration</span>');
+  if (cats.community) parts.push('<span><span class="badge badge-community">COMMUNITY-SUGGESTED</span>from community data; halal status not verified</span>');
+  if (!parts.length) return;
+  var key = document.createElement('div');
+  key.id = 'categoryKey';
+  key.className = 'category-key';
+  key.innerHTML = parts.join('');
+  grid.parentNode.insertBefore(key, grid);
+}
+
+/* Fetch one country's listings file once, on first selection. */
+function loadCountry(country) {
+  if (loadedCountries[country] || !COUNTRY_FILES[country]) return Promise.resolve();
+  var ctr = document.getElementById('resultsInlineCount');
+  if (ctr) ctr.textContent = 'Loading ' + country + ' listings\u2026';
+  return fetch(COUNTRY_FILES[country] + '?v=' + DATA_VERSION)
+    .then(function(resp){ if (!resp.ok) throw new Error('HTTP ' + resp.status); return resp.arrayBuffer(); })
+    .then(function(buf){
+      var wb = XLSX.read(new Uint8Array(buf), {type:'array', cellDates:true, dateNF:'yyyy-mm-dd'});
+      var have = {}; establishments.forEach(function(r){ have[r.id] = true; });
+      var extra = parseRows(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:null, raw:false}))
+        .filter(function(r){ return !have[r.id]; });
+      establishments = establishments.concat(extra);
+      loadedCountries[country] = true;
+      if (mapInstance) addMarkers(extra);
+    })
+    .catch(function(err){ console.error('[Directory] ' + country + ' load error:', err); loadedCountries[country] = 'failed'; });
+}
+function setCountry(country) {
+  state.country = country; state.area = 'all'; state.city = 'all'; shownCount = PAGE_SIZE;
+  document.querySelectorAll('#countrySwitch [data-country]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-country') === country ? 'true' : 'false'); });
+  return loadCountry(country).then(function(){
+    addDataAttribution(); refreshOptions(); syncControls(); syncSheetFromState(); hideMapPreview(); render(); fitCountry();
+  });
+}
+document.querySelectorAll('#countrySwitch [data-country]').forEach(function(b){
+  b.addEventListener('click', function(){ if (state.country !== b.getAttribute('data-country')) setCountry(b.getAttribute('data-country')); });
+});
+
+function afterLoad() {
+  document.querySelectorAll('#countrySwitch [data-country]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-country') === state.country ? 'true' : 'false'); });
+  addDataAttribution();
+  addCategoryKey();
+  initFilters();
+  populateSheetSelects();
+  syncControls();
+  render();
+  initMap();
+}
+
+/* ── Helpers ── */
+function esc(v){return String(v??'').replace(/[&<>'"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;',"'":"&#39;",'"':'&quot;'}[c];});}
+function norm(v){return String(v??'').trim().toLowerCase();}
+function valStatus(v){if(v===true)return'yes';if(v===false)return'no';return'unknown';}
+function alcoholMenuStatus(r){var d=r.declarations;if(d.alcoholServed===false&&d.alcoholMenuItemsDisclosed===false)return'na';return valStatus(d.alcoholMenuItemsDisclosed);}
+function statusText(v,y,n,u){u=u||'Not stated';if(v===true)return y;if(v===false)return n;return u;}
+function dchip(label,ok,neutral){var cls=neutral?'neutral':(ok?'positive':'caution');var icon=ok?'<svg viewBox="0 0 20 20"><path d="M4 10l4 4 8-8"/></svg>':neutral?'<svg viewBox="0 0 20 20"><path d="M10 8v4M10 14v.5"/></svg>':'<svg viewBox="0 0 20 20"><path d="M10 5v6M10 14v.5"/></svg>';return'<span class="dchip '+cls+'">'+icon+label+'</span>';}
+function getUniqueOptions(field,rs){return Array.from(new Set((rs||establishments).map(function(r){return r[field];}).filter(Boolean))).sort();}
+function scopeKey(r){var s=norm(r.halalScope);if(s.indexOf('selected')===0)return'selected';if(s.indexOf('entire')===0)return'entire';return'other';}
+function inCountry(){return establishments.filter(function(r){return r.country===state.country;});}
+/* Option lists follow the chosen country (and, for towns, the chosen area). */
+function refreshOptions(){
+  var rs=inCountry();
+  var cityRs=state.area==='all'?rs:rs.filter(function(r){return norm(r.region)===norm(state.area);});
+  var lists={area:getUniqueOptions('region',rs),city:getUniqueOptions('city',cityRs),cuisine:getUniqueOptions('cuisine',rs),type:getUniqueOptions('establishmentType',rs),cert:getUniqueOptions('certificationStatus',rs),listing:getUniqueOptions('status',rs)};
+  var ids={area:['areaFilter','sheetAreaFilter'],city:['cityFilter','sheetCityFilter'],cuisine:['cuisineFilter','sheetCuisineFilter'],type:['typeFilter','sheetTypeFilter'],cert:['certFilter','sheetCertFilter'],listing:['listingFilter','sheetListingFilter']};
+  Object.keys(ids).forEach(function(k){ids[k].forEach(function(id){var sel=document.getElementById(id);if(!sel)return;while(sel.options.length>1)sel.remove(1);lists[k].forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});if(state[k]!=='all'&&lists[k].indexOf(state[k])===-1)state[k]='all';sel.value=state[k];});});
+  var lbl=state.country==='Japan'?'Prefecture':state.country==='Malaysia'?'State / territory':'Area';
+  ['areaFilter','sheetAreaFilter'].forEach(function(id){var l=document.querySelector('label[for="'+id+'"]');if(l)l.textContent=lbl;var sel=document.getElementById(id);if(sel&&sel.options[0])sel.options[0].textContent='Any '+lbl.toLowerCase();});
+}
+
+/* ── State + element cache ── */
+var state={country:'Singapore',search:'',area:'all',city:'all',scope:'all',cuisine:'all',type:'all',cert:'all',listing:'all',alcohol:'all',alcoholMenu:'all',meat:'all',pork:'all',lard:'all',prayer:'all',mapready:'all',sort:'name',selectedId:null,lastFocusEl:null,view:'list'};
+var els={
+  searchInput:document.getElementById('searchInput'),
+  areaFilter:document.getElementById('areaFilter'),
+  cityFilter:document.getElementById('cityFilter'),
+  scopeFilter:document.getElementById('scopeFilter'),
+  cuisineFilter:document.getElementById('cuisineFilter'),
+  typeFilter:document.getElementById('typeFilter'),
+  certFilter:document.getElementById('certFilter'),
+  listingFilter:document.getElementById('listingFilter'),
+  alcoholMenuFilter:document.getElementById('alcoholMenuFilter'),
+  prayerFilter:document.getElementById('prayerFilter'),
+  mapreadyFilter:document.getElementById('mapreadyFilter'),
+  alcoholFilter:document.getElementById('alcoholFilter'),
+  meatFilter:document.getElementById('meatFilter'),
+  porkFilter:document.getElementById('porkFilter'),
+  lardFilter:document.getElementById('lardFilter'),
+  sortSelect:document.getElementById('sortSelect'),
+  clearFiltersBtn:document.getElementById('clearFiltersBtn'),
+  searchSubmitBtn:document.getElementById('searchSubmitBtn'),
+  emptyClearBtn:document.getElementById('emptyClearBtn'),
+  recordsGrid:document.getElementById('recordsGrid'),
+  emptyState:document.getElementById('emptyState'),
+  activeChips:document.getElementById('activeChips'),
+  resultsInlineCount:document.getElementById('resultsInlineCount'),
+  drawer:document.getElementById('declDrawer'),
+  backdrop:document.getElementById('declBackdrop'),
+  drawerClose:document.getElementById('declDrawerClose'),
+  drawerTitleArea:document.getElementById('drawerTitleArea'),
+  drawerContent:document.getElementById('drawerContent')
+};
+
+/* ── View switching ── */
+function setView(v){
+  state.view=v;
+  var dirView=document.getElementById('view-directory');
+  dirView.classList.toggle('dir-is-mapview',v==='map');
+  var bl=document.getElementById('btnListView'),bm=document.getElementById('btnMapView');
+  if(bl){bl.classList.toggle('active',v==='list');bl.setAttribute('aria-pressed',v==='list'?'true':'false');}
+  if(bm){bm.classList.toggle('active',v==='map');bm.setAttribute('aria-pressed',v==='map'?'true':'false');}
+  if(v==='map'&&mapInstance){setTimeout(function(){mapInstance.invalidateSize();},80);}
+  syncPanelNavOffset();
+}
+document.getElementById('btnListView').addEventListener('click',function(){setView('list');});
+document.getElementById('btnMapView').addEventListener('click',function(){setView('map');if(mapInstance){setTimeout(function(){mapInstance.invalidateSize();},80);}});
+var btnReturn=document.getElementById('btnReturnToList');
+if(btnReturn)btnReturn.addEventListener('click',function(){setView('list');});
+
+/* ── Filter sheet (mobile) ── */
+function openFilterSheet(){
+  var sh=document.getElementById('filterSheet'),b=document.getElementById('filterSheetBackdrop');
+  syncSheetFromState();
+  sh.style.transform='';
+  sh.classList.add('is-open');b.classList.add('is-open');
+  sh.setAttribute('aria-hidden','false');b.removeAttribute('aria-hidden');
+  document.body.classList.add('sheet-open');
+  var n=activeFilterCount();var sc=document.getElementById('sheetCount');if(sc)sc.textContent=n?'('+n+')':'';
+  var cl=document.getElementById('filterSheetClose');if(cl)cl.focus();
+}
+function closeFilterSheet(){
+  var sh=document.getElementById('filterSheet'),b=document.getElementById('filterSheetBackdrop');
+  sh.classList.remove('is-open','is-dragging');sh.style.transform='';
+  b.classList.remove('is-open');
+  sh.setAttribute('aria-hidden','true');b.setAttribute('aria-hidden','true');
+  document.body.classList.remove('sheet-open');
+  var fb=document.getElementById('filterSheetBtn');if(fb)fb.focus();
+}
+function syncSheetFromState(){var map={sheetAreaFilter:'area',sheetCityFilter:'city',sheetScopeFilter:'scope',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)el.value=state[map[id]];});}
+function applySheetFilters(){var map={sheetAreaFilter:'area',sheetCityFilter:'city',sheetScopeFilter:'scope',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)state[map[id]]=el.value;});syncControls();render();closeFilterSheet();updateFilterBtnState();}
+function updateFilterBtnState(){
+  var n=activeFilterCount();
+  [['filterSheetBtn','.fbtn-count-m'],['filterToggleBtn','.fbtn-count']].forEach(function(pair){
+    var btn=document.getElementById(pair[0]);if(!btn)return;
+    btn.classList.toggle('has-filters',n>0);
+    var lbl=btn.querySelector(pair[1]);if(lbl)lbl.textContent=n?' ('+n+')':'';
+    btn.setAttribute('aria-label',n?'Filters, '+n+' active':'Open filters');
+  });
+  var fc=document.getElementById('fdCount');
+  if(fc)fc.textContent=n?n+(n===1?' filter active':' filters active'):'';
+}
+/* Pull-down-to-close. Follows the finger, snaps shut past 90px or on a flick,
+   springs back otherwise. Bound to the handle and header only, so scrolling
+   the filter list is never mistaken for a dismiss. */
+(function(){
+  var sh=document.getElementById('filterSheet');
+  var grab=document.getElementById('sheetGrab');
+  var head=sh&&sh.querySelector('.filter-sheet-header');
+  if(!sh||!grab)return;
+  var y0=0,t0=0,dy=0,active=false;
+  function start(e){
+    if(e.target.closest('button'))return;
+    active=true;dy=0;y0=(e.touches?e.touches[0].clientY:e.clientY);t0=Date.now();
+    sh.classList.add('is-dragging');
+  }
+  function move(e){
+    if(!active)return;
+    var y=(e.touches?e.touches[0].clientY:e.clientY);
+    dy=Math.max(0,y-y0);
+    sh.style.transform='translateY('+dy+'px)';
+    if(e.cancelable)e.preventDefault();
+  }
+  function end(){
+    if(!active)return;
+    active=false;sh.classList.remove('is-dragging');
+    var fast=(Date.now()-t0)<300&&dy>40;
+    if(dy>90||fast){sh.style.transform='';closeFilterSheet();}
+    else {sh.style.transform='';}
+  }
+  [grab,head].forEach(function(el){
+    if(!el)return;
+    el.addEventListener('touchstart',start,{passive:true});
+    el.addEventListener('touchmove',move,{passive:false});
+    el.addEventListener('touchend',end);
+    el.addEventListener('touchcancel',end);
+    el.addEventListener('mousedown',start);
+  });
+  document.addEventListener('mousemove',move);
+  document.addEventListener('mouseup',end);
+  /* Tapping the handle closes it too — the smallest possible escape hatch. */
+  grab.addEventListener('click',function(){if(dy<5)closeFilterSheet();});
+})();
+var fsBtn=document.getElementById('filterSheetBtn');if(fsBtn)fsBtn.addEventListener('click',openFilterSheet);
+var fsClose=document.getElementById('filterSheetClose');if(fsClose)fsClose.addEventListener('click',closeFilterSheet);
+var fsBack=document.getElementById('filterSheetBackdrop');if(fsBack)fsBack.addEventListener('click',closeFilterSheet);
+var fsApply=document.getElementById('filterSheetApply');if(fsApply)fsApply.addEventListener('click',applySheetFilters);
+var fsReset=document.getElementById('filterSheetReset');if(fsReset)fsReset.addEventListener('click',function(){clearAllFilters();syncControls();syncSheetFromState();render();updateFilterBtnState();var sc=document.getElementById('sheetCount');if(sc)sc.textContent='';});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('filterSheet').classList.contains('is-open'))closeFilterSheet();});
+function populateSheetSelects(){refreshOptions();}
+
+/* ── Filters ── */
+var FILTER_KEYS=['area','city','scope','cuisine','type','cert','listing','alcohol','alcoholMenu','meat','pork','lard','prayer','mapready'];
+function activeFilterCount(){var n=0;FILTER_KEYS.forEach(function(k){if(state[k]!=='all')n++;});return n;}
+function hasActiveCriteria(){return Boolean(state.search.trim())||activeFilterCount()>0;}
+function getFiltered(){
+  /* Multi-term AND search: every whitespace-separated term must appear
+     somewhere in the record's precomputed index. Case- and space-tolerant. */
+  var terms=norm(state.search).split(/\s+/).filter(Boolean);
+  var rs=establishments.filter(function(r){
+    for(var i=0;i<terms.length;i++){ if(r.searchBlob.indexOf(terms[i])===-1) return false; }
+    if(r.country!==state.country)return false;
+    if(state.area!=='all'&&norm(r.region)!==norm(state.area))return false;
+    if(state.city!=='all'&&norm(r.city)!==norm(state.city))return false;
+    if(state.scope!=='all'&&scopeKey(r)!==state.scope)return false;
+    if(state.cuisine!=='all'&&norm(r.cuisine)!==norm(state.cuisine))return false;
+    if(state.type!=='all'&&norm(r.establishmentType)!==norm(state.type))return false;
+    if(state.cert!=='all'&&norm(r.certificationStatus)!==norm(state.cert))return false;
+    if(state.listing!=='all'&&norm(r.status)!==norm(state.listing))return false;
+    if(state.alcohol!=='all'&&valStatus(r.declarations.alcoholServed)!==state.alcohol)return false;
+    if(state.alcoholMenu!=='all'&&valStatus(r.declarations.alcoholMenuItemsDisclosed)!==state.alcoholMenu)return false;
+    if(state.meat!=='all'&&valStatus(r.declarations.meatFromHalalCertifiedSources)!==state.meat)return false;
+    if(state.pork!=='all'&&valStatus(r.declarations.noPorkDeclared)!==state.pork)return false;
+    if(state.lard!=='all'&&valStatus(r.declarations.noLardDeclared)!==state.lard)return false;
+    if(state.prayer!=='all'&&valStatus(r.facilities.prayerSpace)!==state.prayer)return false;
+    if(state.mapready==='yes'&&!r.mapReady)return false;
+    if(state.mapready==='no'&&r.mapReady)return false;
+    return true;
+  });
+  var byName=function(a,b){return String(a.name).localeCompare(String(b.name));};
+  rs.sort(function(a,b){
+    switch(state.sort){
+      case 'name_desc': return String(b.name).localeCompare(String(a.name));
+      case 'area':      return String(a.area).localeCompare(String(b.area))||byName(a,b);
+      case 'updated':   return (b.lastUpdated||'').localeCompare(a.lastUpdated||'')||byName(a,b);
+      case 'cert':      return String(a.certificationStatus||'~').localeCompare(String(b.certificationStatus||'~'))||byName(a,b);
+      case 'mapfirst':  return (b.mapReady?1:0)-(a.mapReady?1:0)||byName(a,b);
+      default:          return byName(a,b);
+    }
+  });
+  return rs;
+}
+
+/* "Claim this listing": opens a pre-filled email to the directory administrator.
+   Nothing is published from a claim until the administrator has reviewed it. */
+var CLAIM_EMAIL='admin@digi-architect.studio';
+function claimMailto(r){
+  var subject='Claim listing '+r.id+' — '+r.name;
+  var body=[
+    'Listing: '+r.name+' ('+r.id+')',
+    'Listed address: '+(r.address||r.area||''),
+    '',
+    'BUSINESS DETAILS',
+    'Registered business name and registration number (e.g. UEN, SSM or corporate number):',
+    'Your name and role:',
+    'Best contact number:',
+    'Corrections to the listing (name, address, cuisine, etc.):',
+    '',
+    'HALAL CERTIFICATION (if held)',
+    'Certifying body:',
+    'Certificate number:',
+    'Expiry date:',
+    'Please attach a copy of the current certificate.',
+    '',
+    'MUSLIM-FRIENDLY DECLARATION (if not certified, answer Yes / No / Not sure)',
+    'No pork used:',
+    'No lard used:',
+    'All meat from halal-certified suppliers:',
+    'Alcohol served on the premises:',
+    'Alcohol used in any menu item:',
+    'Shared kitchen, utensils, fryers or grills with non-halal food:',
+    'Prayer space available:',
+    '',
+    'I confirm that I am authorised to submit this information on behalf of the business.'
+  ].join('\n');
+  return 'mailto:'+CLAIM_EMAIL+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
+}
+function claimSection(r){
+  if(r.isDemo)return'';
+  return '<section><div class="drawer-sec-title">Is this your establishment?</div>'
+    +'<p class="drawer-plain">Claim this listing to correct its details and submit your own declaration or halal certificate. '
+    +'Every submission is reviewed before anything changes. Certification is shown only after the certificate has been checked.</p>'
+    +'<p style="margin-top:10px;"><a class="btn btn-dark btn-sm" href="'+esc(claimMailto(r))+'" style="font-size:11px;">Claim this listing</a></p>'
+    +'<p class="drawer-plain" style="margin-top:6px;font-size:11px;">Opens an email to '+CLAIM_EMAIL+'. Information you send is used only to review this listing.</p>'
+    +'</section>';
+}
+
+/* certified | self | community | pending | other. Drives badges; never inferred from names. */
+function listingCategory(r){
+  var s=norm(r.status);
+  if(r.halalCertified===true||s==='halal certified')return'certified';
+  if(s.indexOf('pending verification')===0)return'pending';
+  if(s.indexOf('community')===0)return'community';
+  if(s.indexOf('self-declared')===0)return'self';
+  return'other';
+}
+
+function placeLabel(r){if(r.country==='Singapore')return r.area||r.address||'';return [r.city,r.region].filter(function(x,i,a){return x&&a.indexOf(x)===i;}).join(', ')||r.address||'';}
+function mapsLinks(r){if(!r.mapReady)return[];var ll=r.coordinates.lat+','+r.coordinates.lng;return['<a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(ll)+'" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>','<a href="https://www.openstreetmap.org/?mlat='+r.coordinates.lat+'&mlon='+r.coordinates.lng+'#map=18/'+r.coordinates.lat+'/'+r.coordinates.lng+'" target="_blank" rel="noopener noreferrer">Open in OpenStreetMap</a>'];}
+function renderRow(r){
+  var d=r.declarations;
+  var chips=[
+    d.noPorkDeclared===null?dchip('Pork — not stated',false,true):dchip(d.noPorkDeclared?'No pork declared':'Pork not clear',d.noPorkDeclared===true),
+    d.noLardDeclared===null?dchip('Lard — not stated',false,true):dchip(d.noLardDeclared?'No lard declared':'Lard not clear',d.noLardDeclared===true),
+    d.meatFromHalalCertifiedSources===null?dchip('Meat — not stated',false,true):dchip(d.meatFromHalalCertifiedSources?'Halal-sourced meat':'Meat source unclear',d.meatFromHalalCertifiedSources===true),
+    d.alcoholServed===null?dchip('Alcohol — not stated',false,true):(d.alcoholServed===false?dchip('No alcohol served',true):dchip('Alcohol served',false))
+  ];
+  var sel=state.selectedId===r.id;
+  var cat=listingCategory(r);
+  var certBadge=cat==='certified'?'<span class="badge badge-halal">HALAL-CERTIFIED'+(r.certifyingBody?' &middot; '+esc(r.certifyingBody.split(' (')[0].toUpperCase()):'')+'</span>'
+    :cat==='community'?'<span class="badge badge-community">COMMUNITY-SUGGESTED</span><span class="badge badge-unverified">NOT VERIFIED</span>'
+    :cat==='pending'?'<span class="badge badge-unverified">CERTIFICATION PENDING RE-VERIFICATION</span>'
+    :cat==='self'?'<span class="badge badge-self">SELF-DECLARED</span>'+(r.halalCertified===false?'<span class="badge badge-not-halal">NOT HALAL-CERTIFIED</span>':'')
+    :'<span class="badge badge-unverified">NOT VERIFIED</span>';
+  if(scopeKey(r)==='selected')certBadge+='<span class="badge badge-scope">SELECTED HALAL ITEMS ONLY</span>';
+  var demoBadge=r.isDemo?'<span class="badge badge-demo">DEMO LISTING</span>':'';
+  var demoDisc=r.isDemo?'<div class="demo-disclaimer">'+esc(r.demoDisclaimer)+'</div>':'';
+  return '<article class="record-row'+(sel?' is-selected':'')+(r.isDemo?' is-demo':'')+(cat==='community'?' is-community':'')+'" data-id="'+esc(r.id)+'" role="listitem">'
+    +'<div class="record-main"><h4>'+esc(r.name)+'</h4>'
+    +(r.localName?'<p class="record-local" lang="'+(r.country==='Japan'?'ja':'ms')+'">'+esc(r.localName)+'</p>':'')
+    +'<p class="record-meta">'+esc(placeLabel(r))+(r.cuisine?' &middot; '+esc(r.cuisine):'')+(r.establishmentType?' &middot; '+esc(r.establishmentType):'')+'</p>'
+    +'<div class="record-badges">'+demoBadge+certBadge+'</div>'
+    +'<div class="record-chips">'+chips.join('')+'</div>'
+    +demoDisc+'</div>'
+    +'<div class="record-foot">'
+    +'<span class="last-updated">'+(r.lastUpdated?'Updated '+esc(r.lastUpdated):'')+'</span>'
+    +(r.mapReady
+        ?'<button class="btn btn-outline btn-sm" type="button" data-view-on-map="'+esc(r.id)+'" style="font-size:10px;padding:0 10px;min-height:32px;">View on Map</button>'
+        :'<span class="no-map-note" title="This listing has no map location">Map location unavailable</span>')
+    +'<button class="btn btn-dark btn-sm" type="button" data-open-record="'+esc(r.id)+'">'+(cat==='self'?'View Declaration':'View Details')+'</button>'
+    +'</div></article>';
+}
+
+var CHIP_LABELS={
+  alcohol:{yes:'Alcohol served',no:'No alcohol served',unknown:'Alcohol not stated'},
+  alcoholMenu:{yes:'Alcohol in menu indicated',no:'Alcohol in menu not indicated',unknown:'Menu alcohol not stated'},
+  meat:{yes:'Halal-sourced meat',no:'Meat not halal-sourced',unknown:'Meat source not stated'},
+  pork:{yes:'No pork declared',no:'Pork not declared',unknown:'Pork not stated'},
+  lard:{yes:'No lard declared',no:'Lard not declared',unknown:'Lard not stated'},
+  prayer:{yes:'Prayer space',no:'No prayer space',unknown:'Prayer space not stated'},
+  mapready:{yes:'Shown on map',no:'No map location'}
+};
+CHIP_LABELS.scope={entire:'Entire menu reported halal',selected:'Selected halal items only',other:'Halal scope not stated'};
+var CHIP_PREFIX={city:'Town',area:'Area',cuisine:'Cuisine',type:'Type',cert:'Certification',listing:'Listing'};
+function chipLabel(k){
+  if(CHIP_LABELS[k])return CHIP_LABELS[k][state[k]]||state[k];
+  return (CHIP_PREFIX[k]||k)+': '+state[k];
+}
+function renderChips(){
+  var chips=[];
+  if(state.search.trim())chips.push({k:'search',l:'Search: '+state.search.trim()});
+  FILTER_KEYS.forEach(function(k){ if(state[k]!=='all')chips.push({k:k,l:chipLabel(k)}); });
+  if(!chips.length){els.activeChips.innerHTML='';return;}
+  els.activeChips.innerHTML=chips.map(function(c){
+    return '<span class="chip">'+esc(c.l)+' <button type="button" data-remove="'+esc(c.k)+'" aria-label="Remove filter: '+esc(c.l)+'">&times;</button></span>';
+  }).join('');
+}
+
+/* ── Map marker visibility + bounds ── */
+function updateMapMarkers(rs,noFit){
+  if(!mapInstance||typeof L==='undefined'||!clusterGroup)return;
+  var visible=rs.filter(function(r){return mapMarkers[r.id];});
+  clusterGroup.clearLayers();
+  if(clusterGroup.addLayers)clusterGroup.addLayers(visible.map(function(r){return mapMarkers[r.id];}));
+  else visible.forEach(function(r){clusterGroup.addLayer(mapMarkers[r.id]);});
+  Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===state.selectedId);});
+  /* State: results exist but none can be plotted */
+  var me=document.getElementById('mapEmpty');
+  if(me){
+    if(!rs.length){
+      me.classList.add('visible');
+      me.textContent='No establishments match the current search or filters.';
+    } else if(!visible.length){
+      me.classList.add('visible');
+      me.textContent=rs.length+' matching '+(rs.length===1?'establishment has':'establishments have')+' no map location. Switch to List view to see them.';
+    } else {
+      me.classList.remove('visible');
+    }
+  }
+  if(noFit)return;
+  if(visible.length===1){
+    var ll=mapMarkers[visible[0].id].getLatLng();
+    mapInstance.setView(ll,15,{animate:true});
+  } else if(visible.length>1){
+    var lls=visible.map(function(r){return mapMarkers[r.id].getLatLng();});
+    try{mapInstance.fitBounds(L.latLngBounds(lls),{padding:[40,40],animate:true});}catch(e){}
+  }
+}
+/* Bring the matching card into view when a marker is chosen */
+function scrollRowIntoView(id){
+  var row=els.recordsGrid&&els.recordsGrid.querySelector('.record-row[data-id="'+(window.CSS&&CSS.escape?CSS.escape(id):id)+'"]');
+  if(row&&row.scrollIntoView)try{row.scrollIntoView({block:'nearest',behavior:'smooth'});}catch(e){row.scrollIntoView();}
+}
+
+/* ── View on Map ── */
+function viewOnMap(id){
+  var r=establishments.find(function(x){return x.id===id;});if(!r)return;
+  state.selectedId=id;
+  if(mapInstance&&r.coordinates&&typeof r.coordinates.lat==='number'){
+    var mk0=mapMarkers[id];
+    if(mk0&&clusterGroup&&clusterGroup.zoomToShowLayer&&clusterGroup.hasLayer(mk0)){clusterGroup.zoomToShowLayer(mk0,function(){});}
+    else mapInstance.setView([r.coordinates.lat,r.coordinates.lng],15,{animate:true});
+  }
+  Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===id);});
+  showMapPreview(r);
+  if(window.innerWidth<768){setView('map');}
+  renderRows();
+}
+
+/* ── Map preview ── */
+function showMapPreview(r){
+  var preview=document.getElementById('mapPreview');
+  var content=document.getElementById('mapPreviewContent');
+  if(!preview||!content)return;
+  content.innerHTML='<div class="map-preview-name">'+esc(r.name)+'</div>'
+    +'<div class="map-preview-meta">'+esc(r.area||r.address||'')+(r.cuisine?' &middot; '+esc(r.cuisine):'')+'</div>'
+    +(r.isDemo?'<div style="font-size:10px;color:#7C3AED;font-weight:600;text-transform:uppercase;font-family:monospace;letter-spacing:0.04em;margin-bottom:6px;">Demo listing</div>':'')
+    +'<button class="btn btn-dark btn-sm" type="button" id="previewViewDecl" style="font-size:10px;padding:0 10px;min-height:32px;">'+(listingCategory(r)==='self'?'View Declaration':'View Details')+'</button>';
+  preview.removeAttribute('hidden');
+  syncPanelNavOffset();
+  var pvd=document.getElementById('previewViewDecl');
+  if(pvd)pvd.addEventListener('click',function(){openDeclDrawer(r,pvd);});
+}
+/* Keep the fixed section-nav clear of the map preview card (they occupy the
+   same bottom-right corner). Height is measured, since the card grows when a
+   demo badge is present. Smooth, and reset the moment the card closes. */
+function syncPanelNavOffset(){
+  var nav=document.querySelector('.panel-nav');
+  var pv=document.getElementById('mapPreview');
+  if(!nav)return;
+  var open=pv&&!pv.hasAttribute('hidden')&&PANELS[currentIdx]==='directory';
+  if(open){
+    var h=pv.offsetHeight||0;
+    nav.style.bottom=(h+(window.innerWidth<=480?16:28)+12)+'px';
+  } else {
+    nav.style.bottom='';
+  }
+}
+function hideMapPreview(){var p=document.getElementById('mapPreview');if(p)p.setAttribute('hidden','');syncPanelNavOffset();state.selectedId=null;Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.remove('marker-selected');});renderRows();}
+var mpClose=document.getElementById('mapPreviewClose');if(mpClose)mpClose.addEventListener('click',hideMapPreview);
+
+function renderRows(){
+  var sel=state.selectedId;
+  els.recordsGrid.querySelectorAll('.record-row').forEach(function(row){row.classList.toggle('is-selected',row.getAttribute('data-id')===sel);});
+}
+
+/* ── Main render ── */
+function render(){
+  if(!establishments.length){showDirectoryEmpty();var mc0=document.getElementById('mapResultCount');if(mc0)mc0.textContent='0 establishments';return;}
+  var rs=getFiltered();
+  var total=inCountry().length;
+  var countText=rs.length+' of '+total+' establishment'+(total!==1?'s':'')+' in '+state.country;
+  var ctr=document.getElementById('resultsInlineCount');if(ctr)ctr.textContent=countText;
+  var mc=document.getElementById('mapResultCount');if(mc)mc.textContent=countText;
+  if(!rs.length){
+    els.recordsGrid.innerHTML='';
+    els.emptyState.classList.add('visible');
+    els.emptyState.querySelector('h3').textContent='No establishments found';
+    els.emptyState.querySelector('p').textContent=hasActiveCriteria()?'Adjust the search or filters and try again.':'No listings are currently available.';
+  } else {
+    els.emptyState.classList.remove('visible');
+    els.recordsGrid.innerHTML=rs.slice(0,shownCount).map(renderRow).join('')
+      +(rs.length>shownCount?'<div class="show-more-row"><button class="btn btn-outline btn-sm" type="button" id="showMoreBtn">Show more ('+(rs.length-shownCount)+' remaining)</button></div>':'');
+    var smb=document.getElementById('showMoreBtn');if(smb)smb.addEventListener('click',function(){shownCount+=PAGE_SIZE;render();});
+    els.recordsGrid.querySelectorAll('[data-open-record]').forEach(function(btn){
+      btn.addEventListener('click',function(e){e.stopPropagation();var id=btn.getAttribute('data-open-record');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,btn);});
+    });
+    els.recordsGrid.querySelectorAll('[data-view-on-map]').forEach(function(btn){
+      btn.addEventListener('click',function(e){e.stopPropagation();viewOnMap(btn.getAttribute('data-view-on-map'));});
+    });
+    els.recordsGrid.querySelectorAll('.record-row[data-id]').forEach(function(row){
+      row.addEventListener('click',function(e){if(e.target.closest('button'))return;var id=row.getAttribute('data-id');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,row);});
+    });
+  }
+  updateMapMarkers(rs);
+  renderChips();
+  updateFilterBtnState();
+}
+
+/* ── Declaration drawer ── */
+function boolLabel(v,y,n){if(v===true)return y;if(v===false)return n;return'Not stated';}
+function renderDrawerContent(r){
+  var d=r.declarations;var f=r.facilities||{};
+  var links=[];
+  if(r.website)links.push('<a href="'+esc(r.website)+'" target="_blank" rel="noopener noreferrer">Website</a>');
+  if(r.instagram)links.push('<a href="'+esc(r.instagram)+'" target="_blank" rel="noopener noreferrer">Instagram</a>');
+  if(r.externalLocationUrl)links.push('<a href="'+esc(r.externalLocationUrl)+'" target="_blank" rel="noopener noreferrer">View Location</a>');
+  if(r.externalDirectionsUrl)links.push('<a href="'+esc(r.externalDirectionsUrl)+'" target="_blank" rel="noopener noreferrer">Get Directions</a>');
+  mapsLinks(r).forEach(function(a){links.push(a);});
+  if(r.sourceUrl)links.push('<a href="'+esc(r.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Source record</a>');
+  if(r.externalReviewsUrl)links.push('<a href="'+esc(r.externalReviewsUrl)+'" target="_blank" rel="noopener noreferrer">Read Reviews</a>');
+  var certBadgeColour=r.halalCertified===null?'color:var(--muted)':r.halalCertified?'color:var(--good)':'color:var(--caution)';
+  var certBadgeText=r.halalCertified===null?'Not assessed or verified':r.halalCertified?'Halal certified':'Not halal-certified';
+  return (r.isDemo?'<div style="padding:10px 14px;background:#EDE9FE;border-left:3px solid #7C3AED;font-size:12px;color:#5B21B6;line-height:1.55;margin-bottom:4px;">'+esc(r.demoDisclaimer)+'</div>':'')
+    +'<section><div class="drawer-sec-title">Record Summary</div>'
+    +'<dl class="detail-list">'
+    +(r.localName?'<div><dt>Local name</dt><dd lang="'+(r.country==='Japan'?'ja':'ms')+'">'+esc(r.localName)+'</dd></div>':'')
+    +'<div><dt>Location</dt><dd>'+esc(r.address||r.area||'Not stated')+'</dd></div>'
+    +(r.localAddress?'<div><dt>Address (Japanese)</dt><dd lang="ja">'+esc(r.localAddress)+'</dd></div>':'')
+    +(r.country!=='Singapore'?'<div><dt>Country</dt><dd>'+esc(r.country)+'</dd></div>':'')
+    +(r.city?'<div><dt>City / town</dt><dd>'+esc(r.city)+'</dd></div>':'')
+    +(r.halalScope?'<div><dt>Halal scope</dt><dd>'+esc(r.halalScope)+'</dd></div>':'')
+    +(r.openingHours?'<div><dt>Opening hours</dt><dd>'+esc(r.openingHours)+' <span style="font-size:11px;color:var(--muted)">(community data; confirm before visiting)</span></dd></div>':'')
+    +(r.muslimOwned&&r.muslimOwned!=='Unknown'?'<div><dt>Muslim-owned</dt><dd>'+esc(r.muslimOwned)+'</dd></div>':'')
+    +(r.postalCode?'<div><dt>Postal code</dt><dd>'+esc(r.postalCode)+'</dd></div>':'')
+    +'<div><dt>'+(r.country==='Japan'?'Prefecture':r.country==='Malaysia'?'State':'Area')+'</dt><dd>'+esc(r.region||r.area||'Not stated')+'</dd></div>'
+    +'<div><dt>Cuisine</dt><dd>'+esc(r.cuisine||'Not stated')+'</dd></div>'
+    +(r.establishmentType?'<div><dt>Type</dt><dd>'+esc(r.establishmentType)+'</dd></div>':'')
+    +'<div><dt>Last updated</dt><dd>'+esc(r.lastUpdated||'Not stated')+'</dd></div>'
+    +(r.declarationDate?'<div><dt>Declaration date</dt><dd>'+esc(r.declarationDate)+'</dd></div>':'')
+    +'</dl>'
+    +(links.length?'<div class="link-row">'+links.join('')+'</div>':'')
+    +'</section>'
+    +'<section><div class="drawer-sec-title">Certification & Listing Status</div>'
+    +'<p class="drawer-plain" style="'+certBadgeColour+';font-weight:600;">'+certBadgeText+'</p>'
+    +'<p class="drawer-plain" style="margin-top:6px;">'+esc(r.basisOfListing||'Not stated')+'</p>'
+    +(r.certifyingBody?'<p class="drawer-plain" style="margin-top:4px;font-size:12px;">Certifying body: '+esc(r.certifyingBody)+'</p>':'')
+    +(r.certificateExpiry?'<p class="drawer-plain" style="margin-top:4px;font-size:12px;">Certificate expiry: '+esc(r.certificateExpiry)+'</p>':'')
+    +'</section>'
+    +'<section><div class="drawer-sec-title">Food Practice Declarations</div><div class="decl-list">'
+    +'<div class="decl-item '+(d.noPorkDeclared===true?'positive':d.noPorkDeclared===false?'caution':'')+'"><span class="decl-marker">'+(d.noPorkDeclared===true?'YES':d.noPorkDeclared===false?'NO':'?')+'</span><div><strong>No pork</strong><p>'+boolLabel(d.noPorkDeclared,'Declared: no pork.','Not declared pork-free.')+'</p></div></div>'
+    +'<div class="decl-item '+(d.noLardDeclared===true?'positive':d.noLardDeclared===false?'caution':'')+'"><span class="decl-marker">'+(d.noLardDeclared===true?'YES':d.noLardDeclared===false?'NO':'?')+'</span><div><strong>No lard</strong><p>'+boolLabel(d.noLardDeclared,'Declared: no lard.','Not declared lard-free.')+'</p></div></div>'
+    +'<div class="decl-item '+(d.meatFromHalalCertifiedSources===true?'positive':d.meatFromHalalCertifiedSources===false?'caution':'')+'"><span class="decl-marker">'+(d.meatFromHalalCertifiedSources===true?'YES':d.meatFromHalalCertifiedSources===false?'NO':'?')+'</span><div><strong>Halal-sourced meat</strong><p>'+boolLabel(d.meatFromHalalCertifiedSources,'Sourced from halal-certified suppliers.','Not stated to be sourced from halal-certified suppliers.')+'</p></div></div>'
+    +'</div></section>'
+    +'<section><div class="drawer-sec-title">Alcohol Disclosure</div><div class="decl-list">'
+    +'<div class="decl-item '+(d.alcoholServed===false?'positive':d.alcoholServed===true?'caution':'')+'"><span class="decl-marker">'+(d.alcoholServed===false?'NO':d.alcoholServed===true?'YES':'?')+'</span><div><strong>Alcohol served</strong><p>'+boolLabel(d.alcoholServed,'Alcohol is served on the premises.','Alcohol is not served on the premises.')+'</p></div></div>'
+    +(d.alcoholMenuItemsDisclosed!==null?'<div class="decl-item '+(d.alcoholMenuItemsDisclosed===true?'positive':'caution')+'"><span class="decl-marker">'+(d.alcoholMenuItemsDisclosed===true?'YES':'NO')+'</span><div><strong>Alcohol in menu items</strong><p>'+boolLabel(d.alcoholMenuItemsDisclosed,'Menu items containing alcohol are indicated.','Alcohol-containing menu items are not explicitly indicated.')+'</p></div></div>':'')
+    +'</div></section>'
+    +(d.sharedKitchen!==null||d.sharedUtensils!==null||d.sharedFryer!==null||d.sharedGrill!==null?
+      '<section><div class="drawer-sec-title">Shared Equipment</div><div class="decl-list">'
+      +(d.sharedKitchen!==null?'<div class="decl-item '+(d.sharedKitchen?'caution':'positive')+'"><span class="decl-marker">'+(d.sharedKitchen?'YES':'NO')+'</span><div><strong>Shared kitchen</strong><p>'+boolLabel(d.sharedKitchen,'Shared kitchen area is used.','Shared kitchen is not used.')+'</p></div></div>':'')
+      +(d.sharedUtensils!==null?'<div class="decl-item '+(d.sharedUtensils?'caution':'positive')+'"><span class="decl-marker">'+(d.sharedUtensils?'YES':'NO')+'</span><div><strong>Shared utensils</strong><p>'+boolLabel(d.sharedUtensils,'Shared utensils are used.','Shared utensils are not used.')+'</p></div></div>':'')
+      +(d.sharedFryer!==null?'<div class="decl-item '+(d.sharedFryer?'caution':'positive')+'"><span class="decl-marker">'+(d.sharedFryer?'YES':'NO')+'</span><div><strong>Shared fryer</strong><p>'+boolLabel(d.sharedFryer,'A shared fryer is used.','A shared fryer is not used.')+'</p></div></div>':'')
+      +(d.sharedGrill!==null?'<div class="decl-item '+(d.sharedGrill?'caution':'positive')+'"><span class="decl-marker">'+(d.sharedGrill?'YES':'NO')+'</span><div><strong>Shared grill</strong><p>'+boolLabel(d.sharedGrill,'A shared grill is used.','A shared grill is not used.')+'</p></div></div>':'')
+      +'</div></section>':'')
+    +(f.prayerSpace!==null||f.prayerMat!==null||f.qiblaDirection!==null||f.waterFacilities!==null?
+      '<section><div class="drawer-sec-title">Muslim-Friendly Facilities</div><div class="decl-list">'
+      +(f.prayerSpace!==null?'<div class="decl-item '+(f.prayerSpace?'positive':'caution')+'"><span class="decl-marker">'+(f.prayerSpace?'YES':'NO')+'</span><div><strong>Prayer space</strong><p>'+boolLabel(f.prayerSpace,'Prayer space is available.','Prayer space is not available.')+'</p></div></div>':'')
+      +(f.prayerMat!==null?'<div class="decl-item '+(f.prayerMat?'positive':'caution')+'"><span class="decl-marker">'+(f.prayerMat?'YES':'NO')+'</span><div><strong>Prayer mat</strong><p>'+boolLabel(f.prayerMat,'Prayer mats are available.','Prayer mats are not available.')+'</p></div></div>':'')
+      +(f.qiblaDirection!==null?'<div class="decl-item '+(f.qiblaDirection?'positive':'caution')+'"><span class="decl-marker">'+(f.qiblaDirection?'YES':'NO')+'</span><div><strong>Qibla direction</strong><p>'+boolLabel(f.qiblaDirection,'Qibla direction is indicated.','Qibla direction is not indicated.')+'</p></div></div>':'')
+      +(f.waterFacilities!==null?'<div class="decl-item '+(f.waterFacilities?'positive':'caution')+'"><span class="decl-marker">'+(f.waterFacilities?'YES':'NO')+'</span><div><strong>Water facilities</strong><p>'+boolLabel(f.waterFacilities,'Water facilities are available.','Water facilities are not available.')+'</p></div></div>':'')
+      +'</div></section>':'')
+    +'<section><div class="drawer-sec-title">Declaration & Notes</div>'
+    +(r.declarationProvided?'<p class="drawer-plain"><strong>Declaration:</strong> '+esc(r.declarationProvided)+'</p>':'')
+    +(r.crossContactNote?'<p class="drawer-plain" style="margin-top:8px;"><strong>Cross-contact note:</strong> '+esc(r.crossContactNote)+'</p>':'')
+    +(r.additionalNotes?'<p class="drawer-plain" style="margin-top:8px;"><strong>Additional notes:</strong> '+esc(r.additionalNotes)+'</p>':'')
+    +(r.verificationNotes?'<p class="drawer-plain" style="margin-top:8px;"><strong>Verification:</strong> '+esc(r.verificationNotes)+'</p>':'')
+    +'</section>'
+    +claimSection(r)
+    +'<p class="drawer-disclaimer">This information is presented for transparency. Each listing states the applicable status. Self-declared information is reproduced in good faith based on disclosures provided by the establishment and may change without prior notice. Muslim-friendly certification is not halal certification, and unless expressly stated, this listing does not constitute a religious ruling, government approval or statutory verification. Diners should review the listing and make their own enquiries where necessary.</p>';
+}
+
+function openDeclDrawer(rec,trigger){
+  if(mapInstance)mapInstance.closePopup();
+  state.selectedId=rec.id;state.lastFocusEl=trigger||document.activeElement;
+  Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===rec.id);});
+  els.drawerTitleArea.innerHTML='<p class="mono" style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Record / '+esc(rec.id)+'</p><h2 id="drawerTitle">'+esc(rec.name)+'</h2><p style="font-size:11px;color:var(--muted);margin-top:2px;">'+[placeLabel(rec),rec.cuisine].filter(Boolean).map(esc).join(' &middot; ')+'</p>';
+  els.drawerContent.innerHTML=renderDrawerContent(rec);
+  document.body.classList.add('drawer-open');
+  requestAnimationFrame(function(){els.backdrop.classList.add('is-open');els.backdrop.removeAttribute('aria-hidden');els.drawer.classList.add('is-open');els.drawer.setAttribute('aria-hidden','false');els.drawerClose.focus();});
+}
+function closeDeclDrawer(){document.body.classList.remove('drawer-open');els.backdrop.classList.remove('is-open');els.backdrop.setAttribute('aria-hidden','true');els.drawer.classList.remove('is-open');els.drawer.setAttribute('aria-hidden','true');if(state.lastFocusEl&&typeof state.lastFocusEl.focus==='function')state.lastFocusEl.focus();state.selectedId=null;}
+function trapFocus(e){if(!els.drawer.classList.contains('is-open')||e.key!=='Tab')return;var focusable=els.drawer.querySelectorAll('a[href],button:not([disabled]),input:not([disabled]),[tabindex]:not([tabindex="-1"])');if(!focusable.length)return;var first=focusable[0],last=focusable[focusable.length-1];if(e.shiftKey&&document.activeElement===first){e.preventDefault();last.focus();}else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first.focus();}}
+els.drawerClose.addEventListener('click',closeDeclDrawer);
+els.backdrop.addEventListener('click',closeDeclDrawer);
+document.addEventListener('keydown',function(e){if(e.key==='Escape'){if(els.drawer.classList.contains('is-open')){closeDeclDrawer();return;}}trapFocus(e);});
+
+window.viewFromMap=function(id){
+  var r=establishments.find(function(x){return x.id===id;});if(!r)return;
+  if(mapInstance)mapInstance.closePopup();
+  state.selectedId=id;
+  Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===id);});
+  showMapPreview(r);renderRows();openDeclDrawer(r);
+};
+
+function initMap(){
+  var mapEl=document.getElementById('declarationMap');
+  if(typeof L==='undefined'){mapEl.innerHTML='<div class="map-fallback">Interactive map unavailable. Browse the list to find establishments.</div>';return;}
+  try{
+    var m=L.map(mapEl,{scrollWheelZoom:true,dragging:true,touchZoom:true,doubleClickZoom:true,zoomControl:true}).setView((COUNTRY_VIEW[state.country]||COUNTRY_VIEW.Singapore).slice(0,2),(COUNTRY_VIEW[state.country]||COUNTRY_VIEW.Singapore)[2]);
+    mapInstance=m;
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(m);
+    m.zoomControl.setPosition('topright');
+    m.on('popupopen',function(ev){var btn=ev.popup.getElement()&&ev.popup.getElement().querySelector('[data-view-record]');if(btn)btn.addEventListener('click',function(){window.viewFromMap(btn.getAttribute('data-view-record'));});});
+    clusterGroup=(typeof L.markerClusterGroup==='function')?L.markerClusterGroup({chunkedLoading:true,maxClusterRadius:45,showCoverageOnHover:false}):L.layerGroup();
+    m.addLayer(clusterGroup);
+    addMarkers(establishments);
+    fitCountry();
+    var resizeTmr;
+    window.addEventListener('resize',function(){clearTimeout(resizeTmr);resizeTmr=setTimeout(function(){m.invalidateSize();syncPanelNavOffset();},200);});
+    window.addEventListener('orientationchange',function(){setTimeout(function(){m.invalidateSize();},400);});
+  }catch(err){mapEl.innerHTML='<div class="map-fallback">Interactive map could not be loaded. Browse the list to find establishments.</div>';}
+}
+function fitCountry(){
+  if(!mapInstance)return;
+  var lls=inCountry().filter(function(r){return mapMarkers[r.id];}).map(function(r){return mapMarkers[r.id].getLatLng();});
+  var v=COUNTRY_VIEW[state.country]||COUNTRY_VIEW.Singapore;
+  if(lls.length>1){try{mapInstance.fitBounds(L.latLngBounds(lls),{padding:[40,40]});return;}catch(e){}}
+  mapInstance.setView(lls.length===1?lls[0]:[v[0],v[1]],lls.length===1?13:v[2]);
+}
+function addMarkers(records){
+  var m=mapInstance;if(!m)return;
+    records.forEach(function(r){
+      var c=r.coordinates;if(typeof c.lat!=='number'||typeof c.lng!=='number')return;
+      var mk=L.marker([c.lat,c.lng]);
+      var popupBadge=r.isDemo?'<span class="lp-badge" style="color:#5B21B6;">DEMO LISTING</span>':'<span class="lp-badge">'+esc(r.certificationStatus||'Not stated')+'</span>';
+      mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div>'+(r.localName?'<div class="lp-meta">'+esc(r.localName)+'</div>':'')+'<div class="lp-meta">'+[placeLabel(r),r.cuisine].filter(Boolean).map(esc).join(' &middot; ')+'</div>'+popupBadge+'<button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">'+(listingCategory(r)==='self'?'View Declaration':'View Details')+'</button>');
+      mk.on('click',function(){state.selectedId=r.id;Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===r.id);});showMapPreview(r);renderRows();scrollRowIntoView(r.id);});
+      mapMarkers[r.id]=mk;
+    });
+    updateMapMarkers(getFiltered(),true);
+}
+
+function syncControls(){
+  if(els.searchInput)els.searchInput.value=state.search;
+  if(els.areaFilter)els.areaFilter.value=state.area;
+  if(els.cityFilter)els.cityFilter.value=state.city;
+  if(els.scopeFilter)els.scopeFilter.value=state.scope;
+  if(els.cuisineFilter)els.cuisineFilter.value=state.cuisine;
+  if(els.typeFilter)els.typeFilter.value=state.type;
+  if(els.certFilter)els.certFilter.value=state.cert;
+  if(els.listingFilter)els.listingFilter.value=state.listing;
+  if(els.alcoholMenuFilter)els.alcoholMenuFilter.value=state.alcoholMenu;
+  if(els.prayerFilter)els.prayerFilter.value=state.prayer;
+  if(els.mapreadyFilter)els.mapreadyFilter.value=state.mapready;
+  if(els.alcoholFilter)els.alcoholFilter.value=state.alcohol;
+  if(els.meatFilter)els.meatFilter.value=state.meat;
+  if(els.porkFilter)els.porkFilter.value=state.pork;
+  if(els.lardFilter)els.lardFilter.value=state.lard;
+  if(els.sortSelect)els.sortSelect.value=state.sort;
+}
+function clearAllFilters(){state.search='';FILTER_KEYS.forEach(function(k){state[k]='all';});state.sort='name';shownCount=PAGE_SIZE;if(typeof refreshOptions==='function'&&establishments.length)refreshOptions();}
+function resetAll(){clearAllFilters();state.selectedId=null;syncControls();syncSheetFromState();render();hideMapPreview();updateFilterBtnState();}
+function populateSelect(sel,vals){vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}
+function initFilters(){refreshOptions();}
+var searchTmr=null;
+if(els.searchInput)els.searchInput.addEventListener('input',function(){
+  state.search=els.searchInput.value;
+  shownCount=PAGE_SIZE;
+  clearTimeout(searchTmr);
+  searchTmr=setTimeout(render,180); /* debounce: keeps fast typing smooth */
+});
+if(els.searchInput)els.searchInput.addEventListener('search',function(){clearTimeout(searchTmr);state.search=els.searchInput.value;render();});
+/* Submit now: cancels the pending debounce, renders immediately, and blurs so
+   the on-screen keyboard gets out of the way of the results it just produced. */
+function submitSearch(){
+  clearTimeout(searchTmr);
+  if(els.searchInput){state.search=els.searchInput.value;els.searchInput.blur();}
+  render();
+  closeDropdown();
+}
+var sgb=document.getElementById('searchGoBtn');
+if(sgb)sgb.addEventListener('click',submitSearch);
+if(els.searchInput)els.searchInput.addEventListener('keydown',function(e){
+  if(e.key==='Enter'){e.preventDefault();submitSearch();}
+});
+var ssb=document.getElementById('searchSubmitBtn');if(ssb)ssb.addEventListener('click',function(){render();closeDropdown({refocus:true});});
+/* Dropdown overlays the map, so nothing resizes on open — no invalidateSize
+   needed, and the map view is never disturbed. Three ways out: Escape,
+   click-away, Apply. Same contract as the sheet. */
+var fdEl=document.getElementById('filterDropdown');
+var fdBtn=document.getElementById('filterToggleBtn');
+function openDropdown(){
+  if(!fdEl||!fdBtn)return;
+  fdEl.hidden=false;fdBtn.setAttribute('aria-expanded','true');
+  document.body.classList.add('dropdown-open');
+  var f=fdEl.querySelector('select');if(f)f.focus();
+}
+function closeDropdown(o){
+  if(!fdEl||!fdBtn)return;
+  fdEl.hidden=true;fdBtn.setAttribute('aria-expanded','false');
+  document.body.classList.remove('dropdown-open');
+  if(o&&o.refocus)fdBtn.focus();
+}
+function toggleDropdown(){ (fdEl&&fdEl.hidden)?openDropdown():closeDropdown({refocus:true}); }
+if(fdBtn)fdBtn.addEventListener('click',function(e){e.stopPropagation();toggleDropdown();});
+document.addEventListener('click',function(e){
+  if(!fdEl||fdEl.hidden)return;
+  if(fdEl.contains(e.target)||(fdBtn&&fdBtn.contains(e.target)))return;
+  closeDropdown();
+});
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'&&fdEl&&!fdEl.hidden)closeDropdown({refocus:true});
+});
+[[els.areaFilter,'area'],[els.cityFilter,'city'],[els.scopeFilter,'scope'],[els.cuisineFilter,'cuisine'],[els.typeFilter,'type'],[els.certFilter,'cert'],[els.listingFilter,'listing'],[els.alcoholFilter,'alcohol'],[els.alcoholMenuFilter,'alcoholMenu'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.prayerFilter,'prayer'],[els.mapreadyFilter,'mapready'],[els.sortSelect,'sort']].forEach(function(p){if(p[0])p[0].addEventListener('change',function(){state[p[1]]=p[0].value;if(p[1]==='area'){state.city='all';refreshOptions();}shownCount=PAGE_SIZE;render();updateFilterBtnState();});});
+var sheetArea=document.getElementById('sheetAreaFilter');if(sheetArea)sheetArea.addEventListener('change',function(){state.area=sheetArea.value;state.city='all';refreshOptions();});
+if(els.clearFiltersBtn)els.clearFiltersBtn.addEventListener('click',resetAll);
+var inlineReset=document.getElementById('inlineResetBtn');
+if(inlineReset)inlineReset.addEventListener('click',resetAll);
+if(els.emptyClearBtn)els.emptyClearBtn.addEventListener('click',resetAll);
+if(els.activeChips)els.activeChips.addEventListener('click',function(e){var btn=e.target.closest('[data-remove]');if(!btn)return;var k=btn.getAttribute('data-remove');if(k==='search')state.search='';else if(k in state)state[k]='all';syncControls();render();updateFilterBtnState();});
+document.querySelectorAll('.fw-btn').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.fw-item'),wasOpen=item.classList.contains('is-open');document.querySelectorAll('.fw-item.is-open').forEach(function(i){i.classList.remove('is-open');i.querySelector('.fw-btn').setAttribute('aria-expanded','false');});if(!wasOpen){item.classList.add('is-open');btn.setAttribute('aria-expanded','true');}});});
+document.querySelectorAll('.faq-btn').forEach(function(btn){btn.addEventListener('click',function(){var item=btn.closest('.faq-item'),wasOpen=item.classList.contains('open');document.querySelectorAll('.faq-item.open').forEach(function(i){i.classList.remove('open');i.querySelector('.faq-btn').setAttribute('aria-expanded','false');});if(!wasOpen){item.classList.add('open');btn.setAttribute('aria-expanded','true');}});});
+
+/* START — triggers everything after DOM is ready */
+loadDirectory();
+</script>
+
+</body>
+</html>
