@@ -1,0 +1,327 @@
+community_id,date_checked,register_status,register_premises,expiry,match_method,note
+com-12b9fc87,2026-10-18,confirmed,MARRYBROWN AYER HITAM,2028-06-15,postcode,"same chain, same postcode, single register premises"
+com-0a4d9ea5,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-16b546de,2026-10-18,confirmed,MARRYBROWN BUKIT GAMBIR,2027-10-31,postcode,"same chain, same postcode, single register premises"
+com-ad8bc9b8,2026-10-18,review,MARRYBROWN SUNWAY BIGBOX,2027-02-15,words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-b50556af,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-46609979,2026-10-18,review,MARRYBROWN SUNWAY BIGBOX,2027-02-15,postcode,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-cd702faf,2026-10-18,confirmed,MARRYBROWN ECO GALLERIA,2026-10-31,postcode,"same chain, same postcode, single register premises"
+com-f227a912,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-58decf9b,2026-10-18,review,MCDONALD 'S TAN SRI YAACOP,2028-10-15,postcode,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-5c36a62c,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-0ab44cfa,2026-10-18,confirmed,MCDONALD 'S EDUCITY DRIVE THRU,2028-11-30,postcode,"same chain, same postcode, single register premises"
+com-e644cc58,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-44865381,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-92dd60dc,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-6d324ab3,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-39086c5c,2026-10-18,confirmed,MARRYBROWN LOTUS'S SETIA TROPIKA,2026-12-15,postcode+words,"same chain, same postcode, single register premises"
+com-b3912c0d,2026-10-18,confirmed,MARRYBROWN LARKIN SENTRAL,2027-05-15,postcode,"same chain, same postcode, single register premises"
+com-990b8354,2026-10-18,confirmed,MCDONALD 'S KOMTAR JBCC,2028-02-29,postcode,"same chain, same postcode, single register premises"
+com-cd7b0acd,2026-10-18,confirmed,MCDONALD 'S TERMINAL LARKIN,2027-04-15,postcode,"same chain, same postcode, single register premises"
+com-bd40a095,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-ba5fe71d,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-d511f1c7,2026-10-18,review,MCDONALD 'S PARADIGM MALL,2027-04-15,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-2e156f67,2026-10-18,review,MCDONALD 'S TAN SRI YAACOP,2028-10-15,postcode,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-e519777d,2026-10-18,confirmed,MCDONALD 'S PLAZA PELANGI,2026-12-31,postcode,"same chain, same postcode, single register premises"
+com-aa95a8e0,2026-10-18,review,MCDONALD 'S PARADIGM MALL,2027-04-15,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-dbcf78af,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-ca942c7d,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-149845c7,2026-10-18,confirmed,MARRYBROWN KELAPA SAWIT,2027-02-15,postcode,"same chain, same postcode, single register premises"
+com-cd1fcd92,2026-10-18,review,MARRYBROWN KLUANG MALL,2027-03-31,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-5cb419fe,2026-10-18,confirmed,MARRYBROWN ECONSAVE KLUANG,2026-10-31,postcode+words,"same chain, same postcode, single register premises"
+com-92060455,2026-10-18,review,MARRYBROWN KLUANG MALL,2027-03-31,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-6d4911af,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-9904fe75,2026-10-18,confirmed,MCDONALD 'S KLUANG DRIVE THRU,2028-12-15,postcode+words,"same chain, same postcode, single register premises"
+com-2faa76d8,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-59bd7f6e,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-527c61c2,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-0043a83c,2026-10-18,confirmed,MARRYBROWN IOI MALL - KULAI,2026-12-15,postcode+words,"same chain, same postcode, single register premises"
+com-59abe624,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-682171ea,2026-10-18,confirmed,MCDONALD 'S SRI ALAM MASAI DRIVE THRU,2028-11-30,postcode+words,"same chain, same postcode, single register premises"
+com-e4829b5c,2026-10-18,confirmed,MARRYBROWN MERSING,2026-12-15,postcode,"same chain, same postcode, single register premises"
+com-fe197c01,2026-10-18,confirmed,"MARRYBROWN JALAN IBRAHIM, MUAR",2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-7ce7a0d0,2026-10-18,review,MCDONALD 'S PARIT RAJA DRIVE THRU,2027-04-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-b3d3a73e,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-a66aac72,2026-10-18,review,MCDONALD 'S PASIR GUDANG DRIVE THRU,2028-10-15,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-e2465f9b,2026-10-18,review,MCDONALD 'S PASIR GUDANG DRIVE THRU,2028-10-15,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-5780f7ff,2026-10-18,confirmed,MARRYBROWN PEKAN NENAS,2027-02-15,postcode,"same chain, same postcode, single register premises"
+com-7d84f80a,2026-10-18,review,MARRYBROWN TOPPEN,2027-06-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-49584429,2026-10-18,confirmed,MARRYBROWN PONTIAN,2027-02-15,postcode,"same chain, same postcode, single register premises"
+com-5961798c,2026-10-18,confirmed,MCDONALD 'S PONTIAN DT,2028-03-15,postcode,"same chain, same postcode, single register premises"
+com-bc4d5144,2026-10-18,confirmed,MARRYBROWN SEGAMAT,2027-05-15,postcode,"same chain, same postcode, single register premises"
+com-2a9c48fb,2026-10-18,confirmed,MCDONALD 'S SENAI AIRPORT DRIVE THRU,2027-04-15,postcode,"same chain, same postcode, single register premises"
+com-709fb411,2026-10-18,review,MARRYBROWN SIMPANG RENGGAM,2026-10-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-2e5d6c58,2026-10-18,confirmed,MARRYBROWN PENGERANG,2027-10-31,postcode,"same chain, same postcode, single register premises"
+com-5027faa1,2026-10-18,not_found,,,ambiguous(9),several register premises share this postcode
+com-e78a4a24,2026-10-18,review,MARRYBROWN TOPPEN,2027-06-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-e6d1c5e9,2026-10-18,not_found,,,ambiguous(9),several register premises share this postcode
+com-f751d364,2026-10-18,review,MARRYBROWN TOPPEN,2027-06-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-08476685,2026-10-18,confirmed,MARRYBROWN MOUNT AUSTIN,2027-06-15,postcode+words,"same chain, same postcode, single register premises"
+com-ecc7cfab,2026-10-18,confirmed,MCDONALD 'S PELANGI INDAH,2028-10-15,postcode,"same chain, same postcode, single register premises"
+com-61e8030a,2026-10-18,confirmed,MARRYBROWN YONG PENG,2027-06-30,postcode,"same chain, same postcode, single register premises"
+com-bebf7532,2026-10-18,review,MARRYBROWN ABC ALOR SETAR,2026-11-30,words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-dec5e980,2026-10-18,review,MARRYBROWN ABC ALOR SETAR,2026-11-30,postcode,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-b9471840,2026-10-18,confirmed,MCDONALD S ALOR MENGKUDU DRIVE THRU,2027-03-15,postcode,"same chain, same postcode, single register premises"
+com-e16d46d5,2026-10-18,confirmed,SUSHI KING AMAN CENTRAL,2028-07-31,postcode,"same chain, same postcode, single register premises"
+com-2d9ed992,2026-10-18,confirmed,TEXAS CHICKEN AMAN CENTRAL,2027-07-31,postcode,"same chain, same postcode, single register premises"
+com-19f85d5b,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-626d9258,2026-10-18,review,MARRYBROWN SENAI AIRPORT,2027-06-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-c506992d,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-bab8c7b1,2026-10-18,confirmed,MCDONALD 'S KULIM DRIVE THRU,2028-01-31,postcode,"same chain, same postcode, single register premises"
+com-03ba2c13,2026-10-18,confirmed,MCDONALD 'S CENTRAL SQUARE,2028-03-15,postcode+words,"same chain, same postcode, single register premises"
+com-ca23b000,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-234b25d4,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-1d9ba22b,2026-10-18,confirmed,MCDONALD 'S KOTA BHARU DRIVE THRU,2028-02-15,postcode,"same chain, same postcode, single register premises"
+com-1df2257c,2026-10-18,review,MARRYBROWN MYDIN TUNJONG,2028-08-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-84720343,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-f6ced046,2026-10-18,confirmed,MARRYBROWN BREM MALL,2027-05-31,postcode,"same chain, same postcode, single register premises"
+com-9f21407e,2026-10-18,confirmed,MARRYBROWN KENANGA WHOLESALE CITY,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-dd81add7,2026-10-18,review,MARRYBROWN DANAU KOTA,2027-01-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-c4960bab,2026-10-18,confirmed,MARRYBROWN TERMINAL BERSEPADU SELATAN,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-9cf5137e,2026-10-18,confirmed,MARRYBROWN RIMBUNAN KEPONG,2027-01-15,postcode,"same chain, same postcode, single register premises"
+com-97009231,2026-10-18,review,MARRYBROWN Q AVENUE,2027-05-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-5bb9fbb5,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-6318efc9,2026-10-18,confirmed,MCDONALD 'S CHERAS LEISURE MALL,2028-01-31,postcode+words,"same chain, same postcode, single register premises"
+com-ce273546,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-c7847228,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-16990929,2026-10-18,confirmed,MCDONALD 'S MONT KIARA,2028-01-31,postcode,"same chain, same postcode, single register premises"
+com-42f3ffdc,2026-10-18,confirmed,MCDONALD 'S BHP TAMAN MELAWATI,2028-02-29,postcode+words,"same chain, same postcode, single register premises"
+com-e25f5469,2026-10-18,confirmed,MCDONALD 'S JALAN TUN PERAK,2028-01-31,postcode,"same chain, same postcode, single register premises"
+com-0521cf0f,2026-10-18,confirmed,MCDONALD 'S SRI PETALING,2028-02-29,postcode+words,"same chain, same postcode, single register premises"
+com-1f9ef781,2026-10-18,confirmed,MCDONALD 'S WISMA LIM FOO YONG,2027-04-15,postcode,"same chain, same postcode, single register premises"
+com-174bd106,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-59acf994,2026-10-18,review,MCDONALD 'S DESA PANDAN,2028-01-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-c613865f,2026-10-18,review,MCDONALD 'S DESA PARKCITY,2027-03-31,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-cd2b4348,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-3bdcbfbf,2026-10-18,not_found,,,ambiguous(10),several register premises share this postcode
+com-5ab5c155,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-0e7e443b,2026-10-18,confirmed,MCDONALD 'S SURIA KLCC,2028-11-30,postcode+words,"same chain, same postcode, single register premises"
+com-5df53b20,2026-10-18,review,MCDONALD 'S DESA PARKCITY,2027-03-31,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-8315b7b5,2026-10-18,confirmed,MCDONALD 'S NU SENTRAL,2027-01-15,postcode+words,"same chain, same postcode, single register premises"
+com-de96e73d,2026-10-18,confirmed,MCDONALD 'S PETRONAS TPM DRIVE THRU,2028-10-15,postcode+words,"same chain, same postcode, single register premises"
+com-94062b2b,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-7a9cb8fa,2026-10-18,confirmed,MCDONALD 'S TAMAN TUN DR ISMAIL,2028-11-30,postcode,"same chain, same postcode, single register premises"
+com-3fb237ce,2026-10-18,confirmed,MCDONALD S' DANAU KOTA DRIVE THRU,2027-03-31,postcode+words,"same chain, same postcode, single register premises"
+com-703df941,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-47e540e9,2026-10-18,confirmed,MCDONALD 'S SHELL TAMAN DESA DT,2027-01-15,postcode,"same chain, same postcode, single register premises"
+com-33e461fc,2026-10-18,confirmed,SUSHI KING AMPANG UTARA 2,2028-06-30,postcode,"same chain, same postcode, single register premises"
+com-900c6492,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-1e3df906,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-0d6d1382,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-f01269ed,2026-10-18,confirmed,MARRYBROWN KOTA FESYEN MITC,2027-10-31,postcode,"same chain, same postcode, single register premises"
+com-3b0216c4,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-1d3ce779,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-5381605f,2026-10-18,confirmed,MCDONALD S BATU BERENDAM DT,2028-03-15,postcode+words,"same chain, same postcode, single register premises"
+com-e63fb061,2026-10-18,confirmed,MARRYBROWN MYDIN JASIN,2027-02-15,postcode,"same chain, same postcode, single register premises"
+com-28aa5e7e,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-594011e9,2026-10-18,review,MCDONALD 'S DATARAN PAHLAWAN DT,2028-03-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-5ef51267,2026-10-18,review,MCDONALD 'S DATARAN PAHLAWAN DT,2028-03-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-14a0ec15,2026-10-18,review,MCDONALD 'S DATARAN PAHLAWAN DT,2028-03-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-66381f09,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-0f39acdf,2026-10-18,confirmed,MCDONALD S BANDAR UTAMA CHENG,2028-03-15,postcode,"same chain, same postcode, single register premises"
+com-6c2b2bb9,2026-10-18,confirmed,MCDONALD S KOTA LAKSAMANA DRIVE THRU,2027-03-31,postcode,"same chain, same postcode, single register premises"
+com-6a89e9de,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-37c6dc78,2026-10-18,confirmed,MCDONALD 'S MERLIMAU DT,2027-03-31,postcode,"same chain, same postcode, single register premises"
+com-957b46f7,2026-10-18,confirmed,MARRYBROWN BAHAU,2027-02-15,postcode,"same chain, same postcode, single register premises"
+com-3ab58526,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-d6e18926,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-e237f058,2026-10-18,confirmed,MCDONALD 'S PUTRA NILAI DT,2028-02-29,postcode+words,"same chain, same postcode, single register premises"
+com-a74be9e8,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-20620ffd,2026-10-18,confirmed,TEXAS CHICKEN TESCO LUKUT,2026-12-15,postcode,"same chain, same postcode, single register premises"
+com-10ba1d87,2026-10-18,confirmed,MARRYBROWN SENDAYAN,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-bc6b6f70,2026-10-18,confirmed,MARRYBROWN OASIS SEREMBAN,2027-06-30,postcode,"same chain, same postcode, single register premises"
+com-7fc6a7a9,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-27f0371b,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-98d2c8fa,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-29ca1976,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-ef14adf9,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-fb81c367,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-3ae0c259,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-2c383484,2026-10-18,confirmed,MARRYBROWN CAMERON HIGHLANDS,2027-05-15,postcode,"same chain, same postcode, single register premises"
+com-bfe825dc,2026-10-18,review,MARRYBROWN GENTING PREMIUM OUTLET,2027-01-31,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-8905aaef,2026-10-18,review,MARRYBROWN GENTING PREMIUM OUTLET,2027-01-31,postcode+words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-9204d1b0,2026-10-18,confirmed,MCDONALD 'S GENTING GRAND,2027-01-31,postcode,"same chain, same postcode, single register premises"
+com-b390602a,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-4aa4b6be,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-f5b9afcb,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-93cfe73f,2026-10-18,confirmed,"MARRYBROWN PETRON MAKMUR, GAMBANG",2027-08-15,postcode,"same chain, same postcode, single register premises"
+com-4a0e049a,2026-10-18,confirmed,KIOSK (#124 MCDONALD 'S MEGAMALL KUANTAN),2027-06-30,postcode,"same chain, same postcode, single register premises"
+com-e901d633,2026-10-18,confirmed,MCDONALD S TELUK CHEMPEDAK,2028-01-31,postcode,"same chain, same postcode, single register premises"
+com-8cc3e1f6,2026-10-18,confirmed,MCDONALD 'S KUANTAN RIVERFRONT DT,2028-01-31,postcode+words,"same chain, same postcode, single register premises"
+com-49026807,2026-10-18,confirmed,TEXAS CHICKEN KUANTAN DT,2026-11-30,postcode,"same chain, same postcode, single register premises"
+com-aa1407fa,2026-10-18,confirmed,MCDONALD 'S PEKAN DRIVE THRU,2028-11-30,postcode,"same chain, same postcode, single register premises"
+com-97833def,2026-10-18,review,MARRYBROWN RAUB,2027-08-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-b7ec3846,2026-10-18,confirmed,MARRYBROWN BALOK,2027-08-15,postcode,"same chain, same postcode, single register premises"
+com-8bd696f2,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-e62a6a44,2026-10-18,confirmed,MARRYBROWN BAGAN SERAI,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-9e76a0de,2026-10-18,confirmed,MARRYBROWN BATU GAJAH,2027-02-15,postcode,"same chain, same postcode, single register premises"
+com-23f1099b,2026-10-18,confirmed,MARRYBROWN IPOH JAYA,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-f8fa057f,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-ba0daa9f,2026-10-18,confirmed,MARRYBROWN BILLION MALL SILIBIN,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-70c64d2f,2026-10-18,confirmed,MARRYBROWN PETRON CHEPOR INDAH 2,2027-06-15,postcode+words,"same chain, same postcode, single register premises"
+com-aca3d51b,2026-10-18,confirmed,MARRYBROWN GUNUNG LANG,2027-06-15,postcode+words,"same chain, same postcode, single register premises"
+com-e907b557,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-1befc096,2026-10-18,confirmed,MCDONALD 'S SULTAN AZLAN SHAH DRIVE THRU,2028-09-15,postcode+words,"same chain, same postcode, single register premises"
+com-a82189fe,2026-10-18,confirmed,MCDONALD 'S SUNWAY CITY IPOH DRIVE THRU,2028-11-30,postcode,"same chain, same postcode, single register premises"
+com-54750257,2026-10-18,confirmed,MCDONALD 'S JALAN KUALA KANGSAR DRIVE THRU,2027-01-15,postcode,"same chain, same postcode, single register premises"
+com-880e07da,2026-10-18,confirmed,MCDONALD 'S KLEBANG DRIVE THRU,2028-11-30,postcode,"same chain, same postcode, single register premises"
+com-2303ba7e,2026-10-18,confirmed,MCDONALD 'S MERU RAYA DRIVE THRU,2027-01-15,postcode,"same chain, same postcode, single register premises"
+com-2db8a096,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-fd5062ab,2026-10-18,confirmed,MCDONALD 'S PENGKALAN DRIVE/THRU,2028-09-15,postcode,"same chain, same postcode, single register premises"
+com-63b306d8,2026-10-18,confirmed,MCDONALD 'S KAMPAR DRIVE THRU,2028-09-15,postcode,"same chain, same postcode, single register premises"
+com-a3b15079,2026-10-18,confirmed,MARRYBROWN KUALA KANGSAR,2027-02-15,postcode,"same chain, same postcode, single register premises"
+com-935c1a05,2026-10-18,confirmed,MCDONALD 'S SERI ISKANDAR DRIVE THRU,2028-02-15,postcode,"same chain, same postcode, single register premises"
+com-9ec166a5,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-66aa01ac,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-bab628fb,2026-10-18,confirmed,MARRYBROWN SUNGKAI,2027-10-31,postcode,"same chain, same postcode, single register premises"
+com-d09f30b0,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-46b61990,2026-10-18,confirmed,MCDONALD 'S TAIPING LAKE GARDEN DRIVE THRU,2028-02-15,postcode+words,"same chain, same postcode, single register premises"
+com-f6f74059,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-05350f39,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-6b4d966e,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-5aa9a217,2026-10-18,confirmed,MCDONALD S PSS BATU FERINGGI DT,2028-03-15,postcode,"same chain, same postcode, single register premises"
+com-84020a2d,2026-10-18,confirmed,MARRYBROWN BATU KAWAN,2027-08-15,postcode,"same chain, same postcode, single register premises"
+com-a105dc73,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-e9fa8a53,2026-10-18,review,MCDONALD 'S QUEENSBAY MALL,2028-10-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-a42dbd98,2026-10-18,review,MCDONALD 'S QUEENSBAY MALL,2028-10-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-270c8904,2026-10-18,review,MCDONALD 'S QUEENSBAY MALL,2028-10-15,postcode+words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-41a26f61,2026-10-18,confirmed,MCDONALD 'S CALTEX JALAN TENGAH DT,2028-10-31,postcode+words,"same chain, same postcode, single register premises"
+com-ee85c248,2026-10-18,review,MCDONALD 'S JURU DRIVE THRU,2028-01-31,postcode,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-a6a7a6c9,2026-10-18,review,MCDONALD 'S JURU DRIVE THRU,2028-01-31,postcode,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-807e72bc,2026-10-18,review,MCDONALD 'S JURU DRIVE THRU,2028-01-31,postcode,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-f457e4fc,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-9a45af33,2026-10-18,confirmed,MCDONALD 'S BAGAN AJAM DT,2028-11-30,postcode,"same chain, same postcode, single register premises"
+com-0533ac8a,2026-10-18,review,"MARRYBROWN BUKIT JAMBUL,",2027-01-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-f83959c4,2026-10-18,review,MCDONALD 'S PRANGIN MALL,2028-01-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-73347690,2026-10-18,confirmed,MCDONALD 'S BUKIT JAMBUL,2028-01-31,postcode+words,"same chain, same postcode, single register premises"
+com-4d48ebda,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-f39076d5,2026-10-18,confirmed,MCDONALD S BIRCH HOUSE DRIVE THRU,2027-03-15,postcode,"same chain, same postcode, single register premises"
+com-c543b9b9,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-98dd8694,2026-10-18,confirmed,MCDONALD 'S TESCO PENANG,2028-10-15,postcode+words,"same chain, same postcode, single register premises"
+com-2866f434,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-1bf1074e,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-4dd8c883,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-16f5ba71,2026-10-18,confirmed,MCDONALD 'S CALTEX SUNWAY PRAI,2028-01-31,postcode,"same chain, same postcode, single register premises"
+com-5f5a046f,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-1b389bca,2026-10-18,confirmed,MCDONALD 'S DESA UNIVERSITI,2028-01-31,postcode+words,"same chain, same postcode, single register premises"
+com-d5e62cd1,2026-10-18,confirmed,MCDONALD 'S TESCO TANJUNG PINANG,2027-03-15,postcode,"same chain, same postcode, single register premises"
+com-84c1a44d,2026-10-18,confirmed,MARRYBROWN AYER 8 PUTRAJAYA,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-f70818b3,2026-10-18,confirmed,MARRYBROWN PRESINT 15 PUTRAJAYA,2027-11-30,postcode,"same chain, same postcode, single register premises"
+com-40a56ea8,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-8eaac0f0,2026-10-18,review,"TEXAS CHICKEN CALTEX PRESINT 14 DRIVE-THRU, P",2027-06-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-f81fc026,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-3fce23a8,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-19c07b31,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-5b135bfe,2026-10-18,confirmed,MCDONALD 'S SURIA SABAH,2027-12-31,postcode+words,"same chain, same postcode, single register premises"
+com-b1e75207,2026-10-18,not_found,,,ambiguous(4),several register premises share this postcode
+com-b3b42a48,2026-10-18,confirmed,MCDONALD 'S API-API CENTRE,2028-11-15,postcode+words,"same chain, same postcode, single register premises"
+com-bbf43451,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-327de872,2026-10-18,not_found,,,ambiguous(4),several register premises share this postcode
+com-8296de49,2026-10-18,not_found,,,ambiguous(4),several register premises share this postcode
+com-0de9af8c,2026-10-18,review,MARRYBROWN PRIMA SQUARE SANDAKAN,2027-11-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-cc64392f,2026-10-18,review,MCDONALD 'S SANDAKAN DRIVE THRU,2027-04-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-f64bc0b2,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-6aa3937a,2026-10-18,review,MCDONALD S PLAZA MERDEKA,2027-02-15,postcode,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-dad1e1cd,2026-10-18,review,MCDONALD S PLAZA MERDEKA,2027-02-15,postcode,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-6d2b19fe,2026-10-18,review,MCDONALD S PLAZA MERDEKA,2027-02-15,postcode,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-c2f0d18b,2026-10-18,review,MCDONALD 'S TABUAN JAYA DRIVE THRU,2027-02-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-2d7a9c55,2026-10-18,confirmed,MARRYBROWN MIRI AIRPORT,2027-08-15,postcode,"same chain, same postcode, single register premises"
+com-3670b54b,2026-10-18,confirmed,MCDONALD 'S BINTANG PLAZA,2028-01-15,postcode+words,"same chain, same postcode, single register premises"
+com-f2ba95a3,2026-10-18,confirmed,MCDONALD 'S PETRONAS MIRI DRIVE THRU,2027-02-15,postcode+words,"same chain, same postcode, single register premises"
+com-ec64a350,2026-10-18,confirmed,MCDONALD 'S PERMYJAYA MIRI DRIVE THRU,2028-10-31,postcode+words,"same chain, same postcode, single register premises"
+com-fc9a6352,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-a0883eff,2026-10-18,confirmed,SUSHI KING PERMAISURI IMPERIAL MIRI,2028-02-15,postcode+words,"same chain, same postcode, single register premises"
+com-dd49ed30,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-de95cd43,2026-10-18,confirmed,"KIOSK (#257 MCDONALD 'S WISMA SANYAN,SIBU)",2027-07-31,postcode+words,"same chain, same postcode, single register premises"
+com-3797805e,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-625c185d,2026-10-18,confirmed,MCDONALD 'S TAMAN DAGANG DRIVE THRU,2028-02-29,postcode+words,"same chain, same postcode, single register premises"
+com-07d4ca3e,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-33a90b49,2026-10-18,review,MCDONALD 'S PANDAN MEWAH DRIVE THRU,2028-02-29,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-8d1545ee,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-2c1b0f11,2026-10-18,review,MCDONALD 'S BANDAR BARU BANGI DRIVE THRU,2028-02-29,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-e84c89a2,2026-10-18,confirmed,MARRYBROWN PUNCAK ALAM,2027-05-31,postcode,"same chain, same postcode, single register premises"
+com-9c3c235a,2026-10-18,confirmed,MARRYBROWN BATANG KALI,2026-12-15,postcode,"same chain, same postcode, single register premises"
+com-46f3e5af,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-b2b7bfd2,2026-10-18,confirmed,MARRYBROWN BANDAR BARU BANGI,2027-01-15,postcode,"same chain, same postcode, single register premises"
+com-6de0e559,2026-10-18,confirmed,MARRYBROWN HULU LANGAT,2028-01-15,postcode,"same chain, same postcode, single register premises"
+com-50c3ae65,2026-10-18,confirmed,MCDONALD 'S KAJANG,2028-01-31,postcode+words,"same chain, same postcode, single register premises"
+com-fe26bbda,2026-10-18,not_found,,,ambiguous(4),several register premises share this postcode
+com-3dda4128,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-14c77625,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-99d928a2,2026-10-18,confirmed,MCDONALD 'S BHP JALAN KAPAR DT,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-20bbd854,2026-10-18,confirmed,MARRYBROWN PEKAN KAPAR,2027-01-15,postcode,"same chain, same postcode, single register premises"
+com-deee5299,2026-10-18,confirmed,MARRYBROWN BANDAR BUKIT RAJA,2027-07-31,postcode,"same chain, same postcode, single register premises"
+com-19bccb3a,2026-10-18,confirmed,MARRYBROWN JALAN GOPENG,2026-12-15,postcode,"same chain, same postcode, single register premises"
+com-0e541f07,2026-10-18,confirmed,MARRYBROWN GM KLANG,2028-01-15,postcode+words,"same chain, same postcode, single register premises"
+com-da9e52bf,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-6a62b1da,2026-10-18,confirmed,MCDONALD S CALTEX BANDAR PUTERI DRIVE THRU,2027-01-15,postcode+words,"same chain, same postcode, single register premises"
+com-fd91be4b,2026-10-18,confirmed,MCDONALD 'S DESA AMAN PURI,2028-02-29,postcode+words,"same chain, same postcode, single register premises"
+com-9bb0b19f,2026-10-18,not_found,,,ambiguous(6),several register premises share this postcode
+com-eb516c1b,2026-10-18,confirmed,MARRYBROWN TAMAN BENDAHARA,2027-07-31,postcode,"same chain, same postcode, single register premises"
+com-e7d030d9,2026-10-18,confirmed,MCDONALD 'S KUALA SELANGOR DRIVE THRU,2027-01-15,postcode,"same chain, same postcode, single register premises"
+com-a65fad4d,2026-10-18,confirmed,MARRYBROWN LOTUS'S DAMANSARA,2027-06-15,postcode,"same chain, same postcode, single register premises"
+com-a7a0e1ad,2026-10-18,review,MARRYBROWN TAMAN MAJU JAYA,2027-10-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-1fed242b,2026-10-18,confirmed,MCDONALD 'S CITTA MALL,2027-03-31,postcode+words,"same chain, same postcode, single register premises"
+com-37a040fd,2026-10-18,review,MCDONALD 'S P.J OLD TOWN,2028-01-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-9befee23,2026-10-18,confirmed,MCDONALD 'S PKNS PJ DT,2028-02-15,postcode,"same chain, same postcode, single register premises"
+com-24301cb1,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-157af037,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-04c87104,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-b5ccf005,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-bfe7aa29,2026-10-18,review,MCDONALD 'S DAMANSARA DAMAI,2027-02-15,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-86b86cbd,2026-10-18,confirmed,MCDONALD 'S BANDAR SRI DAMANSARA DRIVE THRU,2028-02-15,postcode+words,"same chain, same postcode, single register premises"
+com-f1d3ce1a,2026-10-18,confirmed,MCDONALD 'S BANDAR UTAMA DRIVE THRU,2028-02-29,postcode+words,"same chain, same postcode, single register premises"
+com-bdaec3a9,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-5e095777,2026-10-18,confirmed,TEXAS CHICKEN SUNWAY PYRAMID,2028-09-30,postcode+words,"same chain, same postcode, single register premises"
+com-f9965fad,2026-10-18,confirmed,MCDONALD 'S PUNCAK ALAM DRIVE THRU,2028-02-29,postcode,"same chain, same postcode, single register premises"
+com-352b439b,2026-10-18,confirmed,MCDONALD 'S RAWANG DRIVE THRU,2027-02-15,postcode+words,"same chain, same postcode, single register premises"
+com-be1d4c93,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-fcdd49e5,2026-10-18,confirmed,MARRYBROWN TAMAN SERI GOMBAK,2027-10-31,postcode,"same chain, same postcode, single register premises"
+com-677f3ae6,2026-10-18,confirmed,MARRYBROWN KEMARIS AVENUE,2027-01-15,postcode+words,"same chain, same postcode, single register premises"
+com-8f4b51e0,2026-10-18,review,MARRYBROWN BANDAR TASIK PUTERI RAWANG,2028-04-30,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-e79c500d,2026-10-18,review,MCDONALD 'S KEPONG,2027-04-15,postcode,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-d1d46841,2026-10-18,confirmed,MCDONALD 'S SELAYANG MALL,2028-02-29,postcode+words,"same chain, same postcode, single register premises"
+com-b6147fcb,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-279f3c8a,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-31bc3485,2026-10-18,review,MCDONALD 'S KEPONG,2027-04-15,postcode,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-c9349456,2026-10-18,not_found,,,ambiguous(2),several register premises share this postcode
+com-e2a71e57,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-fd9bf3bf,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-9945788d,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-181623d4,2026-10-18,confirmed,MARRYBROWN KOTA WARISAN,2026-12-15,postcode,"same chain, same postcode, single register premises"
+com-4b632c4e,2026-10-18,confirmed,MCDONALD S KLIA 2 SATELLITE,2027-07-31,postcode+words,"same chain, same postcode, single register premises"
+com-174fab01,2026-10-18,confirmed,MCDONALD S KOTA WARISAN DRIVE THRU,2028-02-29,postcode,"same chain, same postcode, single register premises"
+com-88e2fb9a,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-6cdd3c49,2026-10-18,confirmed,MARRYBROWN SEKSYEN 18,2027-06-15,postcode+words,"same chain, same postcode, single register premises"
+com-6cf727da,2026-10-18,review,MARRYBROWN BANTING,2026-12-15,words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-f335a8fc,2026-10-18,confirmed,MARRYBROWN DENAI ALAM,2027-06-15,postcode+words,"same chain, same postcode, single register premises"
+com-1c6b0a50,2026-10-18,review,MARRYBROWN BANTING,2026-12-15,words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-83942e00,2026-10-18,review,MARRYBROWN SETIA ALAM,2027-01-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-74f905fc,2026-10-18,review,MARRYBROWN BANTING,2026-12-15,words,register premises matched to 3 mapped outlets; outlet not individually confirmed
+com-f0b26298,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-0f44e1cd,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-d6e26301,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-aade5c00,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-3d6927e5,2026-10-18,confirmed,MCDONALD 'S KOTA KEMUNING DRIVE THRU,2028-02-29,postcode+words,"same chain, same postcode, single register premises"
+com-ba10f466,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-bf822199,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-d8666b81,2026-10-18,confirmed,MCDONALD 'S SECTION 22 SHAH ALAM,2027-01-15,postcode+words,"same chain, same postcode, single register premises"
+com-b0a9cc11,2026-10-18,review,MARRYBROWN MYDIN USJ,2028-01-15,words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-c4af986d,2026-10-18,review,MARRYBROWN MYDIN USJ,2028-01-15,words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-c855e490,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-4ea614e6,2026-10-18,review,KIOSK (#410 MCDONALD 'S PSS USJ 1 DT),2027-07-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-db351aa9,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-036326e9,2026-10-18,review,MCDONALD 'S PSS USJ 1 DT,2027-06-15,words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-57361471,2026-10-18,not_found,,,ambiguous(6),several register premises share this postcode
+com-01cd3c1e,2026-10-18,review,MCDONALD 'S PSS USJ 1 DT,2027-06-15,words,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-bcbeeed8,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-63f63d06,2026-10-18,not_found,,,ambiguous(3),several register premises share this postcode
+com-f2ab3e39,2026-10-18,not_found,,,ambiguous(5),several register premises share this postcode
+com-40104f32,2026-10-18,not_found,,,none,no register premises of this chain found for this postcode or name
+com-fdbd9a09,2026-10-18,confirmed,MCDONALD 'S SABAK BERNAM DRIVE THRU,2028-10-15,postcode,"same chain, same postcode, single register premises"
+com-3af8d061,2026-10-18,confirmed,"MARRYBROWN PUSAT KOMERSIAL TSB, SUNGAI BULOH",2027-10-31,postcode+words,"same chain, same postcode, single register premises"
+com-9944a74d,2026-10-18,confirmed,MARRYBROWN PAKA,2026-12-15,postcode,"same chain, same postcode, single register premises"
+com-0c09c317,2026-10-18,confirmed,MARRYBROWN DUNGUN,2028-08-31,postcode,"same chain, same postcode, single register premises"
+com-1bd3100f,2026-10-18,review,MCDONALD S GONG BADAK DRIVE THRU,2027-01-31,words,name-only match (postcode differs or missing); outlet not individually confirmed
+com-add386cc,2026-10-18,review,MCDONALD 'S KUALA TERENGGANU DT,2028-08-15,postcode,register premises matched to 2 mapped outlets; outlet not individually confirmed
+com-1aa472dc,2026-10-18,review,MCDONALD 'S KUALA TERENGGANU DT,2028-08-15,words,register premises matched to 2 mapped outlets; outlet not individually confirmed

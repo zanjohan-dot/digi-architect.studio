@@ -33,3 +33,13 @@ A government Muslim-friendly scheme (e.g. Yamanashi Food Diversity, "no pork / n
 - Miri (Sarawak): 471 OSM records; contributor's edits cite local knowledge and street-level imagery (332 changesets, 2024);
   no same-name duplicates within 300 m; 452 carry Miri 980xx postcodes; all edited 2024–2025; 7 are outlets of chains with
   operator JAKIM statements; Sushi Zanmai held back (operator statement: not halal); none confirmed at outlet level.
+
+## 2026-10-18
+- GO TOKYO Muslim Travelers' Guide 2026-27: icons read visually for 109 entries (pork, alcohol, halal meat, kitchen,
+  utensils, ownership, prayer space). Only icons clearly legible were recorded; nothing inferred from unclear icons.
+- Japan: 339 researched records across 30 prefectures (with OSM-only records); 196 meet C1–C5 (111 in Tokyo).
+- JAKIM premises register searched through a browser session (the server-side request still fails): 931 register premises
+  for McDonald's, Marrybrown, Texas Chicken and Sushi King. Of 326 mapped outlets of these chains, 142 matched one register
+  premises at the same postcode (confirmed), 65 matched only by name or shared a premises with another outlet (review,
+  not certified) and 119 had no or several candidates (not found). Derived facts only: `jakim-outlets-my.csv`.
+- Miri: 5 chain outlets confirmed on the JAKIM register; the 464 community-only records stay unverified and unpublished.

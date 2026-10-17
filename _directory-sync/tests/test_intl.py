@@ -153,7 +153,8 @@ class EvidenceTiers(unittest.TestCase):
                                 "cooking_alcohol_in_halal_items", "separate_kitchen_or_utensils",
                                 "advance_reservation_required", "prayer_space", "operating_status",
                                 "latest_source_date", "not_yet_verified", "notes", "sources", "last_checked")}
-        base.update(id="res-1", country="Japan", state="Tokyo", name="Test", address="1-1 Ginza", **kw)
+        base.update(id="res-1", country="Japan", state="Tokyo", name="Test", address="1-1 Ginza")
+        base.update(kw)
         return base
 
     def test_research_tiers_stay_separate(self):
@@ -168,11 +169,32 @@ class EvidenceTiers(unittest.TestCase):
     def test_old_or_guide_only_records_need_checking(self):
         ready, issues = rb.research_readiness(self.research(establishment_declaration="halal menu", latest_source_date="2019"), TODAY)
         self.assertEqual(ready, "needs_check")
+        # A tourism body publishing establishment-supplied information meets C2; without an address it fails C1.
         ready, _ = rb.research_readiness(self.research(listed_by="Tokyo Convention & Visitors Bureau",
                                                        tourism_listing="Listed", latest_source_date="2025-11"), TODAY)
+        self.assertEqual(ready, "ready")
+        ready, _ = rb.research_readiness(self.research(listed_by="Tokyo Convention & Visitors Bureau", address="",
+                                                       tourism_listing="Listed", latest_source_date="2025-11"), TODAY)
+        self.assertEqual(ready, "needs_check")
+        ready, _ = rb.research_readiness(self.research(news="x", latest_source_date="2025"), TODAY)
         self.assertEqual(ready, "needs_check")
         ready, _ = rb.research_readiness(self.research(establishment_declaration="halal menu", latest_source_date="2025"), TODAY)
         self.assertEqual(ready, "ready")
+
+    def test_outlet_certification_needs_a_unique_register_match(self):
+        from collections import Counter
+        rows = list(rb.load_jakim().values())
+        confirmed = [r for r in rows if r["register_status"] == "confirmed"]
+        self.assertTrue(confirmed)
+        shared = Counter(r["register_premises"] for r in rows if r["register_premises"])
+        for r in confirmed:
+            self.assertTrue(r["match_method"].startswith("postcode"), r)
+            self.assertEqual(shared[r["register_premises"]], 1, r)
+            self.assertTrue(r["expiry"] and r["date_checked"], r)
+        row = rb.certified_row({"Source URL": "u"}, {"chain": "C", "statement": "s", "source_url": "v"},
+                               {"register_premises": "P", "expiry": "2027-01-01", "date_checked": "2026-10-18"})
+        self.assertEqual(row["Certifying Body"], "JAKIM")
+        self.assertIn("valid to 2027-01-01", row["Certification Status"])
 
     def test_nothing_published_without_approval(self):
         gate = rb.load_publication()
