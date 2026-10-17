@@ -1,51 +1,107 @@
-/home/runner/work/digi-architect.studio/digi-architect.studio/_directory-sync/research_osm.py:84: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
-  result = {"country": cc, "retrieved": dt.datetime.utcnow().isoformat(timespec="seconds") + "Z",
 MY-01 Johor: 96 halal-tagged of 3338 eating places
-  retry: https://overpass-api.de/api/interpreter: HTTP 502
-  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
-MY-02 Kedah: 104 halal-tagged of 1667 eating places
-  retry: https://overpass-api.de/api/interpreter: HTTP 502
-  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
-  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
-  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
-  retry: https://overpass-api.de/api/interpreter: HTTP 502
-MY-03 Kelantan: 15 halal-tagged of 743 eating places
-  retry: https://overpass-api.de/api/interpreter: HTTP 502
-  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
-  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+MY-02 Kedah: 105 halal-tagged of 1690 eating places
+MY-03 Kelantan: 15 halal-tagged of 758 eating places
 MY-04 Melaka: 30 halal-tagged of 1014 eating places
 MY-05 Negeri Sembilan: 39 halal-tagged of 695 eating places
-  retry: https://overpass-api.de/api/interpreter: HTTP 502
-  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
-  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
-  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
 MY-06 Pahang: 79 halal-tagged of 1119 eating places
 MY-07 Pulau Pinang: 69 halal-tagged of 2611 eating places
-  retry: https://overpass-api.de/api/interpreter: HTTP 502
-  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
-  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
 MY-08 Perak: 46 halal-tagged of 1729 eating places
   retry: https://overpass-api.de/api/interpreter: HTTP 502
   retry: https://overpass.private.coffee/api/interpreter: HTTP 500
   retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
   retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
 MY-09 Perlis: 2 halal-tagged of 97 eating places
-MY-10 Selangor: 265 halal-tagged of 5864 eating places
-MY-11 Terengganu: 8 halal-tagged of 584 eating places
   retry: https://overpass-api.de/api/interpreter: HTTP 502
   retry: https://overpass.private.coffee/api/interpreter: HTTP 500
   retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
   retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
+MY-10 Selangor: 265 halal-tagged of 5864 eating places
+MY-11 Terengganu: 8 halal-tagged of 584 eating places
 MY-12 Sabah: 40 halal-tagged of 1261 eating places
 MY-13 Sarawak: 562 halal-tagged of 3264 eating places
 MY-14 Kuala Lumpur: 117 halal-tagged of 4478 eating places
 MY-15 Labuan: 3 halal-tagged of 45 eating places
+MY-16 Putrajaya: 7 halal-tagged of 83 eating places
   retry: https://overpass-api.de/api/interpreter: HTTP 502
-MY-16 Putrajaya: 5 halal-tagged of 73 eating places
-Traceback (most recent call last):
-  File "/home/runner/work/digi-architect.studio/digi-architect.studio/_directory-sync/research_osm.py", line 106, in <module>
-    main(sys.argv[1:] or ["MY", "JP"])
-  File "/home/runner/work/digi-architect.studio/digi-architect.studio/_directory-sync/research_osm.py", line 96, in main
-    result["places"] = [{"id": p["id"], "lat": p["lat"], "lon": p["lon"],
-                                               ~^^^^^^^
-KeyError: 'lat'
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
+MY: 484 city/town nodes
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+JP-01 Hokkaido: 1 halal-tagged of 5035 eating places
+JP-02 Aomori: 0 halal-tagged of 2238 eating places
+JP-03 Iwate: 0 halal-tagged of 1322 eating places
+JP-04 Miyagi: 2 halal-tagged of 5955 eating places
+JP-05 Akita: 0 halal-tagged of 2230 eating places
+JP-06 Yamagata: 0 halal-tagged of 2814 eating places
+JP-07 Fukushima: 0 halal-tagged of 1811 eating places
+JP-08 Ibaraki: 3 halal-tagged of 2078 eating places
+JP-09 Tochigi: 1 halal-tagged of 2160 eating places
+JP-10 Gunma: 1 halal-tagged of 1887 eating places
+JP-11 Saitama: 10 halal-tagged of 6027 eating places
+JP-12 Chiba: 4 halal-tagged of 6167 eating places
+JP-13 Tokyo: 37 halal-tagged of 28856 eating places
+JP-14 Kanagawa: 5 halal-tagged of 10975 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 504
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+JP-15 Niigata: 0 halal-tagged of 1942 eating places
+JP-16 Toyama: 0 halal-tagged of 746 eating places
+JP-17 Ishikawa: 0 halal-tagged of 1355 eating places
+JP-18 Fukui: 0 halal-tagged of 1167 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+JP-19 Yamanashi: 5 halal-tagged of 1027 eating places
+JP-20 Nagano: 0 halal-tagged of 2803 eating places
+JP-21 Gifu: 0 halal-tagged of 1654 eating places
+JP-22 Shizuoka: 1 halal-tagged of 4274 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+JP-23 Aichi: 1 halal-tagged of 7105 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+JP-24 Mie: 0 halal-tagged of 0 eating places
+JP-25 Shiga: 0 halal-tagged of 2057 eating places
+JP-26 Kyoto: 1 halal-tagged of 5559 eating places
+JP-27 Osaka: 4 halal-tagged of 18469 eating places
+JP-28 Hyogo: 2 halal-tagged of 9454 eating places
+JP-29 Nara: 1 halal-tagged of 1848 eating places
+JP-30 Wakayama: 0 halal-tagged of 1839 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
+JP-31 Tottori: 0 halal-tagged of 701 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+JP-32 Shimane: 0 halal-tagged of 580 eating places
+JP-33 Okayama: 3 halal-tagged of 3360 eating places
+JP-34 Hiroshima: 3 halal-tagged of 2088 eating places
+JP-35 Yamaguchi: 0 halal-tagged of 587 eating places
+JP-36 Tokushima: 0 halal-tagged of 641 eating places
+JP-37 Kagawa: 2 halal-tagged of 1266 eating places
+JP-38 Ehime: 0 halal-tagged of 1007 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
+JP-39 Kochi: 0 halal-tagged of 413 eating places
+JP-40 Fukuoka: 0 halal-tagged of 3980 eating places
+JP-41 Saga: 0 halal-tagged of 438 eating places
+JP-42 Nagasaki: 0 halal-tagged of 785 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
+JP-43 Kumamoto: 0 halal-tagged of 842 eating places
+JP-44 Oita: 0 halal-tagged of 1077 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+JP-45 Miyazaki: 0 halal-tagged of 0 eating places
+JP-46 Kagoshima: 0 halal-tagged of 1325 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
+JP-47 Okinawa: 0 halal-tagged of 2455 eating places
+JP: 1560 city/town nodes
