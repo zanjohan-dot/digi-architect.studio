@@ -1,0 +1,13 @@
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
+JP-24 Mie: 0 halal-tagged of 1846 eating places
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+  retry: https://maps.mail.ru/osm/tools/overpass/api/interpreter: HTTP 504
+  retry: https://overpass-api.de/api/interpreter: HTTP 502
+  retry: https://overpass.private.coffee/api/interpreter: HTTP 500
+  retry: https://overpass.kumi.systems/api/interpreter: HTTP 500
+JP-45 Miyazaki: 0 halal-tagged of 538 eating places
