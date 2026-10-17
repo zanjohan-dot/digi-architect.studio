@@ -1,0 +1,20 @@
+{
+ "jakim-dir": {
+  "url": "https://myehalal.halal.gov.my/portal-halal/v1/index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=",
+  "status": 200,
+  "final_url": "https://www.halal.gov.my/?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=",
+  "bytes": 16772
+ },
+ "jakim-home": {
+  "url": "https://www.halal.gov.my/",
+  "status": 200,
+  "final_url": "https://www.halal.gov.my/",
+  "bytes": 32023
+ },
+ "osm-user": {
+  "url": "https://www.openstreetmap.org/user/Peter_Ha_QCHB",
+  "status": 200,
+  "final_url": "https://www.openstreetmap.org/user/Peter_Ha_QCHB",
+  "bytes": 14347
+ }
+}

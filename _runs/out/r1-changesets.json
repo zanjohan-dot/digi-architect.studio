@@ -1,0 +1,4339 @@
+{
+"155085092": {
+"created_at": "2024-08-11T04:39:58Z",
+"tags": {
+"changesets_count": "2525",
+"comment": "Updated various places at Permyjaya, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 26
+},
+"155056100": {
+"created_at": "2024-08-10T10:32:40Z",
+"tags": {
+"changesets_count": "2508",
+"comment": "Updated a residential area",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 184
+},
+"155028637": {
+"created_at": "2024-08-09T15:22:05Z",
+"tags": {
+"changesets_count": "2502",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 21
+},
+"154941660": {
+"created_at": "2024-08-07T15:26:18Z",
+"tags": {
+"changesets_count": "2478",
+"comment": "Updated various places at Desa Murni, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 23
+},
+"154879381": {
+"created_at": "2024-08-06T07:24:43Z",
+"tags": {
+"changesets_count": "2471",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 36
+},
+"154739299": {
+"created_at": "2024-08-02T14:29:44Z",
+"tags": {
+"changesets_count": "2433",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 23
+},
+"154724676": {
+"created_at": "2024-08-02T08:38:03Z",
+"tags": {
+"changesets_count": "2431",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 40
+},
+"154690568": {
+"created_at": "2024-08-01T11:58:17Z",
+"tags": {
+"changesets_count": "2423",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 6
+},
+"154676544": {
+"created_at": "2024-08-01T05:33:39Z",
+"tags": {
+"changesets_count": "2417",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 29
+},
+"154655190": {
+"created_at": "2024-07-31T15:20:50Z",
+"tags": {
+"changesets_count": "2414",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 15
+},
+"154632097": {
+"created_at": "2024-07-31T06:02:23Z",
+"tags": {
+"changesets_count": "2407",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 37
+},
+"154545418": {
+"created_at": "2024-07-29T05:19:16Z",
+"tags": {
+"changesets_count": "2387",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 102
+},
+"154489899": {
+"created_at": "2024-07-27T15:36:23Z",
+"tags": {
+"changesets_count": "2355",
+"comment": "Updated various places at Taman Tunku, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 47
+},
+"154485817": {
+"created_at": "2024-07-27T14:01:11Z",
+"tags": {
+"changesets_count": "2351",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"154485374": {
+"created_at": "2024-07-27T13:49:15Z",
+"tags": {
+"changesets_count": "2349",
+"comment": "Updated various places at Permaisuri Imperial City Mall, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 10
+},
+"154129530": {
+"created_at": "2024-07-19T06:57:14Z",
+"tags": {
+"changesets_count": "2250",
+"comment": "Updated various places at Piasau area, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 20
+},
+"154106616": {
+"created_at": "2024-07-18T15:14:27Z",
+"tags": {
+"changesets_count": "2241",
+"comment": "Updated Coco Cabana, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 439
+},
+"153997545": {
+"created_at": "2024-07-16T05:21:58Z",
+"tags": {
+"changesets_count": "2195",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 8
+},
+"153928624": {
+"created_at": "2024-07-14T12:34:01Z",
+"tags": {
+"changesets_count": "2166",
+"comment": "updated various places at Piasau Utara area, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 107
+},
+"153904339": {
+"created_at": "2024-07-13T17:57:34Z",
+"tags": {
+"changesets_count": "2155",
+"comment": "Updated various places at Piasau Indah Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 38
+},
+"153899382": {
+"created_at": "2024-07-13T15:48:52Z",
+"tags": {
+"changesets_count": "2154",
+"comment": "Updated various places along Jalan Datuk Edward Jeli, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 88
+},
+"153745260": {
+"created_at": "2024-07-09T13:35:50Z",
+"tags": {
+"changesets_count": "2091",
+"comment": "updated various places at Krokop area, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 539
+},
+"153729782": {
+"created_at": "2024-07-09T06:13:59Z",
+"tags": {
+"changesets_count": "2079",
+"comment": "updated a gas station",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 28
+},
+"153708889": {
+"created_at": "2024-07-08T15:24:52Z",
+"tags": {
+"changesets_count": "2069",
+"comment": "updated various places at Desa Pujut 2 Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 30
+},
+"153699918": {
+"created_at": "2024-07-08T11:42:38Z",
+"tags": {
+"changesets_count": "2061",
+"comment": "updated various places at Desa Senadin Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery",
+"warnings:outdated_tags:noncanonical_brand": "1"
+},
+"changes": 89
+},
+"153689669": {
+"created_at": "2024-07-08T07:26:42Z",
+"tags": {
+"changesets_count": "2060",
+"comment": "updated various places at Desa Senadin Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 76
+},
+"153646599": {
+"created_at": "2024-07-07T04:35:04Z",
+"tags": {
+"changesets_count": "2045",
+"comment": "updated various places at Permyjaya, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 42
+},
+"153645808": {
+"created_at": "2024-07-07T03:28:20Z",
+"tags": {
+"changesets_count": "2041",
+"comment": "updated various places at Miri city centre",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 56
+},
+"153643992": {
+"created_at": "2024-07-07T01:06:03Z",
+"tags": {
+"changesets_count": "2040",
+"comment": "updated various places at Miri Times Square, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 124
+},
+"153627723": {
+"created_at": "2024-07-06T15:10:02Z",
+"tags": {
+"changesets_count": "2034",
+"comment": "updated various places at Miri Waterfront Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 92
+},
+"153569772": {
+"created_at": "2024-07-05T02:03:15Z",
+"tags": {
+"changesets_count": "2004",
+"comment": "updated a food court",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"153531966": {
+"created_at": "2024-07-04T07:56:00Z",
+"tags": {
+"changesets_count": "1984",
+"comment": "updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge;streetlevel imagery"
+},
+"changes": 1
+},
+"153527448": {
+"created_at": "2024-07-04T05:26:42Z",
+"tags": {
+"changesets_count": "1983",
+"comment": "updated various places at Piasau area, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 146
+},
+"153451550": {
+"created_at": "2024-07-02T11:28:03Z",
+"tags": {
+"changesets_count": "1928",
+"comment": "updated various places at Miri Waterfront Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 96
+},
+"153335290": {
+"created_at": "2024-06-29T14:45:51Z",
+"tags": {
+"changesets_count": "1835",
+"comment": "updated various places at Awalk Business Park, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 27
+},
+"153315774": {
+"created_at": "2024-06-29T02:45:05Z",
+"tags": {
+"changesets_count": "1828",
+"comment": "updated various places at Morsjaya Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 21
+},
+"153298593": {
+"created_at": "2024-06-28T15:11:41Z",
+"tags": {
+"changesets_count": "1816",
+"comment": "updated a residential area in Piasau area, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 115
+},
+"153295272": {
+"created_at": "2024-06-28T14:03:24Z",
+"tags": {
+"changesets_count": "1807",
+"comment": "updated a residential area in Taman Tunku",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 229
+},
+"153247273": {
+"created_at": "2024-06-27T13:09:37Z",
+"tags": {
+"changesets_count": "1776",
+"comment": "updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"153209498": {
+"created_at": "2024-06-26T15:36:40Z",
+"tags": {
+"changesets_count": "1753",
+"comment": "updated a food stall",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "aerial imagery;streetlevel imagery;local knowledge"
+},
+"changes": 10
+},
+"153208771": {
+"created_at": "2024-06-26T15:19:28Z",
+"tags": {
+"changesets_count": "1752",
+"comment": "updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"153208603": {
+"created_at": "2024-06-26T15:14:50Z",
+"tags": {
+"changesets_count": "1751",
+"comment": "updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"153204875": {
+"created_at": "2024-06-26T14:07:52Z",
+"tags": {
+"changesets_count": "1741",
+"comment": "updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 5
+},
+"153202755": {
+"created_at": "2024-06-26T13:23:52Z",
+"tags": {
+"changesets_count": "1736",
+"comment": "updated various places at Assar Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 50
+},
+"153161282": {
+"created_at": "2024-06-25T14:51:38Z",
+"tags": {
+"changesets_count": "1713",
+"comment": "updated various places at Kg Lereng Bukit, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 71
+},
+"153155139": {
+"created_at": "2024-06-25T12:27:27Z",
+"tags": {
+"changesets_count": "1701",
+"comment": "updated various places at Miri city centre",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 17
+},
+"153115289": {
+"created_at": "2024-06-24T14:27:33Z",
+"tags": {
+"changesets_count": "1685",
+"comment": "updated various places at Desa Senadin Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 123
+},
+"153055873": {
+"created_at": "2024-06-23T07:36:26Z",
+"tags": {
+"changesets_count": "1673",
+"comment": "updated various places at Canada Hill, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 414
+},
+"153050855": {
+"created_at": "2024-06-23T02:29:49Z",
+"tags": {
+"changesets_count": "1666",
+"comment": "updated a restaurant",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 8
+},
+"153022914": {
+"created_at": "2024-06-22T10:12:03Z",
+"tags": {
+"changesets_count": "1650",
+"comment": "updated a burger stall",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"152883979": {
+"created_at": "2024-06-19T08:56:30Z",
+"tags": {
+"changesets_count": "1581",
+"comment": "updated various places at Desa Senadin Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 8
+},
+"152855964": {
+"created_at": "2024-06-18T16:06:10Z",
+"tags": {
+"changesets_count": "1568",
+"comment": "updated various places at Desa Pujut 2 Commercial Centre, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 6
+},
+"152854258": {
+"created_at": "2024-06-18T15:20:06Z",
+"tags": {
+"changesets_count": "1564",
+"comment": "Updated various places at Senadin Gateway Commercial Centre & Golden Royal Villa Shoplots, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 53
+},
+"150226408": {
+"created_at": "2024-04-19T14:18:43Z",
+"tags": {
+"changesets_count": "1499",
+"comment": "updated various places at Boulevard Commercial Centre, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 13
+},
+"150135442": {
+"created_at": "2024-04-17T15:30:03Z",
+"tags": {
+"changesets_count": "1486",
+"comment": "updated various places at Centre Point Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 2
+},
+"150046789": {
+"created_at": "2024-04-15T16:08:18Z",
+"tags": {
+"changesets_count": "1456",
+"comment": "updated a restaurant",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"150046421": {
+"created_at": "2024-04-15T16:00:40Z",
+"tags": {
+"changesets_count": "1454",
+"comment": "updated various places at Miri City Center",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 36
+},
+"150000311": {
+"created_at": "2024-04-14T16:17:38Z",
+"tags": {
+"changesets_count": "1443",
+"comment": "updated various places at Miri City Center",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 26
+},
+"149997951": {
+"created_at": "2024-04-14T15:25:55Z",
+"tags": {
+"changesets_count": "1442",
+"comment": "updated various places at Miri City Center",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 73
+},
+"149975038": {
+"created_at": "2024-04-14T03:14:45Z",
+"tags": {
+"changesets_count": "1437",
+"comment": "updated various places at Piasau area, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 99
+},
+"149951124": {
+"created_at": "2024-04-13T13:13:32Z",
+"tags": {
+"changesets_count": "1429",
+"comment": "updated various places at Miri City Center",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;streetlevel imagery;aerial imagery"
+},
+"changes": 27
+},
+"149936189": {
+"created_at": "2024-04-13T05:34:30Z",
+"tags": {
+"changesets_count": "1422",
+"comment": "updated various places at Miri City Center",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 40
+},
+"149911828": {
+"created_at": "2024-04-12T13:45:29Z",
+"tags": {
+"changesets_count": "1413",
+"comment": "updated various places at Pelita Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 71
+},
+"149889737": {
+"created_at": "2024-04-12T04:13:34Z",
+"tags": {
+"changesets_count": "1405",
+"comment": "updated various places at Piasau area, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:almost_junction:highway-highway": "1",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 95
+},
+"149874641": {
+"created_at": "2024-04-11T17:12:59Z",
+"tags": {
+"changesets_count": "1402",
+"comment": "updated various places at Miri City Center",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 36
+},
+"149871265": {
+"created_at": "2024-04-11T15:55:33Z",
+"tags": {
+"changesets_count": "1401",
+"comment": "updated various places at Miri City Center",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:outdated_tags:incomplete_tags": "1",
+"resolved:outdated_tags:noncanonical_brand": "1",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 40
+},
+"149861208": {
+"created_at": "2024-04-11T11:50:00Z",
+"tags": {
+"changesets_count": "1392",
+"comment": "updated various places at Boulevard Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 33
+},
+"149820387": {
+"created_at": "2024-04-10T13:31:57Z",
+"tags": {
+"changesets_count": "1384",
+"comment": "updated various places at Boulevard Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 40
+},
+"149781755": {
+"created_at": "2024-04-09T15:06:44Z",
+"tags": {
+"changesets_count": "1376",
+"comment": "updated various places at Pujut 7 Commercial Center & Chong Shin Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 106
+},
+"149773350": {
+"created_at": "2024-04-09T11:34:32Z",
+"tags": {
+"changesets_count": "1360",
+"comment": "updated various places at Morsjaya Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 44
+},
+"149719667": {
+"created_at": "2024-04-08T06:38:11Z",
+"tags": {
+"changesets_count": "1339",
+"comment": "updated various places along Jalan Padang Kerbau, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 203
+},
+"149689022": {
+"created_at": "2024-04-07T11:59:45Z",
+"tags": {
+"changesets_count": "1323",
+"comment": "updated various places at Luak area, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 65
+},
+"149683861": {
+"created_at": "2024-04-07T09:29:04Z",
+"tags": {
+"changesets_count": "1321",
+"comment": "updated various places at Luak Bay Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 15
+},
+"149659170": {
+"created_at": "2024-04-06T15:02:36Z",
+"tags": {
+"changesets_count": "1298",
+"comment": "updated various places at Permayaja, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 63
+},
+"149653513": {
+"created_at": "2024-04-06T12:36:32Z",
+"tags": {
+"changesets_count": "1297",
+"comment": "updated various places at Permayaja, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 98
+},
+"149505242": {
+"created_at": "2024-04-03T04:12:51Z",
+"tags": {
+"changesets_count": "1243",
+"comment": "updated various places at Mega Emart Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "aerial imagery;local knowledge"
+},
+"changes": 28
+},
+"149386707": {
+"created_at": "2024-03-31T11:51:11Z",
+"tags": {
+"changesets_count": "1208",
+"comment": "updated various places at Pelita Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 80
+},
+"149343775": {
+"created_at": "2024-03-30T09:55:09Z",
+"tags": {
+"changesets_count": "1196",
+"comment": "updated a food stall",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"149312240": {
+"created_at": "2024-03-29T13:14:59Z",
+"tags": {
+"changesets_count": "1188",
+"comment": "updated various places at Pelita Commercial Center, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 45
+},
+"149022516": {
+"created_at": "2024-03-22T16:51:29Z",
+"tags": {
+"changesets_count": "1129",
+"comment": "updated various places at Saberkas Comeercial Centre, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 29
+},
+"148920379": {
+"created_at": "2024-03-20T15:35:30Z",
+"tags": {
+"changesets_count": "1121",
+"comment": "updated various places at Pelita area, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:mismatched_geometry:vertex_as_point": "1",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 34
+},
+"148817124": {
+"created_at": "2024-03-18T13:29:17Z",
+"tags": {
+"changesets_count": "1102",
+"comment": "updated various places at Miri city centre",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:mismatched_geometry:vertex_as_point": "3",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 66
+},
+"148436338": {
+"created_at": "2024-03-09T19:05:24Z",
+"tags": {
+"changesets_count": "1018",
+"comment": "updated various places at Miri city centre",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 53
+},
+"148391063": {
+"created_at": "2024-03-08T16:07:56Z",
+"tags": {
+"changesets_count": "994",
+"comment": "updated various places at Saberkas Commercial Centre, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 28
+},
+"148257518": {
+"created_at": "2024-03-05T16:04:56Z",
+"tags": {
+"changesets_count": "983",
+"comment": "updated various places at Pelita Commercial Centre, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 91
+},
+"148128572": {
+"created_at": "2024-03-02T12:08:05Z",
+"tags": {
+"changesets_count": "963",
+"comment": "updated various places at Miri city centre",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 29
+},
+"148106978": {
+"created_at": "2024-03-01T18:19:04Z",
+"tags": {
+"changesets_count": "958",
+"comment": "updated various places at Desa Senadin Commercial Centre, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 36
+},
+"148102969": {
+"created_at": "2024-03-01T16:16:38Z",
+"tags": {
+"changesets_count": "955",
+"comment": "updated various places at Desa Senadin Commercial Centre, Miri",
+"created_by": "iD 2.28.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:missing_tag:descriptive": "1",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 77
+},
+"148036198": {
+"created_at": "2024-02-29T04:46:27Z",
+"tags": {
+"changesets_count": "945",
+"comment": "updated various places at Bekenu town",
+"created_by": "iD 2.28.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Bing Maps Aerial",
+"locale": "en-US",
+"resolved:outdated_tags:noncanonical_brand": "2",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 13
+},
+"147931523": {
+"created_at": "2024-02-26T13:14:21Z",
+"tags": {
+"changesets_count": "910",
+"comment": "updated various places at Taman Tunku, Miri",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 66
+},
+"147776851": {
+"created_at": "2024-02-22T14:52:00Z",
+"tags": {
+"changesets_count": "890",
+"comment": "updated various places at Miri city centre",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 49
+},
+"147719625": {
+"created_at": "2024-02-21T06:55:16Z",
+"tags": {
+"changesets_count": "877",
+"comment": "updated a food court",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 7
+},
+"147598415": {
+"created_at": "2024-02-18T08:08:22Z",
+"tags": {
+"changesets_count": "854",
+"comment": "updated various places at Permayaja, Miri",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 51
+},
+"147538436": {
+"created_at": "2024-02-16T16:01:22Z",
+"tags": {
+"changesets_count": "835",
+"comment": "updated various places at Permayaja, Miri",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 97
+},
+"147445749": {
+"created_at": "2024-02-14T11:07:16Z",
+"tags": {
+"changesets_count": "824",
+"comment": "updated various places at Bintang Jaya Commercial Centre & Bintang Megamall, Miri",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:outdated_tags:noncanonical_brand": "2",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 55
+},
+"147298355": {
+"created_at": "2024-02-10T15:57:34Z",
+"tags": {
+"changesets_count": "777",
+"comment": "updated various places at Pujut Corner, Miri",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 217
+},
+"146598652": {
+"created_at": "2024-01-23T15:58:02Z",
+"tags": {
+"changesets_count": "659",
+"comment": "updated various places at Permyjaya, Miri",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 88
+},
+"146306891": {
+"created_at": "2024-01-16T04:40:35Z",
+"tags": {
+"changesets_count": "594",
+"comment": "updated various places at Bekenu & Taman Lambir Jaya",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Bing Maps Aerial;Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 86
+},
+"145825685": {
+"created_at": "2024-01-03T07:09:42Z",
+"tags": {
+"changesets_count": "427",
+"comment": "updated various places in Bekenu & Taman Lambir Jaya",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Bing Maps Aerial",
+"locale": "en-US",
+"resolved:outdated_tags:noncanonical_brand": "1",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 44
+},
+"145825194": {
+"created_at": "2024-01-03T06:49:45Z",
+"tags": {
+"changesets_count": "426",
+"comment": "updated various places in Bekenu",
+"created_by": "iD 2.27.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Bing Maps Aerial",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 138
+},
+"157841936": {
+"created_at": "2024-10-13T16:05:04Z",
+"tags": {
+"changesets_count": "3879",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 24
+},
+"157838631": {
+"created_at": "2024-10-13T14:48:45Z",
+"tags": {
+"changesets_count": "3878",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 31
+},
+"157835845": {
+"created_at": "2024-10-13T13:41:55Z",
+"tags": {
+"changesets_count": "3877",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 61
+},
+"157830297": {
+"created_at": "2024-10-13T11:25:15Z",
+"tags": {
+"changesets_count": "3869",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157828551": {
+"created_at": "2024-10-13T10:34:05Z",
+"tags": {
+"changesets_count": "3867",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 48
+},
+"157798723": {
+"created_at": "2024-10-12T14:37:00Z",
+"tags": {
+"changesets_count": "3861",
+"comment": "Updated various places at Pujut, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge",
+"warnings:outdated_tags:noncanonical_brand": "1"
+},
+"changes": 51
+},
+"157763406": {
+"created_at": "2024-10-11T15:54:07Z",
+"tags": {
+"changesets_count": "3853",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 58
+},
+"157755134": {
+"created_at": "2024-10-11T12:33:05Z",
+"tags": {
+"changesets_count": "3844",
+"comment": "Updated various places at Bulatan Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 3
+},
+"157739853": {
+"created_at": "2024-10-11T04:01:44Z",
+"tags": {
+"changesets_count": "3834",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157721894": {
+"created_at": "2024-10-10T15:40:48Z",
+"tags": {
+"changesets_count": "3826",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157721708": {
+"created_at": "2024-10-10T15:37:26Z",
+"tags": {
+"changesets_count": "3825",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157703394": {
+"created_at": "2024-10-10T08:27:25Z",
+"tags": {
+"changesets_count": "3812",
+"comment": "Updated various places at Eastwood Industrial Estate, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 52
+},
+"157703039": {
+"created_at": "2024-10-10T08:17:25Z",
+"tags": {
+"changesets_count": "3811",
+"comment": "Updated various places at Eastwood Industrial Estate, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 46
+},
+"157702053": {
+"created_at": "2024-10-10T07:45:05Z",
+"tags": {
+"changesets_count": "3808",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157659984": {
+"created_at": "2024-10-09T08:05:50Z",
+"tags": {
+"changesets_count": "3780",
+"comment": "Updated various places at Mega Emart Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 51
+},
+"157525920": {
+"created_at": "2024-10-06T06:51:48Z",
+"tags": {
+"changesets_count": "3694",
+"comment": "Updated Piasau Nature Reserve, Miri",
+"created_by": "iD 2.30.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 48
+},
+"157460554": {
+"created_at": "2024-10-04T13:15:17Z",
+"tags": {
+"changesets_count": "3661",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.3",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157403968": {
+"created_at": "2024-10-03T06:28:55Z",
+"tags": {
+"changesets_count": "3635",
+"comment": "Updated various places at Bulatan Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 38
+},
+"157378174": {
+"created_at": "2024-10-02T13:04:07Z",
+"tags": {
+"changesets_count": "3626",
+"comment": "Updated various places at Taman Tunku, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 321
+},
+"157375834": {
+"created_at": "2024-10-02T11:54:17Z",
+"tags": {
+"changesets_count": "3624",
+"comment": "Updated various places at Taman Tunku, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 109
+},
+"157346397": {
+"created_at": "2024-10-01T15:58:51Z",
+"tags": {
+"changesets_count": "3611",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157343224": {
+"created_at": "2024-10-01T14:47:34Z",
+"tags": {
+"changesets_count": "3607",
+"comment": "Updated various places at Centre Point Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 68
+},
+"157295099": {
+"created_at": "2024-09-30T12:25:56Z",
+"tags": {
+"changesets_count": "3592",
+"comment": "Updated various places along Jalan Temenggong Oyong Lawai Jau, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 114
+},
+"157248247": {
+"created_at": "2024-09-29T11:38:12Z",
+"tags": {
+"changesets_count": "3567",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 94
+},
+"157237348": {
+"created_at": "2024-09-29T06:11:43Z",
+"tags": {
+"changesets_count": "3558",
+"comment": "Updated various places at Assar Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 46
+},
+"157159462": {
+"created_at": "2024-09-27T08:21:32Z",
+"tags": {
+"changesets_count": "3543",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 28
+},
+"157154251": {
+"created_at": "2024-09-27T05:23:32Z",
+"tags": {
+"changesets_count": "3542",
+"comment": "Updated various places at Pujut, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 24
+},
+"157132662": {
+"created_at": "2024-09-26T14:49:07Z",
+"tags": {
+"changesets_count": "3530",
+"comment": "Updated various places along Jalan Pujut-Lutong, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 53
+},
+"157113241": {
+"created_at": "2024-09-26T07:30:40Z",
+"tags": {
+"changesets_count": "3518",
+"comment": "Updated various places at Lutong Baru, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 11
+},
+"157063354": {
+"created_at": "2024-09-25T04:45:19Z",
+"tags": {
+"changesets_count": "3503",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157046643": {
+"created_at": "2024-09-24T16:00:18Z",
+"tags": {
+"changesets_count": "3502",
+"comment": "Updated various places along Jalan Coastal Miri-Bintulu",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 183
+},
+"156984757": {
+"created_at": "2024-09-23T09:03:32Z",
+"tags": {
+"changesets_count": "3471",
+"comment": "Updated various places at Bintang Jaya Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 3
+},
+"156952630": {
+"created_at": "2024-09-22T13:48:39Z",
+"tags": {
+"changesets_count": "3467",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US"
+},
+"changes": 1
+},
+"156946164": {
+"created_at": "2024-09-22T11:13:00Z",
+"tags": {
+"changesets_count": "3460",
+"comment": "Updated various places at 101 Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 35
+},
+"156938960": {
+"created_at": "2024-09-22T07:48:02Z",
+"tags": {
+"changesets_count": "3452",
+"comment": "Updated a government office",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 4
+},
+"156938508": {
+"created_at": "2024-09-22T07:32:30Z",
+"tags": {
+"changesets_count": "3451",
+"comment": "Updated various places at 101 Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 48
+},
+"156936127": {
+"created_at": "2024-09-22T05:38:18Z",
+"tags": {
+"changesets_count": "3448",
+"comment": "Updated various places at Pelita Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery",
+"warnings:outdated_tags:noncanonical_brand": "1"
+},
+"changes": 71
+},
+"156867248": {
+"created_at": "2024-09-20T13:08:44Z",
+"tags": {
+"changesets_count": "3418",
+"comment": "Updated various places at Assar Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 43
+},
+"156864430": {
+"created_at": "2024-09-20T11:59:02Z",
+"tags": {
+"changesets_count": "3412",
+"comment": "Updated various places at Mega Emart Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 67
+},
+"156852424": {
+"created_at": "2024-09-20T07:03:15Z",
+"tags": {
+"changesets_count": "3406",
+"comment": "Updated various places along Jalan Airport, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 74
+},
+"156817785": {
+"created_at": "2024-09-19T12:25:55Z",
+"tags": {
+"changesets_count": "3398",
+"comment": "Updated various places at Riam, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 64
+},
+"156816435": {
+"created_at": "2024-09-19T11:59:24Z",
+"tags": {
+"changesets_count": "3397",
+"comment": "Updated various places along Jalan Bakam & Jalan Luak, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 68
+},
+"156776051": {
+"created_at": "2024-09-18T14:19:00Z",
+"tags": {
+"changesets_count": "3387",
+"comment": "Updated various places at Bandar Baru Permyjaya, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 53
+},
+"156576316": {
+"created_at": "2024-09-13T14:53:22Z",
+"tags": {
+"changesets_count": "3369",
+"comment": "Updated a residential area",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 142
+},
+"156489323": {
+"created_at": "2024-09-11T15:07:11Z",
+"tags": {
+"changesets_count": "3339",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156465648": {
+"created_at": "2024-09-11T05:28:08Z",
+"tags": {
+"changesets_count": "3328",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 5
+},
+"156443546": {
+"created_at": "2024-09-10T14:24:29Z",
+"tags": {
+"changesets_count": "3316",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156443079": {
+"created_at": "2024-09-10T14:16:12Z",
+"tags": {
+"changesets_count": "3315",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156442264": {
+"created_at": "2024-09-10T13:58:55Z",
+"tags": {
+"changesets_count": "3312",
+"comment": "Updated a hotel",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 10
+},
+"156440006": {
+"created_at": "2024-09-10T13:13:33Z",
+"tags": {
+"changesets_count": "3309",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156437819": {
+"created_at": "2024-09-10T12:21:58Z",
+"tags": {
+"changesets_count": "3300",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156406814": {
+"created_at": "2024-09-09T17:42:51Z",
+"tags": {
+"changesets_count": "3284",
+"comment": "Updated various places at Pujut, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 20
+},
+"156404707": {
+"created_at": "2024-09-09T16:58:05Z",
+"tags": {
+"changesets_count": "3283",
+"comment": "Updated various places at Taman Tunku, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 17
+},
+"156403005": {
+"created_at": "2024-09-09T16:23:16Z",
+"tags": {
+"changesets_count": "3282",
+"comment": "Updated various places at Taman Tunku, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 68
+},
+"156391908": {
+"created_at": "2024-09-09T12:19:26Z",
+"tags": {
+"changesets_count": "3280",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156354444": {
+"created_at": "2024-09-08T14:23:58Z",
+"tags": {
+"changesets_count": "3274",
+"comment": "Updated various places at Krokop, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 238
+},
+"156347503": {
+"created_at": "2024-09-08T11:39:24Z",
+"tags": {
+"changesets_count": "3270",
+"comment": "Updated a residential area",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 90
+},
+"156343243": {
+"created_at": "2024-09-08T09:49:55Z",
+"tags": {
+"changesets_count": "3268",
+"comment": "Updated a residential area",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 41
+},
+"156341253": {
+"created_at": "2024-09-08T09:03:43Z",
+"tags": {
+"changesets_count": "3263",
+"comment": "Updated various places at Canada Hill, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 10
+},
+"156340555": {
+"created_at": "2024-09-08T08:45:17Z",
+"tags": {
+"changesets_count": "3261",
+"comment": "Updated a cafe",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156339991": {
+"created_at": "2024-09-08T08:27:17Z",
+"tags": {
+"changesets_count": "3259",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156337949": {
+"created_at": "2024-09-08T07:09:48Z",
+"tags": {
+"changesets_count": "3255",
+"comment": "Updated a residential area",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 42
+},
+"156335766": {
+"created_at": "2024-09-08T05:14:13Z",
+"tags": {
+"changesets_count": "3252",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156335034": {
+"created_at": "2024-09-08T04:10:55Z",
+"tags": {
+"changesets_count": "3249",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156314171": {
+"created_at": "2024-09-07T13:51:44Z",
+"tags": {
+"changesets_count": "3242",
+"comment": "Updated various places at Piasau, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;gps;aerial imagery"
+},
+"changes": 192
+},
+"156197446": {
+"created_at": "2024-09-04T17:30:05Z",
+"tags": {
+"changesets_count": "3216",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156097726": {
+"created_at": "2024-09-02T12:57:33Z",
+"tags": {
+"changesets_count": "3165",
+"comment": "Updated various places at Permyajaya, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 81
+},
+"156082022": {
+"created_at": "2024-09-02T06:29:18Z",
+"tags": {
+"changesets_count": "3152",
+"comment": "Updated various places at Emart Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 21
+},
+"156059251": {
+"created_at": "2024-09-01T15:13:38Z",
+"tags": {
+"changesets_count": "3139",
+"comment": "Updated various places at Tudan, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 10
+},
+"156054825": {
+"created_at": "2024-09-01T13:34:04Z",
+"tags": {
+"changesets_count": "3136",
+"comment": "Updated various places at Xiang Xiang Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 13
+},
+"156053255": {
+"created_at": "2024-09-01T12:58:54Z",
+"tags": {
+"changesets_count": "3131",
+"comment": "Updated various places at Xiang Xiang Commercial Centre, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 60
+},
+"156018995": {
+"created_at": "2024-08-31T14:56:57Z",
+"tags": {
+"changesets_count": "3113",
+"comment": "Updated various places at Piasau Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 10
+},
+"156014420": {
+"created_at": "2024-08-31T13:07:11Z",
+"tags": {
+"changesets_count": "3106",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 6
+},
+"156013274": {
+"created_at": "2024-08-31T12:36:49Z",
+"tags": {
+"changesets_count": "3104",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 4
+},
+"156009198": {
+"created_at": "2024-08-31T10:50:05Z",
+"tags": {
+"changesets_count": "3102",
+"comment": "Updated various places at Senadin, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 65
+},
+"156005261": {
+"created_at": "2024-08-31T09:18:17Z",
+"tags": {
+"changesets_count": "3100",
+"comment": "Updated various places at Senadin, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 25
+},
+"156003236": {
+"created_at": "2024-08-31T08:18:39Z",
+"tags": {
+"changesets_count": "3098",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"156003154": {
+"created_at": "2024-08-31T08:15:42Z",
+"tags": {
+"changesets_count": "3096",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"155931860": {
+"created_at": "2024-08-29T14:26:34Z",
+"tags": {
+"changesets_count": "3061",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 104
+},
+"155880389": {
+"created_at": "2024-08-28T13:18:37Z",
+"tags": {
+"changesets_count": "3043",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 28
+},
+"155831400": {
+"created_at": "2024-08-27T13:08:19Z",
+"tags": {
+"changesets_count": "3017",
+"comment": "Updated a cafe",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"155721774": {
+"created_at": "2024-08-25T06:21:06Z",
+"tags": {
+"changesets_count": "2975",
+"comment": "Updated various places at Taman Tunku, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 85
+},
+"155680138": {
+"created_at": "2024-08-24T06:04:57Z",
+"tags": {
+"changesets_count": "2949",
+"comment": "Updated SouthLake Permyaja, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 45
+},
+"155660262": {
+"created_at": "2024-08-23T15:51:31Z",
+"tags": {
+"changesets_count": "2938",
+"comment": "Updated various places at Permyjaya, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 240
+},
+"155634073": {
+"created_at": "2024-08-23T05:27:30Z",
+"tags": {
+"changesets_count": "2933",
+"comment": "Updated various places at Taman Tunku, Miri",
+"created_by": "iD 2.30.2",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Mapbox Satellite;Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 37
+},
+"155559174": {
+"created_at": "2024-08-21T13:38:42Z",
+"tags": {
+"changesets_count": "2858",
+"comment": "Updated various places at Simpang Bekenu, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Bing Maps Aerial",
+"locale": "en-US",
+"resolved:outdated_tags:incomplete_tags": "1",
+"source": "local knowledge"
+},
+"changes": 11
+},
+"155467487": {
+"created_at": "2024-08-19T15:44:45Z",
+"tags": {
+"changesets_count": "2802",
+"comment": "Updated various places along Miri's coastal highway",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 419
+},
+"155456279": {
+"created_at": "2024-08-19T11:48:49Z",
+"tags": {
+"changesets_count": "2795",
+"comment": "Updated ILP Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 258
+},
+"155369556": {
+"created_at": "2024-08-17T12:48:16Z",
+"tags": {
+"changesets_count": "2703",
+"comment": "Updated various places at Marina Square 1 & 2, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 64
+},
+"155367506": {
+"created_at": "2024-08-17T11:57:53Z",
+"tags": {
+"changesets_count": "2702",
+"comment": "Updated various places at Marina Square 2, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 67
+},
+"155364653": {
+"created_at": "2024-08-17T10:50:34Z",
+"tags": {
+"changesets_count": "2701",
+"comment": "Updated various places at Marina Square 2, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 57
+},
+"155334835": {
+"created_at": "2024-08-16T15:52:39Z",
+"tags": {
+"changesets_count": "2684",
+"comment": "Updated various places at Marina Square 2, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 49
+},
+"155324780": {
+"created_at": "2024-08-16T12:11:42Z",
+"tags": {
+"changesets_count": "2672",
+"comment": "Updated various places at Marina Square 1, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 45
+},
+"155319124": {
+"created_at": "2024-08-16T09:54:31Z",
+"tags": {
+"changesets_count": "2669",
+"comment": "Updated a supermarket",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Bing Maps Aerial",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 2
+},
+"155312898": {
+"created_at": "2024-08-16T07:14:14Z",
+"tags": {
+"changesets_count": "2668",
+"comment": "Updated various places at Marina Square 1, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 21
+},
+"155311267": {
+"created_at": "2024-08-16T06:24:02Z",
+"tags": {
+"changesets_count": "2667",
+"comment": "Updated various places at Marina Square 1, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 74
+},
+"155221080": {
+"created_at": "2024-08-14T04:11:25Z",
+"tags": {
+"changesets_count": "2590",
+"comment": "Updated various places all over Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 42
+},
+"155202758": {
+"created_at": "2024-08-13T16:01:00Z",
+"tags": {
+"changesets_count": "2587",
+"comment": "Updated various places all over Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:disconnected_way:highway": "1",
+"source": "local knowledge;aerial imagery;streetlevel imagery",
+"warnings:disconnected_way:highway": "1"
+},
+"changes": 346
+},
+"155147494": {
+"created_at": "2024-08-12T12:48:33Z",
+"tags": {
+"changesets_count": "2559",
+"comment": "Updated various places at Krokop, Miri",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 501
+},
+"155086697": {
+"created_at": "2024-08-11T06:25:47Z",
+"tags": {
+"changesets_count": "2528",
+"comment": "Updated a residential area",
+"created_by": "iD 2.29.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 146
+},
+"160165261": {
+"created_at": "2024-12-11T11:45:21Z",
+"tags": {
+"changesets_count": "4685",
+"comment": "Updated a residential area",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 228
+},
+"160046787": {
+"created_at": "2024-12-08T06:18:32Z",
+"tags": {
+"changesets_count": "4653",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 47
+},
+"160045183": {
+"created_at": "2024-12-08T03:41:46Z",
+"tags": {
+"changesets_count": "4652",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"160045141": {
+"created_at": "2024-12-08T03:36:58Z",
+"tags": {
+"changesets_count": "4649",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"160004445": {
+"created_at": "2024-12-06T18:04:51Z",
+"tags": {
+"changesets_count": "4643",
+"comment": "Updated various places at Saberkas Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard);Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 38
+},
+"159961002": {
+"created_at": "2024-12-05T15:00:21Z",
+"tags": {
+"changesets_count": "4624",
+"comment": "Updated various places at Bandar Baru Permyajaya, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 11
+},
+"159851880": {
+"created_at": "2024-12-02T17:05:51Z",
+"tags": {
+"changesets_count": "4600",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 21
+},
+"159827607": {
+"created_at": "2024-12-02T04:37:46Z",
+"tags": {
+"changesets_count": "4592",
+"comment": "Updated various places at Krokop, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 17
+},
+"159805334": {
+"created_at": "2024-12-01T12:57:48Z",
+"tags": {
+"changesets_count": "4589",
+"comment": "Updated various places at Marina Square 1, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;survey"
+},
+"changes": 25
+},
+"159794342": {
+"created_at": "2024-12-01T04:34:05Z",
+"tags": {
+"changesets_count": "4583",
+"comment": "Updated various places at Bandar Baru Permyajaya, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 33
+},
+"159777095": {
+"created_at": "2024-11-30T15:04:38Z",
+"tags": {
+"changesets_count": "4577",
+"comment": "Updated various places at Miri Times Square",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 12
+},
+"159726276": {
+"created_at": "2024-11-29T04:36:39Z",
+"tags": {
+"changesets_count": "4566",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"159708494": {
+"created_at": "2024-11-28T15:40:54Z",
+"tags": {
+"changesets_count": "4560",
+"comment": "Updated various places at Bulatan Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 22
+},
+"159706889": {
+"created_at": "2024-11-28T15:05:19Z",
+"tags": {
+"changesets_count": "4557",
+"comment": "Updated various places at Senadin Gateway, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 12
+},
+"159667191": {
+"created_at": "2024-11-27T16:06:58Z",
+"tags": {
+"changesets_count": "4551",
+"comment": "Updated various places at Desa Senadin Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 5
+},
+"159642132": {
+"created_at": "2024-11-27T04:52:06Z",
+"tags": {
+"changesets_count": "4538",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"159622859": {
+"created_at": "2024-11-26T15:46:47Z",
+"tags": {
+"changesets_count": "4537",
+"comment": "Updated various places at Bandar Baru Permyajaya, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 3
+},
+"159621563": {
+"created_at": "2024-11-26T15:18:42Z",
+"tags": {
+"changesets_count": "4532",
+"comment": "Updated various places at Centre Point Commercial Centre 2, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;survey"
+},
+"changes": 81
+},
+"159577457": {
+"created_at": "2024-11-25T15:02:05Z",
+"tags": {
+"changesets_count": "4528",
+"comment": "Updated various places at Desa Bahagia Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 93
+},
+"159565479": {
+"created_at": "2024-11-25T09:57:08Z",
+"tags": {
+"changesets_count": "4527",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"159538428": {
+"created_at": "2024-11-24T15:30:52Z",
+"tags": {
+"changesets_count": "4526",
+"comment": "Updated various places along Jalan Bulan Sabit, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"resolved:outdated_tags:noncanonical_brand": "1",
+"source": "local knowledge"
+},
+"changes": 32
+},
+"159533362": {
+"created_at": "2024-11-24T13:23:41Z",
+"tags": {
+"changesets_count": "4524",
+"comment": "Updated Boulevard Shopping Mall, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 12
+},
+"159530807": {
+"created_at": "2024-11-24T12:06:02Z",
+"tags": {
+"changesets_count": "4522",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 41
+},
+"159525503": {
+"created_at": "2024-11-24T09:22:06Z",
+"tags": {
+"changesets_count": "4521",
+"comment": "Updated various places at Centre Point Commercial Centre 1, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 11
+},
+"159524464": {
+"created_at": "2024-11-24T08:48:56Z",
+"tags": {
+"changesets_count": "4520",
+"comment": "Updated various places at Marina Square 1, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery (Clarity) Beta;Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 14
+},
+"159444736": {
+"created_at": "2024-11-22T06:15:53Z",
+"tags": {
+"changesets_count": "4504",
+"comment": "Updated a drink stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 5
+},
+"159375076": {
+"created_at": "2024-11-20T16:56:12Z",
+"tags": {
+"changesets_count": "4496",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 12
+},
+"159288946": {
+"created_at": "2024-11-18T15:46:56Z",
+"tags": {
+"changesets_count": "4486",
+"comment": "Updated a residential area",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 31
+},
+"159216247": {
+"created_at": "2024-11-16T17:11:24Z",
+"tags": {
+"changesets_count": "4457",
+"comment": "Updated various places at Miri Times Square",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 31
+},
+"159211143": {
+"created_at": "2024-11-16T14:52:56Z",
+"tags": {
+"changesets_count": "4455",
+"comment": "Updated various places at Miri Times Square",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 75
+},
+"159201308": {
+"created_at": "2024-11-16T10:11:47Z",
+"tags": {
+"changesets_count": "4454",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"159168339": {
+"created_at": "2024-11-15T12:28:53Z",
+"tags": {
+"changesets_count": "4447",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;survey"
+},
+"changes": 49
+},
+"159156229": {
+"created_at": "2024-11-15T06:22:36Z",
+"tags": {
+"changesets_count": "4445",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;survey"
+},
+"changes": 12
+},
+"159015464": {
+"created_at": "2024-11-11T16:09:15Z",
+"tags": {
+"changesets_count": "4406",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"159014890": {
+"created_at": "2024-11-11T15:53:59Z",
+"tags": {
+"changesets_count": "4405",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"159014676": {
+"created_at": "2024-11-11T15:47:32Z",
+"tags": {
+"changesets_count": "4403",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158979509": {
+"created_at": "2024-11-10T18:13:49Z",
+"tags": {
+"changesets_count": "4390",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158970057": {
+"created_at": "2024-11-10T14:40:10Z",
+"tags": {
+"changesets_count": "4389",
+"comment": "Updated a mall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge",
+"warnings:outdated_tags:noncanonical_brand": "1"
+},
+"changes": 23
+},
+"158959069": {
+"created_at": "2024-11-10T09:00:55Z",
+"tags": {
+"changesets_count": "4383",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158955983": {
+"created_at": "2024-11-10T05:51:25Z",
+"tags": {
+"changesets_count": "4377",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158955860": {
+"created_at": "2024-11-10T05:39:25Z",
+"tags": {
+"changesets_count": "4376",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158955816": {
+"created_at": "2024-11-10T05:35:39Z",
+"tags": {
+"changesets_count": "4375",
+"comment": "Updated various places along Jalan Luak Bay, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 5
+},
+"158955042": {
+"created_at": "2024-11-10T04:09:12Z",
+"tags": {
+"changesets_count": "4374",
+"comment": "Updated various places at Miri Times Square",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 17
+},
+"158927045": {
+"created_at": "2024-11-09T10:34:08Z",
+"tags": {
+"changesets_count": "4371",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:outdated_tags:noncanonical_brand": "1",
+"source": "local knowledge;survey"
+},
+"changes": 21
+},
+"158906034": {
+"created_at": "2024-11-08T18:00:53Z",
+"tags": {
+"changesets_count": "4366",
+"comment": "Updated various places at Miri Times Square",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 15
+},
+"158895285": {
+"created_at": "2024-11-08T13:13:39Z",
+"tags": {
+"changesets_count": "4364",
+"comment": "Updated a residential area",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery",
+"warnings:outdated_tags:noncanonical_brand": "1"
+},
+"changes": 126
+},
+"158894473": {
+"created_at": "2024-11-08T12:50:40Z",
+"tags": {
+"changesets_count": "4363",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158894338": {
+"created_at": "2024-11-08T12:46:36Z",
+"tags": {
+"changesets_count": "4362",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 6
+},
+"158891883": {
+"created_at": "2024-11-08T11:35:06Z",
+"tags": {
+"changesets_count": "4360",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158891783": {
+"created_at": "2024-11-08T11:32:25Z",
+"tags": {
+"changesets_count": "4359",
+"comment": "Added a marketplace",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 87
+},
+"158858394": {
+"created_at": "2024-11-07T14:28:06Z",
+"tags": {
+"changesets_count": "4352",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158858315": {
+"created_at": "2024-11-07T14:26:50Z",
+"tags": {
+"changesets_count": "4351",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158857951": {
+"created_at": "2024-11-07T14:19:49Z",
+"tags": {
+"changesets_count": "4350",
+"comment": "Updated various places at Assar Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 19
+},
+"158837930": {
+"created_at": "2024-11-07T01:01:37Z",
+"tags": {
+"changesets_count": "4342",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 63
+},
+"158812275": {
+"created_at": "2024-11-06T10:46:56Z",
+"tags": {
+"changesets_count": "4328",
+"comment": "Updated various places at Mega Emart Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 57
+},
+"158764723": {
+"created_at": "2024-11-05T05:23:02Z",
+"tags": {
+"changesets_count": "4315",
+"comment": "Updated various places at 101 Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 15
+},
+"158764587": {
+"created_at": "2024-11-05T05:12:40Z",
+"tags": {
+"changesets_count": "4311",
+"comment": "Updated a cafe",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158689852": {
+"created_at": "2024-11-03T09:23:30Z",
+"tags": {
+"changesets_count": "4298",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158689777": {
+"created_at": "2024-11-03T09:20:29Z",
+"tags": {
+"changesets_count": "4297",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158664335": {
+"created_at": "2024-11-02T15:39:03Z",
+"tags": {
+"changesets_count": "4287",
+"comment": "Updated various places along Jalan Cahaya, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 3
+},
+"158663521": {
+"created_at": "2024-11-02T15:21:03Z",
+"tags": {
+"changesets_count": "4286",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158615703": {
+"created_at": "2024-11-01T12:01:15Z",
+"tags": {
+"changesets_count": "4268",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158587510": {
+"created_at": "2024-10-31T15:51:22Z",
+"tags": {
+"changesets_count": "4262",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158499670": {
+"created_at": "2024-10-29T13:56:09Z",
+"tags": {
+"changesets_count": "4201",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158461258": {
+"created_at": "2024-10-28T15:32:39Z",
+"tags": {
+"changesets_count": "4190",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158415220": {
+"created_at": "2024-10-27T14:16:21Z",
+"tags": {
+"changesets_count": "4178",
+"comment": "Updated a shop",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158399054": {
+"created_at": "2024-10-27T05:56:10Z",
+"tags": {
+"changesets_count": "4159",
+"comment": "Updated Taman Selera Tanjong Lobang, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 30
+},
+"158397622": {
+"created_at": "2024-10-27T03:53:35Z",
+"tags": {
+"changesets_count": "4157",
+"comment": "Updated Taman Selera Tanjong Lobang, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 80
+},
+"158373959": {
+"created_at": "2024-10-26T12:18:51Z",
+"tags": {
+"changesets_count": "4148",
+"comment": "Updated Taman Selera Tanjong Lobang, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;.gpx data file",
+"locale": "en-US",
+"source": "local knowledge;gps"
+},
+"changes": 157
+},
+"158342636": {
+"created_at": "2024-10-25T15:14:11Z",
+"tags": {
+"changesets_count": "4143",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158307068": {
+"created_at": "2024-10-24T17:32:41Z",
+"tags": {
+"changesets_count": "4133",
+"comment": "Updated various places at Bandar Baru Permyjaya, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 34
+},
+"158279364": {
+"created_at": "2024-10-24T04:31:58Z",
+"tags": {
+"changesets_count": "4117",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 70
+},
+"158249177": {
+"created_at": "2024-10-23T11:44:14Z",
+"tags": {
+"changesets_count": "4104",
+"comment": "Updated Boulevard Shopping Mall, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:outdated_tags:noncanonical_brand": "1",
+"source": "local knowledge"
+},
+"changes": 13
+},
+"158214094": {
+"created_at": "2024-10-22T14:20:34Z",
+"tags": {
+"changesets_count": "4084",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158200693": {
+"created_at": "2024-10-22T08:26:51Z",
+"tags": {
+"changesets_count": "4078",
+"comment": "Updated Imperial Mall, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 89
+},
+"158196454": {
+"created_at": "2024-10-22T06:07:26Z",
+"tags": {
+"changesets_count": "4075",
+"comment": "Updated various places at Pelita Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 29
+},
+"158180861": {
+"created_at": "2024-10-21T17:37:46Z",
+"tags": {
+"changesets_count": "4070",
+"comment": "Updated various places at Tanjong Loabang, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 27
+},
+"158176684": {
+"created_at": "2024-10-21T15:50:49Z",
+"tags": {
+"changesets_count": "4067",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"158174948": {
+"created_at": "2024-10-21T15:11:29Z",
+"tags": {
+"changesets_count": "4062",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"resolved:disconnected_way:highway": "1",
+"resolved:outdated_tags:noncanonical_brand": "1",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 534
+},
+"158165288": {
+"created_at": "2024-10-21T11:22:28Z",
+"tags": {
+"changesets_count": "4057",
+"comment": "Updated various places at Palm Villa Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 45
+},
+"158138193": {
+"created_at": "2024-10-20T17:19:10Z",
+"tags": {
+"changesets_count": "4041",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 10
+},
+"158134778": {
+"created_at": "2024-10-20T15:54:47Z",
+"tags": {
+"changesets_count": "4039",
+"comment": "Updated various places at Tanjong Loabang, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta;OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 232
+},
+"158124426": {
+"created_at": "2024-10-20T11:37:54Z",
+"tags": {
+"changesets_count": "4033",
+"comment": "Updated a village",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 646
+},
+"158097213": {
+"created_at": "2024-10-19T15:46:36Z",
+"tags": {
+"changesets_count": "4002",
+"comment": "Updated various places at Centre Point Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 31
+},
+"158089614": {
+"created_at": "2024-10-19T12:57:06Z",
+"tags": {
+"changesets_count": "3989",
+"comment": "Updated various places at Brighton Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 29
+},
+"158087196": {
+"created_at": "2024-10-19T11:59:37Z",
+"tags": {
+"changesets_count": "3988",
+"comment": "Updated a cafe",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 2
+},
+"158073543": {
+"created_at": "2024-10-19T03:05:02Z",
+"tags": {
+"changesets_count": "3981",
+"comment": "Updated Pan Borneo Highway",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 149
+},
+"158058129": {
+"created_at": "2024-10-18T16:01:09Z",
+"tags": {
+"changesets_count": "3974",
+"comment": "Updated Pan Borneo Highway",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Bing Maps Aerial",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 440
+},
+"158015899": {
+"created_at": "2024-10-17T16:05:27Z",
+"tags": {
+"changesets_count": "3953",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 70
+},
+"158014950": {
+"created_at": "2024-10-17T15:44:09Z",
+"tags": {
+"changesets_count": "3952",
+"comment": "Updated various places at RPR Permyjaya, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 141
+},
+"158006154": {
+"created_at": "2024-10-17T12:34:14Z",
+"tags": {
+"changesets_count": "3949",
+"comment": "Updated various places at Desa Pujut, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 41
+},
+"157968715": {
+"created_at": "2024-10-16T14:51:45Z",
+"tags": {
+"changesets_count": "3936",
+"comment": "Updated MCITI Square, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 24
+},
+"157966574": {
+"created_at": "2024-10-16T14:09:27Z",
+"tags": {
+"changesets_count": "3932",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 9
+},
+"157965949": {
+"created_at": "2024-10-16T13:56:42Z",
+"tags": {
+"changesets_count": "3929",
+"comment": "Updated various places at Bandar Baru Permyajaya, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 19
+},
+"157946371": {
+"created_at": "2024-10-16T04:25:46Z",
+"tags": {
+"changesets_count": "3917",
+"comment": "Updated various places at Boulevard Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Bing Maps Aerial",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 47
+},
+"157920822": {
+"created_at": "2024-10-15T13:17:41Z",
+"tags": {
+"changesets_count": "3909",
+"comment": "Updated various places at Miri city centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 84
+},
+"157917198": {
+"created_at": "2024-10-15T11:45:20Z",
+"tags": {
+"changesets_count": "3908",
+"comment": "Updated a mall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 82
+},
+"157876244": {
+"created_at": "2024-10-14T12:54:16Z",
+"tags": {
+"changesets_count": "3893",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"157875640": {
+"created_at": "2024-10-14T12:41:31Z",
+"tags": {
+"changesets_count": "3891",
+"comment": "Updated various places at Pujut, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 32
+},
+"157857601": {
+"created_at": "2024-10-14T03:16:40Z",
+"tags": {
+"changesets_count": "3885",
+"comment": "Updated various places at Pelita Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 17
+},
+"162876354": {
+"created_at": "2025-02-24T05:26:15Z",
+"tags": {
+"changesets_count": "4859",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.31.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"162810490": {
+"created_at": "2025-02-22T10:22:32Z",
+"tags": {
+"changesets_count": "4858",
+"comment": "Updated various places at Bandar Baru Permyjaya, Miri",
+"created_by": "iD 2.31.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 6
+},
+"162594482": {
+"created_at": "2025-02-17T03:39:25Z",
+"tags": {
+"changesets_count": "4855",
+"comment": "Updated various places at Marina Square, Miri",
+"created_by": "iD 2.31.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 5
+},
+"162413808": {
+"created_at": "2025-02-12T03:51:18Z",
+"tags": {
+"changesets_count": "4849",
+"comment": "Updated a food stall",
+"created_by": "iD 2.31.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"162239902": {
+"created_at": "2025-02-07T10:42:24Z",
+"tags": {
+"changesets_count": "4843",
+"comment": "Updated a food stall",
+"created_by": "iD 2.31.1",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 7
+},
+"162191067": {
+"created_at": "2025-02-06T04:07:29Z",
+"tags": {
+"changesets_count": "4837",
+"comment": "Updated various places at Piasau, Miri",
+"created_by": "iD 2.31.0",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard);Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 229
+},
+"161661084": {
+"created_at": "2025-01-23T06:05:42Z",
+"tags": {
+"changesets_count": "4818",
+"comment": "Updated a cafe",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"161642494": {
+"created_at": "2025-01-22T15:22:56Z",
+"tags": {
+"changesets_count": "4814",
+"comment": "Updated various places at Bandar Baru Permyjaya, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 16
+},
+"161636212": {
+"created_at": "2025-01-22T12:27:12Z",
+"tags": {
+"changesets_count": "4813",
+"comment": "Updated various places at Lutong, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 98
+},
+"161621941": {
+"created_at": "2025-01-22T03:46:03Z",
+"tags": {
+"changesets_count": "4810",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "OpenStreetMap (Standard)",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"161621809": {
+"created_at": "2025-01-22T03:33:46Z",
+"tags": {
+"changesets_count": "4809",
+"comment": "Updated a village",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 176
+},
+"161514655": {
+"created_at": "2025-01-19T07:36:22Z",
+"tags": {
+"changesets_count": "4797",
+"comment": "Updated various places at Mega Emart Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 11
+},
+"161489889": {
+"created_at": "2025-01-18T12:45:03Z",
+"tags": {
+"changesets_count": "4793",
+"comment": "Updated a bus station",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 7
+},
+"161262720": {
+"created_at": "2025-01-12T07:00:50Z",
+"tags": {
+"changesets_count": "4778",
+"comment": "Updated a cafe",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"161262702": {
+"created_at": "2025-01-12T06:59:29Z",
+"tags": {
+"changesets_count": "4777",
+"comment": "Updated various places at Boulevard Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 5
+},
+"161261888": {
+"created_at": "2025-01-12T05:48:03Z",
+"tags": {
+"changesets_count": "4775",
+"comment": "Updated various places at Senadin, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 49
+},
+"161201441": {
+"created_at": "2025-01-10T11:27:13Z",
+"tags": {
+"changesets_count": "4774",
+"comment": "Updated a clinic",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"161157360": {
+"created_at": "2025-01-09T06:35:57Z",
+"tags": {
+"changesets_count": "4772",
+"comment": "Removed defunct businesses at Marina Square, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 7
+},
+"161011357": {
+"created_at": "2025-01-05T07:45:35Z",
+"tags": {
+"changesets_count": "4767",
+"comment": "Updated various places at Bintang Jaya Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 36
+},
+"160833163": {
+"created_at": "2024-12-31T13:40:56Z",
+"tags": {
+"changesets_count": "4759",
+"comment": "Updated various places along Jalan Padang Kerbau, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 32
+},
+"160559557": {
+"created_at": "2024-12-24T01:22:43Z",
+"tags": {
+"changesets_count": "4746",
+"comment": "Updated a food stall",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US"
+},
+"changes": 1
+},
+"160505919": {
+"created_at": "2024-12-22T15:34:32Z",
+"tags": {
+"changesets_count": "4743",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 17
+},
+"160476540": {
+"created_at": "2024-12-21T16:49:59Z",
+"tags": {
+"changesets_count": "4738",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"160474162": {
+"created_at": "2024-12-21T15:37:54Z",
+"tags": {
+"changesets_count": "4735",
+"comment": "Updated various places at Emart Commercial Centre, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 5
+},
+"160436193": {
+"created_at": "2024-12-20T14:32:13Z",
+"tags": {
+"changesets_count": "4733",
+"comment": "Updated a restaurant",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 1
+},
+"160404214": {
+"created_at": "2024-12-19T17:30:40Z",
+"tags": {
+"changesets_count": "4730",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 74
+},
+"160278804": {
+"created_at": "2024-12-14T12:56:08Z",
+"tags": {
+"changesets_count": "4709",
+"comment": "Updated various places at Marina Square 2, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 7
+},
+"160255129": {
+"created_at": "2024-12-13T17:16:17Z",
+"tags": {
+"changesets_count": "4704",
+"comment": "Updated Taman Awam Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"resolved:outdated_tags:deprecated_tags": "2",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 90
+},
+"160234704": {
+"created_at": "2024-12-13T07:53:29Z",
+"tags": {
+"changesets_count": "4700",
+"comment": "Updated various places along Jalan Miri By Pass, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge"
+},
+"changes": 4
+},
+"160203234": {
+"created_at": "2024-12-12T11:08:59Z",
+"tags": {
+"changesets_count": "4695",
+"comment": "Updated various places at Miri City Centre",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery"
+},
+"changes": 96
+},
+"160170103": {
+"created_at": "2024-12-11T14:02:56Z",
+"tags": {
+"changesets_count": "4688",
+"comment": "Updated various places at Piasau, Miri",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 282
+},
+"160168229": {
+"created_at": "2024-12-11T13:06:03Z",
+"tags": {
+"changesets_count": "4687",
+"comment": "Updated a residential area",
+"created_by": "iD 2.30.4",
+"host": "https://www.openstreetmap.org/edit",
+"imagery_used": "Esri World Imagery;Esri World Imagery (Clarity) Beta",
+"locale": "en-US",
+"source": "local knowledge;aerial imagery;streetlevel imagery"
+},
+"changes": 303
+}
+}

@@ -1,0 +1,555 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Halal Malaysia Portal</title>
+<meta name="description"
+      content="Sistem MYeHALAL rasmi Jabatan Kemajuan Islam Malaysia (JAKIM)." />
+
+<meta property="og:site_name"
+      content="Portal Halal Malaysia" />
+
+<meta property="og:title"
+      content="Sistem MYeHALAL - Portal Halal Malaysia" />
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link href="css/popup.css" rel="stylesheet" type="text/css" media="screen">
+<link href="css/styles.css" rel="stylesheet" type="text/css" media="screen">
+
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
+<link href="css/responsive.css" rel="stylesheet" type="text/css" media="screen">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+
+<link rel="stylesheet" href="modalwindow/modal.css" type="text/css" />
+<link rel="stylesheet" href="modalwindow/dhtmlwindow.css" type="text/css" />
+
+<script type="text/javascript" src="modalwindow/dhtmlwindow.js">
+/***********************************************
+* DHTML Window Widget-  Dynamic Drive (www.dynamicdrive.com)
+* This notice must stay intact for legal use.
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+</script>
+<script type="text/javascript" src="modalwindow/modal.js"></script>
+
+<script src="js/jquery-1.9.1.min.js"></script> 
+<script src="js/owl.carousel.js"></script>
+
+<!-- Slider -->
+<link href="css/owl.carousel.css" rel="stylesheet">
+<link href="css/owl.theme.css" rel="stylesheet">
+<link href="css/prettify.css" rel="stylesheet">
+<link href="css/hover.css" rel="stylesheet">
+
+<!-- Popup -->
+<script src="js/jquery.magnific-popup.js"></script> 
+<script language="javascript" type="text/javascript">
+function do_search(url){
+	if(document.halal.category.value==''){
+		alert("Sila pilih kategori maklumat carian");
+		document.halal.category.focus();
+	} else if(document.halal.cari.value==''){
+		alert("Sila maklumat carian");
+		document.halal.cari.focus();
+	} else {
+		document.halal.action=url;
+		document.halal.target='_self';
+		document.halal.submit();
+	}
+}
+function do_homes(url){
+	document.homes.action=url;
+	document.homes.target='_self';
+	document.homes.submit();
+}
+function validateForm() {
+	alert("ss");
+    var x = document.halal.cari.value;
+    if (x == "") {
+        alert("Maklumat Carian perlu diisi");
+        return false;
+    }
+}
+</script>
+</head>
+
+<body>
+<div>
+    <style>
+        #mobile-nav{
+            transition: all 500ms;
+        }
+
+        @media (max-width: 640px){
+            .hiden{
+                display: none;
+            }
+        }
+    </style>
+	<div class="">
+    	<div class="bg-gray-50/70 flex justify-between items-center h-28 px-6 sm:px-8">
+            <a class="flex items-center" style="text-decoration: none" href="index.php">
+                <div class="mr-4"><img class="h-20" src="images/jakim_logo.png" title="Click to display main pages"></div>
+                <p class="text-[1.7rem] sm:text-3xl font-bold no-underline uppercase">Halal Malaysia Portal</p>
+            </a>
+            <button class="sm:hidden" onclick="showMobileNav()" ><span class="material-symbols-outlined" >menu</span></button>
+            <div id="mobile-nav" class="sm:hidden flex flex-col items-center justify-center text-white text-4xl font-semibold absolute top-0 right-0 w-0 h-screen bg-cyan-900 z-20 overflow-hidden whitespace-nowrap">
+                <button onclick="closeMobileNav()"><span class="material-symbols-outlined absolute p-6 text-6xl top-0 left-0 close-btn" >close</span></button>
+                <a class="my-5" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb3Jwb3JhdGU7Ozs7&utama=corporate'">Corporate</a>
+                <a class="my-5" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jZXJ0aWZpY2F0ZTs7Ozs=&utama=sijil&view='">Certification</a>
+                <a class="my-5" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb2xsYXBzaWJsZV9jb250ZW50Ozs7Ow==&utama=panduan&view='">Procedure</a>
+                <a class="my-5" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb250YWN0X3VzOzs7Ow==">Contact Us</a>
+                <a class="my-5" href="index.php?lang=bm" ><p class="uppercase hover:text-cyan-800" >bm</p></a>
+                <!-- <a class="font-semibold" style="text-decoration: none" href="index.php?data=&utama=panduan&view='"></a> -->
+            </div>  
+            <div class="hiden sm:flex font-semibold">
+                <a class="mr-8" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb3Jwb3JhdGU7Ozs7&utama=corporate'">Corporate</a>
+                <a class="mr-8" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jZXJ0aWZpY2F0ZTs7Ozs=&utama=sijil&view='">Certification</a>
+                <a class="mr-8" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb2xsYXBzaWJsZV9jb250ZW50Ozs7Ow==&utama=panduan&view='">Procedure</a>
+                <a class="mr-8" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb250YWN0X3VzOzs7Ow==">Contact Us</a>
+                <a href="index.php?lang=bm" ><p class="uppercase hover:text-cyan-800" >bm</p></a>
+                <!-- <a class="font-semibold" style="text-decoration: none" href="index.php?data=&utama=panduan&view='"></a> -->
+            </div>           
+    	</div>
+	</div>
+	<div class="">
+        <style>
+            @media (min-width: 640px) {
+                .owl-pagination{
+                    top: -48px;
+                }
+            }
+        </style>
+    <hr>
+    <div class="bg-gray-800 h-64 overflow-hidden object-fill" id="slider-header" class="owl-carousel">
+            <div class="item"><a href="https://www.halal.gov.my/pdf/plh/RS07092026-BM.pdf"><img class="h-[315px] w-screen" src="slide/RS-BM-16102026.jpeg" width="100%"></a></div>
+            <div class="item"><a href="https://www.halal.gov.my/pdf/plh/RS07092026-ENG.pdf"><img class="h-[315px] w-screen" src="slide/RS-BI-16102026.jpeg" width="100%"></a></div>
+            <div class="item"><a href="https://www.halal.gov.my/pdf/cb/FHCB21August2026.pdf"><img class="h-[315px] w-screen" src="slide/PortalFHCBEng.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/LANTIKANEKSEKUTIFHALAL.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/PLHLIST062026.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/KEPERLUAN_PENGISYTIHARAAN.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/KEPERLUANPERUBAHANNAMA.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/DAFTARRAMUAN.jpeg" width="100%"></a></div>
+            <div class="item"><a href="https://myehalal.halal.gov.my/portal-halal/v1/pdf/plh/PLHMAC2026.pdf"><img class="h-[315px] w-screen" src="slide/PLHTERKINI.jpeg" width="100%"></a></div>
+            <div class="item"><a href="https://myehalal.halal.gov.my/portal-halal/v1/pdf/pekeliling/PPSHMBIL2-2026.pdf"><img class="h-[315px] w-screen" src="slide/PPSHMBIL2-2026.jpeg" width="100%"></a></div>
+            <div class="item"><a href="https://myehalal.halal.gov.my/portal-halal/v1/pdf/pekeliling/PPSHMBIL1-2026.pdf"><img class="h-[315px] w-screen" src="slide/PPSHMBIL1-2026.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/HEBAHANINDUSTRI12026.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/KEPERLUANSPHMDARIDAPURBERPUSAT.jpg" width="100%"></a></div>
+            <div class="item"><a href="https://myehalal.halal.gov.my/portal-halal/v1/pdf/pekeliling/PEK.BILANGAN.1.2025.pdf"><img class="h-[315px] w-screen" src="slide/PPHMBIL12025.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/keperluanbgpremismknnberangkai.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/JOMPAYBANNER.jpg" width="100%"></a></div>
+            <!-- <!-- <div class="item"><img class="h-[315px] w-screen" src="slide/acceptanceofhalalcertificateHQC.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/PELAKSANAAN_ECERT.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/PENUTUPANMYeHALAL.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/OPSKAUNTERRAYA2026.jpeg" width="100%"></a></div> -->
+            <!--<div class="item"><a href="https://myehalal.halal.gov.my/portal-halal/v1/pdf/cb/CBLIST-20FEBRUARY2025edited110325.pdf"><img class="h-[315px] w-screen" src="slide/HEBAHAN-SENARAIFHCB.jpg" width="100%"></a></div>
+            <div class="item"><a href="https://myehalal.halal.gov.my/portal-halal/v1/index.php?data=bW9kdWxlcy9jb250ZW50X2RldGFpbHM7Ozs=&page_title=Announcement&content_id=2025031367d238e5c4bba"><img class="h-[315px] w-screen" src="slide/WITHDRAWALFHCB.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/FIPEMPROSESAN2025.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/cartaalirfiproses.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/JOMPAYBANNER.jpg" width="100%"></a></div>
+            <div class="item"><a href="https://myehalal.halal.gov.my/domestik/v1/"><img class="h-[315px] w-screen" src="slide/MYeHALALlinknew.jpeg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/BannerLPPOM.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/RECOGNITIONPOLICYOFHALALCB01.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/tempohmasamaklumbalas.jpg" width="100%"></a></div>
+            <div class="item"><img class="h-[315px] w-screen" src="slide/KEPERLUANMENGISIMAKLUMATPEKERJAMUSLIM-01.jpg" width="100%"></a></div>-->
+            <!--<div class="item"><img src="slide/WebsiteProgramTPM.jpg" width="100%" height="315px"></a></div>
+            <div class="item"><a href="https://www.mihas.com.my/"><img src="slide/mihas2023.jpg" width="100%" height="315px"></a></div>
+            <div class="item"><a href="https://www.globalhalalsummit.com"><img src="slide/ghas2023.jpg" width="100%" height="315px"></a></div>
+            <div class="item"><img src="slide/aduanhalalslider2023.jpg" width="100%" height="315px"></div>-->
+            <!--<div class="item"><img src="slide/Infografik - Public Comment FHCB 2021 - Web Halal.png" width="100%" height="315px"></div>
+            <div class="item"><img src="slide/Perjansian_pensijilan_halal.png" width="100%" height="315px"></div>
+            <div class="item"><a href="http://www.halal.gov.my/v4/index.php?data=bW9kdWxlcy9uZXdzOzs7Ow==&utama=ann&ids=202003025e5cab445abe2"><img src="slide/IMG-20200304-WA0014.jpg" width="100%" height="315px"></a></div>-->
+	    <!--<div class="item"><a href="http://www.halal.gov.my/v4/index.php?data=bW9kdWxlcy9uZXdzOzs7MjAyMDAzMDU1ZTYwYWUyNTNmYTVlOw==&utaman=ann"><img src="slide/IMG-20200306-WA0013.jpg" width="100%" height="315px"></a></div>	
+            <div class="item"><a href="http://www.halal.gov.my/v4/index.php?data=bW9kdWxlcy9uZXdzOzs7Ow==&utaman=ann"><img src="slide/perubahan_premis.png" width="100%" height="315px"></a></div>-->
+	    <!--<div class="item"><img src="slide/halfest_2019.jpeg" width="100%" height="315px"></div>
+            <div class="item"><img src="slide/MAKLUMAN2.png" width="100%" height="480px"></div>
+            <div class="item"><img src="slide/IMG-20190829-WA0001.jpg" width="100%" height="315px"></div>
+            <div class="item"><img src="slide/makluman poster.png" width="960px" height="315px"></div>-->
+            <!--<div class="item"><img src="slide/slide1.png" width="100%" height="100%"></div>
+            <div class="item"><img src="slide/slide2.png" width="100%" height="100%"></div>
+            <div class="item"><img src="slide/slide3.png" width="100%" height="100%"></div>
+            <div class="item"><img src="slide/slide4.png" width="100%" height="100%"></div>
+            <div class="item"><img src="slide/slide5.png" width="100%" height="100%"></div>
+            <div class="item"><img src="slide/slide6.png" width="100%" height="100%"></div>-->
+
+        </div>
+	</div>
+	
+    
+	
+</div>
+<hr>
+<script>
+    const mobileNav = document.getElementById("mobile-nav");
+
+    function showMobileNav(){
+        mobileNav.style.width = '100vw';
+    }
+
+    function closeMobileNav(){
+        mobileNav.style.width = '0vw';
+    }
+</script>
+
+<div class="grid grid-cols-1 sm:grid-cols-2" >
+    <div class="relative flex justify-center items-center min-h-80 overflow-hidden" >
+        <div>
+            <form name="halal" method="post" action="index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=">
+                <p class="text-3xl font-medium text-white mb-3 tracking-wider" >Verify Halal Status</p>
+                                <div class="form-group">
+                    <select name="category" class="border border-gray-400 rounded-md w-full py-3">
+                        <option value="">Please Select Category</option>
+                                                <option value="BG" >Barang Gunaan</option>
+                                                <option value="FM" >Farmaseutikal</option>
+                                                <option value="IN" >International</option>
+                                                <option value="KO" >Kosmetik dan Dandanan Diri</option>
+                                                <option value="MD" >Peranti Perubatan</option>
+                                                <option value="OEM" >Pengilangan Kontrak / Original Equipment Manufacturing(OEM)</option>
+                                                <option value="PE" >Premis Makanan</option>
+                                                <option value="PL" >Logistik</option>
+                                                <option value="PR" >Produk Makanan / Minuman</option>
+                                                <option value="PS" >Rumah Sembelihan</option>
+                                            </select>
+                </div>
+                <div class="flex">
+                    <input type="text" class="p-3 px-5 rounded-l-lg w-96" name="cari" value=""  placeholder="Search....." required="required">
+                    <button name="search" class="bg-cyan-500 hover:bg-cyan-400 px-4 rounded-r-lg flex justify-center items-center" onClick="do_search('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=')"><span class="material-symbols-outlined" >search</span></button>
+                </div>
+            </form>
+        </div>
+        <img class="absolute top-0 -z-20" src="images/v2/bg_img.jpg" alt="bg_img">
+        <div class="absolute top-0 -z-10 bg-black h-full w-full opacity-50"></div>
+    </div>
+    <div class="py-6 bg-cyan-50" >
+        <p class="text-2xl font-semibold px-6 uppercase" >Announcement.</p>
+                <a class="flex items-center cursor-pointer hover:bg-cyan-100" href="index.php?data=bW9kdWxlcy9jb250ZW50X2RldGFpbHM7Ozs=&page_title=Announcement&content_id=202504246809bf6f8159e" >
+            <div class="flex-1 py-2 px-6" >
+                <p class="py-1 text-cyan-800 font-semibold" >MEDIA STATEMENT - ANNOUNCEMENT RECALL OF HALAL FOOD PRODUCTS CERTIFIED IN INDONESIA</p>
+                <p class="text-lg font-thin" >24/04/2025</p>
+            </div>
+            <span class="material-symbols-outlined mr-8">chevron_right</span>
+        </a>
+        <hr>
+                <a class="flex items-center cursor-pointer hover:bg-cyan-100" href="index.php?data=bW9kdWxlcy9jb250ZW50X2RldGFpbHM7Ozs=&page_title=Announcement&content_id=2025031367d238e5c4bba" >
+            <div class="flex-1 py-2 px-6" >
+                <p class="py-1 text-cyan-800 font-semibold" >WITHDRAWAL OF RECOGNITION OF FOREIGN HALAL CERTIFICATION BODIES IN FRANCE, CROATIA, AND CHINA</p>
+                <p class="text-lg font-thin" >13/03/2025</p>
+            </div>
+            <span class="material-symbols-outlined mr-8">chevron_right</span>
+        </a>
+        <hr>
+                <a class="flex items-center cursor-pointer hover:bg-cyan-100" href="index.php?data=bW9kdWxlcy9jb250ZW50X2RldGFpbHM7Ozs=&page_title=News&content_id=2024102367189d4da3e20" >
+            <div class="flex-1 py-2 px-6" >
+                <p class="py-1 text-cyan-800 font-semibold" >Halal on Track @ Pahang Berlangsung Meriah</p>
+                <p class="text-lg font-thin" >23/10/2024</p>
+            </div>
+            <span class="material-symbols-outlined mr-8">chevron_right</span>
+        </a>
+        <hr>
+                <a class="px-6 pt-3 block font-semibold" href="index.php?data=bW9kdWxlcy9hbm5vdW5jZW1lbnQ7Ozs=" >Show more...</a>
+    </div>
+</div>
+
+<!-- <div class="center-block">
+	<div class="main-wrap clearfix">
+		
+        <div class="announcement"><h3> </h3>
+            <div class="announcment-content">
+                <div class="box">
+                <script type="text/javascript">
+                    new pausescroller(pausecontent2, "pscroller2", "someclass", 3000)
+                </script></div>
+            </div>
+        </div>
+
+        <div class="search-status"><h3> : </h3> 
+            <div class="check-content search-wrap">
+			<form name="halal" method="post"  
+            	action="index.php?data=<?php// echo base64_encode('directory/index_directory;;;;');?>">    
+                <input type="text" class="search-name" name="cari" value=""  placeholder="Search....." required="required">
+                <input type="button" name="search" class="search-button" 
+                	onClick="do_search('index.php?data=')"> 
+			</form>	
+            </div>
+        </div>
+	</div>
+</div> -->
+<div class="sm:p-12 p-6 bg-gray-50" >
+    <div class="flex flex-col sm:flex-row bg-cyan-100 border border-cyan-500 rounded-xl" >
+        <div class="flex-1 py-8 sm:px-12 px-8" >
+            <p class="font-bold uppercase text-3xl mb-3" >Counter Operation Hours</p>
+            <p class="font-semibold" >Monday - Thursday</p>
+            <p>8:30 Pagi sehingga 12.30 Tengahari / 8.30 AM until 12.30 PM</p>
+            <p>2:30 Petang sehingga 4.30 Petang / 2.30 PM until 4.30 PM</p>
+            <p class="font-semibold mt-3" >Friday</p>
+            <p>8:30 Pagi sehingga 12.00 Tengahari / 8.30 AM until 12.00 PM</p>
+            <p>2:45 Petang sehingga 4.30 Petang / 2.45 PM until 4.30 PM</p>
+            <p class="font-semibold mt-3" >Saturday - Sunday</p>
+            <p>Closed</p>
+        </div>
+        <hr class="sm:hidden border-gray-300" >
+        <div class="sm:w-0.5 h-auto bg-black" ></div>
+        <div class="flex-1 py-8 px-12">
+            <p class="text-3xl font-semibold mb-5" >E-Aduan</p>
+            <div class="flex flex-col justify-start sm:flex-row sm:items-center" >
+                <div class="border-2 rounded-lg sm:mr-6 flex w-fit" ><img class="w-56 rounded-lg p-2 bg-white" src="images/v2/aduan_qr.png" alt="qrcode"></div>
+                <div class="pb-6 pt-4" >
+                    <p class="mb-8" >Scan the QR code to create a complaint or click the button below.</p>
+                    <!--<a href="https://docs.google.com/forms/d/e/1FAIpQLSegJR9iVSmUf86opgYMohJNejqCO52Qiv6cJfpKl6Ffgt2oXA/viewform?usp=send_form" class="bg-cyan-500 hover:bg-cyan-400 font-semibold rounded-lg px-8 py-4" target="_blank">Create a complaint</a>-->
+					<a href="https://islam.spab.gov.my/eApps/system/index.do" class="bg-cyan-500 hover:bg-cyan-400 font-semibold rounded-lg px-8 py-4" target="_blank">Create a complaint</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="flex flex-col sm:flex-row bg-gray-50 px-12 py-24 sm:px-32 sm:py-32 items-center" >
+    <div class="sm:mr-16 relative" >
+        <img class="w-[40rem]"  src="images/v2/monitor.png" alt="monitor">
+    </div>
+    <div class="pt-6 sm:pt-0" >
+        <p class="text-3xl font-semibold py-5" >System MYeHALAL</p>
+        <p class="pb-6" >Application system for domestic and international organizations to apply for Halal certificate from JAKIM</p>
+        <div class="flex font-semibold" >
+            <a href="https://myehalal.halal.gov.my/domestik/v1" target="_blank" class="rounded-lg py-3 w-56 bg-cyan-500 hover:bg-cyan-400 flex items-center justify-center mr-4" ><p class="mr-3" >Domestic</p><span class="material-symbols-outlined" >chevron_right</span></a>
+			<a href="https://myehalal.halal.gov.my/international/v1/pemohon/" target="_blank" class="rounded-lg py-3 w-56 bg-cyan-500 hover:bg-cyan-400 flex items-center justify-center" ><p class="mr-3" >International</p><span class="material-symbols-outlined" >chevron_right</span></a>
+            <!--<a href="http://apps.halal.gov.my/international" target="_blank" class="rounded-lg py-3 w-56 bg-cyan-500 hover:bg-cyan-400 flex items-center justify-center" ><p class="mr-3" >International</p><span class="material-symbols-outlined" >chevron_right</span></a>-->
+        </div>
+    </div>
+</div>
+
+<div class="flex flex-wrap justify-center py-24 bg-gray-50" >
+    <style>
+        a{
+            text-decoration: none !important;
+        }
+
+        img{
+            transition: all 200ms;
+        }
+    </style>
+    <div class="m-3 sm:m-6" >
+        <a class="w-[15.5rem] sm:w-[16rem] flex flex-col justify-between border rounded-lg shadow-sm hover:shadow-xl border-lg" href="index.php?data=bW9kdWxlcy9jb2xsYXBzaWJsZV9jb250ZW50Ozs7Ow==&utama=CB_LIST">
+            <div class="h-64 flex justify-center items-center bg-white rounded-t-lg" ><img class="p-6 hover:scale-110" src="images/v2/fhcb.jpeg" alt="halal_brunei_logo"></div>
+            <p class="bg-cyan-400 text-center p-3 h-20 rounded-b-lg font-semibold text-xl" >Foreign Halal Certification Body</p>
+        </a>
+    </div>
+    <div class="m-3 sm:m-6">
+        <a class="flex flex-col justify-between shadow-sm hover:shadow-xl border rounded-lg" href="index.php?data=bW9kdWxlcy9jb2xsYXBzaWJsZV9jb250ZW50Ozs7Ow==&utama=info">
+            <div class="w-[15.5rem] sm:w-[16rem] h-64 flex justify-center items-center bg-white rounded-t-lg" ><img class="hover:scale-110" src="images/halalLogo.png" alt="halal_malaysia_logo"></div>
+            <p class="bg-cyan-400 h-20 flex items-center justify-center rounded-b-lg font-semibold text-xl">Halal Information</p>
+        </a>
+    </div>
+    <div class="m-3 sm:m-6">
+        <a class="flex flex-col justify-between shadow-sm hover:shadow-xl border rounded-lg" href="index.php?data=bW9kdWxlcy9wZWtlbGlsaW5nOzs7Ow==">
+            <div class="w-[15.5rem] sm:w-[16rem] h-64 flex justify-center items-center bg-white rounded-t-lg" ><img class="p-12 pb-14 hover:scale-110" src="images/v2/pekeliling.png" alt="circular"></div>
+            <p class="bg-cyan-400 h-20 flex items-center justify-center rounded-b-lg font-semibold text-xl">Circular</p>
+        </a>
+    </div>
+    <div class="m-3 sm:m-6">
+        <a class="flex flex-col justify-between shadow-sm hover:shadow-xl border rounded-lg" href="index.php?data=bW9kdWxlcy9jb2xsYXBzaWJsZV9jb250ZW50Ozs7Ow==&utama=media">
+            <div class="w-[15.5rem] sm:w-[16rem] h-64 flex justify-center items-center bg-white rounded-t-lg" ><img class="p-8 hover:scale-110" src="images/v2/megaphone.png" alt="megaphone"></div>
+            <p class="bg-cyan-400 h-20 flex items-center justify-center rounded-b-lg font-semibold text-xl">Press Statement</p>
+        </a>
+    </div>
+    <div class="m-3 sm:m-6">
+        <a class="flex flex-col justify-between shadow-sm hover:shadow-xl border rounded-lg" href="index.php?data=bW9kdWxlcy9qdXJuYWxzOzs7Ow==">
+            <div class="w-[15.5rem] sm:w-[16rem] h-64 flex justify-center items-center bg-white rounded-t-lg" ><img class="p-10 hover:scale-110" src="images/v2/book.png" alt="book"></div>
+            <p class="bg-cyan-400 h-20 flex items-center justify-center rounded-b-lg font-semibold text-xl">Journal</p>
+        </a>
+    </div>
+    <div class="m-3 sm:m-6">
+        <a class="flex flex-col justify-between shadow-sm hover:shadow-xl border rounded-lg" href="index.php?data=bW9kdWxlcy9teWhhYzs7Ozs=">
+            <div class="w-[15.5rem] sm:w-[16rem] h-64 flex justify-center items-center bg-white rounded-t-lg overflow-hidden" ><img class="object-cover hover:scale-110" src="images/v2/myhac.jpeg" alt="myhac"></div>
+            <p class="bg-cyan-400 h-20 flex items-center justify-center rounded-b-lg font-semibold text-xl">Info MyHAC</p>
+        </a>
+    </div>
+</div>
+
+<div class="px-8 sm:px-20 py-14 bg-gray-50 flex flex-col items-center" >
+    <p class="text-center text-3xl font-semibold mb-6" >News</p>
+    <div class="flex flex-col sm:flex-row" >
+                <a class="border rounded-lg shadow p-6 m-2 bg-white hover:bg-cyan-50" href="index.php?data=bW9kdWxlcy9jb250ZW50X2RldGFpbHM7Ozs=&page_title=News&content_id=2024102367189d4da3e20">
+            <p class="font-semibold mb-2" >Halal on Track @ Pahang Berlangsung Meriah</p>
+            <p>23/10/2024</p>
+        </a>
+                <a class="border rounded-lg shadow p-6 m-2 bg-white hover:bg-cyan-50" href="index.php?data=bW9kdWxlcy9jb250ZW50X2RldGFpbHM7Ozs=&page_title=News&content_id=2024102367189d4da3e20">
+            <p class="font-semibold mb-2" >Halal Advice Service Counter at the "Halal Food: World Taste" Program at AEON Mall Shah Alam</p>
+            <p>08/10/2024</p>
+        </a>
+                <a class="border rounded-lg shadow p-6 m-2 bg-white hover:bg-cyan-50" href="index.php?data=bW9kdWxlcy9jb250ZW50X2RldGFpbHM7Ozs=&page_title=News&content_id=2024102367189d4da3e20">
+            <p class="font-semibold mb-2" >Malaysian Halal Certifications Procedure for International Manufacturing</p>
+            <p>22/12/2023</p>
+        </a>
+            </div>
+    <a class="text-center my-10 py-3 px-8 rounded-md text-cyan-700 font-semibold hover:bg-cyan-50 hover:border" href="index.php?data=bW9kdWxlcy9uZXdzOzs7">Show more</a>
+</div>
+
+<div class="bg-cyan-950 text-white" >
+    <div class="flex flex-col sm:flex-row p-12">
+        <div class="flex-1" >
+            <a class="flex py-2 hover:text-gray-400" href="http://www.malaysia.gov.my">
+                <div class="w-16" ><img class="h-8 mr-4" src="images/v2/gov.png" alt="gov_logo"></div>
+                <p class="font-semibold" >Malaysia Government</p>
+            </a>
+            <a class="flex py-2 hover:text-gray-400" href="http://www.islam.gov.my">
+                <div class="w-16" ><img class="h-8" src="images/v2/jakim_logo.png" alt="gov_logo"></div>
+                <p class="font-semibold">JAKIM</p>
+            </a>
+            <a class="flex py-2 hover:text-gray-400" href="https://www.kpdn.gov.my">
+                <div class="w-16" ><img class="h-8 mr-4" src="images/v2/kpdnkk.png" alt="gov_logo"></div>
+                <p class="font-semibold">KPDN</p>
+            </a>
+            <a class="flex py-2 hover:text-gray-400" href="http://www.ssm.com.my">
+                <div class="w-16 flex justify-center items-center" ><img class="h-6 mr-4" src="images/v2/ssm.png" alt="gov_logo"></div>
+                <p class="font-semibold">Suruhanjaya Syarikat Malaysia</p>
+            </a>
+            <a class="flex py-2 hover:text-gray-400" href="http://www.moh.gov.my">
+                <div class="w-16" ><img class="h-8 mr-4" src="images/v2/kkm.png" alt="gov_logo"></div>
+                <p class="font-semibold">Kementerian Kesihatan Malaysia</p>
+            </a>
+        </div>
+        <div class="flex-1 pt-12 sm:pt-0">
+            <p class="mb-3 text-2xl font-semibold" >Address / Location</p>
+            <p>BAHAGIAN PENGURUSAN HALAL,<br />
+                JABATAN KEMAJUAN ISLAM MALAYSIA,<br>
+                Aras 6 & 7, Blok D,<br>
+                Kompleks Islam Putrajaya (KIP),<br>
+                No. 3 Jalan Tun Abdul Razak, <br>
+                Presint 3, 62100 Putrajaya, Malaysia.<br><br>
+                Telefon : 03-8892 5000 | Fax : 03-8892 5005 | Emel : pr_halal@islam.gov.my<br><br>
+        </div>
+    </div>
+    <hr>
+    <div class="flex p-12" >
+        <p class="flex-1 text-2xl" >Follow Us on Social Media</p>
+        <div class="flex flex-1" >
+            <a href="https://www.facebook.com/HabHalalJakim/" target="_blank"><img class="h-12 mr-8" src="images/v2/facebook.png" alt="facebook_icon"></a>
+            <a href="https://x.com/halal_malaysia" target="_blank"><img class="h-12" src="images/v2/x.png" alt="x_icon"></a>
+        </div>
+    </div>
+</div>
+<a href="annpage.php" data-toggle="modal" data-target="#myModal" id="a_href"  class="fa" data-backdrop="static"></a>
+
+<script>
+$(document).ready(function() {
+	// console.log('');
+	// console.log('');
+	
+	$("#slider-header").owlCarousel({
+	
+		navigation : true,
+		slideSpeed : 300,
+		paginationSpeed : 400,
+		singleItem : true,
+		responsive : true,
+		autoPlay: 3000,
+		
+		// "singleItem:true" is a shortcut for:
+		// items : 1, 
+		// itemsDesktop : false,
+		// itemsDesktopSmall : false,
+		// itemsTablet: false,
+		// itemsMobile : false
+		
+	});
+		
+		
+	/*$(".menu-expand").click(function(){
+		$(".menu-floating").toggleClass("menu-expand-all");
+		$(".menu-floating-content").toggleClass("menu-floating-content-show");
+		$(".menu-expand").toggleClass("menu-collapsed");
+	});*/
+
+	$(".social-media-icon").click(function(){
+    	$(".social-media-sub-content").toggleClass("social-media-sub-content-show");
+	});
+
+});
+</script>
+    
+    
+<script>
+    
+$(document).ready(function() {
+	/*$('.popup-starhype').magnificPopup({
+		type: 'inline',
+		preloader: false,
+		
+		fixedContentPos: false,
+		fixedBgPos: true,
+	
+		overflowY: 'auto',
+	
+		closeBtnInside: true,
+		preloader: false,
+		
+		midClick: true,
+		removalDelay: 300,
+		mainClass: 'my-mfp-slide-bottom',
+		
+	
+		// When elemened is focused, some mobile browsers in some cases zoom in
+		// It looks not nice, so we disable it:
+		callbacks: {
+			beforeOpen: function() {
+				if($(window).width() < 700) {
+					this.st.focus = false;
+				} else {
+					this.st.focus = '#name';
+				}
+				
+			}
+
+		}
+	});*/
+});
+</script>
+
+
+<script src="js/bootstrap-collapse.js"></script>
+<script src="js/bootstrap-transition.js"></script>
+<script src="js/bootstrap-tab.js"></script>
+<script src="js/bootstrap-modal.js"></script>
+
+<script src="js/google-code-prettify/prettify.js"></script>
+<script src="js/application.js"></script>
+
+<script>
+$(document).ready(function() {
+    if (!sessionStorage.getItem("visited")) {
+		
+    	// $('#myModal').modal('show');
+
+        sessionStorage.setItem("visited", "true");
+    }
+});
+</script>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myPopup" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document" style="display:flex;justify-content:center;">
+        <img src="images/MAKLUM_BALAS_PENGGUNA.jpeg" id="modalImage" class="img-fluid rounded modal-content" width="100%" height="100%" alt="Image">
+    </div>
+</div>
+
+<!-- Modal -->
+<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-header">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    <h3 id="myModalLabel">Modal header</h3>
+  </div>
+  <div class="modal-body">
+    <p>One fine body…</p>
+  </div>
+  <div class="modal-footer">
+    <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+    <button class="btn btn-primary">Save changes</button>
+  </div>
+</div>
+</body>
+</html>

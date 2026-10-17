@@ -1,0 +1,274 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Halal Malaysia Portal</title>
+<meta name="description"
+      content="Sistem MYeHALAL rasmi Jabatan Kemajuan Islam Malaysia (JAKIM)." />
+
+<meta property="og:site_name"
+      content="Portal Halal Malaysia" />
+
+<meta property="og:title"
+      content="Sistem MYeHALAL - Portal Halal Malaysia" />
+
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+<link href="css/popup.css" rel="stylesheet" type="text/css" media="screen">
+<link href="css/styles.css" rel="stylesheet" type="text/css" media="screen">
+
+<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css" media="screen">
+<link href="css/responsive.css" rel="stylesheet" type="text/css" media="screen">
+<!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">-->
+
+<link rel="stylesheet" href="modalwindow/modal.css" type="text/css" />
+<link rel="stylesheet" href="modalwindow/dhtmlwindow.css" type="text/css" />
+
+<script type="text/javascript" src="modalwindow/dhtmlwindow.js">
+/***********************************************
+* DHTML Window Widget-  Dynamic Drive (www.dynamicdrive.com)
+* This notice must stay intact for legal use.
+* Visit http://www.dynamicdrive.com/ for full source code
+***********************************************/
+</script>
+<script type="text/javascript" src="modalwindow/modal.js"></script>
+
+<script src="js/jquery-1.9.1.min.js"></script> 
+<script src="js/owl.carousel.js"></script>
+
+<!-- Slider -->
+<link href="css/owl.carousel.css" rel="stylesheet">
+<link href="css/owl.theme.css" rel="stylesheet">
+<link href="css/prettify.css" rel="stylesheet">
+<link href="css/hover.css" rel="stylesheet">
+
+<!-- Popup -->
+<script src="js/jquery.magnific-popup.js"></script> 
+<script language="javascript" type="text/javascript">
+function do_search(url){
+	if(document.halal.category.value==''){
+		alert("Sila pilih kategori maklumat carian");
+		document.halal.category.focus();
+	} else if(document.halal.cari.value==''){
+		alert("Sila maklumat carian");
+		document.halal.cari.focus();
+	} else {
+		document.halal.action=url;
+		document.halal.target='_self';
+		document.halal.submit();
+	}
+}
+function do_homes(url){
+	document.homes.action=url;
+	document.homes.target='_self';
+	document.homes.submit();
+}
+function validateForm() {
+	alert("ss");
+    var x = document.halal.cari.value;
+    if (x == "") {
+        alert("Maklumat Carian perlu diisi");
+        return false;
+    }
+}
+</script>
+</head>
+
+<body>
+<div>
+    <style>
+        #mobile-nav{
+            transition: all 500ms;
+        }
+
+        @media (max-width: 640px){
+            .hiden{
+                display: none;
+            }
+        }
+    </style>
+	<div class="">
+    	<div class="bg-gray-50/70 flex justify-between items-center h-28 px-6 sm:px-8">
+            <a class="flex items-center" style="text-decoration: none" href="index.php">
+                <div class="mr-4"><img class="h-20" src="images/jakim_logo.png" title="Click to display main pages"></div>
+                <p class="text-[1.7rem] sm:text-3xl font-bold no-underline uppercase">Halal Malaysia Portal</p>
+            </a>
+            <button class="sm:hidden" onclick="showMobileNav()" ><span class="material-symbols-outlined" >menu</span></button>
+            <div id="mobile-nav" class="sm:hidden flex flex-col items-center justify-center text-white text-4xl font-semibold absolute top-0 right-0 w-0 h-screen bg-cyan-900 z-20 overflow-hidden whitespace-nowrap">
+                <button onclick="closeMobileNav()"><span class="material-symbols-outlined absolute p-6 text-6xl top-0 left-0 close-btn" >close</span></button>
+                <a class="my-5" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb3Jwb3JhdGU7Ozs7&utama=corporate'">Corporate</a>
+                <a class="my-5" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jZXJ0aWZpY2F0ZTs7Ozs=&utama=sijil&view='">Certification</a>
+                <a class="my-5" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb2xsYXBzaWJsZV9jb250ZW50Ozs7Ow==&utama=panduan&view='">Procedure</a>
+                <a class="my-5" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb250YWN0X3VzOzs7Ow==">Contact Us</a>
+                <a class="my-5" href="index.php?lang=bm" ><p class="uppercase hover:text-cyan-800" >bm</p></a>
+                <!-- <a class="font-semibold" style="text-decoration: none" href="index.php?data=&utama=panduan&view='"></a> -->
+            </div>  
+            <div class="hiden sm:flex font-semibold">
+                <a class="mr-8" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb3Jwb3JhdGU7Ozs7&utama=corporate'">Corporate</a>
+                <a class="mr-8" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jZXJ0aWZpY2F0ZTs7Ozs=&utama=sijil&view='">Certification</a>
+                <a class="mr-8" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb2xsYXBzaWJsZV9jb250ZW50Ozs7Ow==&utama=panduan&view='">Procedure</a>
+                <a class="mr-8" style="text-decoration: none" href="index.php?data=bW9kdWxlcy9jb250YWN0X3VzOzs7Ow==">Contact Us</a>
+                <a href="index.php?lang=bm" ><p class="uppercase hover:text-cyan-800" >bm</p></a>
+                <!-- <a class="font-semibold" style="text-decoration: none" href="index.php?data=&utama=panduan&view='"></a> -->
+            </div>           
+    	</div>
+	</div>
+		<!-- <div class="header-pages main-wrap">
+		<h3></h3>
+	</div> -->
+    
+	
+</div>
+<hr>
+<script>
+    const mobileNav = document.getElementById("mobile-nav");
+
+    function showMobileNav(){
+        mobileNav.style.width = '100vw';
+    }
+
+    function closeMobileNav(){
+        mobileNav.style.width = '0vw';
+    }
+</script>
+
+<!-- SELECT * FROM halal_products WHERE MATCH(product_name) AGAINST('keyword' IN BOOLEAN MODE); -->
+<link rel="stylesheet" href="modalwindow/modal.css" type="text/css" />
+<link rel="stylesheet" href="modalwindow/dhtmlwindow.css" type="text/css" />
+<script type="text/javascript" src="modalwindow/dhtmlwindow.js"></script>
+<script type="text/javascript" src="modalwindow/modal.js"></script>
+<script>
+	function open_modal(URL, title){
+		emailwindow=dhtmlmodal.open('EmailBox', 'iframe', URL, title, 'width=850,height=500,center=1,resize=0,scrolling=1')
+	}
+
+	function openModal(URL,title) {
+		if (window.showModalDialog) { 
+			window.showModalDialog(URL,title, "dialogWidth:850;dialogHeight:500");  
+		} else { 
+			window.open(URL,title, 'height=850,width=500,toolbar=no,directories=no,status=no, linemenubar=no,scrollbars=yes,resizable=no ,modal=yes');
+		}
+	} 
+
+	function do_menu1(URL,ty){
+		console.log(URL, ty, "testtttttttt", document.halal.cari);
+		var cari = document.halal.cari.value; 
+		var gcari = cari.replace("&","@d"); 
+		document.direktori.ty.value=ty;
+		document.direktori.action = URL+'&cari='+gcari;
+		document.direktori.target='_self';
+		document.direktori.submit();
+	}
+</script>
+<div>
+    <div class="absolute -z-10 w-screen h-64 bg-cyan-950/70 top-0" ></div>
+    <img class="absolute -z-20 w-screen h-64 object-cover top-0" src="images/v2/bg_img.jpg" alt="bg_img">
+    <p class="text-white font-bold text-4xl uppercase h-36 flex items-center justify-center" >Halal Status Verification</p>
+    <div class="" >
+		<form name="halal" action="index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=" method="post" class="grid gap-4 grid-cols-1 sm:grid-cols-7 pt-8 px-6 sm:px-20">
+			<div class="col-span-2" >
+				<p class="font-semibold" >State</p>
+				<select name="negeri" class="border border-gray-400 rounded-md w-full py-3">
+					<option value="" selected="selected">Please Select State</option>
+					<option value="01" >Johor</option>
+					<option value="02" >Kedah</option>
+					<option value="03" >Kelantan</option>
+					<option value="04" >Melaka</option>
+					<option value="05" >Negeri Sembilan</option>
+					<option value="06" >Pahang</option>
+					<option value="07" >Pulau Pinang</option>
+					<option value="08" >Perak</option>
+					<option value="09" >Perlis</option>
+					<option value="10" >Selangor</option>
+					<option value="11" >Terengganu</option>
+					<option value="12" >Sabah</option>
+					<option value="13" >Sarawak</option>
+					<option value="14" >W.P. Kuala Lumpur</option>
+					<option value="15" >W.P. Labuan</option>
+					<option value="16" >W.P. Putrajaya</option>
+				</select>
+			</div>
+			<div class="col-span-2" >
+				<p class="font-semibold">Category</p>
+				<select name="category" class="border border-gray-400 rounded-md w-full py-3">
+					<option value="">Please Select Category</option>
+										<option value="BG" >Barang Gunaan</option>
+										<option value="FM" >Farmaseutikal</option>
+										<option value="IN" >International</option>
+										<option value="KO" >Kosmetik dan Dandanan Diri</option>
+										<option value="MD" >Peranti Perubatan</option>
+										<option value="OEM" >Pengilangan Kontrak / Original Equipment Manufacturing(OEM)</option>
+										<option value="PE" >Premis Makanan</option>
+										<option value="PL" >Logistik</option>
+										<option value="PR" >Produk Makanan / Minuman</option>
+										<option value="PS" >Rumah Sembelihan</option>
+									</select>
+			</div>
+			<div class="col-span-2">
+				<p class="font-semibold">Search</p>
+				<input type="text" name="cari" class="border border-gray-400 rounded-md w-full py-2 px-3" value="">
+			</div>
+			<div class="col-span-1 flex items-end" >
+				<!-- <input class="bg-cyan-400 hover:bg-cyan-300 w-full py-3 text-xl font-semibold rounded-md" type="submit" value="Search"> -->
+				<button type="button" class="bg-cyan-400 hover:bg-cyan-300 w-full py-3 text-xl font-semibold rounded-md" onClick="do_search('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=')">Search</button>
+			</div>
+		</form>
+    </div>
+    <!--  -->
+</div>
+
+<form method="post" name="direktori" >
+<div class="flex px-6 sm:px-20 py-6">
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','CO')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-cyan-100 border-2 font-semibold" style="text-decoration:none">Syarikat<br />
+<b>Warning</b>:  Undefined variable $syarikat in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>644</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','HO')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Hotel & Resort<br />
+<b>Warning</b>:  Undefined variable $hotel in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>645</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','PE')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Premis Makanan<br />
+<b>Warning</b>:  Undefined variable $premis_makanan in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>646</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','MM')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Menu Makanan<br />
+<b>Warning</b>:  Undefined variable $premis_menu in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>647</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','PR')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Produk<br />
+<b>Warning</b>:  Undefined variable $produk in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>648</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','KO')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Kosmetik<br />
+<b>Warning</b>:  Undefined variable $kosmetik in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>649</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','FM')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Farmaseutikal<br />
+<b>Warning</b>:  Undefined variable $farmaseutikal in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>650</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','BG')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Barang Gunaan<br />
+<b>Warning</b>:  Undefined variable $bgunaan in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>651</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','RS')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Rumah Sembelih<br />
+<b>Warning</b>:  Undefined variable $rumah_sembelih in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>652</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','LO')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Logistik<br />
+<b>Warning</b>:  Undefined variable $logistik in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>653</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','MD')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">Peranti Perubatan<br />
+<b>Warning</b>:  Undefined variable $peranti in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>654</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','OEM')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">OEM<br />
+<b>Warning</b>:  Undefined variable $oem in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>655</b><br />
+</a>
+	<a onClick="do_menu1('index.php?data=ZGlyZWN0b3J5L2luZGV4X2RpcmVjdG9yeTs7Ozs=&negeri=&category=','IN')" class="hidden rounded-full border py-2 px-6 border-cyan-700 bg-cyan-100 text-cyan-800 mr-2 cursor-pointer bg-gray-50 hover:bg-cyan-100 hover:font-semibold" style="text-decoration:none">International<br />
+<b>Warning</b>:  Undefined variable $international in <b>/mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php</b> on line <b>656</b><br />
+</a>
+</div>
+
+<br />
+<b>Warning</b>:  Undefined variable $rs_comp in <b>/mnt/efs/myehalal/portal-halal/v1/directory/page_head_s.php</b> on line <b>34</b><br />
+<br />
+<b>Fatal error</b>:  Uncaught Error: Call to a member function Move() on null in /mnt/efs/myehalal/portal-halal/v1/directory/page_head_s.php:34
+Stack trace:
+#0 /mnt/efs/myehalal/portal-halal/v1/directory/directory_halal_comp.php(2): include()
+#1 /mnt/efs/myehalal/portal-halal/v1/directory/index_directory.php(715): include('...')
+#2 /mnt/efs/myehalal/portal-halal/v1/index.php(159): include('...')
+#3 {main}
+  thrown in <b>/mnt/efs/myehalal/portal-halal/v1/directory/page_head_s.php</b> on line <b>34</b><br />
