@@ -52,7 +52,7 @@ PLACES_QUERY = """
 [out:json][timeout:180];
 area["ISO3166-1"="{cc}"][admin_level=2]->.c;
 node["place"~"^(city|town)$"](area.c);
-out tags;
+out body;
 """
 
 
@@ -81,7 +81,7 @@ def main(countries):
     OUT.mkdir(exist_ok=True)
     s = requests.Session()
     for cc in countries:
-        result = {"country": cc, "retrieved": dt.datetime.utcnow().isoformat(timespec="seconds") + "Z",
+        result = {"country": cc, "retrieved": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
                   "licence": "ODbL-1.0 (c) OpenStreetMap contributors", "areas": {}, "places": []}
         for code, name in AREAS[cc].items():
             payload = overpass(AREA_QUERY.format(code=code), s)
@@ -96,7 +96,7 @@ def main(countries):
         result["places"] = [{"id": p["id"], "lat": p["lat"], "lon": p["lon"],
                              "name": p["tags"].get("name:en") or p["tags"].get("name"),
                              "name_local": p["tags"].get("name"), "place": p["tags"].get("place")}
-                            for p in places if p.get("tags")]
+                            for p in places if p.get("tags") and "lat" in p]
         print(f"{cc}: {len(result['places'])} city/town nodes", flush=True)
         with gzip.open(OUT / f"osm-{cc}.json.gz", "wt", encoding="utf-8") as fh:
             json.dump(result, fh, ensure_ascii=False)

@@ -25,7 +25,9 @@ jobs:
           python-version: "3.12"
       - run: pip install -r _directory-sync/requirements.txt
       - name: Extract Malaysia and Japan
-        run: python _directory-sync/research_osm.py MY JP 2>&1 | tee research.log
+        run: |
+          set -o pipefail
+          python _directory-sync/research_osm.py MY JP 2>&1 | tee research.log
       - name: Commit extract
         run: |
           git config user.name "directory-sync[bot]"
