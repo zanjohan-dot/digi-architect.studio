@@ -1,12 +1,25 @@
-"""Turn the OpenStreetMap research extract into reviewable data for Malaysia and Japan.
+"""Build reviewable and publishable data for Malaysia and Japan.
 
-Reads   _directory-sync/research/osm-<CC>.json.gz   (from research_osm.py)
-Writes  _directory-sync/state/candidates-<cc>.csv   every candidate, graded, with review columns
-        _directory-sync/research/coverage-<cc>.csv  per state / prefecture research log
-        data/community-listings-<cc>.xlsx           publishable-tier listings (with --write-data)
+Reads   _directory-sync/research/osm-<CC>.json.gz      OpenStreetMap extract (research_osm.py)
+        _directory-sync/research/records-<cc>.csv      desk-researched establishments, one row each,
+                                                       with evidence kept by source type
+        _directory-sync/research/chain-evidence-my.csv operator / JAKIM statements about chains
+        _directory-sync/publication.json               which evidence tiers may go live (owner-approved)
+Writes  _directory-sync/state/candidates-<cc>.csv      every OSM candidate, graded
+        _directory-sync/state/prepared-<cc>.csv        every record, its evidence tier and readiness
+        _directory-sync/research/coverage-<cc>.csv     per state / prefecture research log
+        data/community-listings-<cc>.xlsx              OSM-derived listings allowed by publication.json (ODbL)
+        data/directory-<cc>.xlsx                       researched listings allowed by publication.json
+                                                       (with --write-data)
 
-Every listing is "Community suggested — not verified". An OpenStreetMap halal
-tag is never treated as certification, ownership or a declaration.
+Evidence tiers, never merged into one "verified" flag:
+  certified               certification confirmed with the certifying body / official register
+  certification_reported  certification claimed by the establishment, its operator, a tourism body or the press
+  self_declared           the establishment's own published declaration, or a tourism-body listing
+                          based on information the establishment supplied
+  community               OpenStreetMap community report only
+An OpenStreetMap halal tag is never treated as certification, ownership or a declaration;
+a chain's statement is never treated as confirmation for an individual outlet.
 """
 import argparse
 import csv
@@ -37,7 +50,13 @@ CAND_FIELDS = ["source_id", "country", "state", "city", "city_basis", "name", "l
                "source_url", "review_status", "review_note"]
 
 NEW_COLUMNS = ["Local Name", "Local Address", "State / Prefecture", "City", "Halal Scope", "Muslim-Owned",
-               "Opening Hours", "Source URL", "Last Verified", "Verification Notes"]
+               "Opening Hours", "Source URL", "Last Verified", "Verification Notes",
+               "Listed By", "Certification Claimed By", "Establishment Declaration", "Certifier Confirmation",
+               "Tourism Listing", "OpenStreetMap Report", "Not Yet Verified", "Evidence Sources",
+               "Pork Served On Premises", "Cooking Alcohol In Halal Items", "Advance Reservation Required"]
+PUBLICATION = HERE / "publication.json"
+PREP_FIELDS = ["id", "source", "country", "state", "city", "name", "local_name", "address", "tier",
+               "readiness", "blocking_issues", "listed_by", "certifier", "evidence_sources", "notes"]
 
 NOT_OPEN = re.compile(r"opening soon|coming soon|under construction|temporarily closed|\btutup\b|akan dibuka|閉店|休業|準備中|近日オープン", re.I)
 
@@ -175,6 +194,74 @@ def grade(rec, cc, today):
     return "publishable", "; ".join(notes)
 
 
+def load_chains():
+    path = RESEARCH / "chain-evidence-my.csv"
+    if not path.exists():
+        return []
+    return [dict(r, _re=re.compile(r["pattern"], re.I)) for r in csv.DictReader(path.open(encoding="utf-8"))]
+
+
+def chain_for(c, chains):
+    for ch in chains:
+        if ch["_re"].search(c["name"]):
+            return ch
+    return None
+
+
+def apply_chain(c, chains):
+    """Chain statements: 'reported' adds an operator claim (outlet not confirmed);
+    'contradicted' / 'not_certified' hold the halal tag back for checking."""
+    ch = chain_for(c, chains)
+    c["chain"] = ch
+    if not ch or c["quality_tier"] == "rejected":
+        return
+    if ch["status"] in ("contradicted", "not_certified"):
+        c["quality_tier"] = "needs_check"
+        c["quality_notes"] = "; ".join(x for x in (c["quality_notes"], f"{ch['chain']}: {ch['statement']}") if x)
+
+
+RESEARCH_FIELDS = None
+
+
+def load_research(cc):
+    path = RESEARCH / f"records-{cc.lower()}.csv"
+    if not path.exists():
+        return []
+    return list(csv.DictReader(path.open(encoding="utf-8")))
+
+
+def supersede(cands, research):
+    """An OSM candidate already covered by a researched record is not listed twice."""
+    from dsync.intl import name_key
+    from dsync.normalise import metres_between
+    by_osm = {r["osm_source_id"]: r for r in research if r.get("osm_source_id")}
+    n = 0
+    for c in cands:
+        r = by_osm.get(c["source_id"])
+        if r is None:
+            for x in research:
+                same = name_key(x["name"]) and name_key(x["name"]) in (name_key(c["name"]), name_key(c.get("local_name")))
+                if not same or x["state"] != c["state"]:
+                    continue
+                try:
+                    near = metres_between(float(x["latitude"]), float(x["longitude"]), c["latitude"], c["longitude"]) <= 150
+                except (TypeError, ValueError):
+                    near = x["city"] and x["city"] == c["city"]
+                if near:
+                    r = x
+                    break
+        if r is not None:
+            c["superseded_by"] = r["id"]
+            n += 1
+    return n
+
+
+def load_publication():
+    if PUBLICATION.exists():
+        return json.loads(PUBLICATION.read_text(encoding="utf-8"))
+    return {}
+
+
 def listing_row(c, today, community_id):
     venue = is_venue({"place_kind": c["place_kind"], "establishment_type": c["establishment_type"], "name": c["name"]})
     if venue:
@@ -218,10 +305,134 @@ def listing_row(c, today, community_id):
         "Opening Hours": c["opening_hours"] or None, "Source URL": c["source_url"],
         "Last Verified": None,
         "Verification Notes": "Halal status, certification, ownership and alcohol use not verified. " + (c["quality_notes"] or ""),
+        "OpenStreetMap Report": f"{claim} (OpenStreetMap, last edited {c['osm_last_edit'] or 'unknown'}).",
+        "Not Yet Verified": "Halal status, certification, ownership, pork and alcohol policy",
+        "Evidence Sources": c["source_url"],
     }
 
 
-def write_workbook(path, rows, template):
+def chain_row(row, ch):
+    """Outlet of a chain whose operator states JAKIM certification: reported, not confirmed for this outlet."""
+    row.update({
+        "Listing Status": "Certification reported — not confirmed",
+        "Certification Status": f"Reported by the operator ({ch['certifier']}, chain-level); this outlet is not confirmed with {ch['certifier']}",
+        "Certification Claimed By": f"{ch['certifier']} (chain-level statement by {ch['chain']})",
+        "Establishment Declaration": ch["statement"],
+        "Not Yet Verified": f"This outlet's own {ch['certifier']} certificate; ownership; alcohol policy",
+        "Evidence Sources": " | ".join(x for x in (ch["source_url"], row["Source URL"]) if x),
+        "Basis of Listing": (f"{ch['chain']} states that the chain is halal-certified by {ch['certifier']}. This outlet "
+                             f"has not been confirmed individually with {ch['certifier']}. Also reported on OpenStreetMap."),
+        "Last Verified": ch["checked"],
+    })
+    return row
+
+
+YESNO = {"Yes": "TRUE", "No": "FALSE"}
+SCOPE_TEXT = {"entire": "Entire menu stated halal / Muslim-friendly",
+              "selected": "Selected halal menu only (the rest of the menu may not be halal)",
+              "muslim_friendly": "Muslim-friendly practices stated (no halal claim)",
+              "muslim_friendly_no_halal_claim": "Muslim-friendly practices stated (no halal claim)"}
+
+
+def research_tier(r):
+    if r["cert_status"] == "confirmed":
+        return "certified"
+    if r["cert_status"] == "reported":
+        return "certification_reported"
+    if r["establishment_declaration"] or r["tourism_listing"]:
+        return "self_declared"
+    return "community" if r["openstreetmap_report"] else "unsupported"
+
+
+def research_readiness(r, today):
+    issues = []
+    if not (r["address"] or r["local_address"]):
+        issues.append("no confirmed address")
+    if r["operating_status"] == "closed":
+        issues.append("reported closed")
+    d = r["latest_source_date"][:4]
+    if d.isdigit() and int(d) < 2022:
+        issues.append(f"latest evidence {r['latest_source_date']} (before 2022)")
+    if r["listed_by"] == "Tokyo Convention & Visitors Bureau" and not r["establishment_declaration"] and r["cert_status"] != "confirmed":
+        issues.append("guide details (halal meat, pork, alcohol icons) not yet transcribed")
+    if re.search(r"vegetarian|vegan|no halal (claim|text|mention)", r["notes"], re.I) and r["halal_scope"] in ("", "unknown"):
+        issues.append("source makes no halal claim (vegetarian / no halal text)")
+    if research_tier(r) == "unsupported":
+        issues.append("no supporting evidence")
+    if not r.get("latitude"):
+        issues.append("no map position yet")
+    blocking = [i for i in issues if i != "no map position yet"]
+    return ("ready" if not blocking else "needs_check"), issues
+
+
+def research_row(r, today):
+    tier = research_tier(r)
+    status = {"certified": "Halal Certified", "certification_reported": "Certification reported — not confirmed",
+              "self_declared": "Self-declared Muslim-friendly"}.get(tier, "Community suggested — not verified")
+    scope = SCOPE_TEXT.get(r["halal_scope"], "")
+    basis = []
+    if r["certifier_confirmation"]:
+        basis.append(r["certifier_confirmation"] + ".")
+    if r["cert_status"] == "reported":
+        basis.append(f"Certification is reported (claimed certifier: {r['certifier']}) but has not been confirmed with the certifying body.")
+    if r["establishment_declaration"]:
+        basis.append("The establishment states: " + r["establishment_declaration"].rstrip(".") + ".")
+    if r["tourism_listing"]:
+        basis.append(r["tourism_listing"])
+    area = r["city"] or r["state"]
+    try:
+        lat, lon = float(r["latitude"]), float(r["longitude"])
+    except (TypeError, ValueError):
+        lat = lon = None
+    return {
+        "ID": r["id"], "Name": r["name"], "Country": r["country"],
+        "Address": r["address"] or r["local_address"] or f"{r['city']}, {r['state']}".strip(", "),
+        "Postal Code": r["postal_code"] or None,
+        "Area / Prefecture Override": f"{area}, {r['state']}" if area != r["state"] else r["state"],
+        "Area / Prefecture": f"{area}, {r['state']}" if area != r["state"] else r["state"],
+        "Cuisine": r["cuisine"] or None, "Establishment Type": r["establishment_type"] or "Restaurant",
+        "Latitude": lat, "Longitude": lon,
+        "Listing Status": status, "Basis of Listing": " ".join(basis) or None,
+        "Halal Certified": "TRUE" if tier == "certified" else None,
+        "Certification Status": {"certified": f"Certified by {r['certifier']}",
+                                 "certification_reported": "Reported — not confirmed with the certifying body"}.get(tier, "Not halal-certified (no certification found)"),
+        "Certifying Body": r["certifier"] if tier == "certified" else None,
+        "Alcohol Served": YESNO.get(r["alcohol_served"]),
+        "Shared Kitchen": {"Yes": "FALSE", "No": "TRUE"}.get(r["separate_kitchen_or_utensils"]),
+        "No Pork Declared": "TRUE" if r["pork_served_on_premises"] == "No" else None,
+        "Prayer Space": YESNO.get(r["prayer_space"]),
+        "Declaration Text Override": r["establishment_declaration"] or None,
+        "Declaration Text": r["establishment_declaration"] or "No declaration has been submitted to this directory. Contact the establishment directly.",
+        "Additional Notes": r["notes"] or None, "Website URL": r["website"] or None,
+        "Last Updated": today.isoformat(), "Is Demo": "FALSE",
+        "Local Name": r["local_name"] or None, "Local Address": r["local_address"] or None,
+        "State / Prefecture": r["state"], "City": r["city"] or None, "Halal Scope": scope or None,
+        "Muslim-Owned": "Yes (source cited)" if r["muslim_owned"] == "Yes" else "Unknown",
+        "Source URL": (r["sources"].split(" | ") or [""])[0] or None, "Last Verified": r["last_checked"],
+        "Verification Notes": ("Not yet verified: " + r["not_yet_verified"]) if r["not_yet_verified"] else None,
+        "Listed By": r["listed_by"] or None,
+        "Certification Claimed By": r["certifier"] if tier == "certification_reported" else None,
+        "Establishment Declaration": r["establishment_declaration"] or None,
+        "Certifier Confirmation": r["certifier_confirmation"] or None,
+        "Tourism Listing": r["tourism_listing"] or None,
+        "OpenStreetMap Report": r["openstreetmap_report"] or None,
+        "Not Yet Verified": r["not_yet_verified"] or None,
+        "Evidence Sources": r["sources"] or None,
+        "Pork Served On Premises": YESNO.get(r["pork_served_on_premises"]),
+        "Cooking Alcohol In Halal Items": YESNO.get(r["cooking_alcohol_in_halal_items"]),
+        "Advance Reservation Required": YESNO.get(r["advance_reservation_required"]),
+    }
+
+
+RESEARCH_LICENCE = [["Licence and sources"],
+                    ["Compiled by The Digital Systems Architect (Zan J Private Limited) from the public sources cited "
+                     "in each record's Evidence Sources column. Each record states what was declared, by whom, and "
+                     "what has not been verified."],
+                    ["Map positions in Japan are from the Geospatial Information Authority of Japan address search "
+                     "(出典：国土地理院) where shown."]]
+
+
+def write_workbook(path, rows, template, licence=None):
     import openpyxl
     from openpyxl.worksheet.table import Table, TableStyleInfo
     from dsync.workbook import ODBL_NOTICE
@@ -238,7 +449,7 @@ def write_workbook(path, rows, template):
     t.tableStyleInfo = TableStyleInfo(name="TableStyleLight9", showRowStripes=True)
     ws.add_table(t)
     lic = wb.create_sheet("Licence")
-    for row in ODBL_NOTICE:
+    for row in (licence or ODBL_NOTICE):
         lic.append(row)
     lic.append(["Country", rows[0]["Country"] if rows else ""])
     wb.save(path)
@@ -254,8 +465,12 @@ def build(cc, today, write_data):
         for el in area["elements"]:
             cands.append(dict(record(el, cc, area["name"], towns, geo), _area=code))
     dupes = dedupe_intl(cands)
+    chains = load_chains() if cc == "MY" else []
     for c in cands:
         c["quality_tier"], c["quality_notes"] = grade(c, cc, today)
+        apply_chain(c, chains)
+    research = load_research(cc)
+    covered = supersede(cands, research)
     for code, area in data["areas"].items():
         mine = [c for c in cands if c["_area"] == code]
         tiers = {t: sum(1 for c in mine if c["quality_tier"] == t)
@@ -280,16 +495,57 @@ def build(cc, today, write_data):
         w = csv.DictWriter(fh, fieldnames=list(coverage[0]))
         w.writeheader()
         w.writerows(coverage)
-    rows = [listing_row(c, today, community_id) for c in cands if c["quality_tier"] == "publishable"]
-    ids = [r["ID"] for r in rows]
+    gate = load_publication().get(cc, {})
+    prepared, rows, rrows = [], [], []
+    for c in cands:
+        if c["quality_tier"] == "rejected" or c.get("superseded_by"):
+            continue
+        row = listing_row(c, today, community_id)
+        ch = c.get("chain")
+        tier = "community"
+        if ch and ch["status"] == "reported":
+            chain_row(row, ch)
+            tier = "certification_reported"
+        ready = c["quality_tier"] == "publishable"
+        issues = [] if ready else [c["quality_notes"]]
+        if tier == "community":
+            issues.append("community report only (not verified)")
+        prepared.append({"id": row["ID"], "source": "openstreetmap", "country": c["country"], "state": c["state"],
+                         "city": c["city"], "name": c["name"], "local_name": c["local_name"], "address": c["address"],
+                         "tier": tier, "readiness": "ready" if ready and tier != "community" else "needs_check",
+                         "blocking_issues": "; ".join(i for i in issues if i),
+                         "listed_by": "", "certifier": ch["certifier"] if ch and tier != "community" else "",
+                         "evidence_sources": row["Evidence Sources"], "notes": c["quality_notes"]})
+        if ready and gate.get(tier):
+            rows.append(row)
+    for r in research:
+        tier = research_tier(r)
+        readiness, issues = research_readiness(r, today)
+        prepared.append({"id": r["id"], "source": "desk research", "country": r["country"], "state": r["state"],
+                         "city": r["city"], "name": r["name"], "local_name": r["local_name"],
+                         "address": r["address"] or r["local_address"], "tier": tier, "readiness": readiness,
+                         "blocking_issues": "; ".join(issues), "listed_by": r["listed_by"], "certifier": r["certifier"],
+                         "evidence_sources": r["sources"], "notes": r["notes"][:300]})
+        if readiness == "ready" and gate.get(tier):
+            rrows.append(research_row(r, today))
+    ids = [r["ID"] for r in rows + rrows]
     assert len(ids) == len(set(ids)), "duplicate IDs"
+    with open(STATE / f"prepared-{cc.lower()}.csv", "w", newline="", encoding="utf-8") as fh:
+        w = csv.DictWriter(fh, fieldnames=PREP_FIELDS)
+        w.writeheader()
+        w.writerows(sorted(prepared, key=lambda p: (p["state"], p["city"], p["name"])))
     if write_data:
-        write_workbook(ROOT / "data" / f"community-listings-{cc.lower()}.xlsx", sorted(rows, key=lambda r: (r["State / Prefecture"], r["City"] or "", r["Name"])),
+        key = lambda r: (r["State / Prefecture"], r["City"] or "", r["Name"])
+        write_workbook(ROOT / "data" / f"community-listings-{cc.lower()}.xlsx", sorted(rows, key=key),
                        ROOT / "data" / "community-listings.xlsx")
-    print(f"{cc}: {len(cands)} candidates, {dupes} duplicates, {len(rows)} publishable, "
-          f"{sum(1 for c in cands if c['quality_tier'] == 'needs_check')} needs_check, "
-          f"{sum(1 for c in cands if c['quality_tier'] == 'rejected')} rejected")
-    return cands, rows, coverage
+        write_workbook(ROOT / "data" / f"directory-{cc.lower()}.xlsx", sorted(rrows, key=key),
+                       ROOT / "data" / "community-listings.xlsx", licence=RESEARCH_LICENCE)
+    from collections import Counter
+    tiers = Counter((p["tier"], p["readiness"]) for p in prepared)
+    print(f"{cc}: {len(cands)} OSM candidates ({dupes} duplicates, {covered} matched to researched records), "
+          f"{len(research)} researched records; prepared by tier/readiness: {dict(sorted(tiers.items()))}; "
+          f"published under publication.json: {len(rows)} community + {len(rrows)} researched")
+    return cands, rows + rrows, coverage
 
 
 if __name__ == "__main__":

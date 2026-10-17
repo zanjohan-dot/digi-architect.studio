@@ -119,3 +119,71 @@ class Dedupe(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class EvidenceTiers(unittest.TestCase):
+    CHAINS = [dict(pattern=p, chain=n, status=s, certifier="JAKIM", statement="x", source_url="https://example.org",
+                   source_date="", checked="2026-10-17", _re=__import__("re").compile(p, 2))
+              for p, n, s in (("marry ?brown", "Marrybrown", "reported"), ("zanmai", "Sushi Zanmai", "contradicted"))]
+
+    def my(self, name, i=11):
+        r = rb.record(el(i, {"amenity": "restaurant", "name": name, "diet:halal": "yes"}, lat=1.46, lon=103.76),
+                      "MY", "Johor", TOWNS)
+        r["quality_tier"], r["quality_notes"] = rb.grade(r, "MY", TODAY)
+        rb.apply_chain(r, self.CHAINS)
+        return r
+
+    def test_chain_statement_is_reported_not_certified(self):
+        r = self.my("Marrybrown Johor Bahru")
+        row = rb.chain_row(rb.listing_row(r, TODAY, lambda s: "com-z"), r["chain"])
+        self.assertEqual(row["Listing Status"], "Certification reported — not confirmed")
+        self.assertIsNone(row.get("Halal Certified"))
+        self.assertIn("not confirmed", row["Certification Status"])
+
+    def test_contradicted_chain_held_back(self):
+        r = self.my("Sushi Zanmai", i=12)
+        self.assertEqual(r["quality_tier"], "needs_check")
+
+    def research(self, **kw):
+        base = {f: "" for f in ("id", "country", "state", "city", "name", "local_name", "address", "local_address",
+                                "postal_code", "latitude", "longitude", "establishment_type", "cuisine", "website",
+                                "halal_scope", "cert_status", "certifier", "listed_by", "establishment_declaration",
+                                "certifier_confirmation", "tourism_listing", "openstreetmap_report", "osm_source_id",
+                                "muslim_owned", "pork_served_on_premises", "alcohol_served",
+                                "cooking_alcohol_in_halal_items", "separate_kitchen_or_utensils",
+                                "advance_reservation_required", "prayer_space", "operating_status",
+                                "latest_source_date", "not_yet_verified", "notes", "sources", "last_checked")}
+        base.update(id="res-1", country="Japan", state="Tokyo", name="Test", address="1-1 Ginza", **kw)
+        return base
+
+    def test_research_tiers_stay_separate(self):
+        self.assertEqual(rb.research_tier(self.research(cert_status="confirmed", certifier="X")), "certified")
+        self.assertEqual(rb.research_tier(self.research(cert_status="reported")), "certification_reported")
+        self.assertEqual(rb.research_tier(self.research(tourism_listing="Listed by a tourism body")), "self_declared")
+        self.assertEqual(rb.research_tier(self.research(muslim_owned="Yes")), "unsupported")
+        row = rb.research_row(self.research(cert_status="reported", certifier="JHA", muslim_owned="Yes"), TODAY)
+        self.assertIsNone(row["Halal Certified"])
+        self.assertEqual(row["Muslim-Owned"], "Yes (source cited)")
+
+    def test_old_or_guide_only_records_need_checking(self):
+        ready, issues = rb.research_readiness(self.research(establishment_declaration="halal menu", latest_source_date="2019"), TODAY)
+        self.assertEqual(ready, "needs_check")
+        ready, _ = rb.research_readiness(self.research(listed_by="Tokyo Convention & Visitors Bureau",
+                                                       tourism_listing="Listed", latest_source_date="2025-11"), TODAY)
+        self.assertEqual(ready, "needs_check")
+        ready, _ = rb.research_readiness(self.research(establishment_declaration="halal menu", latest_source_date="2025"), TODAY)
+        self.assertEqual(ready, "ready")
+
+    def test_nothing_published_without_approval(self):
+        gate = rb.load_publication()
+        for cc in ("MY", "JP"):
+            self.assertFalse(any(gate[cc].values()), f"{cc} publication must stay off until the owner approves")
+
+
+class LandingPages(unittest.TestCase):
+    def test_landing_pages_are_not_directories(self):
+        for name in ("muslim-friendly-directory-malaysia.html", "muslim-friendly-directory-japan.html"):
+            page = (HERE.parent / name).read_text(encoding="utf-8")
+            self.assertNotIn("xlsx.full.min.js", page)
+            self.assertNotIn('id="recordsGrid"', page)
+            self.assertIn("/muslim-friendly-directory?country=", page)
