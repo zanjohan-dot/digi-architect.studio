@@ -1,0 +1,36 @@
+name: Directory research sources (read-only)
+
+# Retrieves public pages / official guides listed in
+# _directory-sync/research/sources-request.json for desk research.
+# Output is a short-lived Actions artifact only: nothing is committed or published.
+on:
+  push:
+    branches: [directory-international]
+    paths:
+      - "_directory-sync/research/sources-request.json"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: directory-sources
+  cancel-in-progress: false
+
+jobs:
+  retrieve:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python _directory-sync/research_sources.py
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-sources
+          path: sources-out/
+          retention-days: 3

@@ -1,0 +1,132 @@
+{
+ "download": [
+  {
+   "key": "tokyo-guide-en",
+   "url": "https://www.gotokyo.org/book/wp-content/uploads/2026/03/AO2_2603_muslim_low_EN.pdf"
+  },
+  {
+   "key": "tokyo-guide-ja",
+   "url": "https://www.gotokyo.org/book/wp-content/uploads/2026/03/AO2_2603_muslim_low_JP.pdf"
+  },
+  {
+   "key": "tokyo-book-list",
+   "url": "https://www.gotokyo.org/book/en/list/1664/"
+  },
+  {
+   "key": "tokyo-book-list-ja",
+   "url": "https://www.gotokyo.org/book/list/1664/"
+  },
+  {
+   "key": "kyoto-halal",
+   "url": "https://kyoto.travel/en/muslim/finding-halal-food/"
+  },
+  {
+   "key": "fukuoka-pref",
+   "url": "https://www.crossroadfukuoka.jp/en/articles/muslim"
+  },
+  {
+   "key": "fukuoka-now",
+   "url": "https://www.fukuoka-now.com/en/guides/fukuoka-city-muslim-friendly-restaurant-guide/"
+  },
+  {
+   "key": "okinawa-4340",
+   "url": "https://www.okinawastory.jp/news/tourism/4340"
+  },
+  {
+   "key": "sapporo",
+   "url": "https://www.sapporo.travel/en/info/useful_information/halal_restaurants_in_sapporo/"
+  },
+  {
+   "key": "hokudai-guide",
+   "url": "https://i-colleague.oia.hokudai.ac.jp/wp-content/uploads/2024/03/%E3%83%8F%E3%83%A9%E3%83%BC%E3%83%AB%E3%81%AE%E3%81%8A%E5%BA%97%E7%B4%B9%E4%BB%8B2024%E5%B9%B41%E6%9C%88.pdf"
+  },
+  {
+   "key": "miyako-uemachi",
+   "url": "https://www.miyakohotels.ne.jp/osaka/restaurant/list/uemachi/muslim.html"
+  }
+ ],
+ "crawl": [
+  {
+   "key": "aichi",
+   "url": "https://aichinow.pref.aichi.jp/en/travelkits/muslim/",
+   "match": "\\.pdf|muslim|halal|dining",
+   "limit": 30
+  },
+  {
+   "key": "jnto-muslim",
+   "url": "https://www.japan.travel/en/muslim-travelers/",
+   "match": "muslim|halal|pdf",
+   "limit": 30
+  },
+  {
+   "key": "naha-cert",
+   "url": "https://www.nipponasiahalal.org/",
+   "match": "certif|認証|list|一覧|restaurant|飲食",
+   "limit": 25
+  },
+  {
+   "key": "jha",
+   "url": "https://www.jhalal.com/",
+   "match": "certif|認証|list|一覧|restaurant|飲食|企業",
+   "limit": 25
+  },
+  {
+   "key": "jma",
+   "url": "https://www.muslim.or.jp/",
+   "match": "halal|ハラール|認証|list|一覧",
+   "limit": 20
+  },
+  {
+   "key": "jhf",
+   "url": "https://www.japan-halal.org/",
+   "match": "certif|認証|list|一覧|restaurant|飲食|企業",
+   "limit": 25
+  },
+  {
+   "key": "jit",
+   "url": "https://www.japanislamictrust.com/",
+   "match": "halal|certif|list",
+   "limit": 20
+  },
+  {
+   "key": "mpja",
+   "url": "https://www.mpja.jp/",
+   "match": "halal|certif|認証|list|一覧",
+   "limit": 20
+  },
+  {
+   "key": "ocvb-muslim",
+   "url": "https://www.okinawastory.jp/",
+   "match": "muslim|ムスリム|halal|ハラール",
+   "limit": 20
+  },
+  {
+   "key": "osaka-octb",
+   "url": "https://osaka-info.jp/en/",
+   "match": "muslim|halal",
+   "limit": 20
+  }
+ ],
+ "jakim": [
+  {
+   "key": "jakim-sugarbun-swk",
+   "negeri": "13",
+   "cari": "SugarBun"
+  },
+  {
+   "key": "jakim-marrybrown-swk",
+   "negeri": "13",
+   "cari": "Marrybrown"
+  },
+  {
+   "key": "jakim-sushizanmai",
+   "negeri": "14",
+   "cari": "Sushi Zanmai"
+  },
+  {
+   "key": "jakim-nostate-sofea",
+   "negeri": "",
+   "cari": "Restoran Sofea"
+  }
+ ]
+}
