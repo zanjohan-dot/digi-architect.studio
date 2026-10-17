@@ -37,6 +37,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" crossorigin=""/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" crossorigin=""/>
 <style>
 :root{
   --ink:#0A0F1E;--ink-2:#1C2438;
@@ -336,6 +338,14 @@ p.hero-h1{font-family:Georgia,'Times New Roman',serif;font-weight:normal;}
 .record-badges .badge+.badge{margin-left:4px;}
 .category-key{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;font-size:11px;line-height:1.5;color:var(--muted);margin:8px 14px 4px;}
 .category-key .badge{margin-right:4px;}
+.country-switch{display:inline-flex;gap:0;margin-top:8px;border:1px solid var(--line);border-radius:2px;overflow:hidden;}
+.country-switch button{min-height:32px;padding:0 12px;border:0;border-right:1px solid var(--line);background:var(--white);color:var(--ink);font-size:11px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;cursor:pointer;font-family:inherit;}
+.country-switch button:last-child{border-right:0;}
+.country-switch button[aria-pressed="true"]{background:var(--ink);color:var(--white);}
+.country-switch button:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+.badge-scope{background:transparent;color:var(--caution,#9a6b00);border:1px solid currentColor;}
+.record-local{font-size:12px;color:var(--muted);margin:-2px 0 4px;}
+.show-more-row{display:flex;justify-content:center;padding:14px;}
 .record-chips{display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px;}
 .dchip{font-size:10px;font-weight:600;border-radius:2px;padding:3px 7px 3px 5px;display:inline-flex;align-items:center;gap:3px;white-space:nowrap;}
 .dchip.positive{background:var(--good-bg);color:var(--good);}
@@ -735,6 +745,7 @@ p.hero-h1{font-family:Georgia,'Times New Roman',serif;font-weight:normal;}
             <div class="dir-title">
               <div class="eyebrow">Directory</div>
               <h2>List of Muslim-friendly establishments</h2>
+              <div class="country-switch" id="countrySwitch" role="group" aria-label="Country"><button type="button" data-country="Singapore" aria-pressed="true">Singapore</button><button type="button" data-country="Malaysia" aria-pressed="false">Malaysia</button><button type="button" data-country="Japan" aria-pressed="false">Japan</button></div>
             </div>
             <div class="dir-toolbar">
               <div class="dir-search-wrap">
@@ -760,7 +771,7 @@ p.hero-h1{font-family:Georgia,'Times New Roman',serif;font-weight:normal;}
             </div>
           </div>
           <div class="filter-dropdown" id="filterDropdown" role="region" aria-label="Filter establishments" hidden>
-            <div class="fd-grid"><div><label class="filter-label" for="areaFilter">Area / Prefecture</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div><div><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div><div><label class="filter-label" for="typeFilter">Establishment type</label><select class="dir-select" id="typeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="certFilter">Certification</label><select class="dir-select" id="certFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="listingFilter">Listing status</label><select class="dir-select" id="listingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="alcoholMenuFilter">Alcohol in menu items</label><select class="dir-select" id="alcoholMenuFilter"><option value="all">Any</option><option value="yes">Indicated</option><option value="no">Not indicated</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="porkFilter">Pork</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div><div><label class="filter-label" for="lardFilter">Lard</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div><div><label class="filter-label" for="prayerFilter">Prayer space</label><select class="dir-select" id="prayerFilter"><option value="all">Any</option><option value="yes">Available</option><option value="no">Not available</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="mapreadyFilter">Map location</label><select class="dir-select" id="mapreadyFilter"><option value="all">Any</option><option value="yes">Shown on map</option><option value="no">No map location</option></select></div></div>
+            <div class="fd-grid"><div><label class="filter-label" for="areaFilter">Area / Prefecture</label><select class="dir-select" id="areaFilter"><option value="all">Any area</option></select></div><div><label class="filter-label" for="cityFilter">City / town</label><select class="dir-select" id="cityFilter"><option value="all">Any city or town</option></select></div><div><label class="filter-label" for="scopeFilter">Halal scope</label><select class="dir-select" id="scopeFilter"><option value="all">Any</option><option value="entire">Entire menu reported halal</option><option value="selected">Selected items only</option><option value="other">Other / not stated</option></select></div><div><label class="filter-label" for="cuisineFilter">Cuisine</label><select class="dir-select" id="cuisineFilter"><option value="all">Any cuisine</option></select></div><div><label class="filter-label" for="typeFilter">Establishment type</label><select class="dir-select" id="typeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="certFilter">Certification</label><select class="dir-select" id="certFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="listingFilter">Listing status</label><select class="dir-select" id="listingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="alcoholFilter">Alcohol served</label><select class="dir-select" id="alcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="alcoholMenuFilter">Alcohol in menu items</label><select class="dir-select" id="alcoholMenuFilter"><option value="all">Any</option><option value="yes">Indicated</option><option value="no">Not indicated</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="meatFilter">Meat source</label><select class="dir-select" id="meatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="porkFilter">Pork</label><select class="dir-select" id="porkFilter"><option value="all">Any</option><option value="yes">No pork declared</option><option value="no">Not declared pork-free</option></select></div><div><label class="filter-label" for="lardFilter">Lard</label><select class="dir-select" id="lardFilter"><option value="all">Any</option><option value="yes">No lard declared</option><option value="no">Not declared lard-free</option></select></div><div><label class="filter-label" for="prayerFilter">Prayer space</label><select class="dir-select" id="prayerFilter"><option value="all">Any</option><option value="yes">Available</option><option value="no">Not available</option><option value="unknown">Not stated</option></select></div><div><label class="filter-label" for="mapreadyFilter">Map location</label><select class="dir-select" id="mapreadyFilter"><option value="all">Any</option><option value="yes">Shown on map</option><option value="no">No map location</option></select></div></div>
             <div class="fd-actions">
               <span class="fd-count" id="fdCount" aria-live="polite"></span>
               <button class="btn btn-outline btn-sm" type="button" id="inlineResetBtn">Reset</button>
@@ -897,7 +908,7 @@ p.hero-h1{font-family:Georgia,'Times New Roman',serif;font-weight:normal;}
     <button class="filter-sheet-close" id="filterSheetClose" type="button" aria-label="Close filters">&times;</button>
   </div>
   <div class="filter-sheet-body">
-    <div><label class="filter-label" for="sheetAreaFilter">Area / Prefecture</label><select class="dir-select" id="sheetAreaFilter"><option value="all">Any area</option></select></div>
+    <div><label class="filter-label" for="sheetAreaFilter">Area / Prefecture</label><select class="dir-select" id="sheetAreaFilter"><option value="all">Any area</option></select></div><div><label class="filter-label" for="sheetCityFilter">City / town</label><select class="dir-select" id="sheetCityFilter"><option value="all">Any city or town</option></select></div><div><label class="filter-label" for="sheetScopeFilter">Halal scope</label><select class="dir-select" id="sheetScopeFilter"><option value="all">Any</option><option value="entire">Entire menu reported halal</option><option value="selected">Selected items only</option><option value="other">Other / not stated</option></select></div>
     <div><label class="filter-label" for="sheetCuisineFilter">Cuisine</label><select class="dir-select" id="sheetCuisineFilter"><option value="all">Any cuisine</option></select></div>
     <div><label class="filter-label" for="sheetTypeFilter">Establishment type</label><select class="dir-select" id="sheetTypeFilter"><option value="all">Any type</option></select></div><div><label class="filter-label" for="sheetCertFilter">Certification</label><select class="dir-select" id="sheetCertFilter"><option value="all">Any status</option></select></div><div><label class="filter-label" for="sheetListingFilter">Listing status</label><select class="dir-select" id="sheetListingFilter"><option value="all">Any listing</option></select></div><div><label class="filter-label" for="sheetAlcoholFilter">Alcohol served</label><select class="dir-select" id="sheetAlcoholFilter"><option value="all">Any</option><option value="no">No alcohol served</option><option value="yes">Alcohol served</option><option value="unknown">Not stated</option></select></div>
     <div><label class="filter-label" for="sheetMeatFilter">Meat source</label><select class="dir-select" id="sheetMeatFilter"><option value="all">Any</option><option value="yes">Declared halal-sourced</option><option value="no">Not declared</option><option value="unknown">Not stated</option></select></div>
@@ -911,6 +922,7 @@ p.hero-h1{font-family:Georgia,'Times New Roman',serif;font-weight:normal;}
   </div>
 </div>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" crossorigin=""></script>
 <script>
 var PANELS=['hero','meaning','framework','why','notice','directory','how','faq'];
 var PANEL_LABELS=['Overview','What It Means','Declaration Framework','Why This Exists','Important Notice','Explore Directory','How to Use','FAQ & Information'];
@@ -958,6 +970,14 @@ var establishments = [];
 var DATA_VERSION = '20261016b';
 var DATA_URL = '/data/muslim-friendly-establishments.xlsx';
 var COMMUNITY_URL = '/data/community-listings.xlsx';
+/* Other countries are separate files, fetched only when that country is chosen,
+   so the Singapore directory loads exactly as before. */
+var COUNTRY_FILES = {Malaysia:'/data/community-listings-my.xlsx', Japan:'/data/community-listings-jp.xlsx'};
+var COUNTRY_VIEW = {Singapore:[1.3521,103.8198,11], Malaysia:[4.2,108.0,6], Japan:[36.2,138.3,5]};
+var loadedCountries = {Singapore:true};
+var DEFAULT_COUNTRY = (function(){var q=(location.search.match(/[?&]country=([a-z]+)/i)||[])[1];var m={singapore:'Singapore',malaysia:'Malaysia',japan:'Japan'};return m[(q||'').toLowerCase()]||window.DIRECTORY_COUNTRY||'Singapore';})();
+var clusterGroup = null;
+var PAGE_SIZE = 60, shownCount = PAGE_SIZE;
 var mapMarkers     = {};
 var mapInstance    = null;
 
@@ -1026,6 +1046,15 @@ function parseRows(rows) {
       name:                name,
       country:             trim2(row['country'])          || 'Singapore',
       area:                trim2(row['area_prefecture'])   || '',  // reads from formula-generated column
+      region:              trim2(row['state_prefecture'])  || trim2(row['area_prefecture']) || '',
+      city:                trim2(row['city'])              || '',
+      localName:           trim2(row['local_name'])        || '',
+      halalScope:          trim2(row['halal_scope'])       || '',
+      muslimOwned:         trim2(row['muslim_owned'])      || '',
+      openingHours:        trim2(row['opening_hours'])     || '',
+      sourceUrl:           trim2(row['source_url'])        || '',
+      lastVerified:        fmtDate(row['last_verified']),
+      verificationNotes:   trim2(row['verification_notes'])|| '',
       address:             trim2(row['address'])          || '',
       postalCode:          trim2(row['postal_code'])      || '',
       postalSector:        trim2(row['postal_sector'])      || '',
@@ -1076,8 +1105,8 @@ function parseRows(rows) {
   result.forEach(function(r){
     r.mapReady = r.coordinates.lat !== null && r.coordinates.lng !== null;
     r.searchBlob = [
-      r.name, r.address, r.postalCode, r.postalSector, r.postalDistrict,
-      r.area, r.country, r.cuisine, r.establishmentType,
+      r.name, r.localName, r.address, r.postalCode, r.postalSector, r.postalDistrict,
+      r.area, r.region, r.city, r.country, r.cuisine, r.establishmentType, r.halalScope,
       r.certificationStatus, r.status, r.basisOfListing, r.certifyingBody,
       r.declarationProvided, r.crossContactNote, r.additionalNotes
     ].join(' \u0001 ').toLowerCase();
@@ -1148,6 +1177,8 @@ function loadDirectory() {
     })
     .then(function(rows) {
       establishments = parseRows(rows);
+      state.country = DEFAULT_COUNTRY;
+      if (DEFAULT_COUNTRY !== 'Singapore') { return loadCountry(DEFAULT_COUNTRY).then(afterLoad); }
       if (!establishments.length) { showDirectoryEmpty(); try { initMap(); } catch (e) {} return; }
       afterLoad();
     })
@@ -1167,7 +1198,8 @@ function addDataAttribution() {
   var p = document.createElement('p');
   p.id = 'osmAttribution';
   p.style.cssText = 'font-size:11px;color:var(--muted);margin:12px 14px;';
-  p.innerHTML = 'Community-suggested listings contain information from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; OpenStreetMap contributors, available under the <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">Open Database Licence</a>. The community listings data is <a href="' + COMMUNITY_URL + '">available under the same licence</a>.';
+  p.innerHTML = 'Community-suggested listings contain information from <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; OpenStreetMap contributors, available under the <a href="https://opendatacommons.org/licenses/odbl/" target="_blank" rel="noopener">Open Database Licence</a>. The community listings data is available under the same licence: '
+    + '<a href="' + COMMUNITY_URL + '">Singapore</a>, <a href="' + COUNTRY_FILES.Malaysia + '">Malaysia</a>, <a href="' + COUNTRY_FILES.Japan + '">Japan</a>.';
   grid.parentNode.insertBefore(p, grid.nextSibling);
 }
 
@@ -1189,7 +1221,37 @@ function addCategoryKey() {
   grid.parentNode.insertBefore(key, grid);
 }
 
+/* Fetch one country's listings file once, on first selection. */
+function loadCountry(country) {
+  if (loadedCountries[country] || !COUNTRY_FILES[country]) return Promise.resolve();
+  var ctr = document.getElementById('resultsInlineCount');
+  if (ctr) ctr.textContent = 'Loading ' + country + ' listings\u2026';
+  return fetch(COUNTRY_FILES[country] + '?v=' + DATA_VERSION)
+    .then(function(resp){ if (!resp.ok) throw new Error('HTTP ' + resp.status); return resp.arrayBuffer(); })
+    .then(function(buf){
+      var wb = XLSX.read(new Uint8Array(buf), {type:'array', cellDates:true, dateNF:'yyyy-mm-dd'});
+      var have = {}; establishments.forEach(function(r){ have[r.id] = true; });
+      var extra = parseRows(XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]], {defval:null, raw:false}))
+        .filter(function(r){ return !have[r.id]; });
+      establishments = establishments.concat(extra);
+      loadedCountries[country] = true;
+      if (mapInstance) addMarkers(extra);
+    })
+    .catch(function(err){ console.error('[Directory] ' + country + ' load error:', err); loadedCountries[country] = 'failed'; });
+}
+function setCountry(country) {
+  state.country = country; state.area = 'all'; state.city = 'all'; shownCount = PAGE_SIZE;
+  document.querySelectorAll('#countrySwitch [data-country]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-country') === country ? 'true' : 'false'); });
+  return loadCountry(country).then(function(){
+    addDataAttribution(); refreshOptions(); syncControls(); syncSheetFromState(); hideMapPreview(); render(); fitCountry();
+  });
+}
+document.querySelectorAll('#countrySwitch [data-country]').forEach(function(b){
+  b.addEventListener('click', function(){ if (state.country !== b.getAttribute('data-country')) setCountry(b.getAttribute('data-country')); });
+});
+
 function afterLoad() {
+  document.querySelectorAll('#countrySwitch [data-country]').forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-country') === state.country ? 'true' : 'false'); });
   addDataAttribution();
   addCategoryKey();
   initFilters();
@@ -1206,13 +1268,27 @@ function valStatus(v){if(v===true)return'yes';if(v===false)return'no';return'unk
 function alcoholMenuStatus(r){var d=r.declarations;if(d.alcoholServed===false&&d.alcoholMenuItemsDisclosed===false)return'na';return valStatus(d.alcoholMenuItemsDisclosed);}
 function statusText(v,y,n,u){u=u||'Not stated';if(v===true)return y;if(v===false)return n;return u;}
 function dchip(label,ok,neutral){var cls=neutral?'neutral':(ok?'positive':'caution');var icon=ok?'<svg viewBox="0 0 20 20"><path d="M4 10l4 4 8-8"/></svg>':neutral?'<svg viewBox="0 0 20 20"><path d="M10 8v4M10 14v.5"/></svg>':'<svg viewBox="0 0 20 20"><path d="M10 5v6M10 14v.5"/></svg>';return'<span class="dchip '+cls+'">'+icon+label+'</span>';}
-function getUniqueOptions(field){return Array.from(new Set(establishments.map(function(r){return r[field];}).filter(Boolean))).sort();}
+function getUniqueOptions(field,rs){return Array.from(new Set((rs||establishments).map(function(r){return r[field];}).filter(Boolean))).sort();}
+function scopeKey(r){var s=norm(r.halalScope);if(s.indexOf('selected')===0)return'selected';if(s.indexOf('entire')===0)return'entire';return'other';}
+function inCountry(){return establishments.filter(function(r){return r.country===state.country;});}
+/* Option lists follow the chosen country (and, for towns, the chosen area). */
+function refreshOptions(){
+  var rs=inCountry();
+  var cityRs=state.area==='all'?rs:rs.filter(function(r){return norm(r.region)===norm(state.area);});
+  var lists={area:getUniqueOptions('region',rs),city:getUniqueOptions('city',cityRs),cuisine:getUniqueOptions('cuisine',rs),type:getUniqueOptions('establishmentType',rs),cert:getUniqueOptions('certificationStatus',rs),listing:getUniqueOptions('status',rs)};
+  var ids={area:['areaFilter','sheetAreaFilter'],city:['cityFilter','sheetCityFilter'],cuisine:['cuisineFilter','sheetCuisineFilter'],type:['typeFilter','sheetTypeFilter'],cert:['certFilter','sheetCertFilter'],listing:['listingFilter','sheetListingFilter']};
+  Object.keys(ids).forEach(function(k){ids[k].forEach(function(id){var sel=document.getElementById(id);if(!sel)return;while(sel.options.length>1)sel.remove(1);lists[k].forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});if(state[k]!=='all'&&lists[k].indexOf(state[k])===-1)state[k]='all';sel.value=state[k];});});
+  var lbl=state.country==='Japan'?'Prefecture':state.country==='Malaysia'?'State / territory':'Area';
+  ['areaFilter','sheetAreaFilter'].forEach(function(id){var l=document.querySelector('label[for="'+id+'"]');if(l)l.textContent=lbl;var sel=document.getElementById(id);if(sel&&sel.options[0])sel.options[0].textContent='Any '+lbl.toLowerCase();});
+}
 
 /* ── State + element cache ── */
-var state={search:'',area:'all',cuisine:'all',type:'all',cert:'all',listing:'all',alcohol:'all',alcoholMenu:'all',meat:'all',pork:'all',lard:'all',prayer:'all',mapready:'all',sort:'name',selectedId:null,lastFocusEl:null,view:'list'};
+var state={country:'Singapore',search:'',area:'all',city:'all',scope:'all',cuisine:'all',type:'all',cert:'all',listing:'all',alcohol:'all',alcoholMenu:'all',meat:'all',pork:'all',lard:'all',prayer:'all',mapready:'all',sort:'name',selectedId:null,lastFocusEl:null,view:'list'};
 var els={
   searchInput:document.getElementById('searchInput'),
   areaFilter:document.getElementById('areaFilter'),
+  cityFilter:document.getElementById('cityFilter'),
+  scopeFilter:document.getElementById('scopeFilter'),
   cuisineFilter:document.getElementById('cuisineFilter'),
   typeFilter:document.getElementById('typeFilter'),
   certFilter:document.getElementById('certFilter'),
@@ -1274,8 +1350,8 @@ function closeFilterSheet(){
   document.body.classList.remove('sheet-open');
   var fb=document.getElementById('filterSheetBtn');if(fb)fb.focus();
 }
-function syncSheetFromState(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)el.value=state[map[id]];});}
-function applySheetFilters(){var map={sheetAreaFilter:'area',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)state[map[id]]=el.value;});syncControls();render();closeFilterSheet();updateFilterBtnState();}
+function syncSheetFromState(){var map={sheetAreaFilter:'area',sheetCityFilter:'city',sheetScopeFilter:'scope',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)el.value=state[map[id]];});}
+function applySheetFilters(){var map={sheetAreaFilter:'area',sheetCityFilter:'city',sheetScopeFilter:'scope',sheetCuisineFilter:'cuisine',sheetTypeFilter:'type',sheetCertFilter:'cert',sheetListingFilter:'listing',sheetAlcoholFilter:'alcohol',sheetAlcoholMenuFilter:'alcoholMenu',sheetMeatFilter:'meat',sheetPorkFilter:'pork',sheetLardFilter:'lard',sheetPrayerFilter:'prayer',sheetMapreadyFilter:'mapready',sheetSortSelect:'sort'};Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)state[map[id]]=el.value;});syncControls();render();closeFilterSheet();updateFilterBtnState();}
 function updateFilterBtnState(){
   var n=activeFilterCount();
   [['filterSheetBtn','.fbtn-count-m'],['filterToggleBtn','.fbtn-count']].forEach(function(pair){
@@ -1334,10 +1410,10 @@ var fsBack=document.getElementById('filterSheetBackdrop');if(fsBack)fsBack.addEv
 var fsApply=document.getElementById('filterSheetApply');if(fsApply)fsApply.addEventListener('click',applySheetFilters);
 var fsReset=document.getElementById('filterSheetReset');if(fsReset)fsReset.addEventListener('click',function(){clearAllFilters();syncControls();syncSheetFromState();render();updateFilterBtnState();var sc=document.getElementById('sheetCount');if(sc)sc.textContent='';});
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.getElementById('filterSheet').classList.contains('is-open'))closeFilterSheet();});
-function populateSheetSelects(){function fill(id,vals){var sel=document.getElementById(id);if(!sel)return;vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}fill('sheetAreaFilter',getUniqueOptions('area'));fill('sheetCuisineFilter',getUniqueOptions('cuisine'));fill('sheetTypeFilter',getUniqueOptions('establishmentType'));fill('sheetCertFilter',getUniqueOptions('certificationStatus'));fill('sheetListingFilter',getUniqueOptions('status'));}
+function populateSheetSelects(){refreshOptions();}
 
 /* ── Filters ── */
-var FILTER_KEYS=['area','cuisine','type','cert','listing','alcohol','alcoholMenu','meat','pork','lard','prayer','mapready'];
+var FILTER_KEYS=['area','city','scope','cuisine','type','cert','listing','alcohol','alcoholMenu','meat','pork','lard','prayer','mapready'];
 function activeFilterCount(){var n=0;FILTER_KEYS.forEach(function(k){if(state[k]!=='all')n++;});return n;}
 function hasActiveCriteria(){return Boolean(state.search.trim())||activeFilterCount()>0;}
 function getFiltered(){
@@ -1346,7 +1422,10 @@ function getFiltered(){
   var terms=norm(state.search).split(/\s+/).filter(Boolean);
   var rs=establishments.filter(function(r){
     for(var i=0;i<terms.length;i++){ if(r.searchBlob.indexOf(terms[i])===-1) return false; }
-    if(state.area!=='all'&&norm(r.area)!==norm(state.area))return false;
+    if(r.country!==state.country)return false;
+    if(state.area!=='all'&&norm(r.region)!==norm(state.area))return false;
+    if(state.city!=='all'&&norm(r.city)!==norm(state.city))return false;
+    if(state.scope!=='all'&&scopeKey(r)!==state.scope)return false;
     if(state.cuisine!=='all'&&norm(r.cuisine)!==norm(state.cuisine))return false;
     if(state.type!=='all'&&norm(r.establishmentType)!==norm(state.type))return false;
     if(state.cert!=='all'&&norm(r.certificationStatus)!==norm(state.cert))return false;
@@ -1385,7 +1464,7 @@ function claimMailto(r){
     'Listed address: '+(r.address||r.area||''),
     '',
     'BUSINESS DETAILS',
-    'Registered business name and UEN:',
+    'Registered business name and registration number (e.g. UEN, SSM or corporate number):',
     'Your name and role:',
     'Best contact number:',
     'Corrections to the listing (name, address, cuisine, etc.):',
@@ -1429,6 +1508,8 @@ function listingCategory(r){
   return'other';
 }
 
+function placeLabel(r){if(r.country==='Singapore')return r.area||r.address||'';return [r.city,r.region].filter(function(x,i,a){return x&&a.indexOf(x)===i;}).join(', ')||r.address||'';}
+function mapsLinks(r){if(!r.mapReady)return[];var ll=r.coordinates.lat+','+r.coordinates.lng;return['<a href="https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(ll)+'" target="_blank" rel="noopener noreferrer">Open in Google Maps</a>','<a href="https://www.openstreetmap.org/?mlat='+r.coordinates.lat+'&mlon='+r.coordinates.lng+'#map=18/'+r.coordinates.lat+'/'+r.coordinates.lng+'" target="_blank" rel="noopener noreferrer">Open in OpenStreetMap</a>'];}
 function renderRow(r){
   var d=r.declarations;
   var chips=[
@@ -1444,11 +1525,13 @@ function renderRow(r){
     :cat==='pending'?'<span class="badge badge-unverified">CERTIFICATION PENDING RE-VERIFICATION</span>'
     :cat==='self'?'<span class="badge badge-self">SELF-DECLARED</span>'+(r.halalCertified===false?'<span class="badge badge-not-halal">NOT HALAL-CERTIFIED</span>':'')
     :'<span class="badge badge-unverified">NOT VERIFIED</span>';
+  if(scopeKey(r)==='selected')certBadge+='<span class="badge badge-scope">SELECTED HALAL ITEMS ONLY</span>';
   var demoBadge=r.isDemo?'<span class="badge badge-demo">DEMO LISTING</span>':'';
   var demoDisc=r.isDemo?'<div class="demo-disclaimer">'+esc(r.demoDisclaimer)+'</div>':'';
   return '<article class="record-row'+(sel?' is-selected':'')+(r.isDemo?' is-demo':'')+(cat==='community'?' is-community':'')+'" data-id="'+esc(r.id)+'" role="listitem">'
     +'<div class="record-main"><h4>'+esc(r.name)+'</h4>'
-    +'<p class="record-meta">'+esc(r.area||r.address||'')+(r.cuisine?' &middot; '+esc(r.cuisine):'')+(r.establishmentType?' &middot; '+esc(r.establishmentType):'')+'</p>'
+    +(r.localName?'<p class="record-local" lang="'+(r.country==='Japan'?'ja':'ms')+'">'+esc(r.localName)+'</p>':'')
+    +'<p class="record-meta">'+esc(placeLabel(r))+(r.cuisine?' &middot; '+esc(r.cuisine):'')+(r.establishmentType?' &middot; '+esc(r.establishmentType):'')+'</p>'
     +'<div class="record-badges">'+demoBadge+certBadge+'</div>'
     +'<div class="record-chips">'+chips.join('')+'</div>'
     +demoDisc+'</div>'
@@ -1470,7 +1553,8 @@ var CHIP_LABELS={
   prayer:{yes:'Prayer space',no:'No prayer space',unknown:'Prayer space not stated'},
   mapready:{yes:'Shown on map',no:'No map location'}
 };
-var CHIP_PREFIX={area:'Area',cuisine:'Cuisine',type:'Type',cert:'Certification',listing:'Listing'};
+CHIP_LABELS.scope={entire:'Entire menu reported halal',selected:'Selected halal items only',other:'Halal scope not stated'};
+var CHIP_PREFIX={city:'Town',area:'Area',cuisine:'Cuisine',type:'Type',cert:'Certification',listing:'Listing'};
 function chipLabel(k){
   if(CHIP_LABELS[k])return CHIP_LABELS[k][state[k]]||state[k];
   return (CHIP_PREFIX[k]||k)+': '+state[k];
@@ -1486,18 +1570,13 @@ function renderChips(){
 }
 
 /* ── Map marker visibility + bounds ── */
-function updateMapMarkers(rs){
-  if(!mapInstance||typeof L==='undefined')return;
-  var matchIds={};rs.forEach(function(r){matchIds[r.id]=true;});
-  Object.keys(mapMarkers).forEach(function(id){
-    var mk=mapMarkers[id];if(!mk)return;
-    var el=mk.getElement?mk.getElement():null;
-    if(el){
-      el.style.display=matchIds[id]?'':'none';
-      el.classList.toggle('marker-selected',id===state.selectedId);
-    }
-  });
+function updateMapMarkers(rs,noFit){
+  if(!mapInstance||typeof L==='undefined'||!clusterGroup)return;
   var visible=rs.filter(function(r){return mapMarkers[r.id];});
+  clusterGroup.clearLayers();
+  if(clusterGroup.addLayers)clusterGroup.addLayers(visible.map(function(r){return mapMarkers[r.id];}));
+  else visible.forEach(function(r){clusterGroup.addLayer(mapMarkers[r.id]);});
+  Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===state.selectedId);});
   /* State: results exist but none can be plotted */
   var me=document.getElementById('mapEmpty');
   if(me){
@@ -1511,6 +1590,7 @@ function updateMapMarkers(rs){
       me.classList.remove('visible');
     }
   }
+  if(noFit)return;
   if(visible.length===1){
     var ll=mapMarkers[visible[0].id].getLatLng();
     mapInstance.setView(ll,15,{animate:true});
@@ -1530,7 +1610,9 @@ function viewOnMap(id){
   var r=establishments.find(function(x){return x.id===id;});if(!r)return;
   state.selectedId=id;
   if(mapInstance&&r.coordinates&&typeof r.coordinates.lat==='number'){
-    mapInstance.setView([r.coordinates.lat,r.coordinates.lng],15,{animate:true});
+    var mk0=mapMarkers[id];
+    if(mk0&&clusterGroup&&clusterGroup.zoomToShowLayer&&clusterGroup.hasLayer(mk0)){clusterGroup.zoomToShowLayer(mk0,function(){});}
+    else mapInstance.setView([r.coordinates.lat,r.coordinates.lng],15,{animate:true});
   }
   Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===id);});
   showMapPreview(r);
@@ -1579,8 +1661,8 @@ function renderRows(){
 function render(){
   if(!establishments.length){showDirectoryEmpty();var mc0=document.getElementById('mapResultCount');if(mc0)mc0.textContent='0 establishments';return;}
   var rs=getFiltered();
-  var total=establishments.length;
-  var countText=rs.length+' of '+total+' establishment'+(total!==1?'s':'');
+  var total=inCountry().length;
+  var countText=rs.length+' of '+total+' establishment'+(total!==1?'s':'')+' in '+state.country;
   var ctr=document.getElementById('resultsInlineCount');if(ctr)ctr.textContent=countText;
   var mc=document.getElementById('mapResultCount');if(mc)mc.textContent=countText;
   if(!rs.length){
@@ -1590,7 +1672,9 @@ function render(){
     els.emptyState.querySelector('p').textContent=hasActiveCriteria()?'Adjust the search or filters and try again.':'No listings are currently available.';
   } else {
     els.emptyState.classList.remove('visible');
-    els.recordsGrid.innerHTML=rs.map(renderRow).join('');
+    els.recordsGrid.innerHTML=rs.slice(0,shownCount).map(renderRow).join('')
+      +(rs.length>shownCount?'<div class="show-more-row"><button class="btn btn-outline btn-sm" type="button" id="showMoreBtn">Show more ('+(rs.length-shownCount)+' remaining)</button></div>':'');
+    var smb=document.getElementById('showMoreBtn');if(smb)smb.addEventListener('click',function(){shownCount+=PAGE_SIZE;render();});
     els.recordsGrid.querySelectorAll('[data-open-record]').forEach(function(btn){
       btn.addEventListener('click',function(e){e.stopPropagation();var id=btn.getAttribute('data-open-record');var rec=establishments.find(function(r){return r.id===id;});if(rec)openDeclDrawer(rec,btn);});
     });
@@ -1615,15 +1699,23 @@ function renderDrawerContent(r){
   if(r.instagram)links.push('<a href="'+esc(r.instagram)+'" target="_blank" rel="noopener noreferrer">Instagram</a>');
   if(r.externalLocationUrl)links.push('<a href="'+esc(r.externalLocationUrl)+'" target="_blank" rel="noopener noreferrer">View Location</a>');
   if(r.externalDirectionsUrl)links.push('<a href="'+esc(r.externalDirectionsUrl)+'" target="_blank" rel="noopener noreferrer">Get Directions</a>');
+  mapsLinks(r).forEach(function(a){links.push(a);});
+  if(r.sourceUrl)links.push('<a href="'+esc(r.sourceUrl)+'" target="_blank" rel="noopener noreferrer">Source record</a>');
   if(r.externalReviewsUrl)links.push('<a href="'+esc(r.externalReviewsUrl)+'" target="_blank" rel="noopener noreferrer">Read Reviews</a>');
   var certBadgeColour=r.halalCertified===null?'color:var(--muted)':r.halalCertified?'color:var(--good)':'color:var(--caution)';
   var certBadgeText=r.halalCertified===null?'Not assessed or verified':r.halalCertified?'Halal certified':'Not halal-certified';
   return (r.isDemo?'<div style="padding:10px 14px;background:#EDE9FE;border-left:3px solid #7C3AED;font-size:12px;color:#5B21B6;line-height:1.55;margin-bottom:4px;">'+esc(r.demoDisclaimer)+'</div>':'')
     +'<section><div class="drawer-sec-title">Record Summary</div>'
     +'<dl class="detail-list">'
+    +(r.localName?'<div><dt>Local name</dt><dd lang="'+(r.country==='Japan'?'ja':'ms')+'">'+esc(r.localName)+'</dd></div>':'')
     +'<div><dt>Location</dt><dd>'+esc(r.address||r.area||'Not stated')+'</dd></div>'
+    +(r.country!=='Singapore'?'<div><dt>Country</dt><dd>'+esc(r.country)+'</dd></div>':'')
+    +(r.city?'<div><dt>City / town</dt><dd>'+esc(r.city)+'</dd></div>':'')
+    +(r.halalScope?'<div><dt>Halal scope</dt><dd>'+esc(r.halalScope)+'</dd></div>':'')
+    +(r.openingHours?'<div><dt>Opening hours</dt><dd>'+esc(r.openingHours)+' <span style="font-size:11px;color:var(--muted)">(community data; confirm before visiting)</span></dd></div>':'')
+    +(r.muslimOwned&&r.muslimOwned!=='Unknown'?'<div><dt>Muslim-owned</dt><dd>'+esc(r.muslimOwned)+'</dd></div>':'')
     +(r.postalCode?'<div><dt>Postal code</dt><dd>'+esc(r.postalCode)+'</dd></div>':'')
-    +'<div><dt>Area</dt><dd>'+esc(r.area||'Not stated')+'</dd></div>'
+    +'<div><dt>'+(r.country==='Japan'?'Prefecture':r.country==='Malaysia'?'State':'Area')+'</dt><dd>'+esc(r.region||r.area||'Not stated')+'</dd></div>'
     +'<div><dt>Cuisine</dt><dd>'+esc(r.cuisine||'Not stated')+'</dd></div>'
     +(r.establishmentType?'<div><dt>Type</dt><dd>'+esc(r.establishmentType)+'</dd></div>':'')
     +'<div><dt>Last updated</dt><dd>'+esc(r.lastUpdated||'Not stated')+'</dd></div>'
@@ -1664,6 +1756,7 @@ function renderDrawerContent(r){
     +(r.declarationProvided?'<p class="drawer-plain"><strong>Declaration:</strong> '+esc(r.declarationProvided)+'</p>':'')
     +(r.crossContactNote?'<p class="drawer-plain" style="margin-top:8px;"><strong>Cross-contact note:</strong> '+esc(r.crossContactNote)+'</p>':'')
     +(r.additionalNotes?'<p class="drawer-plain" style="margin-top:8px;"><strong>Additional notes:</strong> '+esc(r.additionalNotes)+'</p>':'')
+    +(r.verificationNotes?'<p class="drawer-plain" style="margin-top:8px;"><strong>Verification:</strong> '+esc(r.verificationNotes)+'</p>':'')
     +'</section>'
     +claimSection(r)
     +'<p class="drawer-disclaimer">This information is presented for transparency. Each listing states the applicable status. Self-declared information is reproduced in good faith based on disclosures provided by the establishment and may change without prior notice. Muslim-friendly certification is not halal certification, and unless expressly stated, this listing does not constitute a religious ruling, government approval or statutory verification. Diners should review the listing and make their own enquiries where necessary.</p>';
@@ -1673,7 +1766,7 @@ function openDeclDrawer(rec,trigger){
   if(mapInstance)mapInstance.closePopup();
   state.selectedId=rec.id;state.lastFocusEl=trigger||document.activeElement;
   Object.keys(mapMarkers).forEach(function(id){var el=mapMarkers[id].getElement&&mapMarkers[id].getElement();if(el)el.classList.toggle('marker-selected',id===rec.id);});
-  els.drawerTitleArea.innerHTML='<p class="mono" style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Record / '+esc(rec.id)+'</p><h2 id="drawerTitle">'+esc(rec.name)+'</h2><p style="font-size:11px;color:var(--muted);margin-top:2px;">'+esc(rec.area)+' &middot; '+esc(rec.cuisine)+'</p>';
+  els.drawerTitleArea.innerHTML='<p class="mono" style="font-size:10px;color:var(--gold);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;">Record / '+esc(rec.id)+'</p><h2 id="drawerTitle">'+esc(rec.name)+'</h2><p style="font-size:11px;color:var(--muted);margin-top:2px;">'+[placeLabel(rec),rec.cuisine].filter(Boolean).map(esc).join(' &middot; ')+'</p>';
   els.drawerContent.innerHTML=renderDrawerContent(rec);
   document.body.classList.add('drawer-open');
   requestAnimationFrame(function(){els.backdrop.classList.add('is-open');els.backdrop.removeAttribute('aria-hidden');els.drawer.classList.add('is-open');els.drawer.setAttribute('aria-hidden','false');els.drawerClose.focus();});
@@ -1696,32 +1789,45 @@ function initMap(){
   var mapEl=document.getElementById('declarationMap');
   if(typeof L==='undefined'){mapEl.innerHTML='<div class="map-fallback">Interactive map unavailable. Browse the list to find establishments.</div>';return;}
   try{
-    var m=L.map(mapEl,{scrollWheelZoom:true,dragging:true,touchZoom:true,doubleClickZoom:true,zoomControl:true}).setView([1.3521,103.8198],12);
+    var m=L.map(mapEl,{scrollWheelZoom:true,dragging:true,touchZoom:true,doubleClickZoom:true,zoomControl:true}).setView((COUNTRY_VIEW[state.country]||COUNTRY_VIEW.Singapore).slice(0,2),(COUNTRY_VIEW[state.country]||COUNTRY_VIEW.Singapore)[2]);
     mapInstance=m;
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(m);
     m.zoomControl.setPosition('topright');
     m.on('popupopen',function(ev){var btn=ev.popup.getElement()&&ev.popup.getElement().querySelector('[data-view-record]');if(btn)btn.addEventListener('click',function(){window.viewFromMap(btn.getAttribute('data-view-record'));});});
-    var allLatLngs=[];
-    establishments.forEach(function(r){
-      var c=r.coordinates;if(typeof c.lat!=='number'||typeof c.lng!=='number')return;
-      var mk=L.marker([c.lat,c.lng]).addTo(m);
-      var popupBadge=r.isDemo?'<span class="lp-badge" style="color:#5B21B6;">DEMO LISTING</span>':'<span class="lp-badge">'+esc(r.certificationStatus||'Not stated')+'</span>';
-      mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div><div class="lp-meta">'+[r.area||r.address,r.cuisine].filter(Boolean).map(esc).join(' &middot; ')+'</div>'+popupBadge+'<button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">'+(listingCategory(r)==='self'?'View Declaration':'View Details')+'</button>');
-      mk.on('click',function(){state.selectedId=r.id;Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===r.id);});showMapPreview(r);renderRows();scrollRowIntoView(r.id);});
-      mapMarkers[r.id]=mk;
-      allLatLngs.push([c.lat,c.lng]);
-    });
-    if(allLatLngs.length>1){try{m.fitBounds(L.latLngBounds(allLatLngs),{padding:[40,40]});}catch(e){}}
-    else if(allLatLngs.length===1){m.setView(allLatLngs[0],13);}
+    clusterGroup=(typeof L.markerClusterGroup==='function')?L.markerClusterGroup({chunkedLoading:true,maxClusterRadius:45,showCoverageOnHover:false}):L.layerGroup();
+    m.addLayer(clusterGroup);
+    addMarkers(establishments);
+    fitCountry();
     var resizeTmr;
     window.addEventListener('resize',function(){clearTimeout(resizeTmr);resizeTmr=setTimeout(function(){m.invalidateSize();syncPanelNavOffset();},200);});
     window.addEventListener('orientationchange',function(){setTimeout(function(){m.invalidateSize();},400);});
   }catch(err){mapEl.innerHTML='<div class="map-fallback">Interactive map could not be loaded. Browse the list to find establishments.</div>';}
 }
+function fitCountry(){
+  if(!mapInstance)return;
+  var lls=inCountry().filter(function(r){return mapMarkers[r.id];}).map(function(r){return mapMarkers[r.id].getLatLng();});
+  var v=COUNTRY_VIEW[state.country]||COUNTRY_VIEW.Singapore;
+  if(lls.length>1){try{mapInstance.fitBounds(L.latLngBounds(lls),{padding:[40,40]});return;}catch(e){}}
+  mapInstance.setView(lls.length===1?lls[0]:[v[0],v[1]],lls.length===1?13:v[2]);
+}
+function addMarkers(records){
+  var m=mapInstance;if(!m)return;
+    records.forEach(function(r){
+      var c=r.coordinates;if(typeof c.lat!=='number'||typeof c.lng!=='number')return;
+      var mk=L.marker([c.lat,c.lng]);
+      var popupBadge=r.isDemo?'<span class="lp-badge" style="color:#5B21B6;">DEMO LISTING</span>':'<span class="lp-badge">'+esc(r.certificationStatus||'Not stated')+'</span>';
+      mk.bindPopup('<div class="lp-name">'+esc(r.name)+'</div>'+(r.localName?'<div class="lp-meta">'+esc(r.localName)+'</div>':'')+'<div class="lp-meta">'+[placeLabel(r),r.cuisine].filter(Boolean).map(esc).join(' &middot; ')+'</div>'+popupBadge+'<button class="lp-btn" type="button" data-view-record="'+esc(r.id)+'">'+(listingCategory(r)==='self'?'View Declaration':'View Details')+'</button>');
+      mk.on('click',function(){state.selectedId=r.id;Object.keys(mapMarkers).forEach(function(mid){var el=mapMarkers[mid].getElement&&mapMarkers[mid].getElement();if(el)el.classList.toggle('marker-selected',mid===r.id);});showMapPreview(r);renderRows();scrollRowIntoView(r.id);});
+      mapMarkers[r.id]=mk;
+    });
+    updateMapMarkers(getFiltered(),true);
+}
 
 function syncControls(){
   if(els.searchInput)els.searchInput.value=state.search;
   if(els.areaFilter)els.areaFilter.value=state.area;
+  if(els.cityFilter)els.cityFilter.value=state.city;
+  if(els.scopeFilter)els.scopeFilter.value=state.scope;
   if(els.cuisineFilter)els.cuisineFilter.value=state.cuisine;
   if(els.typeFilter)els.typeFilter.value=state.type;
   if(els.certFilter)els.certFilter.value=state.cert;
@@ -1735,19 +1841,14 @@ function syncControls(){
   if(els.lardFilter)els.lardFilter.value=state.lard;
   if(els.sortSelect)els.sortSelect.value=state.sort;
 }
-function clearAllFilters(){state.search='';FILTER_KEYS.forEach(function(k){state[k]='all';});state.sort='name';}
+function clearAllFilters(){state.search='';FILTER_KEYS.forEach(function(k){state[k]='all';});state.sort='name';shownCount=PAGE_SIZE;if(typeof refreshOptions==='function'&&establishments.length)refreshOptions();}
 function resetAll(){clearAllFilters();state.selectedId=null;syncControls();syncSheetFromState();render();hideMapPreview();updateFilterBtnState();}
 function populateSelect(sel,vals){vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}
-function initFilters(){
-  if(els.areaFilter)populateSelect(els.areaFilter,getUniqueOptions('area'));
-  if(els.cuisineFilter)populateSelect(els.cuisineFilter,getUniqueOptions('cuisine'));
-  if(els.typeFilter)populateSelect(els.typeFilter,getUniqueOptions('establishmentType'));
-  if(els.certFilter)populateSelect(els.certFilter,getUniqueOptions('certificationStatus'));
-  if(els.listingFilter)populateSelect(els.listingFilter,getUniqueOptions('status'));
-}
+function initFilters(){refreshOptions();}
 var searchTmr=null;
 if(els.searchInput)els.searchInput.addEventListener('input',function(){
   state.search=els.searchInput.value;
+  shownCount=PAGE_SIZE;
   clearTimeout(searchTmr);
   searchTmr=setTimeout(render,180); /* debounce: keeps fast typing smooth */
 });
@@ -1793,7 +1894,8 @@ document.addEventListener('click',function(e){
 document.addEventListener('keydown',function(e){
   if(e.key==='Escape'&&fdEl&&!fdEl.hidden)closeDropdown({refocus:true});
 });
-[[els.areaFilter,'area'],[els.cuisineFilter,'cuisine'],[els.typeFilter,'type'],[els.certFilter,'cert'],[els.listingFilter,'listing'],[els.alcoholFilter,'alcohol'],[els.alcoholMenuFilter,'alcoholMenu'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.prayerFilter,'prayer'],[els.mapreadyFilter,'mapready'],[els.sortSelect,'sort']].forEach(function(p){if(p[0])p[0].addEventListener('change',function(){state[p[1]]=p[0].value;render();updateFilterBtnState();});});
+[[els.areaFilter,'area'],[els.cityFilter,'city'],[els.scopeFilter,'scope'],[els.cuisineFilter,'cuisine'],[els.typeFilter,'type'],[els.certFilter,'cert'],[els.listingFilter,'listing'],[els.alcoholFilter,'alcohol'],[els.alcoholMenuFilter,'alcoholMenu'],[els.meatFilter,'meat'],[els.porkFilter,'pork'],[els.lardFilter,'lard'],[els.prayerFilter,'prayer'],[els.mapreadyFilter,'mapready'],[els.sortSelect,'sort']].forEach(function(p){if(p[0])p[0].addEventListener('change',function(){state[p[1]]=p[0].value;if(p[1]==='area'){state.city='all';refreshOptions();}shownCount=PAGE_SIZE;render();updateFilterBtnState();});});
+var sheetArea=document.getElementById('sheetAreaFilter');if(sheetArea)sheetArea.addEventListener('change',function(){state.area=sheetArea.value;state.city='all';refreshOptions();});
 if(els.clearFiltersBtn)els.clearFiltersBtn.addEventListener('click',resetAll);
 var inlineReset=document.getElementById('inlineResetBtn');
 if(inlineReset)inlineReset.addEventListener('click',resetAll);

@@ -77,17 +77,47 @@ def overpass(query, session):
     raise RuntimeError(f"Overpass failed: {last}")
 
 
-def main(countries):
+FALLBACK_QUERY = AREA_QUERY.replace('area["ISO3166-2"="{code}"]->.a;',
+                                    'area[admin_level=4]["name:en"~"^{name}( Prefecture)?$"]->.a;')
+
+
+def fetch_area(code, name, s):
+    payload = overpass(AREA_QUERY.format(code=code), s)
+    counts = [e for e in payload["elements"] if e.get("type") == "count"]
+    if counts and int(counts[0]["tags"]["total"]) == 0:
+        # Some prefecture boundaries lack the ISO 3166-2 tag: retry by English name.
+        alt = overpass(FALLBACK_QUERY.format(name=name), s)
+        alt_counts = [e for e in alt["elements"] if e.get("type") == "count"]
+        if alt_counts and int(alt_counts[0]["tags"]["total"]) > 0:
+            print(f"  {code}: matched by name instead of ISO code", flush=True)
+            payload = alt
+    els = [e for e in payload["elements"] if e.get("type") != "count"]
+    counts = [e for e in payload["elements"] if e.get("type") == "count"]
+    return els, (int(counts[0]["tags"]["total"]) if counts else None)
+
+
+def main(countries, only=None):
     OUT.mkdir(exist_ok=True)
     s = requests.Session()
+    if only:
+        # Refresh selected areas inside existing extracts.
+        for cc in sorted({c.split("-")[0] for c in only}):
+            path = OUT / f"osm-{cc}.json.gz"
+            result = json.load(gzip.open(path, "rt", encoding="utf-8"))
+            for code in only:
+                if code.startswith(cc):
+                    els, eating = fetch_area(code, AREAS[cc][code], s)
+                    result["areas"][code] = {"name": AREAS[cc][code], "halal_tagged": len(els),
+                                             "eating_places": eating, "elements": els}
+                    print(f"{code} {AREAS[cc][code]}: {len(els)} halal-tagged of {eating} eating places", flush=True)
+            with gzip.open(path, "wt", encoding="utf-8") as fh:
+                json.dump(result, fh, ensure_ascii=False)
+        return
     for cc in countries:
         result = {"country": cc, "retrieved": dt.datetime.now(dt.timezone.utc).isoformat(timespec="seconds"),
                   "licence": "ODbL-1.0 (c) OpenStreetMap contributors", "areas": {}, "places": []}
         for code, name in AREAS[cc].items():
-            payload = overpass(AREA_QUERY.format(code=code), s)
-            els = [e for e in payload["elements"] if e.get("type") != "count"]
-            counts = [e for e in payload["elements"] if e.get("type") == "count"]
-            eating = int(counts[0]["tags"]["total"]) if counts else None
+            els, eating = fetch_area(code, name, s)
             result["areas"][code] = {"name": name, "halal_tagged": len(els), "eating_places": eating,
                                      "elements": els}
             print(f"{code} {name}: {len(els)} halal-tagged of {eating} eating places", flush=True)
@@ -103,4 +133,10 @@ def main(countries):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1:] or ["MY", "JP"])
+    args = sys.argv[1:]
+    if args[:1] == ["--only"]:
+        main([], only=args[1].split(","))
+    elif args and args[0] != "--skip":
+        main(args)
+    elif not args:
+        main(["MY", "JP"])

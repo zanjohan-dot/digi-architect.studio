@@ -1,39 +1,57 @@
 name: Directory international research extract
 
 # Read-only OpenStreetMap research for new countries. Runs when the research
-# script changes on the international branch, and commits the extract back to
-# that branch. Never touches the live workbooks or main.
+# scripts or request change on the international branch, and commits the
+# results back to that branch. Never touches the live workbooks or main.
+#   _directory-sync/research/request.txt  arguments for research_osm.py
+#     "MY JP"               full extract
+#     "--only JP-24,JP-45"  refresh selected areas
+#     "--skip"              no extract (address lookup only)
 on:
   push:
     branches: [directory-international]
     paths:
       - "_directory-sync/research_osm.py"
+      - "_directory-sync/research_geocode.py"
+      - "_directory-sync/research/request.txt"
       - ".github/workflows/directory-research.yml"
   workflow_dispatch:
 
 permissions:
   contents: write
 
+concurrency:
+  group: directory-research
+  cancel-in-progress: false
+
 jobs:
   extract:
     runs-on: ubuntu-24.04
-    timeout-minutes: 90
+    timeout-minutes: 150
     steps:
       - uses: actions/checkout@v5
       - uses: actions/setup-python@v6
         with:
           python-version: "3.12"
       - run: pip install -r _directory-sync/requirements.txt
-      - name: Extract Malaysia and Japan
+      - name: Extract from OpenStreetMap
         run: |
           set -o pipefail
-          python _directory-sync/research_osm.py MY JP 2>&1 | tee research.log
-      - name: Commit extract
+          args=$(cat _directory-sync/research/request.txt 2>/dev/null || echo "MY JP")
+          python _directory-sync/research_osm.py $args 2>&1 | tee research.log
+      - name: Look up addresses (Nominatim, 1 request per 1.1 s, cached)
+        run: |
+          set -o pipefail
+          python _directory-sync/research_geocode.py 2>&1 | tee geocode.log
+      - name: Commit results
+        if: always()
         run: |
           git config user.name "directory-sync[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          cp research.log _directory-sync/research/extract.log
+          [ -s research.log ] && cp research.log _directory-sync/research/extract-latest.log
+          [ -s geocode.log ] && tail -n 40 geocode.log > _directory-sync/research/geocode.log
           git add _directory-sync/research
           git diff --cached --quiet && exit 0
-          git commit -m "Research extract: OpenStreetMap Malaysia and Japan $(date -u +%Y-%m-%d)"
+          git commit -m "Research: OpenStreetMap extract and addresses $(date -u +%Y-%m-%d)"
+          git pull --rebase --quiet origin "${GITHUB_REF_NAME}"
           git push origin HEAD:${GITHUB_REF_NAME}

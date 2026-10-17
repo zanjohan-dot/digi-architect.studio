@@ -149,6 +149,54 @@ published place closed, it is flagged for review, never removed automatically. A
 OpenStreetMap rows are refused while `settings.json` has
 `"osm_publishing_accepted": false`, which is the default.
 
+## Malaysia and Japan (community listings)
+
+Listings outside Singapore come from a systematic OpenStreetMap research
+extract, one query per Malaysian state / federal territory and per Japanese
+prefecture, so coverage can be reported area by area.
+
+| Step | Command | Output |
+|---|---|---|
+| Extract (GitHub Actions, read-only) | `.github/workflows/directory-research.yml` runs `research_osm.py MY JP` | `research/osm-MY.json.gz`, `research/osm-JP.json.gz`, `research/extract.log` |
+| Build | `python _directory-sync/research_build.py MY JP --write-data` | `state/candidates-my.csv`, `state/candidates-jp.csv` (every candidate, graded); `research/coverage-*.csv` (research log by state / prefecture); `data/community-listings-my.xlsx`, `data/community-listings-jp.xlsx` |
+| Pages | `python _directory-sync/seo_build.py` | `muslim-friendly-directory-malaysia.html`, `muslim-friendly-directory-japan.html`, sitemap entries |
+
+**Classification.** Every record is "Community suggested — not verified".
+OpenStreetMap tags are recorded as reported, never as fact:
+
+| OSM tag | Halal Scope shown | Meaning |
+|---|---|---|
+| `diet:halal=only` | Entire menu reported halal (community report) | contributors report the whole menu is halal |
+| `diet:halal=yes` | Halal food reported available (community report) | some or all food is halal |
+| `diet:halal=limited` | Selected halal items only (community report) | only some dishes; the kitchen may not be halal |
+| `cuisine=halal` | Halal cuisine reported (community report) | |
+
+Vegetarian, vegan, pork-free or seafood tags are never treated as halal. A
+`halal:certification`-style tag is noted as "not checked" and never becomes
+certification. Muslim ownership is "Unknown" unless verified.
+
+**Quality tiers** are the same as Singapore (publishable / needs_check /
+rejected), with country bounds and postcodes (Malaysia 5 digits, Japan
+NNN-NNNN). Only `publishable` records go into the data files; the rest stay
+in the candidate files for review. Possible duplicates (the same name within
+60 m, including Japanese and romanised spellings of one name) are held back
+as `needs_check`.
+
+**Town.** `addr:city` when present; otherwise the nearest OpenStreetMap city
+or town within 25 km, labelled "nearest town" in the listing notes.
+
+**Page.** The directory loads Singapore exactly as before. Malaysia and Japan
+files are fetched only when a visitor selects that country (or opens a
+country landing page), so the Singapore page is not slowed down. Markers are
+clustered (Leaflet.markercluster, free, same CDN as Leaflet).
+
+**Certification outside Singapore** is not yet automated:
+`state/verifications.csv` and `apply.py` still assume Singapore (postcodes,
+OneMap). Certified Malaysian or Japanese listings must be added by hand until
+that is extended. Check JAKIM certification on the Malaysia Halal Portal
+(MYeHALAL); in Japan, check with the issuing certification body named on the
+certificate, since standards and recognition differ between bodies.
+
 ## Settings (`settings.json`)
 
 | Setting | Default | Meaning |
