@@ -1,0 +1,5 @@
+{
+  "_comment": "Which evidence tiers of each country may appear on the live directory. Owner approval is required to change this. Singapore is managed separately (sync.py / apply.py) and is unaffected.",
+  "MY": {"certified": false, "certification_reported": false, "self_declared": false, "community": false},
+  "JP": {"certified": false, "certification_reported": false, "self_declared": false, "community": false}
+}

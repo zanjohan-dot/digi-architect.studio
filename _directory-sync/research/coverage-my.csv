@@ -1,0 +1,17 @@
+country,code,state_or_prefecture,osm_eating_places,halal_tagged_records,duplicates,closed_or_not_dining,selected_items_only,entire_menu_reported,certification_note_in_osm,needs_check,ready_for_publication,towns
+Malaysia,MY-01,Johor,3338,96,1,2,0,0,0,22,72,24
+Malaysia,MY-02,Kedah,1690,105,0,15,0,24,0,69,21,12
+Malaysia,MY-03,Kelantan,758,15,0,0,0,0,0,4,11,7
+Malaysia,MY-04,Melaka,1014,30,0,2,0,3,0,1,27,10
+Malaysia,MY-05,Negeri Sembilan,695,39,1,2,0,0,0,15,22,7
+Malaysia,MY-06,Pahang,1119,79,0,3,0,0,0,6,70,10
+Malaysia,MY-07,Pulau Pinang,2611,69,0,2,0,2,0,17,50,19
+Malaysia,MY-08,Perak,1729,46,0,1,0,1,0,11,34,15
+Malaysia,MY-09,Perlis,97,2,0,0,0,0,0,1,1,1
+Malaysia,MY-10,Selangor,5864,265,1,8,0,5,0,25,232,38
+Malaysia,MY-11,Terengganu,584,8,0,0,0,0,0,2,6,4
+Malaysia,MY-12,Sabah,1261,40,0,1,0,3,0,5,34,12
+Malaysia,MY-13,Sarawak,3264,562,2,3,0,0,0,19,540,20
+Malaysia,MY-14,Kuala Lumpur,4478,117,2,5,0,0,0,13,99,9
+Malaysia,MY-15,Labuan,45,3,0,0,0,0,0,0,3,2
+Malaysia,MY-16,Putrajaya,83,7,0,0,0,0,0,1,6,1

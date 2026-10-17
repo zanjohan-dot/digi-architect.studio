@@ -1,0 +1,12 @@
+{
+ "_summary": {
+  "checked": "2026-10-17",
+  "result": "JAKIM MYeHALAL Halal Status Verification search returned a server error (PHP fatal error, no results) for every probe query (SugarBun, Marrybrown, Sushi Zanmai, Sofea); outlet-level confirmation was not possible from this source. JAKIM's Verify Halal app and JAIS Sarawak's Jejak Halal app are mobile-only.",
+  "queries": [
+   "probe-sugarbun-13",
+   "probe-marrybrown-13",
+   "probe-sushizanmai-14",
+   "probe-sofea"
+  ]
+ }
+}

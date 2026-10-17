@@ -1,0 +1,41 @@
+name: Directory halal status checks (Malaysia, read-only)
+
+# Targeted JAKIM Halal Status Verification lookups for Malaysian candidates
+# listed in _directory-sync/research/jakim-request.json. Commits only the
+# matching result text to _directory-sync/research/jakim-checks.json on this
+# branch. Never touches the live workbooks or main.
+on:
+  push:
+    branches: [directory-international]
+    paths:
+      - "_directory-sync/research/jakim-request.json"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: directory-jakim
+  cancel-in-progress: false
+
+jobs:
+  check:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 170
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+      - run: pip install requests
+      - run: python _directory-sync/research_jakim.py
+      - name: Commit results
+        if: always()
+        run: |
+          git config user.name "directory-sync[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add _directory-sync/research/jakim-checks.json
+          git diff --cached --quiet && exit 0
+          git commit -m "Research: JAKIM halal status checks $(date -u +%Y-%m-%d)"
+          git pull --rebase --quiet origin "${GITHUB_REF_NAME}"
+          git push origin HEAD:${GITHUB_REF_NAME}
